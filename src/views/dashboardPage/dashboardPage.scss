@@ -1,0 +1,33 @@
+.dashboard-page {
+    margin: 1rem;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.prev-games-list,
+.games-list {
+    display: block;
+    justify-content: end;
+    padding: 0.8rem;
+    background-color: var(--background-color-1);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin-left: 1rem;
+}
+
+.game-list__item {
+    padding: 0.5rem;
+    background-color: var(--background-color-2);
+    border-radius: 5px;
+    margin-bottom: 0.7rem;
+    transition: all ease-in-out 200ms;
+    box-shadow: 0px 0px 9px -2px rgba(132, 132, 132, 0.612);
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05, 1.05);
+    }
+}

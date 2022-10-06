@@ -1,0 +1,156 @@
+:root {
+  /* Main */
+  --background-color-0: #b59696;
+  --background-color-1: rgb(237 237 237 / 52%);
+  --background-color-2: #e8dcdc;
+  /* Grid */
+  --zoom: 1rem;
+  --grid-color: #d9c6c6;
+  --grid-border-color: black;
+  --cell-border-color: black;
+  --background-image: '';
+  /* Tokens */
+  --token-radius: 50%;
+  --token-selected-color: #6767fd;
+  --enemy-background: #c27474;
+  /* Menu */
+  --menu-color-0: #413a3a;
+  --menu-color-1: #575252;
+  --menu-color-2: #6f6767;
+  --menu-color-3: #796f6f;
+  /* Buttons */
+  --btn-color-0: #605252;
+  /* Colors */
+  --color-blue-0: rgb(48 102 231 / 39%) 0px 3px 8px;
+  --color-blue-1: rgb(144 194 255);
+  --color-red-0: rgba(212, 20, 20, 0.24) 0px 3px 8px;
+  --color-red-1: #7c4e4e;
+  --color-red-2: #e97d7d;
+  --color-red-3: rgb(237 156 156);
+  /* Font size */
+  --font-sm: 0.9375rem; /* 15px */
+  --font-md: 1.4375rem; /* 23px */
+}
+
+* {
+  content: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+  margin: 0px;
+  min-height: 100vh;
+  background-color: var(--background-color-0);
+  font-size: 100%;
+}
+
+.game-page-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.game-content {
+  max-width: 51rem;
+  min-width: 51rem;
+  height: 100vh;
+  margin-right: 0.8rem;
+  position: relative;
+}
+
+.page-title {
+  font-size: 1.875em; /* 30px / 16px */
+}
+
+input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  transition: all ease-in-out 200ms;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin-top: 0.08rem;
+}
+
+.input--hover:hover {
+  transform: scale(1.025, 1.025);
+}
+
+@mixin input($width) {
+  width: $width;
+}
+
+.input--sm {
+  @include input(3rem);
+}
+
+.input--md {
+  @include input(8rem);
+}
+
+.form__input-add input {
+  margin: 0.1rem auto;
+}
+
+.form__btn--remove {
+  background-color: rgb(212 62 62);
+  color: white;
+  max-height: 1.5rem;
+  margin-top: 0.34rem;
+}
+
+select {
+  padding: 0.2rem;
+  border-radius: 5px; 
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  transition: all ease-in-out 200ms;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  cursor: pointer;
+}
+
+.btn {
+  &--hover:hover {
+      transform: scale(1.025, 1.025);
+  }
+
+  &--window-close {
+      border: none;
+      background-color: var(--menu-color-0);
+      margin: 0;
+      box-shadow: none;
+      color: white;
+      position: absolute;
+      right: 0;
+      top: 0;
+  }
+
+  &--logout {
+      margin: 3rem 0 3rem 1rem;
+  }
+
+  &--attack {
+      margin-top: 0.3rem;
+  }
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.box__form {
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  min-width: 20rem;
+  min-height: 20rem;
+  margin: 0 25%;
+}

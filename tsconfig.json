@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+      "target": "ES2015",
+      "module": "ES2015",
+      "moduleResolution": "node",
+      "watch": true,
+      "lib": ["dom", "ES2022", "dom.iterable"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
