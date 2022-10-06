@@ -1,4 +1,4 @@
-# Virtual-Table
+# Tabletop of Many Things
 A virtual tabletop for 5e D&amp;D.
 
 ## Installation
