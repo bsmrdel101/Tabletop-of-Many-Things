@@ -1,4 +1,4 @@
-import { Game } from "../../scripts/types";
+import { Game } from "../scripts/types";
 
 interface Props {
     game: Game

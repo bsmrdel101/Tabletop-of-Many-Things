@@ -16,14 +16,6 @@ export const getGames = async () => {
     }
 };
 
-// export const getPrevGame = async () => {
-//     try {
-//         const res = await axios.get('/api/dashboard/prev');
-//         return res.data[0];
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
 export const getGamesHistory = async () => {
     try {
         const res = await axios.get('/api/dashboard/history');
@@ -43,15 +35,6 @@ export const addGame = async (payload: newGame) => {
         console.log(err);
     }
 };
-
-// export const addPrevGame = async (payload: any) => {
-//     try {
-//         await axios.delete('/api/dashboard/prev', payload);
-//         await axios.post('/api/dashboard/prev', payload);
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
 
 export const addGameToHistory = async (payload: any) => {
     try {

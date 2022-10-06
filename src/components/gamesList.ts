@@ -1,8 +1,8 @@
-import { addGame, getGames } from "../../controllers/dashboardController";
-import { ready } from "../../scripts/utils";
-import { Game } from "../../scripts/types";
-import gameCard from "../gameCard/gameCard";
-import { joinDM, joinPlayer } from "../../views/dashboardPage/dashboardPage";
+import { addGame, getGames } from "../controllers/dashboardController";
+import { ready } from "../scripts/utils";
+import { Game } from "../scripts/types";
+import gameCard from "./gameCard";
+import { joinDM } from "../views/dashboardPage";
 
 let gameFormOpen: boolean = false;
 
@@ -73,7 +73,7 @@ export default function gamesList() {
         // document.getElementById('room-code-input').value = prevGame.code;
         // Get D&D api data
         // getCreatures();
-    });
+    }, '.games-list__content');
 
     return `
         <div class="games-list games-list__content"></div>

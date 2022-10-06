@@ -1,7 +1,6 @@
-import loginPage from './views/loginPage/loginPage';
-import registerPage from './views/registerPage/registerPage';
-import gamePage from './views/gamePage/gamePage';
-import dashboardPage from './views/dashboardPage/dashboardPage';
+import loginPage from './views/loginPage';
+import registerPage from './views/registerPage';
+import dashboardPage from './views/dashboardPage';
 
 const routeManager = () => {
   switch (window.location.pathname) {
@@ -9,10 +8,8 @@ const routeManager = () => {
       return loginPage();
     case '/register':
       return registerPage();
-    case '/dashboard':
-      return dashboardPage();
     case '/game':
-      return gamePage();
+      return dashboardPage();
     default:
       return '<h1>404 Not Found</h1>';
   }

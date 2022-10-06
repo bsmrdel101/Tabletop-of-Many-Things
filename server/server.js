@@ -58,27 +58,26 @@ app.get('/game', (req, res) => {
   res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
 
-let tokens = [];
 
 // Socket.io
 io.on('connection', (socket) => {
-  socket.on('USER_DISCONNECT', (room, id) => {
-    let deleteList = [];
-    let clientList = [];    
-    const clients = io.sockets.adapter.rooms.get(room);
-    for (const clientId of clients) {
-      const clientSocket = io.sockets.sockets.get(clientId);
-      clientList.push(clientSocket.data.nickname);
-      deleteList.push(clientSocket.id);
-    }
+  // socket.on('USER_DISCONNECT', (room, id) => {
+  //   let deleteList = [];
+  //   let clientList = [];    
+  //   const clients = io.sockets.adapter.rooms.get(room);
+  //   for (const clientId of clients) {
+  //     const clientSocket = io.sockets.sockets.get(clientId);
+  //     clientList.push(clientSocket.data.nickname);
+  //     deleteList.push(clientSocket.id);
+  //   }
 
-    for (const client of deleteList) {
-      if (client === id) {
-        clientList.splice(deleteList.indexOf(client), 1);
-      }
-    }
-    io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
-  });
+  //   for (const client of deleteList) {
+  //     if (client === id) {
+  //       clientList.splice(deleteList.indexOf(client), 1);
+  //     }
+  //   }
+  //   io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
+  // });
 
   // Makes the user join a room
   socket.on('JOIN_ROOM', (userType, room, fn) => {
@@ -86,7 +85,7 @@ io.on('connection', (socket) => {
     const client = {
       id: socket.id,
       clientType: userType
-    }
+    };
 
     // Check if room already exists
     if (io.sockets.adapter.rooms.has(room)) {
@@ -107,7 +106,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('SET_NAME', (name) => {
-    socket.data.nickname = {nickname: name};
+    socket.data.nickname = { nickname: name };
   });
 
   socket.on('UPDATE_PLAYER_LIST', (room) => {
@@ -121,7 +120,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('PLACE_TOKEN', (cell, token, username, room) => {
-    tokens.push({cell: cell, token: token, username: username});
+    // tokens.push({cell: cell, token: token, username: username});
     io.to(room).emit('PLACE_TOKEN', cell, token, username);
   });
 

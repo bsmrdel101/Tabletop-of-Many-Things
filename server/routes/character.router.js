@@ -22,6 +22,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })  
 });
 
+router.get('/skills/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = (`
+        SELECT * FROM "skills"
+        WHERE "character_id"=$1
+        ORDER BY "name" ASC;
+    `);
+    const sqlValues = [
+        req.params.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.send(dbres.rows))
+        .catch((dberror) => {
+        console.log('Oops you did a goof: ', dberror);
+        res.sendStatus(500)
+    })  
+});
+
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = (`
         SELECT * FROM "characters"

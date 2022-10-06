@@ -34,7 +34,7 @@ export const registerUser = async (payload: User) => {
 export const loginUser = async (payload: User) => {
     try {
         await axios.post('/api/user/login', payload);
-        window.location.pathname = 'dashboard';
+        window.location.pathname = 'game';
     } catch(err) {
         console.log(err);
     }

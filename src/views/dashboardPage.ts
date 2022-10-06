@@ -1,54 +1,61 @@
-import gamesList from '../../components/gamesList/gamesList';
-import { logout } from '../../controllers/userController';
-import { Client } from '../../scripts/types';
-import { ready } from '../../scripts/utils';
+import gamesList from '../components/gamesList';
+import { logout } from '../controllers/userController';
+import { Client } from '../scripts/types';
+import { ready } from '../scripts/utils';
+import gamesHistoryList from '../components/gameHistoryList';
+import gamePage from './gamePage';
 import { io, Socket } from "socket.io-client";
-import gamesHistoryList from '../../components/gameHistoryList/gameHistoryList';
-import { Game } from '../../scripts/types';
-import { addGameToHistory, getGames } from '../../controllers/dashboardController';
-
-const socket: any = io();
+const socket: Socket = io();
 
 export let room: string;
-export let client: Client;
+export let clientType: string;
 
+
+// Joins the game as a player
 export const joinPlayer = (roomCode: string) => {
     room = roomCode;
-    socket.emit('JOIN_ROOM', 'player', room, (roomExists: boolean, newClient: Client) => {
+    socket.emit('JOIN_ROOM', 'player', roomCode, (roomExists: boolean, newClient: Client) => {
         if (roomExists) {
-            client = newClient;
+            clientType = newClient.clientType;
+            renderGamePage();
             handlePushGameToHistory(roomCode);
-            // socket.emit('FETCH_BOARD');
-            window.location.pathname = 'game';
         } else {
             console.warn('room doesn\'t exist');
         }
     });
 };
 
+// Joins the game as the DM
 export const joinDM = (roomCode: string) => {
     room = roomCode;
-    socket.emit('JOIN_ROOM', 'dm', room, (roomExists: boolean, newClient: Client) => {
+    socket.emit('JOIN_ROOM', 'dm', roomCode, (roomExists: boolean, newClient: Client) => {
         if (roomExists) {
-            client = newClient;
-            window.location.pathname = 'game';
+            clientType = newClient.clientType;
+            renderGamePage();
         } else {
             console.warn('game already started');
         }
     });
 };
 
+// Switch page from dashboard to the game
+const renderGamePage = () => {
+    document.querySelector('.dashboard-page').remove();
+    const container: Element = document.querySelector('.container');
+    container.insertAdjacentHTML('beforeend', gamePage());
+};
+
 // Adds selected game to history
 const handlePushGameToHistory = (roomCode: string) => {
-    // addGameToHistory();
+    // addGameToHistory(roomCode);
 };
 
 export default function dashboardPage() {
     let roomCode: string;
 
-    ready(async () => {
+    ready(() => {
         bindEventsToForm();
-    });
+    }, '.dashboard-page');
 
     const bindEventsToForm = () => {
         document.getElementById('join-room-form')?.addEventListener('submit', (e: Event) => {

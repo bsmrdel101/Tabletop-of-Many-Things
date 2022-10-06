@@ -1,10 +1,10 @@
-import { ready } from '../../scripts/utils';
-import { loginUser } from '../../controllers/userController';
+import { ready } from '../scripts/utils';
+import { loginUser } from '../controllers/userController';
 
 export default function loginPage() {
     ready(() => {
         bindEventToFormSubmit();
-    });
+    }, '.login-page');
 
     const bindEventToFormSubmit = () => {
         const usernameInput: HTMLInputElement = <HTMLInputElement>document.getElementById('login-user-username')!;

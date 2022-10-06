@@ -1,0 +1,55 @@
+.grid-container {
+    overflow: hidden;
+    height: 90vh;
+	width: 80vw;
+    margin-top: 0.8rem;
+    border: 2px solid var(--grid-border-color);
+    border-top: 2.8px solid var(--grid-border-color);
+    background-color: var(--background-color-1);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.grid {
+	--grid-x: 25;
+	--grid-y: 25;
+	--size: 30px;
+    --map-background: rgb(237 237 237 / 52%);
+    --grid-color: rgb(0 0 0);
+
+	height: calc(var(--size) * var(--grid-y));
+	width: calc(var(--size) * var(--grid-x));
+	display: grid;
+	grid-template-columns: repeat(var(--grid-x), var(--size));
+	grid-template-rows: repeat(var(--grid-x), var(--size));
+	box-shadow: 0 -1px var(--grid-color), 1px 0 var(--grid-color),
+		1px -1px var(--grid-color);
+
+	background: repeating-linear-gradient(
+			90deg,
+			var(--grid-color) 0,
+			#0000 1px,
+			#0000 var(--size)
+		),
+		repeating-linear-gradient(
+			0deg,
+			var(--grid-color) 0,
+			#0000 1px,
+			#0000 var(--size)
+		),
+		var(--map-background);
+		background-repeat: no-repeat;
+		background-size: cover;
+
+	&__cell {
+		position: relative;
+	}
+}
+
+.panning {
+    cursor: grabbing;
+}

@@ -1,10 +1,10 @@
-import { ready } from '../../scripts/utils';
-import { registerUser } from '../../controllers/userController';
+import { ready } from '../scripts/utils';
+import { registerUser } from '../controllers/userController';
 
 export default function registerPage() {
     ready(() => {
         bindEventToFormSubmit();
-    });
+    }, '.register-page');
 
     const bindEventToFormSubmit = () => {
         const usernameInput: HTMLInputElement = <HTMLInputElement>document.getElementById('register-user-username')!;

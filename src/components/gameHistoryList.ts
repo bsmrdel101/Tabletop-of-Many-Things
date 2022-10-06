@@ -1,14 +1,14 @@
-import { ready } from "../../scripts/utils";
-import { Game } from "../../scripts/types";
-import { getGamesHistory } from "../../controllers/dashboardController";
-import gameCard from "../gameCard/gameCard";
-import { joinPlayer } from "../../views/dashboardPage/dashboardPage";
+import { ready } from "../scripts/utils";
+import { Game } from "../scripts/types";
+import { getGamesHistory } from "../controllers/dashboardController";
+import gameCard from "./gameCard";
+import { joinPlayer } from "../views/dashboardPage";
 
 export default function gamesHistoryList() {
     ready(async () => {
         const gamesHistory: Game[] = await getGamesHistory();
         renderGamesHistoryList(gamesHistory);
-    });
+    }, '.games-history-list__content');
 
     const renderGamesHistoryList = (gamesHistory: Game[]) => {
         const gameListContent: Element = document.querySelector('.games-history-list__content')!;

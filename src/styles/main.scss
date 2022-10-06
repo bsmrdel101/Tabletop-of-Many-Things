@@ -1,3 +1,14 @@
+@import './mixins';
+@import './dashboardPage';
+@import './gamePage';
+@import './grid';
+@import './loginPage';
+@import './registerPage';
+@import './sidebar';
+@import './toolbar';
+@import './menus';
+@import './modal';
+
 :root {
   /* Main */
   --background-color-0: #b59696;
@@ -30,6 +41,11 @@
   /* Font size */
   --font-sm: 0.9375rem; /* 15px */
   --font-md: 1.4375rem; /* 23px */
+  /* Box shadow */
+  --depth-0: 0 1px 6px 1px rgba(0, 0, 0, 0.404);
+  --depth-1: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  --depth-2: 0 1px 6px 1px rgb(172 172 172 / 50%);
+  --depth-3: 0px 0px 9px -2px rgba(132, 132, 132, 0.612);
 }
 
 * {
@@ -39,22 +55,13 @@
 
 body {
   margin: 0px;
-  min-height: 100vh;
   background-color: var(--background-color-0);
   font-size: 100%;
 }
 
-.game-page-container {
+.game-page {
   display: flex;
   gap: 1rem;
-}
-
-.game-content {
-  max-width: 51rem;
-  min-width: 51rem;
-  height: 100vh;
-  margin-right: 0.8rem;
-  position: relative;
 }
 
 .page-title {
@@ -66,16 +73,12 @@ input {
   border: none;
   border-radius: 5px;
   transition: all ease-in-out 200ms;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: var(--depth-1);
   margin-top: 0.08rem;
 }
 
 .input--hover:hover {
   transform: scale(1.025, 1.025);
-}
-
-@mixin input($width) {
-  width: $width;
 }
 
 .input--sm {
@@ -113,7 +116,7 @@ button {
   border: none;
   border-radius: 5px;
   transition: all ease-in-out 200ms;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: var(--depth-1);
   cursor: pointer;
 }
 
@@ -122,7 +125,7 @@ button {
       transform: scale(1.025, 1.025);
   }
 
-  &--window-close {
+  &--modal-close {
       border: none;
       background-color: var(--menu-color-0);
       margin: 0;
@@ -144,13 +147,4 @@ button {
 
 .bold {
   font-weight: 600;
-}
-
-.box__form {
-  padding: 1rem;
-  border-radius: 10px;
-  font-size: 1.4rem;
-  min-width: 20rem;
-  min-height: 20rem;
-  margin: 0 25%;
 }
