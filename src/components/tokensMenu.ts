@@ -62,3 +62,20 @@ export const placeToken = (token: any, size: number) => {
     token.classList.add('token--dragging');
     token.setAttribute('size', size);
 };
+
+export const resetTokenBodyData = () => {
+    let deleteList = [];
+    for (let token of Array.from(document.getElementsByClassName('menu__item'))) {
+        deleteList.push(token);
+    }
+    for (let btn of Array.from(document.getElementsByClassName('menu__item--circle-btn'))) {
+        deleteList.push(btn);
+    }
+    for (let box of Array.from(document.getElementsByClassName('menu__body--container'))) {
+        deleteList.push(box);
+    }
+    for (let el of deleteList) {
+        el.remove();
+    }
+    getTokenBodyData();
+};

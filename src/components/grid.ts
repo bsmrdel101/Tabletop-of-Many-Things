@@ -3,7 +3,8 @@ import { User, Coord } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
 import { io, Socket } from "socket.io-client";
-import { placeToken } from './tokensMenu';
+import { placeToken, resetTokenBodyData } from './tokensMenu';
+import { getUser } from '../controllers/userController';
 const socket: Socket = io();
 
 class Token {
@@ -158,10 +159,43 @@ const socketPlaceToken = (coords: Coord, tokenData: Token, username: string, roo
 };
 
 
+// Add a token to the board
+socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
+    console.log(selectedCell, menuToken, username);
+    
+    const { x, y } = selectedCell;
+    const { img, relative, size } = menuToken;
+    const token = document.createElement('img');
+    const cell = findCell(x, y);
+    token.classList.add('token');
+    token.setAttribute('src', img);
+    token.setAttribute('relative', relative)
+    token.setAttribute('user', username);
+    token.setAttribute('size', size);
+    cell.appendChild(token);
+    // Set token size
+    token.style.setProperty('height', `calc(var(--size) * ${size})`);
+    token.style.setProperty('width', `calc(var(--size) * ${size})`);
+    // Set token position
+    token.style.setProperty('--row', x);
+    token.style.setProperty('--column', y);
+
+    if (size > 1) {
+        occupyTokenSpace(x, y, size);
+    } else {
+        cell.style.setProperty('background-color', 'var(--enemy-background)');
+    }
+
+    addTokenEvents(token, relative);
+    resetTokenBodyData();
+}));
+
+
 export default function grid() {
-    ready(() => {
-        // socket.emit('SET_NAME', user.username);
-        // socket.emit('UPDATE_PLAYER_LIST', room);
+    ready(async () => {
+        user = await getUser();
+        socket.emit('SET_NAME', user.username);
+        socket.emit('UPDATE_PLAYER_LIST', room);
         setupGrid(25, 25);
         bindEventsToGrid();
     }, '.grid');
