@@ -68,10 +68,10 @@ const addGridEvents = (grid: HTMLElement) => {
 
 const addTokenEvents = (token: any, relative: string) => {
     // Open stats menu after double click
-    token.addEventListener('dblclick', () => {
-        if (!relative) return;
-        // openCreatureStatsWindow(relative);
-    });
+    // token.addEventListener('dblclick', () => {
+    //     if (!relative) return;
+    //     openCreatureStatsWindow(relative);
+    // });
     // Handle dragging token
     token.addEventListener('dragstart', (e: any) => {
         const tokenPos = token.getBoundingClientRect();
@@ -80,15 +80,15 @@ const addTokenEvents = (token: any, relative: string) => {
             y: e.y - tokenPos.y
         };
 
-        placeToken(e, parseInt(token.getAttribute('size')));
+        placeToken(token, parseInt(token.getAttribute('size')));
         const cell = token.parentNode;
         lastPos = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y'))};
     });
     // Handle token moved
     token.addEventListener('dragend', () => {
-        socket.emit('REMOVE_TOKEN', lastPos, room);
+        // socket.emit('REMOVE_TOKEN', lastPos, room);
         const size = parseInt(token.getAttribute('size'));
-        socket.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPos.x, lastPos.y, size, room);
+        // socket.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPos.x, lastPos.y, size, room);
     });
 };
 
@@ -164,11 +164,11 @@ socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username, _room) => {
     if (room !== _room) return;
     
     const { x, y } = selectedCell;
-    const { img, relative, size } = menuToken;
+    const { image, relative, size } = menuToken;
     const token = document.createElement('img');
     const cell = findCell(x, y);
     token.classList.add('token');
-    token.setAttribute('src', img);
+    token.setAttribute('src', image);
     token.setAttribute('relative', relative)
     token.setAttribute('user', username);
     token.setAttribute('size', size);

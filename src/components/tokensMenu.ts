@@ -58,7 +58,7 @@ const getTokenBodyData = async () => {
     });
 };
 
-export const placeToken = (token: any, size: number) => {    
+export const placeToken = (token: any, size: number) => {
     token.classList.add('token--dragging');
     token.setAttribute('size', size);
 };
