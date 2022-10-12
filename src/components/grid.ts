@@ -62,7 +62,14 @@ const addGridEvents = (grid: HTMLElement) => {
 
     document.addEventListener('dragend', () => {
         const relativeCell: Element = findRelativeCell(selectedCell, mousePos.x, mousePos.y);
-        addTokenToBoard(relativeCell || <Element>selectedCell);
+        const menuToken = document.querySelector('.token--dragging');
+        
+        // If this is token is being dragged out from the menu, then place it exactly where the mouse cursor is.
+        if (menuToken.classList.contains('menu__item')) {
+            addTokenToBoard(<Element>selectedCell);
+        } else {
+            addTokenToBoard(relativeCell || <Element>selectedCell);
+        }
     });
 };
 
@@ -86,9 +93,9 @@ const addTokenEvents = (token: any, relative: string) => {
     });
     // Handle token moved
     token.addEventListener('dragend', () => {
-        // socket.emit('REMOVE_TOKEN', lastPos, room);
+        socket.emit('REMOVE_TOKEN', lastPos, room);
         const size = parseInt(token.getAttribute('size'));
-        // socket.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPos.x, lastPos.y, size, room);
+        socket.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPos.x, lastPos.y, size, room);
     });
 };
 
@@ -188,6 +195,23 @@ socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username, _room) => {
 
     addTokenEvents(token, relative);
     resetTokenBodyData();
+}));
+
+// Removes the token background for everyone
+socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, _room) => {
+    if (room !== _room) return;
+
+    if (size > 1) {
+        removeOccupyTokenSpace(lastPosX, lastPosY, size);
+    } else {
+        findCell(lastPosX, lastPosY).style.removeProperty('background-color');
+    }
+});
+
+socket.on('REMOVE_TOKEN', ((cell, _room) => {
+    if (room !== _room) return;
+    const newCell = findCell(cell.x, cell.y);
+    newCell.innerHTML = '';
 }));
 
 

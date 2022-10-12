@@ -124,8 +124,12 @@ io.on('connection', (socket) => {
     io.emit('PLACE_TOKEN', cell, token, username, room);
   });
 
+  socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, room) => {
+    io.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size, room);
+  });
+
   socket.on('REMOVE_TOKEN', (cell, room) => {
-    io.to(room).emit('REMOVE_TOKEN', cell);
+    io.emit('REMOVE_TOKEN', cell, room);
   });
 
   socket.on('SELECT_MAP', (e, map) => {
