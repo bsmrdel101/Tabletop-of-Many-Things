@@ -14,5 +14,5 @@ PGDATABASE="bennett"
 PGPORT=5438
 SESSION_SECRET=62D5ZxmofR3^e?W*ZFu~
 ```
-- Do `npm run start`
+- Do `npm run dev`
 - Go to `http://localhost:3000/register` to create an account.
