@@ -2,10 +2,10 @@ import { zoomIn, zoomOut } from '../components/grid';
 import { clientType } from '../views/dashboardPage';
 import { checkForElement } from './utils';
 
-let canScale: boolean = false;
+let canScale = false;
 let targetPosX: number, targetPosY: number;
-let dragging: boolean = false;
-let canUseHotkey: boolean = true;
+let dragging = false;
+const canUseHotkey = true;
 
 
 export const bindEventsToGrid = () => {
@@ -82,8 +82,8 @@ const handleGridMouseEvents = () => {
 
     // Fires when user moves mouse
     document.addEventListener('mousemove', (e: MouseEvent) => {
-        let mousePosX = e.x;
-        let mousePosY = e.y;
+        const mousePosX = e.x;
+        const mousePosY = e.y;
         if (dragging) {
             document.querySelector('.grid-container').scrollBy((targetPosX - mousePosX) / 40, (targetPosY - mousePosY) / 40);
             document.querySelector('.game-page').classList.add('panning');

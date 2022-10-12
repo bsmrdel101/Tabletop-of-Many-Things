@@ -11,7 +11,7 @@ export default function gamesHistoryList() {
     }, '.games-history-list__content');
 
     const renderGamesHistoryList = (gamesHistory: Game[]) => {
-        const gameListContent: Element = document.querySelector('.games-history-list__content')!;
+        const gameListContent: Element = document.querySelector('.games-history-list__content');
         gameListContent.innerHTML = '';
     
         // Add all games from game history

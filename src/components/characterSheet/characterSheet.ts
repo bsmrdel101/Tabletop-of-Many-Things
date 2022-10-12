@@ -1,8 +1,8 @@
 import { makeDraggable } from "../../scripts/utils";
 import { renderCharacterSheetMainPage } from "./characterSheetMain";
 
-let sheetOpen: boolean = false;
-let sidebarOpen = true;
+let sheetOpen = false;
+// let sidebarOpen = true;
 export let characterSheetPage = 'main';
 
 export const setCharacterSheetPage = (page: string) => characterSheetPage = page;

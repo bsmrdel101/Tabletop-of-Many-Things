@@ -23,13 +23,12 @@
     @media (max-width: 748px) {
         min-width: 100%;
         min-height: 12vh;
-        flex-direction: row;
-        flex-wrap: wrap;
-    
+        flex-flow: wrap;
+
         .game-page {
             flex-wrap: wrap;
         }
-        
+
         .game-content {
             margin-left: 2rem;
         }

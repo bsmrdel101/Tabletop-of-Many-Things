@@ -2,18 +2,18 @@ import { addMap, getMaps, maps } from "../controllers/mapsController";
 import { setupGrid } from "./grid";
 import { Map } from "../scripts/types";
 import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../scripts/menuManager";
-import { io, Socket } from "socket.io-client";
-const socket: Socket = io();
+import { emitServerEvent, onServerEvent } from "../scripts/socket.io";
+import { room } from "../views/dashboardPage";
 
-let defaultMaps: Map[] = [
+const defaultMaps: Map[] = [
     { name: 'Default Map', image: 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg' },
 ];
 
 
 export const addDefaultMaps = () => {
-    for (let map of defaultMaps) {
+    defaultMaps.forEach((map) => {
         addMap(map);
-    }
+    });
 };
 
 export const toggleMapMenu = () => {
@@ -58,12 +58,12 @@ const getMapBodyData = async () => {
 const selectMap = (target: any) => {
     maps.forEach((map: Map) => {
         if (map.id === parseInt(target.getAttribute('id'))) {
-            socket.emit('SELECT_MAP', { width: target.clientWidth, height: target.clientHeight }, map);
+            emitServerEvent('SELECT_MAP', [{ width: target.clientWidth, height: target.clientHeight }, map, room]);
         }
     });
 };
 
-socket.on('SELECT_MAP', ((e: any, map: Map) => {
+onServerEvent('SELECT_MAP', ((e: any, map: Map) => {
     if (map.name === 'Default Map') {
         // Set image to nothing
         (<HTMLElement>document.querySelector('.grid')).style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);

@@ -2,12 +2,10 @@ import { clamp, findCell, findRelativeCell, ready } from '../scripts/utils';
 import { User, Coord } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
-import { io, Socket } from "socket.io-client";
 import { addDefaultTokens, placeToken, resetTokenBodyData } from './tokensMenu';
 import { changeNewUser, getUser } from '../controllers/userController';
 import { addDefaultMaps } from './mapsMenu';
-
-const socket: Socket = io();
+import { emitServerEvent, onServerEvent } from '../scripts/socket.io';
 
 class Token {
     id: number;
@@ -26,7 +24,7 @@ class Token {
 let lastPos: Coord;
 let mousePos: Coord = { x: 0, y: 0 };
 let user: User;
-let zoomMin: number = 12, zoomMax: number = 64;
+const zoomMin = 12, zoomMax = 64;
 
 
 export const setupGrid = (width: number, height: number) => {
@@ -94,9 +92,9 @@ const addTokenEvents = (token: any, relative: string) => {
     });
     // Handle token moved
     token.addEventListener('dragend', () => {
-        socket.emit('REMOVE_TOKEN', lastPos, room);
+        emitServerEvent('REMOVE_TOKEN', [lastPos, room]);
         const size = parseInt(token.getAttribute('size'));
-        socket.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPos.x, lastPos.y, size, room);
+        emitServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', [lastPos.x, lastPos.y, size, room]);
     });
 };
 
@@ -121,15 +119,15 @@ const addTokenToBoard = (selectedCell: Element) => {
 
 export const zoomIn = () => {
     const grid: HTMLElement = document.querySelector('.grid');
-    let rs = getComputedStyle(grid);
-    let zoomValue = parseInt(rs.getPropertyValue('--size'));
+    const rs = getComputedStyle(grid);
+    const zoomValue = parseInt(rs.getPropertyValue('--size'));
     grid.style.setProperty('--size', `${clamp(zoomValue + 4, zoomMin, zoomMax)}px`);
 };
 
 export const zoomOut = () => {
     const grid: HTMLElement = document.querySelector('.grid');
-    let rs = getComputedStyle(grid);
-    let zoomValue = parseInt(rs.getPropertyValue('--size'));
+    const rs = getComputedStyle(grid);
+    const zoomValue = parseInt(rs.getPropertyValue('--size'));
     grid.style.setProperty('--size', `${clamp(zoomValue - 4, zoomMin, zoomMax)}px`);
 };
 
@@ -164,13 +162,11 @@ const resetBoard = () => {
 };
 
 const socketPlaceToken = (coords: Coord, tokenData: Token, username: string, room: string) => {
-    socket.emit('PLACE_TOKEN', coords, tokenData, username, room);
+    emitServerEvent('PLACE_TOKEN', [coords, tokenData, username, room]);
 };
 
 // Add a token to the board
-socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username, _room) => {
-    if (room !== _room) return;
-    
+onServerEvent('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
     const { x, y } = selectedCell;
     const { image, relative, size } = menuToken;
     const token = document.createElement('img');
@@ -199,9 +195,7 @@ socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username, _room) => {
 }));
 
 // Removes the token background for everyone
-socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, _room) => {
-    if (room !== _room) return;
-
+onServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size) => {
     if (size > 1) {
         removeOccupyTokenSpace(lastPosX, lastPosY, size);
     } else {
@@ -209,8 +203,7 @@ socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, _room) => {
     }
 });
 
-socket.on('REMOVE_TOKEN', ((cell, _room) => {
-    if (room !== _room) return;
+onServerEvent('REMOVE_TOKEN', ((cell) => {
     const newCell = findCell(cell.x, cell.y);
     newCell.innerHTML = '';
 }));
@@ -219,8 +212,8 @@ socket.on('REMOVE_TOKEN', ((cell, _room) => {
 export default function grid() {
     ready(async () => {
         user = await getUser();
-        socket.emit('SET_NAME', user.username);
-        socket.emit('UPDATE_PLAYER_LIST', room);
+        emitServerEvent('SET_NAME', [user.username]);
+        emitServerEvent('UPDATE_PLAYER_LIST', [room]);
         setupGrid(25, 25);
         bindEventsToGrid();
 

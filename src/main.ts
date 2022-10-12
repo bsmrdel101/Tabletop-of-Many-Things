@@ -15,7 +15,7 @@ const routeManager = () => {
   }
 }
 
-document.querySelector<HTMLDivElement>('#app')!.insertAdjacentHTML('beforeend', `
+document.querySelector<HTMLDivElement>('#app').insertAdjacentHTML('beforeend', `
   <div class="container">
     ${routeManager()}
   </div>

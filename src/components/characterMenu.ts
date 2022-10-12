@@ -1,5 +1,5 @@
 import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../scripts/menuManager";
-import { characters, getCharacter, getCharacters, getCharacterSkills, updateCharacter, updateCharacterSkills } from "../controllers/charactersController";
+import { character, characters, getCharacter, getCharacters, getCharacterSkills, updateCharacter, updateCharacterSkills } from "../controllers/charactersController";
 
 export const toggleCharacterMenu = () => {
     setMenuOpenValue(!menuOpen);
@@ -21,7 +21,7 @@ export const toggleCharacterMenu = () => {
 
 const getCharacterBodyData = async () => {
     await getCharacters();
-    for (let character of characters) {
+    characters.forEach((character) => {
         document.querySelector('.menu__body').insertAdjacentHTML('beforeend', `
             <div class="menu__item menu__item--character" id="character-menu-item-${character.id}">
                 <img src=${character.image}>
@@ -33,7 +33,7 @@ const getCharacterBodyData = async () => {
         document.getElementById(`character-menu-item-${character.id}`).addEventListener('click', () => {
             selectCharacter(character.id);
         });
-    }
+    });
 
     // Add new character button
     document.querySelector('.menu__body').insertAdjacentHTML('beforeend', `
@@ -44,9 +44,9 @@ const getCharacterBodyData = async () => {
 };
 
 const selectCharacter = async (id: number) => {
-    let characterData = await getCharacter(id);
+    const characterData = await getCharacter(id);
     updateCharacter(characterData);
-    let skillsData = await getCharacterSkills(id);
+    const skillsData = await getCharacterSkills(id);
     updateCharacterSkills(skillsData);
     toggleCharacterMenu();
 };

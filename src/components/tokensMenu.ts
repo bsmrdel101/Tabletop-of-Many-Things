@@ -2,7 +2,7 @@ import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../
 import { Token } from "../scripts/types";
 import { addToken, getTokens, tokens } from "../controllers/tokensController";
 
-let defaultTokens = [
+const defaultTokens = [
     { image: 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', size: 1, creature: 'bandit' },
     { image: 'https://i.imgur.com/5cibmUw.png', size: 2 },
     { image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', size: 4, creature: 'tarrasque' },
@@ -64,18 +64,18 @@ export const placeToken = (token: any, size: number) => {
 };
 
 export const resetTokenBodyData = () => {
-    let deleteList = [];
-    for (let token of Array.from(document.getElementsByClassName('menu__item'))) {
+    const deleteList = [];
+    Array.from(document.getElementsByClassName('menu__item')).forEach((token) => {
         deleteList.push(token);
-    }
-    for (let btn of Array.from(document.getElementsByClassName('menu__item--circle-btn'))) {
+    });
+    Array.from(document.getElementsByClassName('menu__item--circle-btn')).forEach((btn) => {
         deleteList.push(btn);
-    }
-    for (let box of Array.from(document.getElementsByClassName('menu__body--container'))) {
+    });
+    Array.from(document.getElementsByClassName('menu__body--container')).forEach((box) => {
         deleteList.push(box);
-    }
-    for (let el of deleteList) {
+    });
+    deleteList.forEach((el) => {
         el.remove();
-    }
+    });
     getTokenBodyData();
 };

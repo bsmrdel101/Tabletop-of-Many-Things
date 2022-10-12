@@ -3,7 +3,7 @@ import { Game } from "../scripts/types";
 
 interface newGame {
     name: string
-};
+}
 
 // === GET routes === //
 

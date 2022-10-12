@@ -4,7 +4,7 @@ import { Game } from "../scripts/types";
 import gameCard from "./gameCard";
 import { joinDM } from "../views/dashboardPage";
 
-let gameFormOpen: boolean = false;
+let gameFormOpen = false;
 
 // Form that creates new campaign
 const toggleGameForm = () => {
@@ -25,7 +25,7 @@ const toggleGameForm = () => {
 // Renders the list and all game cards within the list
 const renderGamesList = async () => {
     const gamesList: Game[] = await getGames();
-    const gameListContent: Element = document.querySelector('.games-list__content')!;
+    const gameListContent: Element = document.querySelector('.games-list__content');
     gameListContent.innerHTML = '';
 
     // Add all games from game list

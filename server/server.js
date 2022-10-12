@@ -121,20 +121,20 @@ io.on('connection', (socket) => {
 
   socket.on('PLACE_TOKEN', (cell, token, username, room) => {
     // tokens.push({cell: cell, token: token, username: username});
-    io.emit('PLACE_TOKEN', cell, token, username, room);
+    io.to(room).emit('PLACE_TOKEN', cell, token, username);
   });
 
   socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, room) => {
-    io.emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size, room);
+    io.to(room).emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size);
   });
 
   socket.on('REMOVE_TOKEN', (cell, room) => {
-    io.emit('REMOVE_TOKEN', cell, room);
+    io.to(room).emit('REMOVE_TOKEN', cell);
   });
 
-  socket.on('SELECT_MAP', (e, map) => {
+  socket.on('SELECT_MAP', (e, map, room) => {
     selectedMap = [{e}, {map}];
-    io.emit('SELECT_MAP', e, map);
+    io.to(room).emit('SELECT_MAP', e, map);
   });
 });
 

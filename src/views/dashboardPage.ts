@@ -4,8 +4,7 @@ import { Client } from '../scripts/types';
 import { ready } from '../scripts/utils';
 import gamesHistoryList from '../components/gameHistoryList';
 import gamePage from './gamePage';
-import { io, Socket } from "socket.io-client";
-const socket: Socket = io();
+import { emitServerEvent } from '../scripts/socket.io';
 
 export let room: string;
 export let clientType: string;
@@ -14,7 +13,7 @@ export let clientType: string;
 // Joins the game as a player
 export const joinPlayer = (roomCode: string) => {
     room = roomCode;
-    socket.emit('JOIN_ROOM', 'player', roomCode, (roomExists: boolean, newClient: Client) => {
+    emitServerEvent('JOIN_ROOM', ['player', roomCode, (roomExists: boolean, newClient: Client) => {
         if (roomExists) {
             clientType = newClient.clientType;
             renderGamePage();
@@ -22,20 +21,20 @@ export const joinPlayer = (roomCode: string) => {
         } else {
             console.warn('room doesn\'t exist');
         }
-    });
+    }]);
 };
 
 // Joins the game as the DM
 export const joinDM = (roomCode: string) => {
     room = roomCode;
-    socket.emit('JOIN_ROOM', 'dm', roomCode, (roomExists: boolean, newClient: Client) => {
+    emitServerEvent('JOIN_ROOM', ['dm', roomCode, (roomExists: boolean, newClient: Client) => {
         if (roomExists) {
             clientType = newClient.clientType;
             renderGamePage();
         } else {
             console.warn('game already started');
         }
-    });
+    }]);
 };
 
 // Switch page from dashboard to the game

@@ -1,7 +1,7 @@
 import { makeDraggable } from '../scripts/utils';
 import modal from './modal';
 
-let creaturesOpen: boolean = false;
+let creaturesOpen = false;
 
 
 export const toggleCreaturesModal = () => {

@@ -7,8 +7,8 @@ export default function loginPage() {
     }, '.login-page');
 
     const bindEventToFormSubmit = () => {
-        const usernameInput: HTMLInputElement = <HTMLInputElement>document.getElementById('login-user-username')!;
-        const passwordInput: HTMLInputElement = <HTMLInputElement>document.getElementById('login-user-password')!;
+        const usernameInput: HTMLInputElement = <HTMLInputElement>document.getElementById('login-user-username');
+        const passwordInput: HTMLInputElement = <HTMLInputElement>document.getElementById('login-user-password');
         (<HTMLButtonElement>document.getElementById('login-user-btn')).addEventListener('click', (e) => {
             e.preventDefault();
             loginUser({ username: usernameInput.value, password: passwordInput.value });

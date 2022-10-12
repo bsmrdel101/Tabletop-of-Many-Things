@@ -7,8 +7,8 @@ export default function registerPage() {
     }, '.register-page');
 
     const bindEventToFormSubmit = () => {
-        const usernameInput: HTMLInputElement = <HTMLInputElement>document.getElementById('register-user-username')!;
-        const passwordInput: HTMLInputElement = <HTMLInputElement>document.getElementById('register-user-password')!;
+        const usernameInput: HTMLInputElement = <HTMLInputElement>document.getElementById('register-user-username');
+        const passwordInput: HTMLInputElement = <HTMLInputElement>document.getElementById('register-user-password');
         (<HTMLButtonElement>document.getElementById('register-user-btn')).addEventListener('click', (e) => {
             e.preventDefault();
             registerUser({ username: usernameInput.value, password: passwordInput.value });

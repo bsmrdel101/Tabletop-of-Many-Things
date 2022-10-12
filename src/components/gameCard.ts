@@ -2,7 +2,7 @@ import { Game } from "../scripts/types";
 
 interface Props {
     game: Game
-};
+}
 
 export default function gameCard({ game }: Props) {
     return `

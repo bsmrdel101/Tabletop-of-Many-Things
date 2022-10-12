@@ -2,7 +2,7 @@ import { toggleCharacterMenu } from "../components/characterMenu";
 import { toggleMapMenu } from "../components/mapsMenu";
 import { toggleTokenMenu } from "../components/tokensMenu";
 
-export let menuOpen: boolean = false;
+export let menuOpen = false;
 export let selectedMenu: string;
 
 
@@ -28,6 +28,7 @@ export const closeMenu = (menuName: string) => {
                 break;
             case 'characters':
                 toggleCharacterMenu();
+                break;
             default:
                 break;
         }

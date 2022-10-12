@@ -26,10 +26,12 @@
 	display: grid;
 	grid-template-columns: repeat(var(--grid-x), var(--size));
 	grid-template-rows: repeat(var(--grid-x), var(--size));
-	box-shadow: 0 -1px var(--grid-color), 1px 0 var(--grid-color),
+	box-shadow:
+		0 -1px var(--grid-color),
+		1px 0 var(--grid-color),
 		1px -1px var(--grid-color);
-
-	background: repeating-linear-gradient(
+	background:
+		repeating-linear-gradient(
 			90deg,
 			var(--grid-color) 0,
 			#0000 1px,
