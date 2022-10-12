@@ -24,16 +24,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.files.map);
-    const { name, data } = req.files.map;
+    // console.log(req.files.map);
+    // const { name, data } = req.files.map;
     const sqlText =`
         INSERT INTO "maps" ("user_id", "name", "image")
         VALUES ($1, $2, $3);
     `;
     const sqlValues = [
         req.user.id,
-        name,
-        data
+        req.body.name,
+        req.body.image
     ];
     pool.query(sqlText, sqlValues)
         .then(() => res.sendStatus(201))

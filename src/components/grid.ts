@@ -3,8 +3,9 @@ import { User, Coord } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
 import { io, Socket } from "socket.io-client";
-import { placeToken, resetTokenBodyData } from './tokensMenu';
-import { getUser } from '../controllers/userController';
+import { addDefaultTokens, placeToken, resetTokenBodyData } from './tokensMenu';
+import { changeNewUser, getUser } from '../controllers/userController';
+import { addDefaultMaps } from './mapsMenu';
 
 const socket: Socket = io();
 
@@ -222,6 +223,12 @@ export default function grid() {
         socket.emit('UPDATE_PLAYER_LIST', room);
         setupGrid(25, 25);
         bindEventsToGrid();
+
+        if (user.new_user) {
+            addDefaultTokens();
+            addDefaultMaps();
+            changeNewUser(false);
+        }
     }, '.grid');
 
     return `

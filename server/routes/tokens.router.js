@@ -24,13 +24,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-        INSERT INTO "tokens" ("user_id", "image", "size")
-        VALUES ($1, $2, $3);
+        INSERT INTO "tokens" ("user_id", "image", "size", "creature")
+        VALUES ($1, $2, $3, $4);
     `;
     const sqlValues = [
         req.user.id,
         req.body.image,
-        req.body.size
+        req.body.size,
+        req.body.creature
     ];
     pool.query(sqlText, sqlValues)
         .then(() => res.sendStatus(201))

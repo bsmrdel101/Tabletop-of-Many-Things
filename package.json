@@ -9,7 +9,8 @@
     "lint": "eslint ./ --ignore-path .gitignore",
     "dev": "nodemon server/server.js",
     "sass": "sass --watch src/styles:src/buildjs",
-    "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline"
+    "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline",
+    "docker:setup": "rm -rf ./.postgres-data && docker-compose up"
   },
   "repository": {
     "type": "git",

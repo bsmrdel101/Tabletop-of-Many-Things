@@ -9,7 +9,7 @@ let defaultTokens = [
 ];
 
 
-const addDefaultTokens = () => {
+export const addDefaultTokens = () => {
     defaultTokens.forEach((token: Token) => {
         addToken(token);
     });

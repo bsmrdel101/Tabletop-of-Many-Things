@@ -48,3 +48,13 @@ export const logout = async () => {
         console.log(err);
     }
 };
+
+// === PUT routes === //
+
+export const changeNewUser = async (payload) => {
+    try {
+        await axios.put('/api/user', {newStatus: payload});
+    } catch(err) {
+        console.log(err);
+    }
+};

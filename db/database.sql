@@ -1,4 +1,4 @@
-CREATE TABLE "users" (
+CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
@@ -7,22 +7,22 @@ CREATE TABLE "users" (
 
 CREATE TABLE "maps" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
+    "user_id" INTEGER REFERENCES "user",
     "name" TEXT,    
     "image" TEXT
 );
 
 CREATE TABLE "tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
-    "map_id" INTEGER REFERENCES "maps",
+    "user_id" INTEGER REFERENCES "user",
     "image" TEXT,
-    "size" TEXT
+    "size" INTEGER,
+    "creature" TEXT
 );
 
 CREATE TABLE "map_tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
+    "user_id" INTEGER REFERENCES "user",
     "map_id" INTEGER REFERENCES "maps",
     "token_id" INTEGER REFERENCES "tokens",
     "x" INTEGER,
@@ -31,27 +31,27 @@ CREATE TABLE "map_tokens" (
 
 CREATE TABLE "games_list" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
+    "user_id" INTEGER REFERENCES "user",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL
 );
 
 -- CREATE TABLE "prev_games" (
 --     "id" SERIAL PRIMARY KEY,
---     "user_id" INTEGER REFERENCES "users",
+--     "user_id" INTEGER REFERENCES "user",
 --     "code" VARCHAR (20)
 -- );
 
 CREATE TABLE "game_history" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
+    "user_id" INTEGER REFERENCES "user",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL
 );
 
 CREATE TABLE "characters" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
+    "user_id" INTEGER REFERENCES "user",
     "name" VARCHAR (80) NOT NULL,
     "class" VARCHAR (80) NOT NULL,
     "race" VARCHAR (80) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE "characters" (
 
 CREATE TABLE "creatures" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
+    "user_id" INTEGER REFERENCES "user" ON DELETE CASCADE,
     "image" TEXT,
     "name" VARCHAR (80),
     "size" VARCHAR (80),
@@ -223,4 +223,12 @@ CREATE TABLE "creature_action_rolls" (
 --   (1,'Intimidation', 'char', 0, FALSE),
 --   (1,'Performance', 'char', 0, FALSE),
 --   (1,'Persuasion', 'char', 0, FALSE)
+-- ;
+
+-- INSERT INTO "tokens" ("user_id", "image", "size", "creature")
+-- VALUES 
+--     (1, 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', 1, 'bandit'),
+--     (1, 'https://i.imgur.com/zURSSgl.png', 1, 'fire-elemental'),
+--     (1, 'https://i.imgur.com/5cibmUw.png', 2, null),
+--     (1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
 -- ;

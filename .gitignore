@@ -108,3 +108,4 @@ src/build
 coverage
 src/buildjs
 buildjs
+.postgres-data

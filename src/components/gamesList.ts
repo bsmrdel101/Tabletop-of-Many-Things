@@ -23,7 +23,8 @@ const toggleGameForm = () => {
 };
 
 // Renders the list and all game cards within the list
-const renderGamesList = (gamesList: Game[]) => {
+const renderGamesList = async () => {
+    const gamesList: Game[] = await getGames();
     const gameListContent: Element = document.querySelector('.games-list__content')!;
     gameListContent.innerHTML = '';
 
@@ -52,6 +53,7 @@ const bindEventToGamesListForm = () => {
         e.preventDefault();
         const gameNameInput: HTMLInputElement = (<HTMLInputElement>document.getElementById('game-name-input'));
         addGame({ name: gameNameInput.value });
+        renderGamesList();
     });
 };
 
@@ -65,8 +67,7 @@ const bindEventToGameCard = (game: Game) => {
 
 export default function gamesList() {
     ready(async () => {
-        const games: Game[] = await getGames();
-        renderGamesList(games);
+        await renderGamesList();
         bindEventToCreateCampaign();
         // prevGame = await getPrevGame();
         // roomCode = prevGame.code;

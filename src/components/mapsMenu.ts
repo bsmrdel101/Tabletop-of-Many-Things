@@ -10,7 +10,7 @@ let defaultMaps: Map[] = [
 ];
 
 
-const addDefaultMaps = () => {
+export const addDefaultMaps = () => {
     for (let map of defaultMaps) {
         addMap(map);
     }
