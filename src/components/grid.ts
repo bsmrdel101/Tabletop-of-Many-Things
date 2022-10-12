@@ -5,6 +5,7 @@ import { bindEventsToGrid } from '../scripts/gridInput';
 import { io, Socket } from "socket.io-client";
 import { placeToken, resetTokenBodyData } from './tokensMenu';
 import { getUser } from '../controllers/userController';
+
 const socket: Socket = io();
 
 class Token {
@@ -158,10 +159,9 @@ const socketPlaceToken = (coords: Coord, tokenData: Token, username: string, roo
     socket.emit('PLACE_TOKEN', coords, tokenData, username, room);
 };
 
-
 // Add a token to the board
-socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
-    console.log(selectedCell, menuToken, username);
+socket.on('PLACE_TOKEN', ((selectedCell, menuToken, username, _room) => {
+    if (room !== _room) return;
     
     const { x, y } = selectedCell;
     const { img, relative, size } = menuToken;
