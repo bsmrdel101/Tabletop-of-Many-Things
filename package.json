@@ -1,7 +1,7 @@
 {
   "name": "virtual-table",
   "version": "1.0.0",
-  "description": "A virtual tabletop fop 5e D&amp;D.",
+  "description": "A virtual tabletop fop 5e D&D.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -9,10 +9,11 @@
     "lint:js": "eslint ./ --ignore-path .gitignore",
     "lint:css": "stylelint '**/*.scss'",
     "lint": "run-s lint:js lint:css",
-    "dev": "nodemon server/server.js",
+    "server": "nodemon server/server.js",
     "sass": "sass --watch src/styles:src/buildjs",
     "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline",
-    "docker:setup": "rm -rf ./.postgres-data && docker-compose up"
+    "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
+    "dev": "run-p server sass tsc docker:setup"
   },
   "repository": {
     "type": "git",
@@ -49,7 +50,6 @@
     "express": "^4.18.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
-    "node-sass": "^7.0.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^8.7.3",

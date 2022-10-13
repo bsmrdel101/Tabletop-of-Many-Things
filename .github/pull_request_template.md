@@ -13,15 +13,14 @@ See Story: [FSA22V2_ISSUE](card_link)
 
 #### To Validate:
 
-1. Make sure all PR Checks have passed (GitHub Actions, CircleCI, Code Climate, etc).
-2. Pull down all related branches.
-3. `npm run dev`, `npm run sass`, and `npm run tsc` in different terminal windows.
-4. run `npm run docker:setup` if you have not done so before. Also follow create a .env file as shown in the readme.
-5. Go to [localhost:3000/login](http://localhost:3000/login) to login or register an account.
-6. Create a new campaign and start it (Might have to refresh page). You just started the game as the "Dungeon Master"(or DM for short).
-7. Copy the room code at the top of the screen.
-8. In a new tab to go [localhost:3000/game](http://localhost:3000/game) for the second player. It doesn't matter if it uses the same account.
-9. Join the room with the room code. You just joined the game as a player.
+1. Pull down all related branches.
+2. Follow installation instructions in `README.md`.
+3. Verify that `npm run lint` doesn't show any errors.
+4. Go to [localhost:3000/login](http://localhost:3000/login) to login or register an account.
+5. Create a new campaign and start it (Might have to refresh page). This will start the game as the "Dungeon Master"(or DM for short).
+6. Copy the room code at the top of the screen.
+7. In a new tab to go [localhost:3000/game](http://localhost:3000/game) for the second player. It doesn't matter if it uses the same account.
+8. Join the room with the room code. This will join the game as a player.
 
 ---
 
