@@ -1,29 +1,14 @@
 import { clamp, findCell, findRelativeCell, ready } from '../scripts/utils';
-import { User, Coord } from "../scripts/types";
+import { User } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
 import { addDefaultTokens, placeToken, resetTokenBodyData } from './tokensMenu';
 import { changeNewUser, getUser } from '../controllers/userController';
 import { addDefaultMaps } from './mapsMenu';
 import { emitServerEvent, onServerEvent } from '../scripts/socket.io';
+import { addTokenEvents, addTokenToBoard, mousePos } from './token';
 
-class Token {
-    id: number;
-    image: string;
-    size: number;
-    relative: string;
-        
-    constructor(id: number, image: string, size: number, relative: string) {
-        this.id = id;
-        this.image = image;
-        this.size = size;
-        this.relative = relative;
-    }
-}
-
-let lastPos: Coord;
-let mousePos: Coord = { x: 0, y: 0 };
-let user: User;
+export let user: User;
 const zoomMin = 12, zoomMax = 64;
 
 
@@ -63,59 +48,15 @@ const addGridEvents = (grid: HTMLElement) => {
         const relativeCell: Element = findRelativeCell(selectedCell, mousePos.x, mousePos.y);
         const menuToken = document.querySelector('.token--dragging');
         
-        // If this is token is being dragged out from the menu, then place it exactly where the mouse cursor is.
         if (menuToken.classList.contains('menu__item')) {
+            // If this is token is being dragged out from the menu, then place it exactly where the mouse cursor is.
             addTokenToBoard(<Element>selectedCell);
         } else {
+            // Else place it normally
             addTokenToBoard(relativeCell || <Element>selectedCell);
         }
     });
 };
-
-const addTokenEvents = (token: any, relative: string) => {
-    // Open stats menu after double click
-    // token.addEventListener('dblclick', () => {
-    //     if (!relative) return;
-    //     openCreatureStatsWindow(relative);
-    // });
-    // Handle dragging token
-    token.addEventListener('dragstart', (e: any) => {
-        const tokenPos = token.getBoundingClientRect();
-        mousePos = {
-            x: e.x - tokenPos.x,
-            y: e.y - tokenPos.y
-        };
-
-        placeToken(token, parseInt(token.getAttribute('size')));
-        const cell = token.parentNode;
-        lastPos = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y'))};
-    });
-    // Handle token moved
-    token.addEventListener('dragend', () => {
-        emitServerEvent('REMOVE_TOKEN', [lastPos, room]);
-        const size = parseInt(token.getAttribute('size'));
-        emitServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', [lastPos.x, lastPos.y, size, room]);
-    });
-};
-
-const addTokenToBoard = (selectedCell: Element) => {    
-    // Clone token being dragged from menu
-    const menuToken = document.querySelector('.token--dragging');
-    menuToken.classList.remove('token--dragging');
-    const newToken = new Token(parseInt(menuToken.id), menuToken.getAttribute('src'), parseInt(menuToken.getAttribute('size')), menuToken.getAttribute('relative'));
-
-    if (!parseInt(selectedCell.getAttribute('x'))) {
-        menuToken.classList.remove('menu__item');
-        menuToken.classList.remove('menu__item--token');
-        socketPlaceToken({x: lastPos.x, y: lastPos.y}, newToken, user.username, room);
-    }
-
-    if (!(selectedCell.childNodes.length > 0)) {
-        menuToken.classList.remove('menu__item');
-        menuToken.classList.remove('menu__item--token');
-        socketPlaceToken({x: parseInt(selectedCell.getAttribute('x')), y: parseInt(selectedCell.getAttribute('y'))}, newToken, user.username, room);
-    }
-}
 
 export const zoomIn = () => {
     const grid: HTMLElement = document.querySelector('.grid');
@@ -136,7 +77,8 @@ const occupyTokenSpace = (cellX: number, cellY: number, size: number) => {
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
             const cell = findCell(cellX + x, cellY + y);
-            cell.style.setProperty('background-color', 'var(--enemy-background)');
+            cell.classList.add('occupied--enemy');
+            cell.classList.add('occupied');
         }
     }
 };
@@ -146,7 +88,8 @@ const removeOccupyTokenSpace = (cellX: number, cellY: number, size: number) => {
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
             const cell = findCell(cellX + x, cellY + y);
-            cell.style.removeProperty('background-color');
+            cell.classList.remove('occupied--enemy');
+            cell.classList.remove('occupied');
         }
     }
 };
@@ -159,10 +102,6 @@ const resetBoard = () => {
     document.querySelectorAll('.token').forEach((token) => {
         token.remove();
     });
-};
-
-const socketPlaceToken = (coords: Coord, tokenData: Token, username: string, room: string) => {
-    emitServerEvent('PLACE_TOKEN', [coords, tokenData, username, room]);
 };
 
 // Add a token to the board
@@ -187,7 +126,8 @@ onServerEvent('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
     if (size > 1) {
         occupyTokenSpace(x, y, size);
     } else {
-        cell.style.setProperty('background-color', 'var(--enemy-background)');
+        cell.classList.add('occupied--enemy');
+        cell.classList.add('occupied');
     }
 
     addTokenEvents(token, relative);
@@ -199,7 +139,8 @@ onServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size) => {
     if (size > 1) {
         removeOccupyTokenSpace(lastPosX, lastPosY, size);
     } else {
-        findCell(lastPosX, lastPosY).style.removeProperty('background-color');
+        findCell(lastPosX, lastPosY).classList.remove('occupied--enemy');
+        findCell(lastPosX, lastPosY).classList.remove('occupied');
     }
 });
 

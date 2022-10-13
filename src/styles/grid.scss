@@ -52,6 +52,12 @@
 	}
 }
 
+.occupied {
+	&--enemy {
+		background-color: var(--enemy-background);
+	}
+}
+
 .panning {
     cursor: grabbing;
 }
