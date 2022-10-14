@@ -157,12 +157,6 @@ export default function grid() {
         emitServerEvent('UPDATE_PLAYER_LIST', [room]);
         setupGrid(25, 25);
         bindEventsToGrid();
-
-        if (user.new_user) {
-            addDefaultTokens();
-            addDefaultMaps();
-            changeNewUser(false);
-        }
     }, '.grid');
 
     return `
