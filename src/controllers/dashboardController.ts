@@ -16,6 +16,15 @@ export const getGames = async () => {
     }
 };
 
+export const getGame = async (code: string) => {
+    try {
+        const res = await axios.get(`/api/dashboard/game/${code}`);
+        return res.data[0];
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 export const getGamesHistory = async () => {
     try {
         const res = await axios.get('/api/dashboard/history');

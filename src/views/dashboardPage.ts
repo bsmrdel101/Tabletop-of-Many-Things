@@ -1,10 +1,11 @@
 import gamesList from '../components/gamesList';
 import { logout } from '../controllers/userController';
-import { Client } from '../scripts/types';
+import { Client, Game } from '../scripts/types';
 import { ready } from '../scripts/utils';
 import gamesHistoryList from '../components/gameHistoryList';
 import gamePage from './gamePage';
 import { emitServerEvent } from '../scripts/socket.io';
+import { addGameToHistory, getGame, getGamesHistory } from '../controllers/dashboardController';
 
 export let room: string;
 export let clientType: string;
@@ -45,8 +46,19 @@ const renderGamePage = () => {
 };
 
 // Adds selected game to history
-const handlePushGameToHistory = (roomCode: string) => {
-    // addGameToHistory(roomCode);
+const handlePushGameToHistory = async (roomCode: string) => {
+    const game = await getGame(roomCode);
+    const gamesHistory = await getGamesHistory();
+    if (checkGameExists(game, gamesHistory)) return;
+    addGameToHistory(game);
+};
+
+const checkGameExists = (newGame: Game, gamesHistory: Game[]) => {
+    let gameExists = false;
+    gamesHistory.forEach((game) => {
+        if (game.code === newGame.code) gameExists = true;
+    });
+    return gameExists;
 };
 
 export default function dashboardPage() {

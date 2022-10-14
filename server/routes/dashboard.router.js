@@ -22,22 +22,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })  
 });
 
-// router.get('/prev', rejectUnauthenticated, (req, res) => {
-//     const sqlText = (`
-//         SELECT * FROM "prev_games"
-//         WHERE "user_id"=$1
-//         ORDER BY "id";
-//     `);
-//     const sqlValues = [
-//         req.user.id
-//     ];
-//     pool.query(sqlText, sqlValues)
-//         .then((dbres) => res.send(dbres.rows))
-//         .catch((dberror) => {
-//         console.log('Oops you did a goof: ', dberror);
-//         res.sendStatus(500)
-//     })  
-// });
+router.get('/game/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = (`
+        SELECT * FROM "games_list"
+        WHERE "code"=$1;
+    `);
+    const sqlValues = [
+        req.params.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.send(dbres.rows))
+        .catch((dberror) => {
+        console.log('Oops you did a goof: ', dberror);
+        res.sendStatus(500)
+    })  
+});
+
 router.get('/history', rejectUnauthenticated, (req, res) => {
     const sqlText = (`
         SELECT * FROM "game_history"
@@ -52,7 +52,7 @@ router.get('/history', rejectUnauthenticated, (req, res) => {
         .catch((dberror) => {
         console.log('Oops you did a goof: ', dberror);
         res.sendStatus(500)
-    })  
+    });
 });
 
 
