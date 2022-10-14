@@ -1,4 +1,4 @@
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
@@ -7,14 +7,14 @@ CREATE TABLE "user" (
 
 CREATE TABLE "maps" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" TEXT,    
     "image" TEXT
 );
 
 CREATE TABLE "tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "image" TEXT,
     "size" INTEGER,
     "creature" TEXT
@@ -22,7 +22,7 @@ CREATE TABLE "tokens" (
 
 CREATE TABLE "map_tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "map_id" INTEGER REFERENCES "maps",
     "token_id" INTEGER REFERENCES "tokens",
     "x" INTEGER,
@@ -31,27 +31,21 @@ CREATE TABLE "map_tokens" (
 
 CREATE TABLE "games_list" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL
 );
 
--- CREATE TABLE "prev_games" (
---     "id" SERIAL PRIMARY KEY,
---     "user_id" INTEGER REFERENCES "user",
---     "code" VARCHAR (20)
--- );
-
 CREATE TABLE "game_history" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL
 );
 
 CREATE TABLE "characters" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "class" VARCHAR (80) NOT NULL,
     "race" VARCHAR (80) NOT NULL,
@@ -82,7 +76,7 @@ CREATE TABLE "characters" (
 
 CREATE TABLE "creatures" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user" ON DELETE CASCADE,
+    "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
     "image" TEXT,
     "name" VARCHAR (80),
     "size" VARCHAR (80),
