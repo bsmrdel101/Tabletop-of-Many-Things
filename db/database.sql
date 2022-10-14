@@ -1,4 +1,4 @@
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
@@ -7,14 +7,14 @@ CREATE TABLE "user" (
 
 CREATE TABLE "maps" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" TEXT,    
     "image" TEXT
 );
 
 CREATE TABLE "tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "image" TEXT,
     "size" INTEGER,
     "creature" TEXT
@@ -22,7 +22,7 @@ CREATE TABLE "tokens" (
 
 CREATE TABLE "map_tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "map_id" INTEGER REFERENCES "maps",
     "token_id" INTEGER REFERENCES "tokens",
     "x" INTEGER,
@@ -31,27 +31,21 @@ CREATE TABLE "map_tokens" (
 
 CREATE TABLE "games_list" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL
 );
 
--- CREATE TABLE "prev_games" (
---     "id" SERIAL PRIMARY KEY,
---     "user_id" INTEGER REFERENCES "user",
---     "code" VARCHAR (20)
--- );
-
 CREATE TABLE "game_history" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL
 );
 
 CREATE TABLE "characters" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
+    "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "class" VARCHAR (80) NOT NULL,
     "race" VARCHAR (80) NOT NULL,
@@ -82,7 +76,7 @@ CREATE TABLE "characters" (
 
 CREATE TABLE "creatures" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user" ON DELETE CASCADE,
+    "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
     "image" TEXT,
     "name" VARCHAR (80),
     "size" VARCHAR (80),
@@ -197,38 +191,53 @@ CREATE TABLE "creature_action_rolls" (
 -- INSERT DEFAULT DATA --
 -------------------------
 
+INSERT INTO "users" ("username", "password")
+VALUES
+    ('dev', '$2a$10$3rvmJEyHfGUQhLpuhKBmneeK76Zvw2d7wO0KYob8YKAF.DirAKcga')
+;
 
--- INSERT INTO "characters" ("user_id", "name", "class", "race", "background", "alignment", "level", "ac", "max_health", "current_health", "temp_health", "prof_bonus", "initiative", "inspiration", "hit_dice", "str", "dex", "con", "int", "wis", "char", "image", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
--- VALUES
---     (1, 'Steve', 'Breadbarian', 'Goliath', 'Noble', 'CE', 1, 12, 20, 20, 0, 2, 2, FALSE, 12, 4, 10, 11, 20, 18, 12, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBCAMLHmC6fIfZJYcqEsOAcRue_MI924YtdHo1sCosPh5-BxpeHMW0Se_ewoQBwtNODCQ&usqp=CAU', 30, 0, 0, 0, 0)
--- ;
+INSERT INTO "games_list" ("user_id", "name", "code")
+VALUES
+    (1, 'Dev Campaign', 'pA6ZO0')
+;
 
--- INSERT INTO "skills" ("character_id", "name", "type", "bonus_mod", "proficient")
--- VALUES 
---   (1,'Athletics', 'str', 0, FALSE),
---   (1,'Acrobatics', 'dex', 0, FALSE),
---   (1,'Slight of Hand', 'dex', 0, FALSE),
---   (1,'Stealth', 'dex', 0, FALSE),
---   (1,'Arcana', 'int', 0, FALSE),
---   (1,'History', 'int', 0, FALSE),
---   (1,'Invesigation', 'int', 0, FALSE),
---   (1,'Nature', 'wis', 0, FALSE),
---   (1,'Religion', 'wis', 0, FALSE),
---   (1,'Animal Handling', 'wis', 0, FALSE),
---   (1,'Insight', 'wis', 0, FALSE),
---   (1,'Medicine', 'wis', 0, FALSE),
---   (1,'Perception', 'wis', 0, FALSE),
---   (1,'Survival', 'wis', 0, FALSE),
---   (1,'Deception', 'char', 0, FALSE),
---   (1,'Intimidation', 'char', 0, FALSE),
---   (1,'Performance', 'char', 0, FALSE),
---   (1,'Persuasion', 'char', 0, FALSE)
--- ;
+INSERT INTO "characters" ("user_id", "name", "class", "race", "background", "alignment", "level", "ac", "max_health", "current_health", "temp_health", "prof_bonus", "initiative", "inspiration", "hit_dice", "str", "dex", "con", "int", "wis", "char", "image", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
+VALUES
+    (1, 'Steve', 'Breadbarian', 'Goliath', 'Noble', 'CE', 1, 12, 20, 20, 0, 2, 2, FALSE, 12, 4, 10, 11, 20, 18, 12, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBCAMLHmC6fIfZJYcqEsOAcRue_MI924YtdHo1sCosPh5-BxpeHMW0Se_ewoQBwtNODCQ&usqp=CAU', 30, 0, 0, 0, 0)
+;
 
--- INSERT INTO "tokens" ("user_id", "image", "size", "creature")
--- VALUES 
---     (1, 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', 1, 'bandit'),
---     (1, 'https://i.imgur.com/zURSSgl.png', 1, 'fire-elemental'),
---     (1, 'https://i.imgur.com/5cibmUw.png', 2, null),
---     (1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
--- ;
+INSERT INTO "skills" ("character_id", "name", "type", "bonus_mod", "proficient")
+VALUES 
+  (1,'Athletics', 'str', 0, FALSE),
+  (1,'Acrobatics', 'dex', 0, FALSE),
+  (1,'Slight of Hand', 'dex', 0, FALSE),
+  (1,'Stealth', 'dex', 0, FALSE),
+  (1,'Arcana', 'int', 0, FALSE),
+  (1,'History', 'int', 0, FALSE),
+  (1,'Invesigation', 'int', 0, FALSE),
+  (1,'Nature', 'wis', 0, FALSE),
+  (1,'Religion', 'wis', 0, FALSE),
+  (1,'Animal Handling', 'wis', 0, FALSE),
+  (1,'Insight', 'wis', 0, FALSE),
+  (1,'Medicine', 'wis', 0, FALSE),
+  (1,'Perception', 'wis', 0, FALSE),
+  (1,'Survival', 'wis', 0, FALSE),
+  (1,'Deception', 'char', 0, FALSE),
+  (1,'Intimidation', 'char', 0, FALSE),
+  (1,'Performance', 'char', 0, FALSE),
+  (1,'Persuasion', 'char', 0, FALSE)
+;
+
+INSERT INTO "tokens" ("user_id", "image", "size", "creature")
+VALUES 
+    (1, 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', 1, 'bandit'),
+    (1, 'https://i.imgur.com/zURSSgl.png', 1, 'fire-elemental'),
+    (1, 'https://i.imgur.com/5cibmUw.png', 2, null),
+    (1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
+;
+
+INSERT INTO "maps" ("user_id", "name", "image")
+VALUES
+    (1, 'Default Map', 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg'),
+    (1, 'Forest', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwUhS4RzGYSNBN6rAgSzwcdpzoUkYYIg_Cvg&usqp=CAU')
+;

@@ -16,7 +16,7 @@ router.post('/register', (req, res) => {
     const password = encryptLib.encryptPassword(req.body.password);
 
     const sqlText =`
-        INSERT INTO "user" ("username", "password")
+        INSERT INTO "users" ("username", "password")
         VALUES ($1, $2) RETURNING id;
     `;
     const sqlValues = [
@@ -44,7 +44,7 @@ router.post('/logout', (req, res) => {
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-        UPDATE "user"
+        UPDATE "users"
         SET "new_user" = $1
         WHERE "id" = $2;
     `;

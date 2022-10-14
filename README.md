@@ -6,4 +6,8 @@ A virtual tabletop for 5e D&amp;D.
 - Clone the repo, and do `npm i`.
 - Create a `.env` file, and put the content from `.env-sample` inside of it.
 - Do `npm run dev`.
-- Go to `http://localhost:3000/register` to create an account.
+- Go to `http://localhost:3000/login` and login with the following credentials.
+```
+    username: dev
+    password: 123
+```
