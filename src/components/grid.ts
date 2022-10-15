@@ -1,16 +1,15 @@
-import { clamp, findCell, findRelativeCell, ready } from '../scripts/utils';
+import { findCell, ready } from '../scripts/utils';
 import { User } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
-import { addDefaultTokens, placeToken, resetTokenBodyData } from './tokensMenu';
+import { addDefaultTokens, resetTokenBodyData } from './tokensMenu';
 import { changeNewUser, getUser } from '../controllers/userController';
 import { addDefaultMaps } from './mapsMenu';
 import { emitServerEvent, onServerEvent } from '../scripts/socket.io';
-import { addTokenEvents, addTokenToBoard, mousePos } from './token';
+import { addTokenEvents, occupyTokenSpace, removeOccupyTokenSpace } from './token';
+import { addGridEvents } from '../scripts/gridEvents';
 
 export let user: User;
-const zoomMin = 12, zoomMax = 64;
-
 
 export const setupGrid = (width: number, height: number) => {
     const grid: HTMLElement = <HTMLElement>document.querySelector('.grid');
@@ -31,65 +30,6 @@ const createGridClickDetection = (width: number, height: number, grid: HTMLEleme
             grid.insertAdjacentHTML('beforeend', `
                 <div class="grid__cell cell" x="${x}" y="${y}"></div>
             `);
-        }
-    }
-};
-
-// Add event handlers for the grid
-const addGridEvents = (grid: HTMLElement) => {
-    let selectedCell: EventTarget;
-    // Fires whenever token is dragged over the grid
-    // The last cell hovered over is the selected cell
-    grid.addEventListener('dragover', (e) => {
-        selectedCell = e.target;
-    });
-
-    document.addEventListener('dragend', () => {
-        const relativeCell: Element = findRelativeCell(selectedCell, mousePos.x, mousePos.y);
-        const menuToken = document.querySelector('.token--dragging');
-        
-        if (menuToken.classList.contains('menu__item')) {
-            // If this is token is being dragged out from the menu, then place it exactly where the mouse cursor is.
-            addTokenToBoard(<Element>selectedCell);
-        } else {
-            // Else place it normally
-            addTokenToBoard(relativeCell || <Element>selectedCell);
-        }
-    });
-};
-
-export const zoomIn = () => {
-    const grid: HTMLElement = document.querySelector('.grid');
-    const rs = getComputedStyle(grid);
-    const zoomValue = parseInt(rs.getPropertyValue('--size'));
-    grid.style.setProperty('--size', `${clamp(zoomValue + 4, zoomMin, zoomMax)}px`);
-};
-
-export const zoomOut = () => {
-    const grid: HTMLElement = document.querySelector('.grid');
-    const rs = getComputedStyle(grid);
-    const zoomValue = parseInt(rs.getPropertyValue('--size'));
-    grid.style.setProperty('--size', `${clamp(zoomValue - 4, zoomMin, zoomMax)}px`);
-};
-
-// Occupy tiles that the token fills, if the token is bigger than 1 cell
-const occupyTokenSpace = (cellX: number, cellY: number, size: number) => {
-    for (let x = 0; x < size; x++) {
-        for (let y = 0; y < size; y++) {
-            const cell = findCell(cellX + x, cellY + y);
-            cell.classList.add('occupied--enemy');
-            cell.classList.add('occupied');
-        }
-    }
-};
-
-// Don't occupy tiles that the token fills, if the token is bigger than 1 cell
-const removeOccupyTokenSpace = (cellX: number, cellY: number, size: number) => {
-    for (let x = 0; x < size; x++) {
-        for (let y = 0; y < size; y++) {
-            const cell = findCell(cellX + x, cellY + y);
-            cell.classList.remove('occupied--enemy');
-            cell.classList.remove('occupied');
         }
     }
 };

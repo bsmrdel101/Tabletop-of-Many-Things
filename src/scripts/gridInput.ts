@@ -1,5 +1,10 @@
-import { zoomIn, zoomOut } from '../components/grid';
+import { toggleCharacterMenu } from '../components/characterMenu';
+import { toggleCharacterSheet } from '../components/characterSheet/characterSheet';
+import { toggleCreaturesModal } from '../components/creaturesModal';
+import { toggleMapMenu } from '../components/mapsMenu';
+import { toggleTokenMenu } from '../components/tokensMenu';
 import { clientType } from '../views/dashboardPage';
+import { zoomIn, zoomOut } from './gridEvents';
 import { checkForElement } from './utils';
 
 let canScale = false;
@@ -27,15 +32,15 @@ const handleGridKeyEvents = () => {
                         if (_token.classList.contains('token--selected')) _token.remove();
                     }
                     break;
-                // case e.which === 49:
-                //     clientType === 'dm' ? toggleTokenMenu('tokens') : toggleCharacterMenu('characters');
-                //     break;
-                // case e.which === 50:
-                //     clientType === 'dm' ? toggleCreaturesWindow() : toggleCharacterSheet();
-                //     break;
-                // case e.which === 51:
-                //     clientType === 'dm' ? toggleMapMenu('maps') : console.log('Nothing here yet');
-                //     break;
+                case e.key === '1':
+                    clientType === 'dm' ? toggleMapMenu() : toggleCharacterMenu();
+                    break;
+                case e.key === '2':
+                    clientType === 'dm' ? toggleTokenMenu() : toggleCharacterSheet();
+                    break;
+                case e.key === '3':
+                    clientType === 'dm' ? toggleCreaturesModal() : console.warn('Menu doesn\'t exist');
+                    break;
                 default:
                     break;
             }
@@ -94,7 +99,7 @@ const handleGridMouseEvents = () => {
 const handleGridWheelEvents = () => {
     document.addEventListener('wheel', (e: any) => {        
         if (!checkForElement(e.path, '.grid-container')) return;
-        if (e.deltaY > 0) {
+        if (e.deltaY > 0 && !canScale) {
             zoomOut();
         } else {
             zoomIn();

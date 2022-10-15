@@ -1,5 +1,6 @@
 import { emitServerEvent } from "../scripts/socket.io";
 import { Coord } from "../scripts/types";
+import { findCell } from "../scripts/utils";
 import { room } from "../views/dashboardPage";
 import { user } from "./grid";
 import { placeToken } from "./tokensMenu";
@@ -69,4 +70,26 @@ export const addTokenEvents = (token: any, relative: string) => {
         const size = parseInt(token.getAttribute('size'));
         emitServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', [lastPos.x, lastPos.y, size, room]);
     });
+};
+
+// Occupy tiles that the token fills, if the token is bigger than 1 cell
+export const occupyTokenSpace = (cellX: number, cellY: number, size: number) => {
+    for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+            const cell = findCell(cellX + x, cellY + y);
+            cell.classList.add('occupied--enemy');
+            cell.classList.add('occupied');
+        }
+    }
+};
+
+// Don't occupy tiles that the token fills, if the token is bigger than 1 cell
+export const removeOccupyTokenSpace = (cellX: number, cellY: number, size: number) => {
+    for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+            const cell = findCell(cellX + x, cellY + y);
+            cell.classList.remove('occupied--enemy');
+            cell.classList.remove('occupied');
+        }
+    }
 };
