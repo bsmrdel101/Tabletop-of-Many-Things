@@ -31,6 +31,11 @@ export interface Coord {
     y: number
 }
 
+export interface Area {
+    width: number
+    height: number
+}
+
 export type Map = {
     id?: number
     name: string
@@ -41,6 +46,7 @@ export type Token = {
     id?: number
     image: string
     size: number
+    relative?: string
     creature?: string
 };
 

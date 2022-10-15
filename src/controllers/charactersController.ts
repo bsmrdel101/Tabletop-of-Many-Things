@@ -8,6 +8,24 @@ export let skills: Skill[];
 export const updateCharacter = (data: Character) => character = data;
 export const updateCharacterSkills = (data: Skill[]) => skills = data;
 
+interface NewHealthPayload {
+    id: number
+    health: number
+}
+
+interface NewInspirationPayload {
+    id: number
+    newInspiration: boolean
+}
+
+interface NewSkillPayload {
+    id: number
+    characterId: number
+    name: string
+    type: string
+    bonus_mod: number
+    proficient: boolean
+}
 
 // === GET routes === //
 
@@ -40,7 +58,7 @@ export const getCharacterSkills = async (id: number) => {
 
 // === POST routes === //
 
-export const addCharacter = async (payload) => {
+export const addCharacter = async (payload: Character) => {
     try {
         await axios.post('/api/characters', payload);
     } catch (err) {
@@ -58,7 +76,7 @@ export const addCharacterSkill = async (payload: Skill) => {
 
 // === PUT routes === //
 
-export const setHealth = async (payload) => {
+export const setHealth = async (payload: NewHealthPayload) => {
     try {
         await axios.put('/api/characters/health', payload);
         character = await getCharacter(payload.id);
@@ -67,7 +85,7 @@ export const setHealth = async (payload) => {
     }
 };
 
-export const setTempHealth = async (payload) => {
+export const setTempHealth = async (payload: NewHealthPayload) => {
     try {
         await axios.put('/api/characters/temp', payload);
         character = await getCharacter(payload.id);
@@ -76,7 +94,7 @@ export const setTempHealth = async (payload) => {
     }
 };
 
-export const setInspiration = async (payload) => {
+export const setInspiration = async (payload: NewInspirationPayload) => {
     try {
         await axios.put('/api/characters/inspiration', payload);
         character = await getCharacter(payload.id);
@@ -85,7 +103,7 @@ export const setInspiration = async (payload) => {
     }
 };
 
-export const setCharacterSkill = async (payload) => {
+export const setCharacterSkill = async (payload: NewSkillPayload) => {
     try {
         await axios.put('/api/characters/skills', payload);
         skills = await getCharacterSkills(payload.characterId);

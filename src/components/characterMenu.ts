@@ -1,5 +1,5 @@
 import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../scripts/menuManager";
-import { character, characters, getCharacter, getCharacters, getCharacterSkills, updateCharacter, updateCharacterSkills } from "../controllers/charactersController";
+import { characters, getCharacter, getCharacters, getCharacterSkills, updateCharacter, updateCharacterSkills } from "../controllers/charactersController";
 
 export const toggleCharacterMenu = () => {
     setMenuOpenValue(!menuOpen);

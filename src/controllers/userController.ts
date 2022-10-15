@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-interface User {
+interface NewUser {
     username: string
     password: string
 }
@@ -22,7 +22,7 @@ export const getUser = async () => {
 
 // === POST routes === //
 
-export const registerUser = async (payload: User) => {
+export const registerUser = async (payload: NewUser) => {
     try {
         await axios.post('/api/user/register', payload);
         window.location.pathname = 'login';
@@ -31,7 +31,7 @@ export const registerUser = async (payload: User) => {
     }
 };
 
-export const loginUser = async (payload: User) => {
+export const loginUser = async (payload: NewUser) => {
     try {
         await axios.post('/api/user/login', payload);
         window.location.pathname = 'game';
@@ -51,9 +51,9 @@ export const logout = async () => {
 
 // === PUT routes === //
 
-export const changeNewUser = async (payload) => {
+export const changeNewUser = async (payload: boolean) => {
     try {
-        await axios.put('/api/user', {newStatus: payload});
+        await axios.put('/api/user', { newStatus: payload });
     } catch(err) {
         console.log(err);
     }

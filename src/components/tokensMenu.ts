@@ -52,15 +52,15 @@ const getTokenBodyData = async () => {
             `);
         }
         document.getElementById(`token-${i}`).addEventListener('dragstart', (e) => {
-            placeToken(e.target, token.size);
+            placeToken(<Element>e.target, token.size);
         });
         i++;
     });
 };
 
-export const placeToken = (token: any, size: number) => {
+export const placeToken = (token: Element, size: number) => {
     token.classList.add('token--dragging');
-    token.setAttribute('size', size);
+    token.setAttribute('size', `${size}`);
 };
 
 export const resetTokenBodyData = () => {

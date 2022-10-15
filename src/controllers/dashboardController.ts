@@ -45,7 +45,7 @@ export const addGame = async (payload: newGame) => {
     }
 };
 
-export const addGameToHistory = async (payload: any) => {
+export const addGameToHistory = async (payload: Game) => {
     try {
         await axios.post('/api/dashboard/history', payload);
     } catch (err) {

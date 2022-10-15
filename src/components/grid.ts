@@ -1,5 +1,5 @@
 import { findCell, ready } from '../scripts/utils';
-import { User } from "../scripts/types";
+import { Coord, Token, User } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
 import { addDefaultTokens, resetTokenBodyData } from './tokensMenu';
@@ -45,7 +45,7 @@ const resetBoard = () => {
 };
 
 // Add a token to the board
-onServerEvent('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
+onServerEvent('PLACE_TOKEN', ((selectedCell: Coord, menuToken: Token, username: string) => {
     const { x, y } = selectedCell;
     const { image, relative, size } = menuToken;
     const token = document.createElement('img');
@@ -54,14 +54,14 @@ onServerEvent('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
     token.setAttribute('src', image);
     token.setAttribute('relative', relative)
     token.setAttribute('user', username);
-    token.setAttribute('size', size);
+    token.setAttribute('size', `${size}`);
     cell.appendChild(token);
     // Set token size
     token.style.setProperty('height', `calc(var(--size) * ${size})`);
     token.style.setProperty('width', `calc(var(--size) * ${size})`);
     // Set token position
-    token.style.setProperty('--row', x);
-    token.style.setProperty('--column', y);
+    token.style.setProperty('--row', `${x}`);
+    token.style.setProperty('--column', `${y}`);
 
     if (size > 1) {
         occupyTokenSpace(x, y, size);
@@ -75,7 +75,7 @@ onServerEvent('PLACE_TOKEN', ((selectedCell, menuToken, username) => {
 }));
 
 // Removes the token background for everyone
-onServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size) => {
+onServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX: number, lastPosY: number, size: number) => {
     if (size > 1) {
         removeOccupyTokenSpace(lastPosX, lastPosY, size);
     } else {
@@ -84,7 +84,7 @@ onServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size) => {
     }
 });
 
-onServerEvent('REMOVE_TOKEN', ((cell) => {
+onServerEvent('REMOVE_TOKEN', ((cell: Coord) => {
     const newCell = findCell(cell.x, cell.y);
     newCell.innerHTML = '';
 }));

@@ -16,7 +16,7 @@ export const getTokens = async () => {
 
 // === POST routes === //
 
-export const addToken = async (payload) => {
+export const addToken = async (payload: Token) => {
     try {
         await axios.post('/api/tokens', payload);
     } catch (err) {
@@ -24,7 +24,7 @@ export const addToken = async (payload) => {
     }
 };
 
-export const addTokenToMap = async (payload) => {
+export const addTokenToMap = async (payload: Token) => {
     try {
         await axios.post('/api/tokens/map', payload);
     } catch (err) {

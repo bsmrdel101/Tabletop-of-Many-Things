@@ -16,7 +16,7 @@ export const getMaps = async () => {
 
 // === POST routes === //
 
-export const addMap = async (payload) => {
+export const addMap = async (payload: Map) => {
     try {
         console.log(payload);
         await axios.post('/api/maps', payload);

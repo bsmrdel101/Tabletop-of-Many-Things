@@ -1,6 +1,6 @@
 import { addMap, getMaps, maps } from "../controllers/mapsController";
 import { setupGrid } from "./grid";
-import { Map } from "../scripts/types";
+import { Area, Map } from "../scripts/types";
 import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../scripts/menuManager";
 import { emitServerEvent, onServerEvent } from "../scripts/socket.io";
 import { room } from "../views/dashboardPage";
@@ -45,7 +45,7 @@ const getMapBodyData = async () => {
                 <p class="menu__item--name">${map.name}</p>
             </div>
         `);
-        document.getElementById(`${map.id}`).addEventListener('dblclick', (e) => selectMap(e.target));
+        document.getElementById(`${map.id}`).addEventListener('dblclick', (e) => selectMap(<Element>e.target));
     });
     // Add new map button
     document.querySelector('.menu__body').insertAdjacentHTML('beforeend', `
@@ -55,7 +55,7 @@ const getMapBodyData = async () => {
     `);
 };
 
-const selectMap = (target: any) => {
+const selectMap = (target: Element) => {
     maps.forEach((map: Map) => {
         if (map.id === parseInt(target.getAttribute('id'))) {
             emitServerEvent('SELECT_MAP', [{ width: target.clientWidth, height: target.clientHeight }, map, room]);
@@ -63,7 +63,7 @@ const selectMap = (target: any) => {
     });
 };
 
-onServerEvent('SELECT_MAP', ((e: any, map: Map) => {
+onServerEvent('SELECT_MAP', ((target: Area, map: Map) => {
     if (map.name === 'Default Map') {
         // Set image to nothing
         (<HTMLElement>document.querySelector('.grid')).style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);
@@ -71,6 +71,6 @@ onServerEvent('SELECT_MAP', ((e: any, map: Map) => {
     } else {
         // Set new map image
         (<HTMLElement>document.querySelector('.grid')).style.setProperty('--map-background', `url('${map.image}')`);
-        setupGrid(e.width / 2, e.height / 2);
+        setupGrid(target.width / 2, target.height / 2);
     }
 }));
