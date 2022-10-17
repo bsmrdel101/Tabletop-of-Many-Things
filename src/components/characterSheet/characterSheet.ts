@@ -1,4 +1,4 @@
-import { makeDraggable } from "../../scripts/utils";
+import { makeDraggable } from "../../scripts/tools/utils";
 import { renderCharacterSheetMainPage } from "./characterSheetMain";
 
 let sheetOpen = false;

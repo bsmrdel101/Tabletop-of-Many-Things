@@ -262,7 +262,7 @@ router.post('/leg-actions', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         DELETE FROM "creatures"
-        WHERE "index"=$1;
+        WHERE "id"=$1;
     `;
       
     const sqlValues = [

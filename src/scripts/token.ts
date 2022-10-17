@@ -1,9 +1,9 @@
-import { emitServerEvent } from "../scripts/socket.io";
-import { Coord } from "../scripts/types";
-import { findCell } from "../scripts/utils";
+import { emitServerEvent } from "./socket.io";
+import { Coord } from "./types";
+import { findCell } from "./tools/utils";
 import { room } from "../views/dashboardPage";
-import { user } from "./grid";
-import { placeToken } from "./tokensMenu";
+import { user } from "../components/grid";
+import { placeToken } from "../components/tokensMenu";
 
 export let mousePos: Coord = { x: 0, y: 0 };
 let lastPos: Coord;

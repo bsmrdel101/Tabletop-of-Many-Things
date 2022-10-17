@@ -1,4 +1,4 @@
-import { ready } from '../scripts/utils';
+import { ready } from '../scripts/tools/utils';
 import { loginUser } from '../controllers/userController';
 
 export default function loginPage() {

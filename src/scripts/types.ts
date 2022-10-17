@@ -86,3 +86,41 @@ export type Skill = {
     bonus_mod: number
     proficient: boolean
 };
+
+export type Creature = {
+    id: number
+    user_id: number
+    index: string
+    name: string
+    size: number
+    type: string
+    alignment: string
+    ac: number
+    hit_points: number
+    hit_dice: string
+    str: number
+    dex: number
+    con: number
+    int: number
+    wis: number
+    char: number
+    cr: number
+    xp: number
+    languages: any
+    speeds: any
+    proficiencies: any
+    vulnerabilities: any
+    resistances: any
+    damageImmunities: any
+    conditionImmunities: any
+    senses: any
+    abilities: any
+    actions: any
+    legActions: any
+};
+
+export type MinifiedCreature = {
+    index: string
+    name: string
+    url: string
+};

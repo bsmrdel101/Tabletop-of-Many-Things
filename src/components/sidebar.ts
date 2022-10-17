@@ -1,8 +1,8 @@
-import { ready } from "../scripts/utils";
+import { ready } from "../scripts/tools/utils";
 import { clientType } from "../views/dashboardPage";
 import { toggleCharacterMenu } from "./characterMenu";
 import { toggleCharacterSheet } from "./characterSheet/characterSheet";
-import { toggleCreaturesModal } from "./creaturesModal";
+import { toggleCreaturesModal } from "./creaturesModal/creaturesModal";
 import { toggleMapMenu } from "./mapsMenu";
 import { toggleTokenMenu } from "./tokensMenu";
 

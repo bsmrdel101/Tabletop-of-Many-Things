@@ -1,5 +1,5 @@
-import { addTokenToBoard, mousePos } from "../components/token";
-import { clamp, findRelativeCell } from "./utils";
+import { addTokenToBoard, mousePos } from "./token";
+import { clamp, findRelativeCell } from "./tools/utils";
 
 const zoomMin = 12, zoomMax = 64;
 

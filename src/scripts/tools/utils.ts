@@ -1,3 +1,5 @@
+export let canUseHotkey = true;
+
 export const ready = (fn: any, selector: string) => {
     const target = document.querySelector('body');
     // Create a new observer instance:
@@ -90,5 +92,13 @@ export const makeDraggable = (el: HTMLElement, selector: string) => {
       // stop moving when mouse button is released:
       document.onmouseup = null;
       document.onmousemove = null;
+    }
+};
+
+export const disableHotkeys = () => {
+    // Detects when input is focused and disabled hotkeys
+    for (let input of Array.from(document.querySelectorAll('input'))) {
+        input.addEventListener('focusin', () => { canUseHotkey = false; });
+        input.addEventListener('focusout', () => { canUseHotkey = true; });
     }
 };

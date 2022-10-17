@@ -1,0 +1,29 @@
+.creature-row {
+    display: flex;
+    background-color: var(--menu-color-1);
+    padding: 0.3rem 0.3rem;
+    cursor: pointer;
+    transition: all ease-in-out 100ms;
+    position: relative;
+
+    &:nth-child(even) {
+        background-color: var(--menu-color-2);
+    }
+
+    p {
+        margin: 0.3rem;
+        font-weight: 500;
+    }
+
+    &__delete-btn {
+        z-index: 1;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.66rem;
+        transition: all ease-in-out 100ms;
+
+        &:hover {
+            color: #ff4747;
+        }
+    }
+}

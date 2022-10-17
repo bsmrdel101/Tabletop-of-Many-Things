@@ -1,4 +1,4 @@
-import { ready } from "../scripts/utils";
+import { ready } from "../scripts/tools/utils";
 import { Game } from "../scripts/types";
 import { getGamesHistory } from "../controllers/dashboardController";
 import gameCard from "./gameCard";

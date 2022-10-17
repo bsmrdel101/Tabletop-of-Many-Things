@@ -1,5 +1,8 @@
-import { makeDraggable } from '../scripts/utils';
-import modal from './modal';
+import { makeDraggable } from '../../scripts/tools/utils';
+import { creatureRow } from './creatureRow';
+import modal from '../modal';
+import { Creature, MinifiedCreature } from '../../scripts/types';
+import { getCreatures, getCustomCreatures } from '../../controllers/creaturesController';
 
 let creaturesOpen = false;
 
@@ -41,13 +44,22 @@ const renderCreaturesModal = () => {
 };
 
 const getCreaturesBodyData = async () => {
-    // await getCustomCreatures();
-    // for (let creature of customCreatures) {
-    //     renderCustomCreatureRow(creature);
-    // }
-    // for (let creature of creatures) {
-    //     renderStandardCreatureRow(creature);
-    // }
+    let index = 0;
+    const customCreatures: Creature[] = await getCustomCreatures();
+    const creatures: MinifiedCreature[] = await getCreatures();
+
+    customCreatures.forEach((creature: Creature) => {
+        document.getElementById(`creatures-modal`).insertAdjacentHTML('beforeend', 
+            creatureRow({ creature, custom: true, index })
+        );
+        index += 1;
+    });
+    creatures.forEach((creature: MinifiedCreature) => {
+        document.getElementById(`creatures-modal`).insertAdjacentHTML('beforeend', 
+            creatureRow({ creature, custom: false, index })
+        );
+        index += 1;
+    });
 };
 
 // const filterCreaturesList = (value: string) => {

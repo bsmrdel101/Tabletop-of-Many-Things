@@ -241,3 +241,8 @@ VALUES
     (1, 'Default Map', 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg'),
     (1, 'Forest', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwUhS4RzGYSNBN6rAgSzwcdpzoUkYYIg_Cvg&usqp=CAU')
 ;
+
+INSERT INTO "creatures" ("user_id", "index", "image", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
+VALUES
+    (1, 'dough-elemental', 'https://www.dandwiki.com/w/images/3/37/BreadSpawn.jpg', 'Dough Elemental', 'medium', 'elemental', 'neutral', 12, 40, '12d8', 14, 15, 10, 12, 11, 13, 4, 30, 30, null, 5, null, null)
+;

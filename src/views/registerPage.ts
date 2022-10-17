@@ -1,4 +1,4 @@
-import { ready } from '../scripts/utils';
+import { ready } from '../scripts/tools/utils';
 import { registerUser } from '../controllers/userController';
 
 export default function registerPage() {

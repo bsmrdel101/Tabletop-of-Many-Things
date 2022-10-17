@@ -1,7 +1,7 @@
 import gamesList from '../components/gamesList';
 import { logout } from '../controllers/userController';
 import { Client, Game } from '../scripts/types';
-import { ready } from '../scripts/utils';
+import { ready } from '../scripts/tools/utils';
 import gamesHistoryList from '../components/gameHistoryList';
 import gamePage from './gamePage';
 import { emitServerEvent } from '../scripts/socket.io';

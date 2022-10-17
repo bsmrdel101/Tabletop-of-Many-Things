@@ -1,5 +1,5 @@
 import { addGame, getGames } from "../controllers/dashboardController";
-import { ready } from "../scripts/utils";
+import { ready } from "../scripts/tools/utils";
 import { Game } from "../scripts/types";
 import gameCard from "./gameCard";
 import { joinDM } from "../views/dashboardPage";

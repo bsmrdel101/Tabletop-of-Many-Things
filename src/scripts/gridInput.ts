@@ -1,16 +1,16 @@
 import { toggleCharacterMenu } from '../components/characterMenu';
 import { toggleCharacterSheet } from '../components/characterSheet/characterSheet';
-import { toggleCreaturesModal } from '../components/creaturesModal';
+import { toggleCreaturesModal } from '../components/creaturesModal/creaturesModal';
 import { toggleMapMenu } from '../components/mapsMenu';
 import { toggleTokenMenu } from '../components/tokensMenu';
 import { clientType } from '../views/dashboardPage';
 import { zoomIn, zoomOut } from './gridEvents';
-import { checkForElement } from './utils';
+import { canUseHotkey, checkForElement } from './tools/utils';
 
 let canScale = false;
 let targetPosX: number, targetPosY: number;
 let dragging = false;
-const canUseHotkey = true;
+let resistance = 40;
 
 
 export const bindEventsToGrid = () => {
@@ -90,7 +90,7 @@ const handleGridMouseEvents = () => {
         const mousePosX = e.x;
         const mousePosY = e.y;
         if (dragging) {
-            document.querySelector('.grid-container').scrollBy((targetPosX - mousePosX) / 40, (targetPosY - mousePosY) / 40);
+            document.querySelector('.grid-container').scrollBy((targetPosX - mousePosX) / resistance, (targetPosY - mousePosY) / resistance);
             document.querySelector('.game-page').classList.add('panning');
         }
     });
