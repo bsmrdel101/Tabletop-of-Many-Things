@@ -1,4 +1,4 @@
-import { getActionDesc, separateDmgRoll } from "./tools/creatureStatTools";
+import { getActionDesc, separateDmgRoll } from "./tools/statTools";
 import { removeExtraCustomData } from "./tools/stringUtils";
 
 // Separate different parts of the response into arrays

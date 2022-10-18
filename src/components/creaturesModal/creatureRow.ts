@@ -1,6 +1,7 @@
 import { deleteCreature } from "../../controllers/creaturesController";
 import { ready } from "../../scripts/tools/utils";
 import { Creature, MinifiedCreature } from "../../scripts/types";
+import { openCreatureStatsWindow } from "./creatureStats";
 
 interface Props {
     creature: MinifiedCreature | Creature
@@ -17,7 +18,7 @@ const bindEventsToCreatureRow = (creature: any, creatureId: string, custom: bool
         });
     }
     creatureRow.addEventListener('click', () => {
-        console.log(creature);
+        openCreatureStatsWindow(creature.index, custom);
     });
 };
 
@@ -31,7 +32,6 @@ const renderCreatureRowContent = (creature: MinifiedCreature | Creature, creatur
 
 export function creatureRow({ creature, custom, index }: Props) {
     const creatureId = `creature-${index}`;
-    
     ready(() => {
         renderCreatureRowContent(creature, creatureId, custom);
         bindEventsToCreatureRow(creature, creatureId, custom);

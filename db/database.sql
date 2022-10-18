@@ -246,3 +246,13 @@ INSERT INTO "creatures" ("user_id", "index", "image", "name", "size", "type", "a
 VALUES
     (1, 'dough-elemental', 'https://www.dandwiki.com/w/images/3/37/BreadSpawn.jpg', 'Dough Elemental', 'medium', 'elemental', 'neutral', 12, 40, '12d8', 14, 15, 10, 12, 11, 13, 4, 30, 30, null, 5, null, null)
 ;
+
+INSERT INTO "creature_abilities" ("creature_id") VALUES (1);
+INSERT INTO "creature_actions" ("creature_id") VALUES (1);
+INSERT INTO "immunities" ("character_id", "creature_id") VALUES (null, 1);
+INSERT INTO "languages" ("character_id", "creature_id") VALUES (null, 1);
+INSERT INTO "legendary_actions" ("creature_id") VALUES (1);
+INSERT INTO "proficiencies" ("creature_id") VALUES (1);
+INSERT INTO "resistances" ("character_id", "creature_id") VALUES (null, 1);
+INSERT INTO "senses" ("character_id", "creature_id") VALUES (null, 1);
+INSERT INTO "vulnerabilities" ("character_id", "creature_id") VALUES (null, 1);

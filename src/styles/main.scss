@@ -1,15 +1,16 @@
-@import "./mixins";
-@import "./dashboardPage";
-@import "./gamePage";
-@import "./grid";
-@import "./loginPage";
-@import "./registerPage";
-@import "./sidebar";
-@import "./toolbar";
-@import "./menus";
-@import "./modal";
-@import "./token";
-@import "./creatures";
+@import "./tools/mixins";
+@import "./components/dashboardPage";
+@import "./components/gamePage";
+@import "./components/grid";
+@import "./components/loginPage";
+@import "./components/registerPage";
+@import "./components/sidebar";
+@import "./components/toolbar";
+@import "./components/menus";
+@import "./components/modal";
+@import "./components/token";
+@import "./components/creatures";
+@import "./components/stats";
 
 :root {
   /* Main */
@@ -152,8 +153,19 @@ button {
   &--attack {
       margin-top: 0.3rem;
   }
+
+  &--search {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #c6c6c6;
+  }
 }
 
 .bold {
   font-weight: 600;
+}
+
+.relative {
+  position: relative;
 }

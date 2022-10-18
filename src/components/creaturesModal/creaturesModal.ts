@@ -11,7 +11,7 @@ export const toggleCreaturesModal = () => {
     creaturesOpen = !creaturesOpen;
     if (creaturesOpen) {
         renderCreaturesModal();
-        getCreaturesBodyData();
+        renderCreatureRows('all');
         bindEventsToModal();
     } else {
         document.getElementById('creatures-modal').remove();
@@ -24,15 +24,18 @@ const creaturesBodyHeaderHtml = () => `
     </div>
     <div class="modal__filters">
         <label>
-            <select id="creature-list-filter">
+            <select id="creatures-list-filter">
                 <option value="all">All creatures</option>
                 <option value="standard">Standard</option>
                 <option value="custom">Custom</option>
             </select>
         </label>
-        <label>
-            <input placeholder="search" id="creatures-modal-search">
-        </label>
+        <form id="creatures-modal-search-submit">
+            <label class="relative">
+                <input placeholder="search" id="creatures-modal-search">
+                <button type="submit" class="btn--search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </label>
+        </form>
         <button class="btn--hover" id="new-creature-btn">New Creature</button>
     </div>
 `;
@@ -43,67 +46,69 @@ const renderCreaturesModal = () => {
     makeDraggable(el, '.modal__header');
 };
 
-const getCreaturesBodyData = async () => {
+const renderCreatureRows = async (value: string) => {
     let index = 0;
-    const customCreatures: Creature[] = await getCustomCreatures();
-    const creatures: MinifiedCreature[] = await getCreatures();
-
-    customCreatures.forEach((creature: Creature) => {
-        document.getElementById(`creatures-modal`).insertAdjacentHTML('beforeend', 
-            creatureRow({ creature, custom: true, index })
-        );
-        index += 1;
-    });
-    creatures.forEach((creature: MinifiedCreature) => {
-        document.getElementById(`creatures-modal`).insertAdjacentHTML('beforeend', 
-            creatureRow({ creature, custom: false, index })
-        );
-        index += 1;
-    });
+    if (value === 'all' || value === 'custom') {
+        const customCreatures: Creature[] = await getCustomCreatures();
+        customCreatures.forEach((creature: Creature) => {
+            document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+                creatureRow({ creature, custom: true, index })
+            );
+            index += 1;
+        });
+    }
+    if (value === 'all' || value === 'standard') {
+        const creatures: MinifiedCreature[] = await getCreatures();
+        creatures.forEach((creature: MinifiedCreature) => {
+            document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+                creatureRow({ creature, custom: false, index })
+            );
+            index += 1;
+        });
+    }
 };
 
-// const filterCreaturesList = (value: string) => {
-//     document.querySelector('.creatures-window__body').innerHTML = '';
-//     switch (value) {
-//         case 'all':
-//             getCreaturesBodyData();
-//             break;
-//         case 'standard':
-//             getStandardCreaturesData();
-//             break;
-//         case 'custom':
-//             getCustomCreaturesData();
-//             break;
-//         default:
-//             break;
-//     }
-// };
+const filterCreaturesList = async () => {
+    let index = 0;
+    document.querySelector('.creatures-modal__body').innerHTML = '';
+    const selectedFilter = (<HTMLInputElement>document.getElementById('creatures-list-filter')).value;
+    const value = (<HTMLInputElement>document.getElementById('creatures-modal-search')).value;
 
-// const searchCreaturesList = async (value: string) => {
-//     document.querySelector('.creatures-window__body').innerHTML = '';
-//     await getCustomCreatures();
-//     const selectedFilter = document.getElementById('creature-list-filter').value;
-
-//     // Filter all standard creatures
-//     if (selectedFilter === 'all' || selectedFilter === 'standard') {
-//         creatures.forEach((creature) => {
-//             if (creature.name.toLowerCase().includes(value.toLowerCase())) {
-//                 renderStandardCreatureRow(creature);
-//             }
-//         });
-//     }
-//     // Filter all custom creatures
-//     if (selectedFilter === 'all' || selectedFilter === 'custom') {
-//         customCreatures.forEach((creature) => {
-//             if (creature.name.toLowerCase().includes(value.toLowerCase())) {
-//                 renderCustomCreatureRow(creature);
-//             }
-//         });
-//     }
-// };
+    // Filter all custom creatures
+    if (selectedFilter === 'all' || selectedFilter === 'custom') {
+        const customCreatures: Creature[] = await getCustomCreatures();
+        customCreatures.forEach((creature) => {
+            if (creature.name.toLowerCase().includes(value.toLowerCase())) {
+                document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+                    creatureRow({ creature, custom: true, index })
+                );
+                index += 1;
+            }
+        });
+    }
+    // Filter all standard creatures
+    if (selectedFilter === 'all' || selectedFilter === 'standard') {
+        const creatures: MinifiedCreature[] = await getCreatures();
+        creatures.forEach((creature) => {
+            if (creature.name.toLowerCase().includes(value.toLowerCase())) {
+                document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+                    creatureRow({ creature, custom: false, index })
+                );
+                index += 1;
+            }
+        });
+    }
+};
 
 const bindEventsToModal = () => {
     document.getElementById('creatures-modal-close-btn').addEventListener('click', () => {
         toggleCreaturesModal();
+    });
+    document.getElementById('creatures-list-filter').addEventListener('change', () => {
+        filterCreaturesList();
+    });
+    document.getElementById('creatures-modal-search-submit').addEventListener('submit', (e: Event) => {
+        e.preventDefault();
+        filterCreaturesList();
     });
 };

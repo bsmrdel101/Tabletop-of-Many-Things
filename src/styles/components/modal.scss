@@ -15,6 +15,10 @@
     z-index: 1;
     font-weight: 350;
 
+    p {
+        margin: 0.5rem;
+    }
+
     &__header {
         padding: 0.5rem;
         margin: 0;
@@ -28,6 +32,10 @@
         flex-wrap: wrap;
         gap: 0.3rem;
         align-items: center;
+    }
+
+    &--offset {
+        right: 27rem;
     }
 
     &::-webkit-scrollbar {

@@ -2,7 +2,7 @@ import { removeUnitFromString } from "./tools/stringUtils";
 import { separateStandardCreatureResponse } from "./standardCreatureRes";
 import { separateCreatureResponse } from "./customCreatureRes";
 
-export const modifyResponseStandardCreature = (res) => {
+export const modifyResponseStandardCreature = (res: any) => {
     // Gets all the arrays of creature data
     const { proficiencies, condition_immunities, senses, special_abilities, actions, legendary_actions } = separateStandardCreatureResponse(res.data);
     const modifiedRes = new Creature(
@@ -43,10 +43,9 @@ export const modifyResponseStandardCreature = (res) => {
     return modifiedRes;
 };
 
-export const modifyResponseCreature = (res) => {
+export const modifyResponseCreature = (res: any) => {
     // Gets all the arrays of creature data
     const { proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = separateCreatureResponse(res.data);
-
     const modifiedRes = new Creature(
         res.data[0].id,
         res.data[0].user_id,
