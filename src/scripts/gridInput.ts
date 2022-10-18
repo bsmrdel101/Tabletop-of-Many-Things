@@ -6,11 +6,14 @@ import { toggleTokenMenu } from '../components/tokensMenu';
 import { clientType } from '../views/dashboardPage';
 import { zoomIn, zoomOut } from './gridEvents';
 import { canUseHotkey, checkForElement } from './tools/utils';
+import { Coord } from './types';
 
 let canScale = false;
 let targetPosX: number, targetPosY: number;
+let movedPosX: number, movedPosY: number;
+let mouseStartX: number, mouseStartY: number;
 let dragging = false;
-let resistance = 40;
+let position: Coord;
 
 
 export const bindEventsToGrid = () => {
@@ -64,8 +67,10 @@ const handleGridMouseEvents = () => {
     document.addEventListener('mousedown', (e: MouseEvent) => {
         switch (true) {
             case e.which === 2:
-                targetPosX = e.x;
-                targetPosY = e.y;
+                mouseStartX = e.x;
+                mouseStartY = e.y;
+                targetPosX = movedPosX ? movedPosX : 0;
+                targetPosY = movedPosY ? movedPosY : 0;
                 dragging = true;
                 break;
             default:
@@ -78,6 +83,10 @@ const handleGridMouseEvents = () => {
         dragging = false;
         switch (true) {
             case e.which === 2:
+                const grid: any = document.querySelector('.grid'); 
+                const { transformX, transformY } = getTransformValues(grid);
+                movedPosX = transformX;
+                movedPosY = transformY;
                 document.querySelector('.game-page').classList.remove('panning');
                 break;
             default:
@@ -87,13 +96,24 @@ const handleGridMouseEvents = () => {
 
     // Fires when user moves mouse
     document.addEventListener('mousemove', (e: MouseEvent) => {
-        const mousePosX = e.x;
-        const mousePosY = e.y;
+        const mousePosX = -(mouseStartX - e.x);
+        const mousePosY = -(mouseStartY - e.y);
+        targetPosX = movedPosX ? movedPosX : 0;
+        targetPosY = movedPosY ? movedPosY : 0;
+        
         if (dragging) {
-            document.querySelector('.grid-container').scrollBy((targetPosX - mousePosX) / resistance, (targetPosY - mousePosY) / resistance);
+            const grid: any = document.querySelector('.grid');            
+            position = { x: (mousePosX + targetPosX), y: (mousePosY + targetPosY) };
+            grid.style.transform = `translate(${position.x}px, ${position.y}px)`;
             document.querySelector('.game-page').classList.add('panning');
         }
     });
+};
+
+const getTransformValues = (grid: any) => {
+    let style = window.getComputedStyle(grid);
+    let matrix = new DOMMatrixReadOnly(style.transform);
+    return { transformX: matrix.m41, transformY: matrix.m42 };
 };
 
 const handleGridWheelEvents = () => {

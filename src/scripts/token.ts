@@ -35,6 +35,7 @@ export const addTokenToBoard = (selectedCell: Element) => {
         socketPlaceToken({ x: lastPos.x, y: lastPos.y }, newToken, user.username, room);
     }
 
+    // Place token if the cells are not occupied
     if (!(selectedCell.childNodes.length > 0)) {
         menuToken.classList.remove('menu__item');
         menuToken.classList.remove('menu__item--token');

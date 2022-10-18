@@ -21,6 +21,7 @@
     --map-background: rgb(237 237 237 / 52%);
     --grid-color: rgb(0 0 0);
 
+	transform: translate(0px, 0px);
 	height: calc(var(--size) * var(--grid-y));
 	width: calc(var(--size) * var(--grid-x));
 	display: grid;

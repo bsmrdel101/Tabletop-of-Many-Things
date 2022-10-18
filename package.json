@@ -10,7 +10,7 @@
     "lint:css": "stylelint '**/*.scss'",
     "lint": "run-s lint:js lint:css",
     "server": "nodemon server/server.js",
-    "sass": "sass --watch src/styles:src/buildjs",
+    "sass": "sass --watch src/styles/main:src/buildjs/main",
     "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline",
     "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
     "dev": "run-p server sass tsc docker:setup"
