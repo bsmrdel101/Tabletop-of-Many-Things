@@ -13,10 +13,10 @@
     p {
         margin: 0.3rem;
         font-weight: 500;
+        line-height: 1.15;
     }
 
     &__delete-btn {
-        z-index: 1;
         position: absolute;
         right: 0.5rem;
         top: 0.66rem;

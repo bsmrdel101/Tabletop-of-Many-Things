@@ -1,0 +1,21 @@
+.creatures-window-form {
+    right: 27rem;
+
+    &__body {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-bottom: 0.3rem;
+
+        &--box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin: 0.4rem;
+        }
+    }
+}
+
+.creature-form__btn--input {
+    margin-top: 0.3rem;
+}

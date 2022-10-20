@@ -1,4 +1,4 @@
-import { makeDraggable } from "../scripts/tools/utils";
+import { disableHotkeys, makeDraggable } from "../scripts/tools/utils";
 import modal from "./modal";
 
 let creatureFormOpen = false;
@@ -7,9 +7,16 @@ export const toggleNewCreatureForm = () => {
     creatureFormOpen = !creatureFormOpen;
     if (creatureFormOpen) {
         renderNewCreatureFormModal();
+        bindEventsToNewCreatureForm();
     } else {
         document.querySelector('.creatures-window-form').remove();
     }
+};
+
+const bindEventsToNewCreatureForm =() => {
+    document.getElementById('new-creature-form-modal-close-btn').addEventListener('click', () => {
+        toggleNewCreatureForm();
+    });
 };
 
 const renderNewCreatureFormModal = () => {
@@ -20,12 +27,12 @@ const renderNewCreatureFormModal = () => {
     const modalBody: HTMLElement = document.getElementById('new-creature-form-modal__body');
     window.classList.add('creatures-window-form');
     modalBody.insertAdjacentHTML('beforeend', creatureFormBodyHtml());
-    // disableHotkeys();
-    makeDraggable(window, 'creatures-window-form__header');
+    disableHotkeys();
+    makeDraggable(window, '.creatures-window-form__header');
 };
 
 const newCreatureFormHeaderHtml = () => `
-    <div class="creatures-window-form__header">
+    <div class="creatures-window-form__header modal__header">
         <h2>New Creature</h2>
     </div>
 `;

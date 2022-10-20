@@ -35,7 +35,7 @@ export const openCreatureStatsWindow = async (index: string, custom: boolean) =>
 const renderCreatureStatsWindow = (creature: Creature) => {
     document.querySelector('body').insertAdjacentHTML('beforeend', modal(creature.index, creatureStatsWindowHeader(creature)));
     const creatureStatsModal = document.getElementById(`${creature.index}-modal`);
-    const modalBody = <HTMLElement>document.querySelector(`.${creature.index}-modal__body`);
+    const modalBody = <HTMLElement>document.getElementById(`${creature.index}-modal__body`);
     creatureStatsModal.classList.add('modal--offset');
     modalBody.classList.add('creature-stats-window');
     modalBody.classList.add(`creature-stats-window--${creature.index}`);

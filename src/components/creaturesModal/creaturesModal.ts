@@ -1,4 +1,4 @@
-import { makeDraggable } from '../../scripts/tools/utils';
+import { disableHotkeys, makeDraggable } from '../../scripts/tools/utils';
 import { creatureRow } from './creatureRow';
 import modal from '../modal';
 import { Creature, MinifiedCreature } from '../../scripts/types';
@@ -20,7 +20,7 @@ export const toggleCreaturesModal = () => {
 };
 
 const creaturesBodyHeaderHtml = () => `
-    <div class="creatures-modal__header">
+    <div class="creatures-modal__header modal__header">
         <h2>Creatures</h2>
     </div>
     <div class="modal__filters">
@@ -44,6 +44,7 @@ const creaturesBodyHeaderHtml = () => `
 const renderCreaturesModal = () => {
     document.querySelector('body').insertAdjacentHTML('beforeend', modal('creatures', creaturesBodyHeaderHtml()));
     const window = document.getElementById('creatures-modal');
+    disableHotkeys();
     makeDraggable(window, '.creatures-modal__header');
 };
 
@@ -71,7 +72,7 @@ const renderCreatureRows = async (value: string) => {
 
 const filterCreaturesList = async () => {
     let index = 0;
-    document.querySelector('.creatures-modal__body').innerHTML = '';
+    document.getElementById('creatures-modal__body').innerHTML = '';
     const selectedFilter = (<HTMLInputElement>document.getElementById('creatures-list-filter')).value;
     const value = (<HTMLInputElement>document.getElementById('creatures-modal-search')).value;
 
@@ -80,7 +81,7 @@ const filterCreaturesList = async () => {
         const customCreatures: Creature[] = await getCustomCreatures();
         customCreatures.forEach((creature) => {
             if (creature.name.toLowerCase().includes(value.toLowerCase())) {
-                document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+                document.getElementById('creatures-modal__body').insertAdjacentHTML('beforeend', 
                     creatureRow({ creature, custom: true, index })
                 );
                 index += 1;
@@ -92,7 +93,7 @@ const filterCreaturesList = async () => {
         const creatures: MinifiedCreature[] = await getCreatures();
         creatures.forEach((creature) => {
             if (creature.name.toLowerCase().includes(value.toLowerCase())) {
-                document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+                document.getElementById('creatures-modal__body').insertAdjacentHTML('beforeend', 
                     creatureRow({ creature, custom: false, index })
                 );
                 index += 1;
