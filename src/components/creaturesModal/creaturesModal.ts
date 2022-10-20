@@ -3,6 +3,7 @@ import { creatureRow } from './creatureRow';
 import modal from '../modal';
 import { Creature, MinifiedCreature } from '../../scripts/types';
 import { getCreatures, getCustomCreatures } from '../../controllers/creaturesController';
+import { toggleNewCreatureForm } from '../newCreatureForm';
 
 let creaturesOpen = false;
 
@@ -19,7 +20,7 @@ export const toggleCreaturesModal = () => {
 };
 
 const creaturesBodyHeaderHtml = () => `
-    <div class="modal__header">
+    <div class="creatures-modal__header">
         <h2>Creatures</h2>
     </div>
     <div class="modal__filters">
@@ -42,8 +43,8 @@ const creaturesBodyHeaderHtml = () => `
 
 const renderCreaturesModal = () => {
     document.querySelector('body').insertAdjacentHTML('beforeend', modal('creatures', creaturesBodyHeaderHtml()));
-    const el = document.getElementById('creatures-modal');
-    makeDraggable(el, '.modal__header');
+    const window = document.getElementById('creatures-modal');
+    makeDraggable(window, '.creatures-modal__header');
 };
 
 const renderCreatureRows = async (value: string) => {
@@ -51,7 +52,7 @@ const renderCreatureRows = async (value: string) => {
     if (value === 'all' || value === 'custom') {
         const customCreatures: Creature[] = await getCustomCreatures();
         customCreatures.forEach((creature: Creature) => {
-            document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+            document.getElementById('creatures-modal__body').insertAdjacentHTML('beforeend', 
                 creatureRow({ creature, custom: true, index })
             );
             index += 1;
@@ -60,7 +61,7 @@ const renderCreatureRows = async (value: string) => {
     if (value === 'all' || value === 'standard') {
         const creatures: MinifiedCreature[] = await getCreatures();
         creatures.forEach((creature: MinifiedCreature) => {
-            document.querySelector('.creatures-modal__body').insertAdjacentHTML('beforeend', 
+            document.getElementById('creatures-modal__body').insertAdjacentHTML('beforeend', 
                 creatureRow({ creature, custom: false, index })
             );
             index += 1;
@@ -110,5 +111,8 @@ const bindEventsToModal = () => {
     document.getElementById('creatures-modal-search-submit').addEventListener('submit', (e: Event) => {
         e.preventDefault();
         filterCreaturesList();
+    });
+    document.getElementById('new-creature-btn').addEventListener('click', () => {
+        toggleNewCreatureForm();
     });
 };
