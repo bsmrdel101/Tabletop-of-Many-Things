@@ -4,11 +4,13 @@ import { Client, Game } from '../scripts/types';
 import { ready } from '../scripts/tools/utils';
 import gamesHistoryList from '../components/gameHistoryList';
 import gamePage from './gamePage';
-import { emitServerEvent } from '../scripts/socket.io';
+import { emitServerEvent } from '../scripts/socket-io';
 import { addGameToHistory, getGame, getGamesHistory } from '../controllers/dashboardController';
+import { toggleCharacterMenu } from '../components/characterMenu';
 
 export let room: string;
 export let clientType: string;
+export let socketId: string;
 
 
 // Joins the game as a player
@@ -17,8 +19,10 @@ export const joinPlayer = (roomCode: string) => {
     emitServerEvent('JOIN_ROOM', ['player', roomCode, (roomExists: boolean, newClient: Client) => {
         if (roomExists) {
             clientType = newClient.clientType;
+            socketId = newClient.id;
             renderGamePage();
             handlePushGameToHistory(roomCode);
+            toggleCharacterMenu();
         } else {
             console.warn('room doesn\'t exist');
         }
@@ -31,6 +35,7 @@ export const joinDM = (roomCode: string) => {
     emitServerEvent('JOIN_ROOM', ['dm', roomCode, (roomExists: boolean, newClient: Client) => {
         if (roomExists) {
             clientType = newClient.clientType;
+            socketId = newClient.id;
             renderGamePage();
         } else {
             console.warn('game already started');

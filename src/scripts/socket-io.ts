@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-const socket: Socket = io();
+export const socket: Socket = io();
 
 export const emitServerEvent = (event: string, params: any[]) => {
     socket.emit(event, ...params);

@@ -2,7 +2,7 @@ import { addMap, getMaps, maps } from "../controllers/mapsController";
 import { setupGrid } from "./grid";
 import { Area, Map } from "../scripts/types";
 import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../scripts/menuManager";
-import { emitServerEvent, onServerEvent } from "../scripts/socket.io";
+import { emitServerEvent, onServerEvent } from "../scripts/socket-io";
 import { room } from "../views/dashboardPage";
 
 const defaultMaps: Map[] = [

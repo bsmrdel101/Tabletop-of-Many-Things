@@ -20,7 +20,8 @@ export const ready = (fn: any, selector: string) => {
     setTimeout(() => { 
         const div = document.createElement('div');
         div.id = 'new-div';
-        document.body.append(div); 
+        document.body.append(div);
+        document.getElementById('new-div').remove();
     }, 0.1);
 };
 

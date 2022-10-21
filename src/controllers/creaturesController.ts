@@ -17,9 +17,11 @@ export const getCreatureByIndex = async (index: string, custom: boolean) => {
     try {
         if (custom) {
             const res = await axios.get(`/api/creatures/${index}`);
+            if (res.data.length === 0) return;
             return modifyResponseCreature(res);
         } else {
             const res = await axios.get(`https://www.dnd5eapi.co/api/monsters/${index}`);
+            if (res.data.length === 0) return;
             return modifyResponseStandardCreature(res);
         }
     } catch (err) {

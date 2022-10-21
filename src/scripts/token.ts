@@ -1,9 +1,9 @@
-import { emitServerEvent } from "./socket.io";
+import { emitServerEvent } from "./socket-io";
 import { Coord } from "./types";
 import { findCell } from "./tools/utils";
-import { room } from "../views/dashboardPage";
+import { room, socketId } from "../views/dashboardPage";
 import { user } from "../components/grid";
-import { placeToken } from "../components/tokensMenu";
+import { placeToken, resetTokenBodyData } from "../components/tokensMenu";
 
 export let mousePos: Coord = { x: 0, y: 0 };
 let lastPos: Coord;
@@ -29,7 +29,7 @@ export const addTokenToBoard = (selectedCell: Element) => {
     menuToken.classList.remove('token--dragging');
     const newToken = new Token(parseInt(menuToken.id), menuToken.getAttribute('src'), parseInt(menuToken.getAttribute('size')), menuToken.getAttribute('relative'));
 
-    if (!parseInt(selectedCell.getAttribute('x'))) {
+    if (!parseInt(selectedCell.getAttribute('x'))) {        
         menuToken.classList.remove('menu__item');
         menuToken.classList.remove('menu__item--token');
         socketPlaceToken({ x: lastPos.x, y: lastPos.y }, newToken, user.username, room);
@@ -49,9 +49,10 @@ const socketPlaceToken = (coords: Coord, tokenData: Token, username: string, roo
 
 export const addTokenEvents = (token: any, relative: string) => {
     // Open stats menu after double click
-    // token.addEventListener('dblclick', () => {
+    // token.addEventListener('dblclick', async () => {
     //     if (!relative) return;
-    //     openCreatureStatsWindow(relative);
+    //     const creature = await getCreatureByIndex(relative, true) || await getCreatureByIndex(relative, false);
+    //     openCreatureStatsWindow(relative, creature.id ? true : false);
     // });
     // Handle dragging token
     token.addEventListener('dragstart', (e: any) => {

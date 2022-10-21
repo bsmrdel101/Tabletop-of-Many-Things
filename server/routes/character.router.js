@@ -127,5 +127,44 @@ router.put('/temp', rejectUnauthenticated, (req, res) => {
     })  
 });
 
+router.put('/inspiration', rejectUnauthenticated, (req, res) => {
+    const sqlText = (`
+        UPDATE "characters"
+        SET "inspiration" = $1
+        WHERE "id" = $2;
+    `);
+    const sqlValues = [
+        req.body.newInspiration,
+        req.body.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then(() => res.sendStatus(201))
+        .catch((dberror) => {
+        console.log('Oops you did a goof: ', dberror);
+        res.sendStatus(500)
+    })  
+});
+
+router.put('/skills', rejectUnauthenticated, (req, res) => {
+    const sqlText = (`
+        UPDATE "skills"
+        SET "name" = $1, "type" = $2, "bonus_mod" = $3, "proficient" = $4
+        WHERE "id" = $5;
+    `);
+    const sqlValues = [
+        req.body.name,
+        req.body.type,
+        req.body.bonus_mod,
+        req.body.proficient,
+        req.body.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then(() => res.sendStatus(201))
+        .catch((dberror) => {
+        console.log('Oops you did a goof: ', dberror);
+        res.sendStatus(500)
+    })  
+});
+
 
 module.exports = router;

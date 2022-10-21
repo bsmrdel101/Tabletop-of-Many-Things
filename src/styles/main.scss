@@ -12,6 +12,9 @@
 @import "./components/creatures";
 @import "./components/stats";
 @import "./components/newCreatureForm";
+@import "./components/character-sheet/characterSheet";
+@import "./components/character-sheet/characterSheetMain";
+@import "./components/character-sheet/characterSheetSkills";
 
 :root {
   /* Main */
@@ -169,4 +172,12 @@ button {
 
 .relative {
   position: relative;
+}
+
+p {
+  margin: 0.4rem;
+}
+
+.hidden {
+  display: none;
 }

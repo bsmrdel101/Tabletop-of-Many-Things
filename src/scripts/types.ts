@@ -11,7 +11,7 @@ export type Game = {
 };
 
 export type Client = {
-    id: number
+    id: string
     clientType: string
 };
 
@@ -64,6 +64,7 @@ export type Character = {
     temp_health: number
     prof_bonus: number
     initiative: number
+    inspiration: boolean
     hit_dice: number
     str: number
     dex: number
@@ -124,3 +125,12 @@ export type MinifiedCreature = {
     name: string
     url: string
 };
+
+export interface Modifiers {
+    strMod: number
+    dexMod: number
+    conMod: number
+    intMod: number
+    wisMod: number
+    charMod: number
+}

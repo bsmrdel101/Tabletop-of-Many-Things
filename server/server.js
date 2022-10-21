@@ -120,7 +120,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('PLACE_TOKEN', (cell, token, username, room) => {
-    // tokens.push({cell: cell, token: token, username: username});
+    socket.join(room);
     io.to(room).emit('PLACE_TOKEN', cell, token, username);
   });
 
@@ -129,6 +129,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('REMOVE_TOKEN', (cell, room) => {
+    socket.join(room);
     io.to(room).emit('REMOVE_TOKEN', cell);
   });
 

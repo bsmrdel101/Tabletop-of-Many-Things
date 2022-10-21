@@ -41,7 +41,7 @@ const getTokenBodyData = async () => {
             document.querySelector('.menu__body').insertAdjacentHTML('beforeend', `
                 <div class="menu__body--container">
                     <img src=${token.image} class="menu__item menu__item--token" id="token-${i}" relative=${token.creature}>
-                    <button class="menu__item--circle-btn" onclick="openCreatureStatsWindow('${token.creature}')"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                    <button class="menu__item--circle-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
                 </div>
             `);
         } else {

@@ -2,10 +2,9 @@ import { findCell, ready } from '../scripts/tools/utils';
 import { Coord, Token, User } from "../scripts/types";
 import { room } from '../views/dashboardPage';
 import { bindEventsToGrid } from '../scripts/gridInput';
-import { addDefaultTokens, resetTokenBodyData } from './tokensMenu';
-import { changeNewUser, getUser } from '../controllers/userController';
-import { addDefaultMaps } from './mapsMenu';
-import { emitServerEvent, onServerEvent } from '../scripts/socket.io';
+import { resetTokenBodyData } from './tokensMenu';
+import { getUser } from '../controllers/userController';
+import { emitServerEvent, onServerEvent } from '../scripts/socket-io';
 import { addTokenEvents, occupyTokenSpace, removeOccupyTokenSpace } from '../scripts/token';
 import { addGridEvents } from '../scripts/gridEvents';
 
