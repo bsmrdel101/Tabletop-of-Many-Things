@@ -45,7 +45,7 @@ const newCharacterFormSkillInputRowInnerHtml = (skill: Skill, skillModifier: num
     if (skill) {
         return `
             <tr>
-                <td><input class="input--md" placeholder="Skill name" value="${skill.name}"><input class="input--sm new-creature-form--skill-type" onchange="updateNewCharacterSkillType(${skill.id}, event.target.value)" placeholder="Type" value="${skill.type}"></td>
+                <td><input type="text" class="input--md" placeholder="Skill name" value="${skill.name}"><input type="text" class="input--sm new-creature-form--skill-type" onchange="updateNewCharacterSkillType(${skill.id}, event.target.value)" placeholder="Type" value="${skill.type}"></td>
                 <td><input class="input--sm i-${skill.id}-new-skill-mod" placeholder="Value" type="number" value="${skillModifier}"></td>
                 <td>${skill.proficient ? `<i class="fa-solid fa-circle i-${skill.id}-prof-icon"><input class="new-skill-proficient-checkbox-${skill.id} character-sheet__skills-table--checkbox" type="checkbox" checked="true"></input></i>` : `<i class="fa-regular fa-circle i-${skill.id}-prof-icon"><input class="new-skill-proficient-checkbox-${skill.id} character-sheet__skills-table--checkbox" type="checkbox"></input></i>`}</td>
                 <td><i class="fa fa-trash delete-new-character-form-skill-row-btn" aria-hidden="true"></i></td>
