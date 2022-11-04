@@ -1,7 +1,7 @@
 import { addTokenToBoard, mousePos } from "./token";
 import { clamp, findRelativeCell } from "./tools/utils";
 
-const zoomMin = 12, zoomMax = 64;
+const zoomMin = 4, zoomMax = 64;
 
 // Add event handlers for the grid
 export const addGridEvents = (grid: HTMLElement) => {

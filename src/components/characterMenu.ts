@@ -1,5 +1,6 @@
 import { closeMenu, menuOpen, setMenuOpenValue, setSelectedMenuValue } from "../scripts/menuManager";
 import { characters, getCharacter, getCharacters, getCharacterSkills, updateCharacter, updateCharacterSkills } from "../controllers/charactersController";
+import { toggleNewCharacterWindow } from "./newCharacterForm/newCharacter";
 
 export const toggleCharacterMenu = () => {
     setMenuOpenValue(!menuOpen);
@@ -17,6 +18,12 @@ export const toggleCharacterMenu = () => {
     } else {
         closeMenu('characters');
     }
+};
+
+const bindEventsToCharacterMenu = () => {
+    document.getElementById('create-new-character-btn').addEventListener('click', () => {
+        toggleNewCharacterWindow();
+    });
 };
 
 const getCharacterBodyData = async () => {
@@ -38,9 +45,10 @@ const getCharacterBodyData = async () => {
     // Add new character button
     document.querySelector('.menu__body').insertAdjacentHTML('beforeend', `
         <div class="menu__item menu__item--character-btn">
-            <button class="btn--new-item" onclick="toggleNewCharacterWindow()">New Character</button>
+            <button class="btn--new-item" id="create-new-character-btn">New Character</button>
         </div>
     `);
+    bindEventsToCharacterMenu();
 };
 
 const selectCharacter = async (id: number) => {
