@@ -58,8 +58,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-        INSERT INTO "characters" ("user_id", "name", "class", "race", "background", "level", "ac", "max_health", "current_health", "temp_health", "prof_bonus", "movement", "initiative", "inspiration", "hit_dice", "str", "dex", "con", "int", "wis", "char", "image")
-        VALUES ($1, $2);
+        INSERT INTO "characters" ("user_id", "name", "class", "race", "background", "alignment", "level", "ac", "max_health", "current_health", "temp_health", "prof_bonus", "initiative", "inspiration", "hit_dice", "str", "dex", "con", "int", "wis", "char", "image", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27);
     `;
     const sqlValues = [
         req.user.id,
@@ -67,21 +67,28 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         req.body.class,
         req.body.race,
         req.body.background,
+        req.body.alignment,
         req.body.level,
         req.body.ac,
-        req.body.maxHealth,
-        req.body.maxHealth,
-        0,
-        req.body.profBonus,
-        req.body.movement,
+        req.body.max_health,
+        req.body.current_health,
+        req.body.temp_health,
+        req.body.prof_bonus,
         req.body.initiative,
-        req.body.hitDice,
+        req.body.inspiration,
+        req.body.hit_dice,
         req.body.str,
         req.body.dex,
         req.body.con,
         req.body.int,
         req.body.wis,
-        req.body.char
+        req.body.char,
+        req.body.image,
+        req.body.walk_speed,
+        req.body.swim_speed,
+        req.body.burrow_speed,
+        req.body.fly_speed,
+        req.body.climb_speed
     ];
     pool.query(sqlText, sqlValues)
         .then(() => res.sendStatus(201))

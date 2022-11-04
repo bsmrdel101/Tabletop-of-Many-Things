@@ -1,17 +1,17 @@
-import { getProfBonusFromLevel, newCharacterChar, newCharacterCon, newCharacterDex, newCharacterInt, newCharacterLevel, newCharacterStr, newCharacterWis, setNewCharacterFormPage } from "./newCharacter";
+import { getProfBonusFromLevel, newCharacterData, setNewCharacterFormPage, submitNewCharacter } from "./newCharacter";
 
 let latestNewCharacterSkillID: number;
-let newCharacterSkills: Skill[];
+export let newCharacterSkills: Skill[];
 
 export const renderNewCharacterFormSkillsPage = (sheetContent: HTMLElement) => {
     setNewCharacterFormPage('skills');
     sheetContent.insertAdjacentHTML('beforeend', newCharacterFormSkillsPageHtml());
     fillNewCharacterFormSkillsTableBody();
-    bindEventToNewCreatureFormAddRowBtn();
+    bindEventToFormSkillsPage();
 };
 
 const newCharacterFormSkillsPageHtml = () => `
-    <form class="new-character-form__form">
+    <form class="new-character-form__form" id="new-character-form-skills">
         <div class="new-character-form__header">
             <h2>Skills</h2>
         </div>
@@ -26,7 +26,7 @@ const newCharacterFormSkillsPageHtml = () => `
                 </thead>
                 <tbody class="new-character-form__skills-table-body"></tbody>
             </table>
-            <button class="add-new-character-skill-row-btn">Add row</button>
+            <button type="button" class="add-new-character-skill-row-btn">Add row</button>
         </div>
         <button type="submit">Submit</button>
     </form>
@@ -48,7 +48,7 @@ const newCharacterFormSkillInputRowInnerHtml = (skill: Skill, skillModifier: num
                 <td><input type="text" class="input--md" placeholder="Skill name" value="${skill.name}"><input type="text" class="input--sm new-creature-form--skill-type" onchange="updateNewCharacterSkillType(${skill.id}, event.target.value)" placeholder="Type" value="${skill.type}"></td>
                 <td><input class="input--sm i-${skill.id}-new-skill-mod" placeholder="Value" type="number" value="${skillModifier}"></td>
                 <td>${skill.proficient ? `<i class="fa-solid fa-circle i-${skill.id}-prof-icon"><input class="new-skill-proficient-checkbox-${skill.id} character-sheet__skills-table--checkbox" type="checkbox" checked="true"></input></i>` : `<i class="fa-regular fa-circle i-${skill.id}-prof-icon"><input class="new-skill-proficient-checkbox-${skill.id} character-sheet__skills-table--checkbox" type="checkbox"></input></i>`}</td>
-                <td><i class="fa fa-trash delete-new-character-form-skill-row-btn" aria-hidden="true"></i></td>
+                <td><button id="${skill.id}-new-skill-delete-btn"><i class="fa fa-trash delete-new-character-form-skill-row-btn" aria-hidden="true"></i></button></td>
             </tr>
         `;
     }
@@ -56,19 +56,23 @@ const newCharacterFormSkillInputRowInnerHtml = (skill: Skill, skillModifier: num
     newCharacterSkills.push(new Skill(id, 'Untitled skill', 'str', 0, false));
     return `
         <tr>
-            <td><input class="input--md" placeholder="Skill name" value="${newCharacterSkills[id].name}"><input class="input--sm new-creature-form--skill-type" placeholder="Type" value="${newCharacterSkills[id].type}"></td>
+            <td><input type="text" class="input--md" placeholder="Skill name" value="${newCharacterSkills[id].name}"><input type="text" class="input--sm new-creature-form--skill-type" placeholder="Type" value="${newCharacterSkills[id].type}"></td>
             <td><input class="input--sm i-${id}-new-skill-mod" placeholder="Value" type="number" value="${newCharacterSkills[id].bonus_mod}"></td>
             <td>${newCharacterSkills[id].proficient ? `<i class="fa-solid fa-circle i-${newCharacterSkills[id].id}-prof-icon"><input class="character-sheet__skills-table--checkbox new-skill-proficient-checkbox-${newCharacterSkills[id].id}" type="checkbox" checked="true"></input></i>` : `<i class="fa-regular fa-circle i-${newCharacterSkills[id].id}-prof-icon"><input class="character-sheet__skills-table--checkbox new-skill-proficient-checkbox-${newCharacterSkills[id].id}" type="checkbox"></input></i>`}</td>
-            <td><i class="fa fa-trash delete-new-character-form-skill-row-btn" aria-hidden="true"></i></td>
+            <td><button id="${id}-new-skill-delete-btn"><i class="fa fa-trash delete-new-character-form-skill-row-btn" aria-hidden="true"></i></button></td>
         </tr>
     `;
 };
 
-const bindEventToNewCreatureFormAddRowBtn = () => {
+const bindEventToFormSkillsPage = () => {
     const tableBody = document.querySelector('.new-character-form__skills-table-body');
     document.querySelector('.add-new-character-skill-row-btn').addEventListener('click', () => {
         tableBody.insertAdjacentHTML('beforeend', newCharacterFormSkillInputRowInnerHtml(null, null));
         bindEventToNewCharacterFormProf(newCharacterSkills[latestNewCharacterSkillID]);
+    });
+    document.getElementById('new-character-form-skills').addEventListener('submit', (e: Event) => {
+        e.preventDefault();
+        submitNewCharacter();
     });
 };
 
@@ -121,25 +125,25 @@ export const resetNewCharacterSkills = () => {
 
 const getNewCharacterFormSkillModifier = (skill: Skill) => {
     let value = 0;
-    if (skill.proficient) value += getProfBonusFromLevel(newCharacterLevel);
+    if (skill.proficient) value += getProfBonusFromLevel(newCharacterData.level);
     switch (skill.type) {
         case 'str':
-            value += newCharacterStr + skill.bonus_mod || skill.bonus_mod || 0;
+            value += newCharacterData.str + skill.bonus_mod || skill.bonus_mod || 0;
             break;
         case 'dex':
-            value += newCharacterDex + skill.bonus_mod || skill.bonus_mod || 0;
+            value += newCharacterData.dex + skill.bonus_mod || skill.bonus_mod || 0;
             break;
         case 'con':
-            value += newCharacterCon + skill.bonus_mod || skill.bonus_mod || 0;
+            value += newCharacterData.con + skill.bonus_mod || skill.bonus_mod || 0;
             break;
         case 'int':
-            value += newCharacterInt + skill.bonus_mod || skill.bonus_mod || 0;
+            value += newCharacterData.int + skill.bonus_mod || skill.bonus_mod || 0;
             break;
         case 'wis':
-            value += newCharacterWis + skill.bonus_mod || skill.bonus_mod || 0;
+            value += newCharacterData.wis + skill.bonus_mod || skill.bonus_mod || 0;
             break;
         case 'char':
-            value += newCharacterChar + skill.bonus_mod || skill.bonus_mod || 0;
+            value += newCharacterData.char + skill.bonus_mod || skill.bonus_mod || 0;
             break;
         default:
             return value + skill.bonus_mod || 0;

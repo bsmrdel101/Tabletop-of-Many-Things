@@ -1,12 +1,68 @@
-import { setNewCharacterFormPage } from "./newCharacter";
+import { newCharacterData, setNewCharacterFormPage, submitNewCharacter } from "./newCharacter";
 
 export const renderNewCharacterFormMainPage = (sheetContent: HTMLElement) => {
     setNewCharacterFormPage('main');
     sheetContent.insertAdjacentHTML('beforeend', newCharacterFormMainPageHtml());
+    bindEventsToFormMainPage();
+};
+
+const bindEventsToFormMainPage = () => {
+    document.getElementById('new-character-form-main').addEventListener('submit', (e: Event) => {
+        e.preventDefault();
+        submitNewCharacter();
+    });
+    document.getElementById('nc-image').addEventListener('change', (e: any) => {
+        newCharacterData.image = e.target.value;
+    });
+    document.getElementById('nc-name').addEventListener('change', (e: any) => {
+        newCharacterData.name = e.target.value;
+    });
+    document.getElementById('nc-level').addEventListener('change', (e: any) => {
+        newCharacterData.level = e.target.value;
+    });
+    document.getElementById('nc-class').addEventListener('change', (e: any) => {
+        newCharacterData.class = e.target.value;
+    });
+    document.getElementById('nc-race').addEventListener('change', (e: any) => {
+        newCharacterData.race = e.target.value;
+    });
+    document.getElementById('nc-background').addEventListener('change', (e: any) => {
+        newCharacterData.background = e.target.value;
+    });
+    document.getElementById('nc-hit-dice').addEventListener('change', (e: any) => {
+        newCharacterData.hit_dice = e.target.value;
+    });
+    document.getElementById('nc-ac').addEventListener('change', (e: any) => {
+        newCharacterData.ac = e.target.value;
+    });
+    document.getElementById('nc-speed').addEventListener('change', (e: any) => {
+        newCharacterData.walk_speed = e.target.value;
+    });
+    document.getElementById('nc-max-health').addEventListener('change', (e: any) => {
+        newCharacterData.max_health = e.target.value;
+    });
+    document.getElementById('nc-str').addEventListener('change', (e: any) => {
+        newCharacterData.str = e.target.value;
+    });
+    document.getElementById('nc-dex').addEventListener('change', (e: any) => {
+        newCharacterData.dex = e.target.value;
+    });
+    document.getElementById('nc-con').addEventListener('change', (e: any) => {
+        newCharacterData.con = e.target.value;
+    });
+    document.getElementById('nc-int').addEventListener('change', (e: any) => {
+        newCharacterData.int = e.target.value;
+    });
+    document.getElementById('nc-wis').addEventListener('change', (e: any) => {
+        newCharacterData.wis = e.target.value;
+    });
+    document.getElementById('nc-char').addEventListener('change', (e: any) => {
+        newCharacterData.char = e.target.value;
+    });
 };
 
 const newCharacterFormMainPageHtml = () => `
-    <form class="new-character__form">
+    <form class="new-character__form" id="new-character-form-main">
         <div class="new-character-form__header">
             <h2>New Character</h2>
             <input id="nc-image" type="file" accept="image/png, image/jpeg">

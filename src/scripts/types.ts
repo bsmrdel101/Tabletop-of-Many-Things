@@ -51,7 +51,7 @@ export type Token = {
 };
 
 export type Character = {
-    id: number
+    id?: number
     name: string
     class: string
     race: string

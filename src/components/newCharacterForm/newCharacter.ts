@@ -1,19 +1,48 @@
+import { addCharacter } from "../../controllers/charactersController";
 import { disableHotkeys, makeDraggable } from "../../scripts/tools/utils";
-import { Skill } from "../../scripts/types";
+import { Character, Skill } from "../../scripts/types";
 import { handleNewCharacterFormSidebarState, newCharacterFormSidebarHtml } from "./newCharacterFormSidebar";
 import { renderNewCharacterFormMainPage } from "./newCharacterMain";
 import { renderNewCharacterFormSkillsPage, resetNewCharacterSkills } from "./newCharacterSkills";
 
 let newCharacterOpen = false;
 let newCharacterFormPage = 'main';
-export let newCharacterImage: string, newCharacterName: string, newCharacterClass: string,
-newCharacterRace: string, newCharacterBackground: string, newCharacterLevel = 1,
-newCharacterHitDice: string, newCharacterAC: number, newCharacterSpeed: any, newCharacterMaxHealth: number,
-newCharacterStr: number, newCharacterDex: number, newCharacterCon: number, newCharacterInt: number,
-newCharacterWis: number, newCharacterChar: number,
-newCharacterSkills: Skill[];
+export const newCharacterData: Character = {
+    name: '',
+    class: '',
+    race: '',
+    background: '',
+    alignment: '',
+    level: 0,
+    ac: 0,
+    max_health: 0,
+    current_health: 0,
+    temp_health: 0,
+    prof_bonus: 0,
+    initiative: 0,
+    inspiration: false,
+    hit_dice: 0,
+    str: 0,
+    dex: 0,
+    con: 0,
+    int: 0,
+    wis: 0,
+    char: 0,
+    image: '',
+    walk_speed: 0,
+    swim_speed: 0,
+    burrow_speed: 0,
+    fly_speed: 0,
+    climb_speed: 0,
+};
+// export let newCharacterImage: string, newCharacterName: string, newCharacterClass: string,
+// newCharacterRace: string, newCharacterBackground: string, newCharacterLevel = 1,
+// newCharacterHitDice: string, newCharacterAC: number, newCharacterSpeed: any, newCharacterMaxHealth: number,
+// newCharacterStr: number, newCharacterDex: number, newCharacterCon: number, newCharacterInt: number,
+// newCharacterWis: number, newCharacterChar: number,
+// newCharacterSkills: Skill[];
 
-export const setNewCharacterFormPage = (page: string) => {newCharacterFormPage = page};
+export const setNewCharacterFormPage = (page: string) => newCharacterFormPage = page;
 
 export const toggleNewCharacterWindow = () => {
     newCharacterOpen = !newCharacterOpen;
@@ -61,8 +90,8 @@ export const determineNewCharacterFormPage = (page: string) => {
     makeDraggable(document.querySelector('.new-character-form'), '.new-character-form__header');
 };
 
-export const submitNewCharacter = (e: any) => {
-    e.preventDefault();
+export const submitNewCharacter = () => {
+    addCharacter(newCharacterData);
 };
 
 export const getProfBonusFromLevel = (level: number) => {
