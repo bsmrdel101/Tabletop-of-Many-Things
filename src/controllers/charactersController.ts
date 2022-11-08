@@ -68,7 +68,7 @@ export const addCharacter = async (payload: Character) => {
 
 export const addCharacterSkill = async (payload: Skill) => {
     try {
-        await axios.post('/api/characters/skills', payload);
+        await axios.post('/api/characters/skills', {id: character.id, ...payload});
     } catch (err) {
         console.log(err);
     }

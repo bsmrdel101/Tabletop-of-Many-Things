@@ -98,6 +98,26 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.post('/skills', rejectUnauthenticated, (req, res) => {
+    const sqlText =`
+        INSERT INTO "skills" ("character_id", "name", "type", "bonus_mod", "proficient")
+        VALUES ($1, $2, $3, $4, $5);
+    `;
+    const sqlValues = [
+        req.body.id,
+        req.body.name,
+        req.body.type,
+        req.body.bonus_mod,
+        req.body.proficient
+    ];
+    pool.query(sqlText, sqlValues)
+        .then(() => res.sendStatus(201))
+        .catch((dberror) => {
+        console.log('Oops you did a goof: ', dberror);
+        res.sendStatus(500)
+    });
+});
+
 router.put('/health', rejectUnauthenticated, (req, res) => {
     const sqlText = (`
         UPDATE "characters"

@@ -1,46 +1,40 @@
-import { addCharacter } from "../../controllers/charactersController";
+import { addCharacter, addCharacterSkill } from "../../controllers/charactersController";
 import { disableHotkeys, makeDraggable } from "../../scripts/tools/utils";
 import { Character, Skill } from "../../scripts/types";
 import { handleNewCharacterFormSidebarState, newCharacterFormSidebarHtml } from "./newCharacterFormSidebar";
 import { renderNewCharacterFormMainPage } from "./newCharacterMain";
-import { renderNewCharacterFormSkillsPage, resetNewCharacterSkills } from "./newCharacterSkills";
+import { newCharacterSkills, renderNewCharacterFormSkillsPage, resetNewCharacterSkills } from "./newCharacterSkills";
 
 let newCharacterOpen = false;
 let newCharacterFormPage = 'main';
 export const newCharacterData: Character = {
-    name: '',
+    name: 'Unnamed Character',
     class: '',
     race: '',
     background: '',
     alignment: '',
-    level: 0,
-    ac: 0,
+    level: 1,
+    ac: 10,
     max_health: 0,
     current_health: 0,
     temp_health: 0,
-    prof_bonus: 0,
+    prof_bonus: 2,
     initiative: 0,
     inspiration: false,
     hit_dice: 0,
-    str: 0,
-    dex: 0,
-    con: 0,
-    int: 0,
-    wis: 0,
-    char: 0,
+    str: 10,
+    dex: 10,
+    con: 10,
+    int: 10,
+    wis: 10,
+    char: 10,
     image: '',
-    walk_speed: 0,
+    walk_speed: 30,
     swim_speed: 0,
     burrow_speed: 0,
     fly_speed: 0,
     climb_speed: 0,
 };
-// export let newCharacterImage: string, newCharacterName: string, newCharacterClass: string,
-// newCharacterRace: string, newCharacterBackground: string, newCharacterLevel = 1,
-// newCharacterHitDice: string, newCharacterAC: number, newCharacterSpeed: any, newCharacterMaxHealth: number,
-// newCharacterStr: number, newCharacterDex: number, newCharacterCon: number, newCharacterInt: number,
-// newCharacterWis: number, newCharacterChar: number,
-// newCharacterSkills: Skill[];
 
 export const setNewCharacterFormPage = (page: string) => newCharacterFormPage = page;
 
@@ -90,8 +84,11 @@ export const determineNewCharacterFormPage = (page: string) => {
     makeDraggable(document.querySelector('.new-character-form'), '.new-character-form__header');
 };
 
-export const submitNewCharacter = () => {
-    addCharacter(newCharacterData);
+export const submitNewCharacter = async () => {
+    await addCharacter(newCharacterData);
+    newCharacterSkills.forEach((skill: Skill) => {
+        addCharacterSkill(skill);
+    });
 };
 
 export const getProfBonusFromLevel = (level: number) => {
