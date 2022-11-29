@@ -4,6 +4,8 @@ import dashboardPage from './views/dashboardPage';
 
 const routeManager = () => {
   switch (window.location.pathname) {
+    case '/':
+      window.location.pathname = '/game';
     case '/login':
       return loginPage();
     case '/register':

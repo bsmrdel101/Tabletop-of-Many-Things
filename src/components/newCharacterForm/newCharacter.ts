@@ -8,7 +8,7 @@ import { newCharacterSkills, renderNewCharacterFormSkillsPage, resetNewCharacter
 let newCharacterOpen = false;
 let newCharacterFormPage = 'main';
 export const newCharacterData: Character = {
-    name: 'Unnamed Character',
+    name: '',
     class: '',
     race: '',
     background: '',
@@ -21,7 +21,7 @@ export const newCharacterData: Character = {
     prof_bonus: 2,
     initiative: 0,
     inspiration: false,
-    hit_dice: 0,
+    hit_dice: '',
     str: 10,
     dex: 10,
     con: 10,

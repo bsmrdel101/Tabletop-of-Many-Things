@@ -1,5 +1,5 @@
 import gamesList from '../components/gamesList';
-import { logout } from '../controllers/userController';
+import { getUser, logout } from '../controllers/userController';
 import { Client, Game } from '../scripts/types';
 import { ready } from '../scripts/tools/utils';
 import gamesHistoryList from '../components/gameHistoryList';
@@ -69,7 +69,8 @@ const checkGameExists = (newGame: Game, gamesHistory: Game[]) => {
 export default function dashboardPage() {
     let roomCode: string;
 
-    ready(() => {
+    ready(async () => {
+        if (!await getUser()) window.location.pathname = 'login'; // Check if user is logged in
         bindEventsToForm();
     }, '.dashboard-page');
 

@@ -65,7 +65,7 @@ export type Character = {
     prof_bonus: number
     initiative: number
     inspiration: boolean
-    hit_dice: number
+    hit_dice: number | string
     str: number
     dex: number
     con: number

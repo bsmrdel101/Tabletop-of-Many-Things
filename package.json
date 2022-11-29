@@ -13,7 +13,7 @@
     "sass": "sass --watch src/styles/main.scss:src/buildjs/main.css",
     "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline",
     "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
-    "dev": "run-p server sass tsc docker:setup"
+    "start": "run-p server sass tsc docker:setup"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/bsmrdel101/Virtual-Table#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jquery": "^3.5.14",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "esbuild": "^0.15.7",

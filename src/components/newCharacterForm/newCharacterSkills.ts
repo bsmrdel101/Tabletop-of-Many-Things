@@ -65,6 +65,7 @@ const newCharacterFormSkillInputRowInnerHtml = (skill: Skill, skillModifier: num
 };
 
 const bindEventToFormSkillsPage = () => {
+    const skillsModInputs = [];
     const tableBody = document.querySelector('.new-character-form__skills-table-body');
     document.querySelector('.add-new-character-skill-row-btn').addEventListener('click', () => {
         tableBody.insertAdjacentHTML('beforeend', newCharacterFormSkillInputRowInnerHtml(null, null));
@@ -73,6 +74,12 @@ const bindEventToFormSkillsPage = () => {
     document.getElementById('new-character-form-skills').addEventListener('submit', (e: Event) => {
         e.preventDefault();
         submitNewCharacter();
+    });
+    newCharacterSkills.forEach((skill, i) => {
+        skillsModInputs.push((<HTMLInputElement>document.querySelector(`.i-${skill.id}-new-skill-mod`)).value);
+        $(`.i-${skill.id}-new-skill-mod`).on('input', (e: any) => {
+            skill.bonus_mod = parseInt(e.target.value) - skillsModInputs[i];
+        });
     });
 };
 
@@ -94,10 +101,6 @@ const bindEventToNewCharacterFormProf = (skill: Skill) => {
         }
     });
 };
-
-const updateNewCharacterSkillName = (id: number, value: string) => newCharacterSkills[id].name = value;
-const updateNewCharacterSkillType = (id: number, value: string) => newCharacterSkills[id].type = value;
-const updateNewCharacterSkillBonusMod = (id: number, value: string) => newCharacterSkills[id].bonus_mod = parseInt(value);
 
 export const resetNewCharacterSkills = () => {
     latestNewCharacterSkillID = 17;
