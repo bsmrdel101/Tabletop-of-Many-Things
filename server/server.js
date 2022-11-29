@@ -42,22 +42,9 @@ app.use('/api/creatures', creaturesRouter);
 app.use(express.static('src'));
 
 // Views
-app.get('/login', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
-
-app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', 'index.html'));
-});
-
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', 'index.html'));
-});
-
-app.get('/game', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', 'index.html'));
-});
-
 
 // Socket.io
 io.on('connection', (socket) => {
