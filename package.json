@@ -13,7 +13,8 @@
     "sass": "sass --watch src/styles/main.scss:src/buildjs/main.css",
     "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline",
     "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
-    "start": "run-p server sass tsc docker:setup"
+    "dev": "run-p server sass tsc docker:setup",
+    "start": "run-p server sass tsc"
   },
   "repository": {
     "type": "git",
