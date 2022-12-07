@@ -1,0 +1,1 @@
+web: sh -c npm server && npm sass && npm tsc && npm docker:setup
