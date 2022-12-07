@@ -1,1 +1,1 @@
-web: sh -c npm run server && npm run sass && npm run tsc
+web: npm start
