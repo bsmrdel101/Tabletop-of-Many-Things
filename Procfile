@@ -1,1 +1,1 @@
-web: sh -c npm server && npm sass && npm tsc
+web: sh -c npm run server && npm run sass && npm run tsc
