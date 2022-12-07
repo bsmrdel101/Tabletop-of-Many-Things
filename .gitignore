@@ -102,9 +102,5 @@ typings/
 # TernJS port file
 .tern-port
 
-build
-src/build
 coverage
-src/buildjs
-buildjs
 .postgres-data

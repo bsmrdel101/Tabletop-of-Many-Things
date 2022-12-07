@@ -14,6 +14,7 @@ export const getUser = async () => {
             withCredentials: true,
         };
         const res = await axios.get('/api/user', config);
+        console.log(res.data);
         return res.data;
     } catch(err) {
         console.log(err);
