@@ -16,6 +16,9 @@
     "dev": "run-p server sass tsc docker:setup",
     "build": "npx webpack --config webpack.config.js --mode=production"
   },
+  "engines" : { 
+    "node" : "16.18.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bsmrdel101/Virtual-Table.git"
