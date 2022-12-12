@@ -1,8 +1,0 @@
-@mixin input($width) {
-    width: $width;
-}
-
-@mixin red-border($px) {
-    padding-bottom: 0.6rem;
-    border-bottom: $px solid var(--color-red-1);
-}

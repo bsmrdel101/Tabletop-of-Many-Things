@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { changeRoute } from '../components/scripts/router';
 
 interface NewUser {
     username: string
@@ -14,7 +15,6 @@ export const getUser = async () => {
             withCredentials: true,
         };
         const res = await axios.get('/api/user', config);
-        console.log(res.data);
         return res.data;
     } catch(err) {
         console.log(err);
@@ -25,8 +25,12 @@ export const getUser = async () => {
 
 export const registerUser = async (payload: NewUser) => {
     try {
-        await axios.post('/api/user/register', payload);
-        window.location.pathname = 'login';
+        const config = {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        };
+        await axios.post('/api/user/register', payload, config);
+        changeRoute('/login');
     } catch(err) {
         console.log(err);
     }
@@ -34,8 +38,12 @@ export const registerUser = async (payload: NewUser) => {
 
 export const loginUser = async (payload: NewUser) => {
     try {
-        await axios.post('/api/user/login', payload);
-        window.location.pathname = 'game';
+        const config = {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        };
+        await axios.post('/api/user/login', payload, config);
+        changeRoute('/dashboard');
     } catch(err) {
         console.log(err);
     }
@@ -44,7 +52,6 @@ export const loginUser = async (payload: NewUser) => {
 export const logout = async () => {
     try {
         await axios.post('/api/user/logout');
-        window.location.pathname = 'login';
     } catch(err) {
         console.log(err);
     }

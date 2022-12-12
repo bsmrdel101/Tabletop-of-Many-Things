@@ -1,50 +1,35 @@
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const http = require('http');
-const path = require('path');
-const bodyParser = require('body-parser');
+const sessionMiddleware = require('./modules/session-middleware');
+const passport = require('./strategies/user.strategy');
 require('dotenv').config();
 
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-const sessionMiddleware = require('./modules/session-middleware');
-const passport = require('./strategies/user.strategy');
-
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Passport Session Configuration
+// Passport Session Configuration //
 app.use(sessionMiddleware);
 
 // start up passport sessions
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // Routes
 const userRouter = require('./routes/user.router');
-const tokensRouter = require('./routes/tokens.router');
-const mapsRouter = require('./routes/maps.router');
-const dashboardRouter = require('./routes/dashboard.router');
-const characterRouter = require('./routes/character.router');
-const creaturesRouter = require('./routes/creatures.router');
 
 app.use('/api/user', userRouter);
-app.use('/api/tokens', tokensRouter);
-app.use('/api/maps', mapsRouter);
-app.use('/api/dashboard', dashboardRouter);
-app.use('/api/characters', characterRouter);
-app.use('/api/creatures', creaturesRouter);
 
+// Serve static files
+app.use(express.static('build'));
 
-app.use(express.static('src'));
-
-// Views
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', 'index.html'));
-});
 
 // Socket.io
 io.on('connection', (socket) => {
@@ -126,9 +111,11 @@ io.on('connection', (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => {
+const PORT = process.env.PORT || 8000;
+
+/** Listen * */
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log('=======================');
 });

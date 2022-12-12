@@ -1,28 +1,40 @@
-const { Pool } = require("pg");
-let pool;
+const pg = require('pg');
+const url = require('url');
 
-const dotenv = require("dotenv");
-dotenv.config();
+let config = {};
 
-const connectDb = async () => {
-    try {
-        pool = new Pool({
-            user: process.env.PGUSER,
-            host: process.env.PGHOST,
-            database: process.env.DATABASE_NAME || process.env.PGDATABASE,
-            password: process.env.PGPASSWORD,
-            port: process.env.PGPORT,
-        });
-  
-        await pool.connect();
-        // const res = await pool.query('SELECT * FROM users');
-        // console.log(res.rows);
-        // await pool.end();
-    } catch (error) {
-        console.log(error);
-    }
+if (process.env.DATABASE_URL) {
+  const params = url.parse(process.env.DATABASE_URL);
+  const auth = params.auth.split(':');
+
+  config = {
+    user: auth[0],
+    password: auth[1],
+    host: params.hostname,
+    port: params.port,
+    database: params.pathname.split('/')[1],
+    ssl: { rejectUnauthorized: false },
+    max: 10, // max number of clients in the pool
+    idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+  };
+} else {
+  config = {
+    host: 'localhost', // Server hosting the postgres database
+    port: 5432, // env var: PGPORT
+    database: 'tabletop_of_many_things',
+    max: 10, // max number of clients in the pool
+    idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+  };
 }
 
-connectDb();
+// this creates the pool that will be shared by all other modules
+const pool = new pg.Pool(config);
+
+// the pool with emit an error on behalf of any idle clients
+// it contains if a backend error or network partition happens
+pool.on('error', (err) => {
+  console.log('Unexpected error on idle client', err);
+  process.exit(-1);
+});
 
 module.exports = pool;

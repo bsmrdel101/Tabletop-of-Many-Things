@@ -1,20 +1,21 @@
 {
-  "name": "virtual-table",
+  "name": "tabletop-of-many-things",
   "version": "1.0.0",
   "description": "A virtual tabletop fop 5e D&D.",
-  "main": "index.js",
+  "private": true,
+  "proxy": "http://localhost:8000",
   "scripts": {
-    "test": "jest",
+    "test": "react-scripts test",
     "test:coverage": "npm run test -- --coverage",
     "lint:js": "eslint ./ --ignore-path .gitignore",
     "lint:css": "stylelint '**/*.scss'",
     "lint": "run-s lint:js lint:css",
-    "server": "nodemon server/server.js",
-    "sass": "sass --watch src/styles/main.scss:src/buildjs/main.css",
-    "tsc": "esbuild src/*.ts --format=esm --bundle=true --splitting=true --outdir=src/buildjs --watch --sourcemap=inline",
     "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
-    "dev": "run-p server sass tsc docker:setup",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
   },
   "engines": {
     "node": "16.18.1"
@@ -28,10 +29,9 @@
   "bugs": {
     "url": "https://github.com/bsmrdel101/Virtual-Table/issues"
   },
-  "homepage": "https://github.com/bsmrdel101/Virtual-Table#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/jquery": "^3.5.14",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "esbuild": "^0.15.7",
@@ -45,6 +45,14 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^17.0.45",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -52,13 +60,31 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
+    "history": "^5.3.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.7.3",
+    "pg": "^8.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^5.3.4",
+    "react-scripts": "5.0.1",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.2",
     "uuid": "^8.3.2"
-  }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "heroku-run-build-script": true
 }

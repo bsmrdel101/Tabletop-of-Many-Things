@@ -1,3 +1,5 @@
+// No changes should be required in this file
+
 const bcrypt = require('bcryptjs');
 
 const SALT_WORK_FACTOR = 10; // This determines how secure the salt should be

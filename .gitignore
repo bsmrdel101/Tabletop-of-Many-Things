@@ -104,3 +104,4 @@ typings/
 
 coverage
 .postgres-data
+.vscode
