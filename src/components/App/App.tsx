@@ -6,12 +6,15 @@ import {
   Switch,
 } from 'react-router-dom';
 import { getUser } from '../../controllers/userController';
+import { io, Socket } from "socket.io-client";
 
 import DashboardPage from '../../views/DashboardPage/DashboardPage';
 import GamePage from '../../views/GamePage/GamePage';
 import LoginPage from '../../views/LoginPage/LoginPage';
 import RegisterPage from '../../views/RegisterPage/RegisterPage';
-import './App.scss';
+
+
+export const socket: Socket = io();
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -33,9 +36,9 @@ export default function App() {
           <Route exact path="/login">
             {
               user ?
-              <Redirect exact from="/" to="/dashboard" />
-              :
-              <LoginPage />
+                <Redirect to="/dashboard" />
+                :
+                <LoginPage />
             }
           </Route>
 
@@ -50,19 +53,19 @@ export default function App() {
           <Route exact path="/dashboard">
             {
               user ?
-              <DashboardPage />
-              :
-              <Redirect exact from="/" to="/login" />
+                <DashboardPage />
+                :
+                <Redirect to="/login" />
             }
           </Route>
 
           {/* Game page */}
-          <Route exact path="/game">
+          <Route exact path="/game/:room">
             {
               user ?
-              <GamePage />
-              :
-              <Redirect exact from="/" to="/login" />
+                <GamePage />
+                :
+                <Redirect to="/login" />
             }
           </Route>
 

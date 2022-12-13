@@ -24,61 +24,36 @@ app.use(passport.session());
 
 // Routes
 const userRouter = require('./routes/user.router');
+const dashboardRouter = require('./routes/dashboard.router');
 
 app.use('/api/user', userRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 // Serve static files
 app.use(express.static('build'));
 
-
 // Socket.io
 io.on('connection', (socket) => {
-  // socket.on('USER_DISCONNECT', (room, id) => {
-  //   let deleteList = [];
-  //   let clientList = [];    
-  //   const clients = io.sockets.adapter.rooms.get(room);
-  //   for (const clientId of clients) {
-  //     const clientSocket = io.sockets.sockets.get(clientId);
-  //     clientList.push(clientSocket.data.nickname);
-  //     deleteList.push(clientSocket.id);
-  //   }
-
-  //   for (const client of deleteList) {
-  //     if (client === id) {
-  //       clientList.splice(deleteList.indexOf(client), 1);
-  //     }
-  //   }
-  //   io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
-  // });
-
   // Makes the user join a room
-  socket.on('JOIN_ROOM', (userType, room, fn) => {
-    // Create client object
-    const client = {
-      id: socket.id,
-      clientType: userType
-    };
+  socket.on('JOIN_ROOM', (room, fn) => {
+    // Join room
+    socket.join(room);
 
-    // Check if room already exists
-    if (io.sockets.adapter.rooms.has(room)) {
-      if (userType !== 'dm'){
-        // If user is a player, then join
-        socket.join(room);
-        fn(true, client);
-      } else {
-        fn(false, {});
-      }
-    } else if (userType === 'dm') {
-      // If user is a dm, then create a room
-      socket.join(room);
-      fn(true, client);
+    // Get all socket data
+    const clients = io.sockets.adapter.rooms.get(room);
+    let dmExists = false;
+    io.sockets.sockets.forEach((client) => {
+      if (client.data.clientType === 'dm') dmExists = true;
+    });
+
+    // Check if the dm already exists
+    if (clients && clients.size === 1 || !dmExists) {
+      socket.data.clientType = 'dm';
+      fn('dm');
     } else {
-      fn(false, {});
+      socket.data.clientType = 'player';
+      fn('player');
     }
-  });
-
-  socket.on('SET_NAME', (name) => {
-    socket.data.nickname = { nickname: name };
   });
 
   socket.on('UPDATE_PLAYER_LIST', (room) => {
@@ -114,8 +89,7 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 8000;
 
-/** Listen * */
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log('=======================');
 });

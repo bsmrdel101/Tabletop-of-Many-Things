@@ -33,7 +33,8 @@ CREATE TABLE "games_list" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
-    "code" VARCHAR (20) NOT NULL
+    "code" VARCHAR (20) NOT NULL,
+    "dm" INTEGER
 );
 
 CREATE TABLE "game_history" (
@@ -196,9 +197,9 @@ VALUES
     ('dev', '$2a$10$3rvmJEyHfGUQhLpuhKBmneeK76Zvw2d7wO0KYob8YKAF.DirAKcga')
 ;
 
-INSERT INTO "games_list" ("user_id", "name", "code")
+INSERT INTO "games_list" ("user_id", "name", "code", "dm")
 VALUES
-    (1, 'Dev Campaign', 'pA6ZO0')
+    (1, 'Dev Campaign', 'pA6ZO0', 1)
 ;
 
 INSERT INTO "characters" ("user_id", "name", "class", "race", "background", "alignment", "level", "ac", "max_health", "current_health", "temp_health", "prof_bonus", "initiative", "inspiration", "hit_dice", "str", "dex", "con", "int", "wis", "char", "image", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { changeRoute } from "../../components/scripts/router";
+import { changeRoute } from "../../scripts/tools/router";
 import { loginUser } from '../../controllers/userController';
 import './LoginPage.scss';
 

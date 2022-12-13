@@ -2,11 +2,11 @@
     "extends": "stylelint-config-standard",
     "customSyntax": "postcss-less",
     "rules": {
-        "indentation": null,
         "alpha-value-notation": null,
         "selector-class-pattern": null,
         "color-function-notation": null,
         "at-rule-no-unknown": null,
-        "property-no-vendor-prefix": null
+        "property-no-vendor-prefix": null,
+        "no-empty-source": null
     }
 }

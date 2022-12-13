@@ -4,6 +4,6 @@ const history = createBrowserHistory();
 
 
 export const changeRoute = (route: string) => {
-  history.replace(`/#${route}`);
+  history.push(`/#${route}`);
   setTimeout(() => window.location.reload(), 200);
 };

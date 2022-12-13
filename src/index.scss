@@ -120,26 +120,26 @@ button {
 
 .btn {
   &--hover:hover {
-      transform: scale(1.025, 1.025);
+    transform: scale(1.025, 1.025);
   }
 
   &--modal-close {
-      border: none;
-      background-color: var(--menu-color-0);
-      margin: 0;
-      box-shadow: none;
-      color: white;
-      position: absolute;
-      right: 0;
-      top: 0;
+    border: none;
+    background-color: var(--menu-color-0);
+    margin: 0;
+    box-shadow: none;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   &--logout {
-      margin: 3rem 0 3rem 1rem;
+    margin: 3rem 0 3rem 1rem;
   }
 
   &--attack {
-      margin-top: 0.3rem;
+    margin-top: 0.3rem;
   }
 
   &--search {

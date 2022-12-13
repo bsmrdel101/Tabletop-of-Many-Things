@@ -20,9 +20,11 @@ if (process.env.DATABASE_URL) {
 } else {
   config = {
     host: 'localhost', // Server hosting the postgres database
-    port: 5432, // env var: PGPORT
-    database: 'tabletop_of_many_things',
+    port: 5438, // env var: PGPORT
+    database: 'app',
     max: 10, // max number of clients in the pool
+    password: 'db',
+    user: 'app',
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
   };
 }

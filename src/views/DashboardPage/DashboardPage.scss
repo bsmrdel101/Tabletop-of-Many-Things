@@ -1,0 +1,12 @@
+.dashboard-page {
+  margin: 1rem;
+
+  &__join-room-input {
+    margin-right: 0.3rem;
+  }
+}
+
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+}

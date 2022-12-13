@@ -1,6 +1,6 @@
 import React from "react";
 import { logout } from "../../controllers/userController";
-import { changeRoute } from "../scripts/router";
+import { changeRoute } from "../../scripts/tools/router";
 
 export default function LogoutBtn() {
   const handleLogout = async () => {
@@ -9,6 +9,6 @@ export default function LogoutBtn() {
   };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button className="button btn--hover btn--logout" onClick={handleLogout}>Logout</button>
   );
 }

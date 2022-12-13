@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { changeRoute } from "../../components/scripts/router";
+import { changeRoute } from "../../scripts/tools/router";
 import { registerUser } from '../../controllers/userController';
 import './RegisterPage.scss';
 

@@ -1,0 +1,16 @@
+.game-list__item {
+  padding: 1.6rem;
+  background-color: var(--background-color-2);
+  border-radius: 5px;
+  margin-bottom: 0.7rem;
+  transition: all ease-in-out 200ms;
+  box-shadow: var(--depth-3);
+  font-size: 1.2rem;
+  max-width: 8rem;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02, 1.02);
+  }
+}
