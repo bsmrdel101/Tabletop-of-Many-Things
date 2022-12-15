@@ -1,0 +1,26 @@
+.token {
+  height: var(--size);
+  width: var(--size);
+  grid-area: var(--row) / var(--column);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+
+  &:hover {
+    cursor: grab;
+  }
+
+  &--dragging {
+    opacity: 60%;
+    // height: 20rem; // DELETE THIS
+  }
+
+  &--dragging-cursor {
+    cursor: grabbing;
+  }
+
+  &--selected {
+    border: 3px solid var(--token-selected-color);
+    border-radius: 50%;
+  }
+}

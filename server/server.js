@@ -25,9 +25,18 @@ app.use(passport.session());
 // Routes
 const userRouter = require('./routes/user.router');
 const dashboardRouter = require('./routes/dashboard.router');
+const characterRouter = require('./routes/character.router');
+const creatureRouter = require('./routes/creature.router');
+const mapRouter = require('./routes/map.router');
+const tokenRouter = require('./routes/token.router');
 
 app.use('/api/user', userRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/character', characterRouter);
+app.use('/api/creature', creatureRouter);
+app.use('/api/map', mapRouter);
+app.use('/api/token', tokenRouter);
+
 
 // Serve static files
 app.use(express.static('build'));
@@ -67,7 +76,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('PLACE_TOKEN', (cell, token, username, room) => {
-    socket.join(room);
     io.to(room).emit('PLACE_TOKEN', cell, token, username);
   });
 
@@ -76,7 +84,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('REMOVE_TOKEN', (cell, room) => {
-    socket.join(room);
     io.to(room).emit('REMOVE_TOKEN', cell);
   });
 
