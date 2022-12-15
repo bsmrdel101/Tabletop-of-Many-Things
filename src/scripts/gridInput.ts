@@ -8,8 +8,12 @@ let movedPosX: number, movedPosY: number;
 let mouseStartX: number, mouseStartY: number;
 let dragging = false;
 let position: Coord;
+let eventsBound = false;
+let secondaryKeyPressed = false;
 
 export const bindEventsToGrid = () => {
+  if (eventsBound) return;
+  eventsBound = true;
   handleGridKeyEvents();
   handleGridMouseEvents();
   handleGridWheelEvents();
@@ -33,6 +37,20 @@ const handleGridKeyEvents = () => {
       // case e.key === '3':
       //     clientType === 'dm' ? toggleCreaturesModal() : console.warn('Menu doesn\'t exist');
       //     break;
+    case e.key === 'Control' || e.key === 'Meta':
+      secondaryKeyPressed = true;
+      break;
+    default:
+      break;
+    }
+  });
+
+  // Fires when user lets go of key
+  document.addEventListener('keyup', (e: KeyboardEvent) => {
+    switch (true) {
+    case e.key === 'Control' || e.key === 'Meta':
+      secondaryKeyPressed = false;
+      break;
     default:
       break;
     }
@@ -96,10 +114,15 @@ const getTransformValues = (grid: any) => {
 const handleGridWheelEvents = () => {
   document.querySelector('.grid-container')?.addEventListener('wheel', (e: any) => {        
     if (!checkForElement(e.path, '.grid-container')) return;
-    if (e.deltaY > 0) {
-      zoomOut();
+    if (secondaryKeyPressed) {
+      // Scale token
     } else {
-      zoomIn();
+      // Handle zoom
+      if (e.deltaY > 0) {
+        zoomOut();
+      } else {
+        zoomIn();
+      }
     }
   });
 };
