@@ -41,7 +41,8 @@ CREATE TABLE "game_history" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
-    "code" VARCHAR (20) NOT NULL
+    "code" VARCHAR (20) NOT NULL,
+    "dm" INTEGER
 );
 
 CREATE TABLE "characters" (
