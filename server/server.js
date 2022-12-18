@@ -54,12 +54,10 @@ io.on('connection', (socket) => {
     io.sockets.sockets.forEach((client) => {
       if (client.data.clientType === 'dm') dmExists = true;
     });
-    console.log(clients, clients.size === 1, !dmExists);
+
     // Check if the dm already exists
     if (clients && clients.size === 1 || !dmExists) {
       socket.data.clientType = 'dm';
-      console.log(socket.data.clientType);
-      console.log(fn);
       fn('dm');
     } else {
       socket.data.clientType = 'player';
