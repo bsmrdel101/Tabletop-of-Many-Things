@@ -37,7 +37,8 @@ export default function GamePage() {
     }
 
     emitServerEvent('JOIN_ROOM', [room, (type: 'dm' | 'player') => {
-      console.log(type === 'dm' && user.id === game.dm ? 'dm' : 'player');
+      console.log(user.id, game.dm);
+      console.log(user, game);
       setUserType(type === 'dm' && user.id === game.dm ? 'dm' : 'player');
     }]);
   };
