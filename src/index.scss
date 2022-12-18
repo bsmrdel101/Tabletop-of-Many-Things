@@ -165,3 +165,7 @@ p {
 .hidden {
   display: none;
 }
+
+.no-select {
+  z-index: -1;
+}

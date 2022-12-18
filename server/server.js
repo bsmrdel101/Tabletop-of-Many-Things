@@ -8,11 +8,7 @@ require('dotenv').config();
 
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, {
-  cors: {
-    origin: ["http://localhost:8000", "https://tabletop-of-many-things.herokuapp.com/"],
-  },
-});
+const io = new Server(server);
 
 // Body parser middleware
 app.use(bodyParser.json());

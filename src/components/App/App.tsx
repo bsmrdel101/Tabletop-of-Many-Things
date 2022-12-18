@@ -13,9 +13,7 @@ import GamePage from '../../views/GamePage/GamePage';
 import LoginPage from '../../views/LoginPage/LoginPage';
 import RegisterPage from '../../views/RegisterPage/RegisterPage';
 
-const IS_PROD = process.env.NODE_ENV === 'production';
-const URL = IS_PROD ? 'https://tabletop-of-many-things.herokuapp.com/' : 'http://localhost:3000';
-export const socket: Socket = io(URL);
+export const socket: Socket = io();
 
 export default function App() {
   const [user, setUser] = useState({});

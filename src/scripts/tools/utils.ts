@@ -1,3 +1,4 @@
+import e from "cors";
 import { Coord } from "../types";
 
 // Clamp number between two values
@@ -35,4 +36,17 @@ export const getCoords = (cell: Element): Coord => {
     x: parseInt(cell.getAttribute('data-cell-x')!),
     y: parseInt(cell.getAttribute('data-cell-y')!)
   };
+};
+
+export const composedPath = (el: Element) => {
+  const path = [];
+  while (el) {
+    path.push(el);
+    if (el.tagName === 'HTML') {
+      path.push(document);
+      path.push(window);
+      return path;
+    }
+    el = el.parentElement;
+  }
 };

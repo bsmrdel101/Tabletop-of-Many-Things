@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
 import { onServerEvent } from "../../scripts/socket-io";
-import { findCell } from "../../scripts/tools/utils";
+import { composedPath, findCell } from "../../scripts/tools/utils";
 import { Coord } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
 import './Grid.scss';
@@ -45,6 +45,9 @@ export default function Grid({ width, height }: Props) {
       // Set token position
       el.style.setProperty('--row', `${x}`);
       el.style.setProperty('--column', `${y}`);
+
+      // Takes up grid squares for token
+      setTokenArea(tokenData, selectedCell);
     }));
 
     onServerEvent('REMOVE_TOKEN', ((cell: Coord) => {
@@ -57,6 +60,12 @@ export default function Grid({ width, height }: Props) {
 
   const selectCell = (e: any) => {
     selectedCellRef = e.target;
+    if (e.target.parentNode.classList.contains('grid__cell')) {
+      // selectedCellRef = e.target.parentNode;
+      // composedPath(e.target).forEach((el: any) => {
+      //   if (el.classList && el.classList.contains('grid__cell')) console.log(el);
+      // });
+    }
     dispatch(
       setSelectedCell({
         x: parseInt(e.target.getAttribute('data-cell-x')),
@@ -95,6 +104,18 @@ export default function Grid({ width, height }: Props) {
     // document.querySelectorAll('.token').forEach((token) => {
     //   token.remove();
     // });
+  };
+
+  const setTokenArea = (token: Token, selectedCell: Coord) => {
+    const cellX = selectedCell.x;
+    const cellY = selectedCell.y;
+    if (token.size > 1) {
+      for (let y = 0; y < token.size; y++) {
+        for (let x = 0; x < token.size; x++) {
+          const cell = findCell(cellX + x, cellY + y);
+        }
+      }
+    }
   };
 
   return (

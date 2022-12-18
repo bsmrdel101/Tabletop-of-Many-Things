@@ -11,8 +11,8 @@
   }
 
   &--dragging {
-    opacity: 60%;
-    // height: 20rem; // DELETE THIS
+    opacity: 50%;
+    z-index: -10;
   }
 
   &--dragging-cursor {
