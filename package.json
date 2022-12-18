@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A virtual tabletop fop 5e D&D.",
   "private": true,
-  "proxy": "http://localhost:8000/",
   "scripts": {
     "test": "react-scripts test",
     "test:coverage": "npm run test -- --coverage",

@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { getUser } from '../../controllers/userController';
-import socketClient, { io, Socket } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
 import DashboardPage from '../../views/DashboardPage/DashboardPage';
 import GamePage from '../../views/GamePage/GamePage';
@@ -14,8 +14,7 @@ import LoginPage from '../../views/LoginPage/LoginPage';
 import RegisterPage from '../../views/RegisterPage/RegisterPage';
 
 
-// export const socket: Socket = io();
-export const socket = socketClient("http://localhost:3000");
+export const socket: Socket = io();
 
 export default function App() {
   const [user, setUser] = useState({});
