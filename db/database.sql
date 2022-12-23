@@ -9,7 +9,8 @@ CREATE TABLE "maps" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
     "name" TEXT,    
-    "image" TEXT
+    "image" TEXT,
+    "gridSize" INTEGER DEFAULT 0
 );
 
 CREATE TABLE "tokens" (

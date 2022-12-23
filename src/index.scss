@@ -26,6 +26,7 @@
 
   /* Buttons */
   --btn-color-0: #605252;
+  --btn-color-1: #6f5656;
 
   /* Colors */
   --color-blue-0: rgb(48 102 231 / 39%) 0 3px 8px;
@@ -148,6 +149,10 @@ button {
     bottom: 0;
     background-color: #c6c6c6;
   }
+}
+
+input[type="range"] {
+  padding: 0;
 }
 
 .bold {

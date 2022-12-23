@@ -10,6 +10,7 @@ import { emitServerEvent } from "../../scripts/socket-io";
 import { Game, User } from "../../scripts/types";
 import './GamePage.scss';
 import '../../components/Menus/Menus.scss';
+import MapToolbar from "../../components/MapToolbar/MapToolbar";
 
 
 export let roomRef: string;
@@ -47,6 +48,7 @@ export default function GamePage() {
       <div className="game-content">
         <Toolbar room={room} />
         <div className="grid-container">
+          <MapToolbar userType={userType} />
           <Grid width={40} height={40} />
         </div>
       </div>

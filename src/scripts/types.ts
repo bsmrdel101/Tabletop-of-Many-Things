@@ -18,15 +18,16 @@ export interface Coord {
   y: number
 }
 
-// export interface Area {
-//     width: number
-//     height: number
-// }
+export interface Area {
+  width: number
+  height: number
+}
 
 export type Map = {
   id?: number
   name: string
   image: string
+  gridSize: number
 };
 
 // export type TokenType = {

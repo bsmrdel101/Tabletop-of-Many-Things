@@ -28,7 +28,7 @@ export default function TokensMenu() {
               <MenuTokenIcon token={token} />
               {token.creature &&
                 <button className="menu__item--circle-btn">
-                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                  <img src="/images/rightArrowUp.svg" />
                 </button>
               }
             </div>

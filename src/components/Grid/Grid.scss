@@ -4,7 +4,6 @@
   width: 80vw;
   margin-top: 0.8rem;
   border: 2px solid var(--grid-border-color);
-  border-top: 2.8px solid var(--grid-border-color);
   background-color: var(--background-color-1);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -12,6 +11,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  position: relative;
 }
 
 .grid {
@@ -20,8 +20,9 @@
   --size: 30px;
   --map-background: rgb(237 237 237 / 52%);
   --grid-color: rgb(0 0 0);
+  // --grid-color: white;
 
-  transform: translate(0, 0);
+  transform: translate(2px, 44px);
   height: calc(var(--size) * var(--grid-y));
   width: calc(var(--size) * var(--grid-x));
   display: grid;
@@ -45,6 +46,7 @@
       #0000 var(--size)
     ),
     var(--map-background);
+  // url('https://i.etsystatic.com/18388031/r/il/8b7a49/2796267092/il_fullxfull.2796267092_aezx.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 

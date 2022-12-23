@@ -1,0 +1,31 @@
+.set-grid-popup {
+  background-color: var(--menu-color-1);
+  position: absolute;
+  top: 2.8em;
+  left: 0.25rem;
+  min-width: 8rem;
+  color: white;
+  border-radius: 0.3rem;
+  padding: 0 0.35rem 0.4rem 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  h3 {
+    margin: 0.5rem 0.5rem 0.7rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+
+    input {
+      max-width: 3.5rem;
+    }
+  }
+
+  button[type="submit"] {
+    max-width: 3.5rem;
+  }
+}

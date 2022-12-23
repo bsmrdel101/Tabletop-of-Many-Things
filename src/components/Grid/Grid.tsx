@@ -3,7 +3,7 @@ import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
 import { onServerEvent } from "../../scripts/socket-io";
 import { composedPath, findCell } from "../../scripts/tools/utils";
-import { Coord } from "../../scripts/types";
+import { Area, Coord, Map } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
 import './Grid.scss';
 import { Token } from "../../scripts/token";
@@ -21,7 +21,7 @@ export default function Grid({ width, height }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setupGrid();
+    if (!document.querySelector('.grid__cell')) setupGrid(width, height);
 
     /* === SOCKET.IO === */
     // Add a token to the board
@@ -55,17 +55,31 @@ export default function Grid({ width, height }: Props) {
       previousCell.innerHTML = '';
     }));
 
+    // Change the selected map
+    onServerEvent('SELECT_MAP', ((target: Area, map: Map) => {
+      const grid: any = document.querySelector('.grid');
+      if (map.name === 'Default Map') {
+        // Set image to nothing
+        grid.style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);
+        setupGrid(width, height);
+      } else {
+        // Set new map image
+        grid.style.setProperty('--map-background', `url('${map.image}')`);
+        setupGrid(target.width, target.height);
+      }
+    }));
+
+    // Modify the grid size
+    onServerEvent('SET_GRID', ((gridSize: Area) => {
+      setupGrid(parseInt(gridSize.width.toString()), parseInt(gridSize.height.toString()));
+    }));
+
     /* === END SOCKET.IO === */
   }, []);
 
+
   const selectCell = (e: any) => {
     selectedCellRef = e.target;
-    if (e.target.parentNode.classList.contains('grid__cell')) {
-      // selectedCellRef = e.target.parentNode;
-      // composedPath(e.target).forEach((el: any) => {
-      //   if (el.classList && el.classList.contains('grid__cell')) console.log(el);
-      // });
-    }
     dispatch(
       setSelectedCell({
         x: parseInt(e.target.getAttribute('data-cell-x')),
@@ -73,23 +87,23 @@ export default function Grid({ width, height }: Props) {
       }));
   };
 
-  const setupGrid = () => {
+  const setupGrid = (gridWidth: number, gridHeight: number) => {
     const grid: any = document.querySelector('.grid');
-    grid.style.setProperty('--grid-x', width);
-    grid.style.setProperty('--grid-y', height);
-    createGridClickDetection();
+    grid.style.setProperty('--grid-x', gridWidth);
+    grid.style.setProperty('--grid-y', gridHeight);
+    createGridClickDetection(gridWidth, gridHeight);
     bindEventsToGrid();
   };
 
   // Generates div's in each cell, with x and y coordinates
   // The div's will detect where the user drops a token
-  const createGridClickDetection = () => {
-    resetBoard();
+  const createGridClickDetection = (gridWidth: number, gridHeight: number) => {
+    // resetBoard();
     // Add the elements to detect clicks on grid cells
     // Add 1 to width and height because grid starts at (1,1)
     const cells: Coord[] = [];
-    for (let y = 1; y < height + 1; y++) {
-      for (let x = 1; x < width + 1; x++) {
+    for (let y = 1; y < gridHeight + 1; y++) {
+      for (let x = 1; x < gridWidth + 1; x++) {
         cells.push({ x: x, y: y });
       }
     }
@@ -98,12 +112,7 @@ export default function Grid({ width, height }: Props) {
 
   // Clears the board and resets its click detection
   const resetBoard = () => {
-    document.querySelectorAll('.grid__cell').forEach((cell) => {
-      cell.remove();
-    });
-    // document.querySelectorAll('.token').forEach((token) => {
-    //   token.remove();
-    // });
+    document.querySelector('.grid').innerHTML = '';
   };
 
   const setTokenArea = (token: Token, selectedCell: Coord) => {

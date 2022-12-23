@@ -64,8 +64,8 @@ const handleGridMouseEvents = () => {
     case e.which === 2:
       mouseStartX = e.x;
       mouseStartY = e.y;
-      targetPosX = movedPosX ? movedPosX : 0;
-      targetPosY = movedPosY ? movedPosY : 0;
+      targetPosX = movedPosX ? movedPosX : 2;
+      targetPosY = movedPosY ? movedPosY : 44;
       dragging = true;
       break;
     default:
@@ -93,8 +93,8 @@ const handleGridMouseEvents = () => {
   document.addEventListener('mousemove', (e: MouseEvent) => {
     const mousePosX = -(mouseStartX - e.x);
     const mousePosY = -(mouseStartY - e.y);
-    targetPosX = movedPosX ? movedPosX : 0;
-    targetPosY = movedPosY ? movedPosY : 0;
+    targetPosX = movedPosX ? movedPosX : 2;
+    targetPosY = movedPosY ? movedPosY : 44;
         
     if (dragging) {
       const grid: any = document.querySelector('.grid');            

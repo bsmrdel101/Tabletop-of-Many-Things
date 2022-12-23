@@ -88,8 +88,12 @@ io.on('connection', (socket) => {
   });
 
   socket.on('SELECT_MAP', (e, map, room) => {
-    selectedMap = [{e}, {map}];
+    selectedMap = [e, map];
     io.to(room).emit('SELECT_MAP', e, map);
+  });
+
+  socket.on('SET_GRID', (gridSize, room) => {
+    io.to(room).emit('SET_GRID', gridSize);
   });
 });
 
