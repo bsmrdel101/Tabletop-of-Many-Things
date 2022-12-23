@@ -1,8 +1,8 @@
 import { selectedCellRef } from "../components/Grid/Grid";
 import { roomRef } from "../views/GamePage/GamePage";
-import { dropToken } from "./gridEvents";
+import { addTokenToBoard, dropToken } from "./gridEvents";
 import { emitServerEvent } from "./socket-io";
-import { composedPath, findRelativeCell, getCoords } from "./tools/utils";
+import { findRelativeCell, getCoords } from "./tools/utils";
 import { Coord } from "./types";
 
 
@@ -28,7 +28,6 @@ export class Token {
 
   createElement() {
     this.el = document.createElement('img');
-    // let cell: Element;
     
     // Set token data
     if (this.el) {
@@ -52,6 +51,8 @@ export class Token {
       const cell: Element = this.el.parentNode;
       this.lastPos = getCoords(cell);
 
+      emitServerEvent('REMOVE_TOKEN', [this.lastPos, roomRef]);
+
       // Create ghost image
       this.previewToken = document.createElement('img');
       this.previewToken.classList.add('token', 'token--dragging');
@@ -69,12 +70,9 @@ export class Token {
       e.dataTransfer.setDragImage(this.ghostImage, 0, 0);
     });
 
-    // this.el.addEventListener('dragover', (e: any) => {
-    //   const { x, y, width, height } = this.el.getBoundingClientRect();
-    //   const relativeCell: Element = findRelativeCell(e.target.parentNode, -(e.x - (x + (width / 2))), -(e.y - (y + (height / 2))));
-    //   relativeCell.appendChild(this.previewToken);
-    //   cell = relativeCell;
-    // });
+    this.el.addEventListener('dblclick', () => {
+      // Open stats
+    });
 
     // Handle token placement preview
     this.el.addEventListener('drag', () => {
@@ -85,8 +83,6 @@ export class Token {
     // Handle dropping token
     this.el.addEventListener('dragend', () => {
       this.previewToken.remove();
-      emitServerEvent('REMOVE_TOKEN', [this.lastPos, roomRef]);
-      // emitServerEvent('REMOVE_OCCUPIED_TOKEN_SPACE', [lastPos.x, lastPos.y, this.size, roomRef]);
       const selectedCell: Coord = getCoords(selectedCellRef);
       dropToken(selectedCell, this, mousePos);
     });

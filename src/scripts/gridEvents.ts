@@ -21,7 +21,7 @@ export const dropToken = (selectedCell: Coord, token: Token, mousePos: Coord) =>
   }
 };
 
-const addTokenToBoard = (selectedCell: Element, token: Token) => {
+export const addTokenToBoard = (selectedCell: Element, token: Token) => {
   const { el } = token;
   const cell: Coord = getCoords(selectedCell);
 
