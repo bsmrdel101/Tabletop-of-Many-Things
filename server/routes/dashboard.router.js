@@ -92,6 +92,24 @@ router.post('/history', rejectUnauthenticated, (req, res) => {
   });
 });
 
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  const sqlText = (`
+      UPDATE "games_list"
+      SET "map_id" = $1
+      WHERE "id" = $2;
+  `);
+  const sqlValues = [
+      req.body.id,
+      req.params.id
+  ];
+  pool.query(sqlText, sqlValues)
+      .then(() => res.sendStatus(201))
+      .catch((dberror) => {
+      console.log('Oops you did a goof: ', dberror);
+      res.sendStatus(500)
+  })  
+});
+
 
 // router.post('/prev', rejectUnauthenticated, (req, res) => {
 //     const sqlText =`

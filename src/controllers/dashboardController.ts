@@ -1,5 +1,7 @@
 import axios from "axios";
-import { Game } from "../scripts/types";
+import { Game, Map } from "../scripts/types";
+import { roomRef } from "../views/GamePage/GamePage";
+
 
 interface newGame {
     name: string
@@ -48,6 +50,17 @@ export const addGame = async (payload: newGame) => {
 export const addGameToHistory = async (payload: Game) => {
   try {
     await axios.post('/api/dashboard/history', payload);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// === PUT routes === //
+
+export const setSelectedMap = async (payload: Map) => {
+  try {
+    const game: Game = await getGame(roomRef);
+    await axios.put(`/api/dashboard/${game.id}`, payload);
   } catch (err) {
     console.log(err);
   }

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getTokens } from "../../../controllers/tokensController";
+import { toggleMenu } from "../../../scripts/menuManager";
 import { Token } from "../../../scripts/token";
 import MenuTokenIcon from "./MenuTokenIcon";
 
-
-export const toggleTokensMenu = () => {
-  document.getElementById('tokens-menu')?.classList.toggle('hidden');
-};
 
 export default function TokensMenu() {
   const [tokens, setTokens] = useState<Token[]>([]);
@@ -20,7 +17,7 @@ export default function TokensMenu() {
 
   return (
     <div className="menu hidden" id="tokens-menu">
-      <button className="menu__btn menu__btn--close" onClick={toggleTokensMenu}>X</button>
+      <button className="menu__btn menu__btn--close" onClick={() => toggleMenu('tokens')}>X</button>
       <div className="menu__body">
         {tokens.map((token) => {
           return (

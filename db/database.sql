@@ -5,12 +5,21 @@ CREATE TABLE "users" (
     "new_user" BOOLEAN DEFAULT true
 );
 
-CREATE TABLE "maps" (
+CREATE TABLE "games_list" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
+    "name" VARCHAR (80) NOT NULL,
+    "code" VARCHAR (20) NOT NULL,
+    "dm" INTEGER,
+    "map_id" INTEGER DEFAULT 1
+);
+
+CREATE TABLE "maps" (
+    "id" SERIAL PRIMARY KEY,
+    "game_id" INTEGER REFERENCES "games_list",
     "name" TEXT,    
     "image" TEXT,
-    "gridSize" INTEGER DEFAULT 0
+    "gridSize" INTEGER DEFAULT 40
 );
 
 CREATE TABLE "tokens" (
@@ -30,20 +39,13 @@ CREATE TABLE "map_tokens" (
     "y" INTEGER
 );
 
-CREATE TABLE "games_list" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
-    "name" VARCHAR (80) NOT NULL,
-    "code" VARCHAR (20) NOT NULL,
-    "dm" INTEGER
-);
-
 CREATE TABLE "game_history" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
     "name" VARCHAR (80) NOT NULL,
     "code" VARCHAR (20) NOT NULL,
-    "dm" INTEGER
+    "dm" INTEGER,
+    "map_id" INTEGER DEFAULT 1
 );
 
 CREATE TABLE "characters" (
@@ -239,7 +241,7 @@ VALUES
     (1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
 ;
 
-INSERT INTO "maps" ("user_id", "name", "image")
+INSERT INTO "maps" ("game_id", "name", "image")
 VALUES
     (1, 'Default Map', 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg'),
     (1, 'Forest', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwUhS4RzGYSNBN6rAgSzwcdpzoUkYYIg_Cvg&usqp=CAU')

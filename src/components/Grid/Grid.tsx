@@ -2,26 +2,25 @@ import React, { useEffect, useState } from "react";
 import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
 import { onServerEvent } from "../../scripts/socket-io";
-import { composedPath, findCell } from "../../scripts/tools/utils";
-import { Area, Coord, Map } from "../../scripts/types";
+import { findCell } from "../../scripts/tools/utils";
+import { Coord, Map } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
-import './Grid.scss';
 import { Token } from "../../scripts/token";
+import './Grid.scss';
 
 
 interface Props {
-  width: number
-  height: number
+  defaultGridSize: number
 }
 
 export let selectedCellRef: Element;
 
-export default function Grid({ width, height }: Props) {
+export default function Grid({ defaultGridSize }: Props) {
   const [gridCells, setGridCells] = useState<Coord[]>([]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!document.querySelector('.grid__cell')) setupGrid(width, height);
+    if (!document.querySelector('.grid__cell')) setupGrid(defaultGridSize);
 
     /* === SOCKET.IO === */
     // Add a token to the board
@@ -56,26 +55,26 @@ export default function Grid({ width, height }: Props) {
     }));
 
     // Change the selected map
-    onServerEvent('SELECT_MAP', ((target: Area, map: Map) => {
+    onServerEvent('SELECT_MAP', ((map: Map) => {
       const grid: any = document.querySelector('.grid');
       if (map.name === 'Default Map') {
         // Set image to nothing
         grid.style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);
-        setupGrid(width, height);
+        setupGrid(map.gridSize);
       } else {
         // Set new map image
         grid.style.setProperty('--map-background', `url('${map.image}')`);
-        setupGrid(target.width, target.height);
+        setupGrid(map.gridSize);
       }
     }));
 
     // Modify the grid size
-    onServerEvent('SET_GRID', ((gridSize: Area) => {
-      setupGrid(parseInt(gridSize.width.toString()), parseInt(gridSize.height.toString()));
+    onServerEvent('SET_GRID', ((gridSize: number) => {
+      setupGrid(parseInt(gridSize.toString()));
     }));
 
     /* === END SOCKET.IO === */
-  }, []);
+  }, [defaultGridSize]);
 
 
   const selectCell = (e: any) => {
@@ -87,32 +86,27 @@ export default function Grid({ width, height }: Props) {
       }));
   };
 
-  const setupGrid = (gridWidth: number, gridHeight: number) => {
+  const setupGrid = (gridSize: number) => {
     const grid: any = document.querySelector('.grid');
-    grid.style.setProperty('--grid-x', gridWidth);
-    grid.style.setProperty('--grid-y', gridHeight);
-    createGridClickDetection(gridWidth, gridHeight);
+    grid.style.setProperty('--grid-x', gridSize);
+    grid.style.setProperty('--grid-y', gridSize);
+    createGridClickDetection(gridSize);
     bindEventsToGrid();
   };
 
   // Generates div's in each cell, with x and y coordinates
   // The div's will detect where the user drops a token
-  const createGridClickDetection = (gridWidth: number, gridHeight: number) => {
-    // resetBoard();
+  const createGridClickDetection = (gridSize: number) => {
     // Add the elements to detect clicks on grid cells
     // Add 1 to width and height because grid starts at (1,1)
+    resetBoard();
     const cells: Coord[] = [];
-    for (let y = 1; y < gridHeight + 1; y++) {
-      for (let x = 1; x < gridWidth + 1; x++) {
+    for (let y = 1; y < gridSize + 1; y++) {
+      for (let x = 1; x < gridSize + 1; x++) {
         cells.push({ x: x, y: y });
       }
     }
     setGridCells(cells);
-  };
-
-  // Clears the board and resets its click detection
-  const resetBoard = () => {
-    document.querySelector('.grid').innerHTML = '';
   };
 
   const setTokenArea = (token: Token, selectedCell: Coord) => {
@@ -126,6 +120,12 @@ export default function Grid({ width, height }: Props) {
       }
     }
   };
+
+  const resetBoard = () => {
+    const grid: any = document.querySelector('.grid');
+    grid.innerHtml = '';
+  };
+
 
   return (
     <div

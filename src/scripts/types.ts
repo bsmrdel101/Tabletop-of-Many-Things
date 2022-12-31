@@ -11,6 +11,7 @@ export type Game = {
   name: string
   code: string
   dm: number
+  map_id: number
 };
 
 export interface Coord {
@@ -18,25 +19,13 @@ export interface Coord {
   y: number
 }
 
-export interface Area {
-  width: number
-  height: number
-}
-
 export type Map = {
   id?: number
+  game_id: number
   name: string
   image: string
   gridSize: number
 };
-
-// export type TokenType = {
-//   id: number
-//   image: string
-//   size: number
-//   relative?: string
-//   creature?: string
-// };
 
 export type Character = {
   id?: number

@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { getGame } from "../../controllers/dashboardController";
+import { getMap } from "../../controllers/mapsController";
+import { Game, Map } from "../../scripts/types";
+import { roomRef } from "../../views/GamePage/GamePage";
 import './MapToolbar.scss';
 import PopupMenuToolbar from "./PopupMenuToolbar";
 import SetGridPopup from "./Popups/SetGridPopup/SetGridPopup";
@@ -13,12 +17,18 @@ export default function MapToolbar({ userType }: Props) {
   const [popupTitle, setPopupTitle] = useState('');
 
   useEffect(() => {
-    if (currentPopup !== 'grid') {
-      const grid: any = document.querySelector('.grid');
-      const defaultGridSize = 40;
-      grid.style.setProperty('--grid-x', defaultGridSize);
-      grid.style.setProperty('--grid-y', defaultGridSize);
-    }
+    const fetchData = async () => {
+      const game: Game = await getGame(roomRef);
+      const map: Map = await getMap(game.map_id);
+      // Set grid size back to default if changes not applied
+      if (currentPopup !== 'grid') {
+        const grid: any = document.querySelector('.grid');
+        const defaultGridSize = map.gridSize;
+        grid.style.setProperty('--grid-x', defaultGridSize);
+        grid.style.setProperty('--grid-y', defaultGridSize);
+      }
+    };
+    fetchData();
   }, [currentPopup]);
 
   // Handles state of popup menu

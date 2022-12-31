@@ -87,13 +87,12 @@ io.on('connection', (socket) => {
     io.to(room).emit('REMOVE_TOKEN', cell);
   });
 
-  socket.on('SELECT_MAP', (e, map, room) => {
-    selectedMap = [e, map];
-    io.to(room).emit('SELECT_MAP', e, map);
+  socket.on('SELECT_MAP', (map, room) => {
+    io.to(room).emit('SELECT_MAP', map);
   });
 
   socket.on('SET_GRID', (gridSize, room) => {
-    io.to(room).emit('SET_GRID', gridSize);
+    io.to(room).emit('SET_GRID', gridSize.gridSize);
   });
 });
 

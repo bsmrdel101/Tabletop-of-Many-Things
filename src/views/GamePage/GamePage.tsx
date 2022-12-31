@@ -7,10 +7,12 @@ import Toolbar from "../../components/Toolbar/Toolbar";
 import { getGame } from "../../controllers/dashboardController";
 import { getUser } from "../../controllers/userController";
 import { emitServerEvent } from "../../scripts/socket-io";
-import { Game, User } from "../../scripts/types";
+import { Game, Map, User } from "../../scripts/types";
 import './GamePage.scss';
 import '../../components/Menus/Menus.scss';
 import MapToolbar from "../../components/MapToolbar/MapToolbar";
+import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
+import { getMap } from "../../controllers/mapsController";
 
 
 export let roomRef: string;
@@ -21,10 +23,12 @@ export default function GamePage() {
   roomRef = room;
   const [userType, setUserType] = useState<'dm' | 'player'>('player');
   let gameStarted = false;
+  const [gridSize, setGridSize] = useState(0);
 
   useEffect(() => {
     if (!gameStarted) joinGame();
-  }, []);
+    determineGridSize();
+  }, [gridSize]);
 
   const joinGame = async () => {
     gameStarted = true;
@@ -42,6 +46,13 @@ export default function GamePage() {
     }]);
   };
 
+  // Determine grid size from map
+  const determineGridSize = async () => {
+    const game: Game = await getGame(room);
+    const map: Map = await getMap(game.map_id);
+    setGridSize(map.gridSize);
+  };
+
   return (
     <div className="game-page">
       <Sidebar userType={userType} />
@@ -49,11 +60,13 @@ export default function GamePage() {
         <Toolbar room={room} />
         <div className="grid-container">
           <MapToolbar userType={userType} />
-          <Grid width={40} height={40} />
+          <Grid defaultGridSize={gridSize} />
         </div>
       </div>
 
+      {/* Menus */}
       <TokensMenu />
+      <MapsMenu />
     </div>
   );
 }
