@@ -45,20 +45,6 @@ export default function GamePage() {
     emitServerEvent('JOIN_ROOM', [room, (type: 'dm' | 'player') => {
       setUserType(type === 'dm' && user.id === game.dm ? 'dm' : 'player');
     }]);
-
-    // load all tokens onto the board
-    loadTokens();
-  };
-
-  const loadTokens = async () => {
-    const game: Game = await getGame(room);
-    const map: Map = await getMap(game.map_id);
-    const tokens = await getMapTokens(map.id);
-    tokens.forEach(async (mapToken: MapToken) => {
-      const { x, y, token_id } = mapToken;
-      const token = await getToken(token_id);
-      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, room]);
-    });
   };
 
   // Determine grid size from map

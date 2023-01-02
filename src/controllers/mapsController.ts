@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Token } from "../scripts/token";
-import { Game, Map } from "../scripts/types";
+import { Coord, Game, Map } from "../scripts/types";
 import { roomRef } from "../views/GamePage/GamePage";
 import { getGame } from "./dashboardController";
 
@@ -72,11 +72,11 @@ export const setMap = async (payload: Map) => {
 
 // === DELETE routes === //
 
-export const deleteTokenFromMap = async (token: Token) => {
-  const x = parseInt(token.el.parentNode.getAttribute('data-cell-x'));
-  const y = parseInt(token.el.parentNode.getAttribute('data-cell-y'));
+export const deleteTokenFromMap = async (token: Token, cell: Coord) => {
+  // const x = parseInt(token.el.parentNode.getAttribute('data-cell-x'));
+  // const y = parseInt(token.el.parentNode.getAttribute('data-cell-y'));
   try {
-    await axios.delete(`/api/map/token/${x}, ${y}, ${token.id}`);
+    await axios.delete(`/api/map/token/${cell.x}, ${cell.y}, ${token.id}`);
   } catch (err) {
     console.log(err);
   }

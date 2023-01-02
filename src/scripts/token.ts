@@ -53,9 +53,7 @@ export class Token {
       this.lastPos = getCoords(cell);
 
       // Remove token from board
-      emitServerEvent('REMOVE_TOKEN', [this.lastPos, roomRef]);
-      // Delete token data from map
-      deleteTokenFromMap(this);
+      emitServerEvent('REMOVE_TOKEN', [this.lastPos, this, roomRef]);
 
       // Create ghost image
       this.previewToken = document.createElement('img');
