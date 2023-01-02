@@ -73,10 +73,16 @@ export const setMap = async (payload: Map) => {
 // === DELETE routes === //
 
 export const deleteTokenFromMap = async (token: Token, cell: Coord) => {
-  // const x = parseInt(token.el.parentNode.getAttribute('data-cell-x'));
-  // const y = parseInt(token.el.parentNode.getAttribute('data-cell-y'));
   try {
     await axios.delete(`/api/map/token/${cell.x}, ${cell.y}, ${token.id}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const clearTokensFromMap = async (mapId: number) => {
+  try {
+    await axios.delete(`/api/map/token/all/${mapId}`);
   } catch (err) {
     console.log(err);
   }
