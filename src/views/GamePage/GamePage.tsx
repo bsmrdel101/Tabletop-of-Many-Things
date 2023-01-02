@@ -7,12 +7,13 @@ import Toolbar from "../../components/Toolbar/Toolbar";
 import { getGame } from "../../controllers/dashboardController";
 import { getUser } from "../../controllers/userController";
 import { emitServerEvent } from "../../scripts/socket-io";
-import { Game, Map, User } from "../../scripts/types";
-import './GamePage.scss';
-import '../../components/Menus/Menus.scss';
+import { Game, Map, MapToken, User } from "../../scripts/types";
 import MapToolbar from "../../components/MapToolbar/MapToolbar";
 import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
-import { getMap } from "../../controllers/mapsController";
+import { getMap, getMapTokens } from "../../controllers/mapsController";
+import { getToken } from "../../controllers/tokensController";
+import './GamePage.scss';
+import '../../components/Menus/Menus.scss';
 
 
 export let roomRef: string;
@@ -44,6 +45,20 @@ export default function GamePage() {
     emitServerEvent('JOIN_ROOM', [room, (type: 'dm' | 'player') => {
       setUserType(type === 'dm' && user.id === game.dm ? 'dm' : 'player');
     }]);
+
+    // load all tokens onto the board
+    loadTokens();
+  };
+
+  const loadTokens = async () => {
+    const game: Game = await getGame(room);
+    const map: Map = await getMap(game.map_id);
+    const tokens = await getMapTokens(map.id);
+    tokens.forEach(async (mapToken: MapToken) => {
+      const { x, y, token_id } = mapToken;
+      const token = await getToken(token_id);
+      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, room]);
+    });
   };
 
   // Determine grid size from map

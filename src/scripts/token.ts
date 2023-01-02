@@ -1,4 +1,5 @@
 import { selectedCellRef } from "../components/Grid/Grid";
+import { deleteTokenFromMap } from "../controllers/mapsController";
 import { roomRef } from "../views/GamePage/GamePage";
 import { addTokenToBoard, dropToken } from "./gridEvents";
 import { emitServerEvent } from "./socket-io";
@@ -51,7 +52,10 @@ export class Token {
       const cell: Element = this.el.parentNode;
       this.lastPos = getCoords(cell);
 
+      // Remove token from board
       emitServerEvent('REMOVE_TOKEN', [this.lastPos, roomRef]);
+      // Delete token data from map
+      deleteTokenFromMap(this);
 
       // Create ghost image
       this.previewToken = document.createElement('img');

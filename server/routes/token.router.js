@@ -19,7 +19,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       .catch((dberror) => {
       console.log('Oops you did a goof: ', dberror);
       res.sendStatus(500)
-  })  
+  })
+});
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const sqlText = (`
+    SELECT * FROM "tokens"
+    WHERE "id"=$1
+  `);
+  const sqlValues = [
+    req.params.id
+  ];
+  pool.query(sqlText, sqlValues)
+      .then((dbres) => res.send(dbres.rows[0]))
+      .catch((dberror) => {
+      console.log('Oops you did a goof: ', dberror);
+      res.sendStatus(500)
+  })
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {

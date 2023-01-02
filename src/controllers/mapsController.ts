@@ -1,6 +1,15 @@
 import axios from "axios";
-import { Map } from "../scripts/types";
+import { Token } from "../scripts/token";
+import { Game, Map } from "../scripts/types";
+import { roomRef } from "../views/GamePage/GamePage";
+import { getGame } from "./dashboardController";
 
+interface MapTokenData {
+  token: Token
+  x: number
+  y: number
+  size: number
+}
 
 // === GET routes === //
 
@@ -22,6 +31,15 @@ export const getMap = async (id: number) => {
   }
 };
 
+export const getMapTokens = async (id: number) => {
+  try {
+    const res = await axios.get(`/api/map/token/${id}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // === POST routes === //
 
 export const addMap = async (payload: Map) => {
@@ -32,11 +50,33 @@ export const addMap = async (payload: Map) => {
   }
 };
 
+export const addTokenToMap = async (payload: MapTokenData) => {
+  try {
+    const game: Game = await getGame(roomRef);
+    const map: Map = await getMap(game.map_id);
+    await axios.post('/api/map/token', { mapId: map.id, ...payload });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // === PUT routes === //
 
 export const setMap = async (payload: Map) => {
   try {
     await axios.put('/api/map', payload);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// === DELETE routes === //
+
+export const deleteTokenFromMap = async (token: Token) => {
+  const x = parseInt(token.el.parentNode.getAttribute('data-cell-x'));
+  const y = parseInt(token.el.parentNode.getAttribute('data-cell-y'));
+  try {
+    await axios.delete(`/api/map/token/${x}, ${y}, ${token.id}`);
   } catch (err) {
     console.log(err);
   }

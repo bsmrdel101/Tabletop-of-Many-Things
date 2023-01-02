@@ -19,8 +19,17 @@ export interface Coord {
   y: number
 }
 
+export type MapToken = {
+  id: number
+  map_id: number
+  token_id: number
+  x: number
+  y: number
+  size: number
+};
+
 export type Map = {
-  id?: number
+  id: number
   game_id: number
   name: string
   image: string

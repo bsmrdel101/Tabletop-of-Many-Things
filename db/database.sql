@@ -36,7 +36,8 @@ CREATE TABLE "map_tokens" (
     "map_id" INTEGER REFERENCES "maps",
     "token_id" INTEGER REFERENCES "tokens",
     "x" INTEGER,
-    "y" INTEGER
+    "y" INTEGER,
+    "size" INTEGER
 );
 
 CREATE TABLE "game_history" (
