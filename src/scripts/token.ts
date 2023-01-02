@@ -1,10 +1,34 @@
 import { selectedCellRef } from "../components/Grid/Grid";
+import { addTokenToMap, clearTokensFromMap } from "../controllers/mapsController";
 import { roomRef } from "../views/GamePage/GamePage";
-import { addTokenToBoard, dropToken } from "./gridEvents";
+import { dropToken } from "./gridEvents";
 import { emitServerEvent } from "./socket-io";
 import { findRelativeCell, getCoords } from "./tools/utils";
 import { Coord } from "./types";
 
+
+const updateMapState = async () => {
+  // Clear persistent token data
+  await clearTokensFromMap();
+  // Save current token positions
+  document.querySelectorAll('.token').forEach((token: Element) => {
+    const coords: Coord = getCoords(token.parentElement);
+    const size = parseInt(token.getAttribute('size'));
+    // Add token data to map_tokens
+    addTokenToMap({
+      token: 
+        new Token(
+          parseInt(token.getAttribute('token-id')),
+          token.getAttribute('src'),
+          size,
+          token.getAttribute('creature')
+        ),
+      x: coords.x,
+      y: coords.y,
+      size: size
+    });
+  });
+};
 
 export class Token {
   id: number;
@@ -51,7 +75,8 @@ export class Token {
       const cell: Element = this.el.parentNode;
       this.lastPos = getCoords(cell);
 
-      emitServerEvent('REMOVE_TOKEN', [this.lastPos, roomRef]);
+      // Remove token from board
+      emitServerEvent('REMOVE_TOKEN', [this.lastPos, this, roomRef]);
 
       // Create ghost image
       this.previewToken = document.createElement('img');
@@ -85,6 +110,7 @@ export class Token {
       this.previewToken.remove();
       const selectedCell: Coord = getCoords(selectedCellRef);
       dropToken(selectedCell, this, mousePos);
+      updateMapState();
     });
   }
 }

@@ -10,7 +10,7 @@
     "lint:js": "eslint ./ --ignore-path .gitignore --fix",
     "lint:scss": "stylelint '**/*.scss' --fix",
     "lint": "run-s lint:js lint:scss",
-    "db:setup": "rm -rf ./.postgres-data && docker-compose up",
+    "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
     "db:reset": "heroku pg:reset --app tabletop-of-many-things --confirm tabletop-of-many-things",
     "db:push": "heroku pg:push tabletop_of_many_things DATABASE_URL",
     "dev": "run-p docker:setup server",

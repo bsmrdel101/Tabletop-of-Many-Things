@@ -1,4 +1,5 @@
 import React from "react";
+import { addTokenToMap } from "../../../controllers/mapsController";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectedCell } from "../../../redux/reducers/tokenSlice";
 import { dropToken } from "../../../scripts/gridEvents";
@@ -23,8 +24,13 @@ export default function MenuTokenIcon({ token }: Props) {
       x: e.x - tokenPos.x,
       y: e.y - tokenPos.y
     };
+  };
 
-    // const parentNode = e.target.parentNode;
+  const handleDropToken = () => {
+    dropToken(cell, token, mousePos);
+    console.log({ token: token, x: cell.x, y: cell.y, size: parseInt(token.el.getAttribute('size')) });
+    // Store token data on map
+    addTokenToMap({ token: token, x: cell.x, y: cell.y, size: parseInt(token.el.getAttribute('size')) });
   };
 
   return (
@@ -32,7 +38,7 @@ export default function MenuTokenIcon({ token }: Props) {
       src={token.image}
       className="menu__item menu__item--token"
       onDragStart={(e) => handleTokenStartDrag(e)}
-      onDragEnd={() => dropToken(cell, token, mousePos)}
+      onDragEnd={() => handleDropToken()}
     >
     </img>
   );

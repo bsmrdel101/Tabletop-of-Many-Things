@@ -25,6 +25,7 @@ CREATE TABLE "maps" (
 CREATE TABLE "tokens" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
+    "game_id" INTEGER REFERENCES "games_list",
     "image" TEXT,
     "size" INTEGER,
     "creature" TEXT
@@ -32,11 +33,11 @@ CREATE TABLE "tokens" (
 
 CREATE TABLE "map_tokens" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "users",
     "map_id" INTEGER REFERENCES "maps",
     "token_id" INTEGER REFERENCES "tokens",
     "x" INTEGER,
-    "y" INTEGER
+    "y" INTEGER,
+    "size" INTEGER
 );
 
 CREATE TABLE "game_history" (

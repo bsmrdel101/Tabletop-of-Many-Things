@@ -2,7 +2,35 @@
   width: 100%;
   max-width: 20rem;
 
+  .right-side-button {
+    &--chat {
+      position: absolute;
+      right: -0.4rem;
+      top: 21rem;
+      transform: rotate(-90deg);
+      display: none;
+    }
+
+    &--dice {
+      position: absolute;
+      right: -1.2rem;
+      top: 25rem;
+      transform: rotate(-90deg);
+      display: none;
+    }
+  }
+
   @media (max-width: 1020px) {
     max-width: 1rem;
+
+    .right-side-button {
+      &--chat {
+        display: block;
+      }
+  
+      &--dice {
+        display: block;
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { addTokenToMap } from "../controllers/mapsController";
 import { roomRef, userRef } from "../views/GamePage/GamePage";
 import { emitServerEvent } from "./socket-io";
 import { Token } from "./token";
@@ -19,6 +20,9 @@ export const dropToken = (selectedCell: Coord, token: Token, mousePos: Coord) =>
     const relativeCell = findRelativeCell(cell, mousePos.x, mousePos.y);
     addTokenToBoard(relativeCell || cell, token);
   }
+  
+  // Store token data on map
+  // addTokenToMap({ token: token, x: selectedCell.x, y: selectedCell.y, size: parseInt(el.getAttribute('size')) });
 };
 
 export const addTokenToBoard = (selectedCell: Element, token: Token) => {
@@ -29,7 +33,7 @@ export const addTokenToBoard = (selectedCell: Element, token: Token) => {
   el.classList.remove('token--dragging');
 
   // Send a server event to place a token for every client
-  const socketPlaceToken = (cell: Coord, token: any, username: string, room: string) => {
+  const socketPlaceToken = (cell: Coord, token: Token, username: string, room: string) => {
     emitServerEvent('PLACE_TOKEN', [cell, token, username, room]);
   };
   

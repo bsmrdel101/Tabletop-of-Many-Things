@@ -112,8 +112,8 @@ const getTransformValues = (grid: any) => {
 };
 
 const handleGridWheelEvents = () => {
-  document.querySelector('.grid-container')?.addEventListener('wheel', (e: any) => {        
-    if (!checkForElement(e.path, '.grid-container')) return;
+  document.querySelector('.grid-container')?.addEventListener('wheel', (e: any) => {
+    if (!checkForElement(e.composedPath(), '.grid-container')) return;
     if (secondaryKeyPressed) {
       // Scale token
     } else {

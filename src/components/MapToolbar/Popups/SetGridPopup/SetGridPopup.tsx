@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getGame } from "../../../../controllers/dashboardController";
-import { getMap, setMap } from "../../../../controllers/mapsController";
+import { clearTokensFromMap, getMap, setMap } from "../../../../controllers/mapsController";
 import { emitServerEvent } from "../../../../scripts/socket-io";
 import { Game, Map } from "../../../../scripts/types";
 import { roomRef } from "../../../../views/GamePage/GamePage";
@@ -38,6 +38,7 @@ export default function SetGridPopup({ title }: Props) {
     document.querySelectorAll('.token').forEach((token) => {
       token.remove();
     });
+    clearTokensFromMap();
   };
 
   // Apply grid size to the map

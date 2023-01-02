@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
-import { onServerEvent } from "../../scripts/socket-io";
+import { emitServerEvent, onServerEvent } from "../../scripts/socket-io";
 import { findCell } from "../../scripts/tools/utils";
-import { Coord, Map } from "../../scripts/types";
+import { Coord, Game, Map, MapToken } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
 import { Token } from "../../scripts/token";
+import { roomRef, userRef } from "../../views/GamePage/GamePage";
+import { getGame } from "../../controllers/dashboardController";
+import { deleteTokenFromMap, getMapTokens } from "../../controllers/mapsController";
+import { getToken } from "../../controllers/tokensController";
 import './Grid.scss';
 
 
@@ -21,6 +25,8 @@ export default function Grid({ defaultGridSize }: Props) {
 
   useEffect(() => {
     if (!document.querySelector('.grid__cell')) setupGrid(defaultGridSize);
+    // load all tokens onto the board
+    loadTokens();
 
     /* === SOCKET.IO === */
     // Add a token to the board
@@ -28,7 +34,7 @@ export default function Grid({ defaultGridSize }: Props) {
       const { x, y } = selectedCell;
       const cell: Element = findCell(x, y)!;
       if (cell.childNodes.length > 0) return;
-      const { size, el } = new Token(
+      const { size, el, id } = new Token(
         tokenData.id,
         tokenData.image,
         tokenData.size,
@@ -37,6 +43,7 @@ export default function Grid({ defaultGridSize }: Props) {
       
       cell.appendChild(el);
       el.classList.remove('menu__item', 'menu__item--token');
+      el.setAttribute('token-id', id);
       
       // Set token size
       el.style.setProperty('height', `calc(var(--size) * ${size})`);
@@ -46,12 +53,14 @@ export default function Grid({ defaultGridSize }: Props) {
       el.style.setProperty('--column', `${y}`);
 
       // Takes up grid squares for token
-      setTokenArea(tokenData, selectedCell);
+      // setTokenArea(tokenData, selectedCell);
     }));
 
-    onServerEvent('REMOVE_TOKEN', ((cell: Coord) => {
+    onServerEvent('REMOVE_TOKEN', ((cell: Coord, token: Token) => {
       const previousCell: Element = findCell(cell.x, cell.y)!;
       previousCell.innerHTML = '';
+      // Delete persistent token data from map
+      // deleteTokenFromMap(token, cell);
     }));
 
     // Change the selected map
@@ -66,6 +75,7 @@ export default function Grid({ defaultGridSize }: Props) {
         grid.style.setProperty('--map-background', `url('${map.image}')`);
         setupGrid(map.gridSize);
       }
+      loadTokens();
     }));
 
     // Modify the grid size
@@ -76,6 +86,21 @@ export default function Grid({ defaultGridSize }: Props) {
     /* === END SOCKET.IO === */
   }, [defaultGridSize]);
 
+  const loadTokens = async () => {
+    // Delete all tokens from the board
+    document.querySelectorAll('.token').forEach((token) => {
+      token.remove();
+    });
+
+    const game: Game = await getGame(roomRef);
+    const tokens = await getMapTokens(game.map_id);
+    // Load tokens onto board
+    tokens.forEach(async (mapToken: MapToken) => {
+      const { x, y, token_id } = mapToken;
+      const token = await getToken(token_id);
+      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
+    });
+  };
 
   const selectCell = (e: any) => {
     selectedCellRef = e.target;

@@ -83,8 +83,8 @@ io.on('connection', (socket) => {
     io.to(room).emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size);
   });
 
-  socket.on('REMOVE_TOKEN', (cell, room) => {
-    io.to(room).emit('REMOVE_TOKEN', cell);
+  socket.on('REMOVE_TOKEN', (cell, token, room) => {
+    io.to(room).emit('REMOVE_TOKEN', cell, token);
   });
 
   socket.on('SELECT_MAP', (map, room) => {

@@ -7,13 +7,14 @@ import Toolbar from "../../components/Toolbar/Toolbar";
 import { getGame } from "../../controllers/dashboardController";
 import { getUser } from "../../controllers/userController";
 import { emitServerEvent } from "../../scripts/socket-io";
-import { Game, Map, User } from "../../scripts/types";
-import './GamePage.scss';
-import '../../components/Menus/Menus.scss';
+import { Game, Map, MapToken, User } from "../../scripts/types";
 import MapToolbar from "../../components/MapToolbar/MapToolbar";
 import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
-import { getMap } from "../../controllers/mapsController";
 import RightSideContent from "../../components/RightSideContent/RightSideContent";
+import { getMap, getMapTokens } from "../../controllers/mapsController";
+import { getToken } from "../../controllers/tokensController";
+import './GamePage.scss';
+import '../../components/Menus/Menus.scss';
 
 
 export let roomRef: string;
@@ -43,7 +44,7 @@ export default function GamePage() {
     }
 
     emitServerEvent('JOIN_ROOM', [room, (type: 'dm' | 'player') => {
-      setUserType(type === 'dm' && user.id === game.dm ? 'dm' : 'player');
+      setUserType(user.id === game.dm ? 'dm' : 'player');
     }]);
   };
 
