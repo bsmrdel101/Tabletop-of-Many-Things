@@ -52,7 +52,7 @@ export default function Grid({ defaultGridSize }: Props) {
       el.style.setProperty('--column', `${y}`);
 
       // Takes up grid squares for token
-      setTokenArea(tokenData, selectedCell);
+      // setTokenArea(tokenData, selectedCell);
     }));
 
     onServerEvent('REMOVE_TOKEN', ((cell: Coord, token: Token) => {
@@ -85,22 +85,20 @@ export default function Grid({ defaultGridSize }: Props) {
     /* === END SOCKET.IO === */
   }, [defaultGridSize]);
 
-  const loadTokens = () => {
+  const loadTokens = async () => {
     // Delete all tokens from the board
     document.querySelectorAll('.token').forEach((token) => {
       token.remove();
     });
 
-    setTimeout(async () => {
-      const game: Game = await getGame(roomRef);
-      const tokens = await getMapTokens(game.map_id);
-      // Load tokens onto board
-      tokens.forEach(async (mapToken: MapToken) => {
-        const { x, y, token_id } = mapToken;
-        const token = await getToken(token_id);
-        emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
-      });
-    }, 100);
+    const game: Game = await getGame(roomRef);
+    const tokens = await getMapTokens(game.map_id);
+    // Load tokens onto board
+    tokens.forEach(async (mapToken: MapToken) => {
+      const { x, y, token_id } = mapToken;
+      const token = await getToken(token_id);
+      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
+    });
   };
 
   const selectCell = (e: any) => {
