@@ -1,0 +1,8 @@
+.right-content {
+  width: 100%;
+  max-width: 20rem;
+
+  @media (max-width: 1020px) {
+    max-width: 1rem;
+  }
+}

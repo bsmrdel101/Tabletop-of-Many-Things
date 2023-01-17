@@ -1,0 +1,32 @@
+.dice-box {
+  background-color: var(--background-color-1);
+  width: 98%;
+  height: 100%;
+  max-height: 20rem;
+  margin-top: 0.8rem;
+  overflow-y: auto;
+
+  h3 {
+    margin: 0.3rem;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--menu-color-3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 1184px) {
+    width: 90%;
+  }
+
+  @media (max-width: 1020px) {
+    display: none;
+  }
+}

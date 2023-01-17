@@ -13,6 +13,7 @@ import '../../components/Menus/Menus.scss';
 import MapToolbar from "../../components/MapToolbar/MapToolbar";
 import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
 import { getMap } from "../../controllers/mapsController";
+import RightSideContent from "../../components/RightSideContent/RightSideContent";
 
 
 export let roomRef: string;
@@ -58,9 +59,12 @@ export default function GamePage() {
       <Sidebar userType={userType} />
       <div className="game-content">
         <Toolbar room={room} />
-        <div className="grid-container">
-          <MapToolbar userType={userType} />
-          <Grid defaultGridSize={gridSize} />
+        <div className="game-content--box">
+          <div className="grid-container">
+            <MapToolbar userType={userType} />
+            <Grid defaultGridSize={gridSize} />
+          </div>
+          <RightSideContent />
         </div>
       </div>
 
