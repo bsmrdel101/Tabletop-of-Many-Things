@@ -24,9 +24,9 @@ export default function MapsMenu() {
     fetchData();
   }, []);
 
-  const handleSelectMap = (map: Map) => {
+  const handleSelectMap = async (map: Map) => {
     selectedMap = map;
-    setSelectedMap(map);
+    await setSelectedMap(map);
     emitServerEvent('SELECT_MAP', [map, roomRef]);
   };
 

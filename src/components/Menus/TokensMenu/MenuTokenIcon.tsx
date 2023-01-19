@@ -28,7 +28,6 @@ export default function MenuTokenIcon({ token }: Props) {
 
   const handleDropToken = () => {
     dropToken(cell, token, mousePos);
-    console.log({ token: token, x: cell.x, y: cell.y, size: parseInt(token.el.getAttribute('size')) });
     // Store token data on map
     addTokenToMap({ token: token, x: cell.x, y: cell.y, size: parseInt(token.el.getAttribute('size')) });
   };
