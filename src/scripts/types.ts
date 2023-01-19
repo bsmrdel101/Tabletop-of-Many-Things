@@ -106,6 +106,14 @@ export type Creature = {
   legActions: any
 };
 
+export interface Roll {
+  type: number
+  amount: number
+  mod: number
+  roll: number
+  total: number
+}
+
 export type MinifiedCreature = {
   index: string
   name: string

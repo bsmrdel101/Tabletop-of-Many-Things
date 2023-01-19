@@ -9,6 +9,7 @@ import './index.scss';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+document.title = 'Tabletop of Many Things';
 
 
 root.render(

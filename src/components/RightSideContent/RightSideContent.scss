@@ -6,17 +6,19 @@
     &--chat {
       position: absolute;
       right: -0.4rem;
-      top: 21rem;
+      top: 0.5rem;
       transform: rotate(-90deg);
       display: none;
+      z-index: 2;
     }
 
     &--dice {
       position: absolute;
       right: -1.2rem;
-      top: 25rem;
+      top: 4.5rem;
       transform: rotate(-90deg);
       display: none;
+      z-index: 2;
     }
   }
 
@@ -27,7 +29,7 @@
       &--chat {
         display: block;
       }
-  
+
       &--dice {
         display: block;
       }

@@ -7,12 +7,11 @@ import Toolbar from "../../components/Toolbar/Toolbar";
 import { getGame } from "../../controllers/dashboardController";
 import { getUser } from "../../controllers/userController";
 import { emitServerEvent } from "../../scripts/socket-io";
-import { Game, Map, MapToken, User } from "../../scripts/types";
+import { Game, Map, User } from "../../scripts/types";
 import MapToolbar from "../../components/MapToolbar/MapToolbar";
 import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
 import RightSideContent from "../../components/RightSideContent/RightSideContent";
-import { getMap, getMapTokens } from "../../controllers/mapsController";
-import { getToken } from "../../controllers/tokensController";
+import { getMap } from "../../controllers/mapsController";
 import './GamePage.scss';
 import '../../components/Menus/Menus.scss';
 
