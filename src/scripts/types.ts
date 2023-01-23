@@ -106,13 +106,18 @@ export type Creature = {
   legActions: any
 };
 
-export interface Roll {
+export type Roll = {
   type: number
   amount: number
   mod: number
   roll: number
   total: number
-}
+};
+
+export type ChatMsg = {
+  text: string
+  sender: string
+};
 
 export type MinifiedCreature = {
   index: string

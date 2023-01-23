@@ -15,7 +15,16 @@
 
   &__log {
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 69%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: absolute;
+    width: 100%;
+
+    p {
+      max-width: 18.5rem;
+    }
 
     &::-webkit-scrollbar {
       width: 0.45rem;
@@ -42,10 +51,6 @@
   }
 
   @media (max-width: 1184px) {
-    width: 90%;
-  }
-
-  @media (max-width: 1020px) {
     display: none;
   }
 
