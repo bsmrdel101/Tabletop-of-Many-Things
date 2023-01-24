@@ -32,9 +32,8 @@ export default function MapsMenu() {
   };
 
   // Change map only for dm
-  const handleViewMap = async (map: Map) => {
+  const handleViewMap = (map: Map) => {
     selectedMap = map;
-    await setSelectedMap(map);
     emitServerEvent('VIEW_MAP', [map]);
   };
 
