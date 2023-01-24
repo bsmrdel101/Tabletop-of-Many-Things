@@ -1,3 +1,4 @@
+import { drawCircle } from "./canvas";
 import { zoomIn, zoomOut } from "./gridEvents";
 import { checkForElement } from "./tools/utils";
 import { Coord } from "./types";
@@ -58,7 +59,7 @@ const handleGridKeyEvents = () => {
 };
 
 const handleGridMouseEvents = () => {
-  // Fires when user presses mouse button
+  // Fires when user presses mouse button on the page
   document.addEventListener('mousedown', (e: MouseEvent) => {
     switch (true) {
     case e.which === 2:
@@ -67,6 +68,17 @@ const handleGridMouseEvents = () => {
       targetPosX = movedPosX ? movedPosX : 2;
       targetPosY = movedPosY ? movedPosY : 44;
       dragging = true;
+      break;
+    default:
+      break;
+    }
+  });
+
+  // Fires when user presses mouse button on grid
+  document.querySelector('.grid').addEventListener('mousedown', (e: any) => {
+    switch (true) {
+    case e.which === 1:
+      drawCircle(e.x, e.y);
       break;
     default:
       break;

@@ -11,6 +11,7 @@ import { getGame } from "../../controllers/dashboardController";
 import { deleteTokenFromMap, getMapTokens } from "../../controllers/mapsController";
 import { getToken } from "../../controllers/tokensController";
 import './Grid.scss';
+import { drawArrow, initializeCanvas } from "../../scripts/canvas";
 
 
 interface Props {
@@ -25,6 +26,7 @@ export default function Grid({ defaultGridSize }: Props) {
 
   useEffect(() => {
     if (!document.querySelector('.grid__cell')) setupGrid(defaultGridSize);
+    initializeCanvas();
     // load all tokens onto the board
     loadTokens();
 
@@ -157,6 +159,7 @@ export default function Grid({ defaultGridSize }: Props) {
       className="grid"
       onDragOver={(e) => selectCell(e)}
     >
+      <canvas id="canvas" />
       {gridCells.map((cell, i) => {
         return (
           <div

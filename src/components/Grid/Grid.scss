@@ -65,3 +65,10 @@
 .panning {
   cursor: grabbing;
 }
+
+#canvas {
+  z-index: -10;
+  height: calc(var(--size) * var(--grid-y));
+  width: calc(var(--size) * var(--grid-x));
+  // image-rendering: pixelated;
+}
