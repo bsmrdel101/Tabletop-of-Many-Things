@@ -24,10 +24,18 @@ export default function MapsMenu() {
     fetchData();
   }, []);
 
+  // Share map to everyone
   const handleSelectMap = async (map: Map) => {
     selectedMap = map;
     await setSelectedMap(map);
     emitServerEvent('SELECT_MAP', [map, roomRef]);
+  };
+
+  // Change map only for dm
+  const handleViewMap = async (map: Map) => {
+    selectedMap = map;
+    await setSelectedMap(map);
+    emitServerEvent('VIEW_MAP', [map]);
   };
 
 
@@ -38,11 +46,17 @@ export default function MapsMenu() {
         {maps.map((map) => {
           return (
             <div className="menu__body--container" key={map.id}>
+              <button
+                className="map-share-btn"
+                onClick={() => handleSelectMap(map)}
+              >
+                <img src="/images/share-map.svg" alt="share map" />
+              </button>
               <img
                 src={map.image}
                 alt={map.name}
                 draggable={false}
-                onClick={() => handleSelectMap(map)}
+                onClick={() => handleViewMap(map)}
               />
               <p>{map.name}</p>
             </div>

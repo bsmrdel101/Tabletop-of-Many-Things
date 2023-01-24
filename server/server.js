@@ -91,6 +91,10 @@ io.on('connection', (socket) => {
     io.to(room).emit('SELECT_MAP', map);
   });
 
+  socket.on('VIEW_MAP', (map) => {
+    socket.emit('SELECT_MAP', map);
+  });
+
   socket.on('SET_GRID', (gridSize, room) => {
     io.to(room).emit('SET_GRID', gridSize.gridSize);
   });

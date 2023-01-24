@@ -1,6 +1,20 @@
 .menu__body--container {
+  position: relative;
+
   img {
     max-width: 5rem;
     cursor: pointer;
+  }
+
+  .map-share-btn {
+    position: absolute;
+    right: 0;
+    padding: 0.2rem;
+    border: 1px solid black;
+
+    img {
+      width: 100%;
+      max-width: 1rem;
+    }
   }
 }
