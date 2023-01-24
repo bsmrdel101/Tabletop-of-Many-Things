@@ -11,6 +11,7 @@ import { getGame } from "../../controllers/dashboardController";
 import { deleteTokenFromMap, getMapTokens } from "../../controllers/mapsController";
 import { getToken } from "../../controllers/tokensController";
 import './Grid.scss';
+import { bindEventsToPing } from "../../scripts/ping";
 
 
 interface Props {
@@ -24,7 +25,10 @@ export default function Grid({ defaultGridSize }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!document.querySelector('.grid__cell')) setupGrid(defaultGridSize);
+    if (!document.querySelector('.grid__cell')) {
+      setupGrid(defaultGridSize);
+      bindEventsToPing();
+    }
     // load all tokens onto the board
     loadTokens();
 
