@@ -3,12 +3,19 @@ import { Token } from "../scripts/token";
 import { Coord, Game, Map } from "../scripts/types";
 import { roomRef } from "../views/GamePage/GamePage";
 import { getGame } from "./dashboardController";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../scripts/firebase";
 
 interface MapTokenData {
   token: Token
   x: number
   y: number
   size: number
+}
+
+interface NewMap {
+  name: string
+  image: File
 }
 
 
@@ -43,9 +50,25 @@ export const getMapTokens = async (id: number) => {
 
 // === POST routes === //
 
-export const addMap = async (payload: Map) => {
+export const addMap = async (payload: NewMap) => {
   try {
-    await axios.post('/api/map', payload);
+    // Upload map image to firebase
+    const mapRef = ref(storage, payload.name);
+    uploadBytes(mapRef, payload.image).then((snapshot) => {
+      console.log('Uploaded! ', snapshot);
+    });
+    
+    // Build map data object
+    const imageUrl = `https://firebasestorage.googleapis.com/v0/b/tabletop-of-many-things.appspot.com/o/${payload.name}?alt=media&token=43812579-1456-4432-8005-2006de47ce45`;
+    const game: Game = await getGame(roomRef);
+    const mapData = {
+      id: game.id,
+      name: payload.name,
+      image: imageUrl
+    };
+    console.log(mapData);
+
+    await axios.post('/api/map', mapData);
   } catch (err) {
     console.log(err);
   }

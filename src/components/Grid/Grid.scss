@@ -21,7 +21,6 @@
   --size: 30px;
   --map-background: rgb(237 237 237 / 52%);
   --grid-color: rgb(0 0 0);
-  // --grid-color: white;
 
   transform: translate(2px, 44px);
   height: calc(var(--size) * var(--grid-y));
@@ -47,7 +46,6 @@
       #0000 var(--size)
     ),
     var(--map-background);
-  // url('https://i.etsystatic.com/18388031/r/il/8b7a49/2796267092/il_fullxfull.2796267092_aezx.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 

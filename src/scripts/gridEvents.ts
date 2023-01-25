@@ -1,4 +1,3 @@
-import { addTokenToMap } from "../controllers/mapsController";
 import { roomRef, userRef } from "../views/GamePage/GamePage";
 import { emitServerEvent } from "./socket-io";
 import { Token } from "./token";

@@ -76,6 +76,10 @@ input {
   margin-top: 0.08rem;
 }
 
+[type="file"] {
+  box-shadow: none;
+}
+
 .input--hover:hover {
   transform: scale(1.025, 1.025);
 }

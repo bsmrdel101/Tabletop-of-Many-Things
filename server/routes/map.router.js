@@ -56,8 +56,6 @@ router.get('/token/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // console.log(req.files.map);
-  // const { name, data } = req.files.map;
   const sqlText =`
       INSERT INTO "maps" ("game_id", "name", "image")
       VALUES ($1, $2, $3);

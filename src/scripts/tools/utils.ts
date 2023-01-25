@@ -1,4 +1,3 @@
-import e from "cors";
 import { Coord } from "../types";
 
 // Clamp number between two values

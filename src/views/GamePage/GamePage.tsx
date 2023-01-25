@@ -42,7 +42,7 @@ export default function GamePage() {
       return;
     }
 
-    emitServerEvent('JOIN_ROOM', [room, (type: 'dm' | 'player') => {
+    emitServerEvent('JOIN_ROOM', [room, () => {
       setUserType(user.id === game.dm ? 'dm' : 'player');
     }]);
   };
