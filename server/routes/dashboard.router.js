@@ -58,13 +58,14 @@ router.get('/history', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "games_list" ("user_id", "name", "code")
-      VALUES ($1, $2, $3);
+      INSERT INTO "games_list" ("user_id", "name", "code", "dm")
+      VALUES ($1, $2, $3, $4);
   `;
   const sqlValues = [
       req.user.id,
       req.body.name,
-      makeID()
+      makeID(),
+      req.user.id
   ];
   pool.query(sqlText, sqlValues)
       .then(() => res.sendStatus(201))

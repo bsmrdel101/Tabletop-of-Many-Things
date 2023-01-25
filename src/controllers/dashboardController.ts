@@ -4,7 +4,8 @@ import { roomRef } from "../views/GamePage/GamePage";
 
 
 interface newGame {
-    name: string
+  name: string
+  ruleset: string
 }
 
 // === GET routes === //

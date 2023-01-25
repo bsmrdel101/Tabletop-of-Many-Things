@@ -1,0 +1,11 @@
+.new-game-form {
+  border-radius: 5px;
+  margin-bottom: 0.7rem;
+  box-shadow: var(--depth-3);
+  background-color: var(--background-color-2);
+  padding: 0.5rem;
+
+  input, select {
+    margin: 0.2rem 0 0.5rem 0;
+  }
+}
