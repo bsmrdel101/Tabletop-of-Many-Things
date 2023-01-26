@@ -96,7 +96,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('SET_GRID', (gridSize, room) => {
-    io.to(room).emit('SET_GRID', gridSize.gridSize);
+    io.to(room).emit('SET_GRID', { gridSizeX: parseInt(gridSize.gridSizeX), gridSizeY: parseInt(gridSize.gridSizeY) });
   });
 
   socket.on('SEND_MESSAGE', (msg, room) => {

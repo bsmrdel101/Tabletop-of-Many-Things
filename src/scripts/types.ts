@@ -19,6 +19,11 @@ export interface Coord {
   y: number
 }
 
+export interface GridSize {
+  gridSizeX: number
+  gridSizeY: number
+}
+
 export type MapToken = {
   id: number
   map_id: number
@@ -33,7 +38,8 @@ export type Map = {
   game_id: number
   name: string
   image: string
-  gridSize: number
+  gridSizeX: number
+  gridSizeY: number
 };
 
 export type Character = {

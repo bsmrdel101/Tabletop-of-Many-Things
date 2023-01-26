@@ -3,7 +3,7 @@ import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
 import { emitServerEvent, onServerEvent } from "../../scripts/socket-io";
 import { findCell } from "../../scripts/tools/utils";
-import { Coord, Game, Map, MapToken } from "../../scripts/types";
+import { Coord, Game, GridSize, Map, MapToken } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
 import { Token } from "../../scripts/token";
 import { roomRef, userRef } from "../../views/GamePage/GamePage";
@@ -14,7 +14,7 @@ import './Grid.scss';
 
 
 interface Props {
-  defaultGridSize: number
+  defaultGridSize: GridSize
 }
 
 export let selectedCellRef: Element;
@@ -69,22 +69,21 @@ export default function Grid({ defaultGridSize }: Props) {
       if (map.name === 'Default Map') {
         // Set image to nothing
         grid.style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);
-        setupGrid(map.gridSize);
       } else {
         // Set new map image
         grid.style.setProperty('--map-background', `url('${map.image}')`);
-        setupGrid(map.gridSize);
       }
+      setupGrid({ gridSizeX: map.gridSizeX, gridSizeY: map.gridSizeY });
       loadTokens();
     }));
 
     // Modify the grid size
-    onServerEvent('SET_GRID', ((gridSize: number) => {
-      setupGrid(parseInt(gridSize.toString()));
+    onServerEvent('SET_GRID', ((gridSize: GridSize) => {
+      setupGrid(gridSize);
     }));
 
     /* === END SOCKET.IO === */
-  }, [defaultGridSize]);
+  }, []);
 
   const loadTokens = async () => {
     // Delete all tokens from the board
@@ -102,7 +101,7 @@ export default function Grid({ defaultGridSize }: Props) {
     });
   };
 
-  const selectCell = (e: any) => {
+  const selectCell = (e: any) => {    
     selectedCellRef = e.target;
     dispatch(
       setSelectedCell({
@@ -111,23 +110,23 @@ export default function Grid({ defaultGridSize }: Props) {
       }));
   };
 
-  const setupGrid = (gridSize: number) => {
+  const setupGrid = (gridSize: GridSize) => {
     const grid: any = document.querySelector('.grid');
-    grid.style.setProperty('--grid-x', gridSize);
-    grid.style.setProperty('--grid-y', gridSize);
+    grid.style.setProperty('--grid-x', gridSize.gridSizeX);
+    grid.style.setProperty('--grid-y', gridSize.gridSizeY);
     createGridClickDetection(gridSize);
     bindEventsToGrid();
   };
 
   // Generates div's in each cell, with x and y coordinates
   // The div's will detect where the user drops a token
-  const createGridClickDetection = (gridSize: number) => {
+  const createGridClickDetection = (gridSize: GridSize) => {
     // Add the elements to detect clicks on grid cells
     // Add 1 to width and height because grid starts at (1,1)
     resetBoard();
     const cells: Coord[] = [];
-    for (let y = 1; y < gridSize + 1; y++) {
-      for (let x = 1; x < gridSize + 1; x++) {
+    for (let y = 1; y < gridSize.gridSizeY + 1; y++) {
+      for (let x = 1; x < gridSize.gridSizeX + 1; x++) {
         cells.push({ x: x, y: y });
       }
     }

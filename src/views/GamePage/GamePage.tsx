@@ -7,7 +7,7 @@ import Toolbar from "../../components/Toolbar/Toolbar";
 import { getGame } from "../../controllers/dashboardController";
 import { getUser } from "../../controllers/userController";
 import { emitServerEvent } from "../../scripts/socket-io";
-import { Game, Map, User } from "../../scripts/types";
+import { Game, GridSize, Map, User } from "../../scripts/types";
 import MapToolbar from "../../components/MapToolbar/MapToolbar";
 import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
 import RightSideContent from "../../components/RightSideContent/RightSideContent";
@@ -24,12 +24,12 @@ export default function GamePage() {
   roomRef = room;
   const [userType, setUserType] = useState<'dm' | 'player'>('player');
   let gameStarted = false;
-  const [gridSize, setGridSize] = useState(0);
+  const [gridSize, setGridSize] = useState<GridSize>({ gridSizeX: 0, gridSizeY: 0 });
 
   useEffect(() => {
     if (!gameStarted) joinGame();
     determineGridSize();
-  }, [gridSize]);
+  }, []);
 
   const joinGame = async () => {
     gameStarted = true;
@@ -51,7 +51,7 @@ export default function GamePage() {
   const determineGridSize = async () => {
     const game: Game = await getGame(room);
     const map: Map = await getMap(game.map_id);
-    setGridSize(map.gridSize);
+    setGridSize({ gridSizeX: map.gridSizeX, gridSizeY: map.gridSizeY });
   };
 
   return (

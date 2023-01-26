@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getGame } from "../../../../controllers/dashboardController";
 import { clearTokensFromMap, getMap, setMap } from "../../../../controllers/mapsController";
 import { emitServerEvent } from "../../../../scripts/socket-io";
-import { Game, Map } from "../../../../scripts/types";
+import { Game, GridSize, Map } from "../../../../scripts/types";
 import { roomRef } from "../../../../views/GamePage/GamePage";
 import { selectedMap } from "../../../Menus/MapsMenu/MapsMenu";
 import './SetGridPopup.scss';
@@ -13,26 +13,41 @@ interface Props {
 }
 
 export default function SetGridPopup({ title }: Props) {
-  const [gridSize, setGridSize] = useState(0);
+  const [gridSizeX, setGridSizeX] = useState(0);
+  const [gridSizeY, setGridSizeY] = useState(0);
 
   useEffect(() => {
     // Sets size for grid on load
     const setDefaultGridSize = async () => {
       const game: Game = await getGame(roomRef);
       const map: Map = await getMap(game.map_id);
-      setGridSize(map.gridSize);
-      selectedMap.gridSize = map.gridSize;
+      setGridSizeX(map.gridSizeX);
+      setGridSizeY(map.gridSizeY);
+      selectedMap.gridSizeX = map.gridSizeX;
+      selectedMap.gridSizeY = map.gridSizeY;
     };
     setDefaultGridSize();
   }, []);
 
   // Handle visual change for grid resizing
-  const handleChangeGridSize = async (e: any) => {
-    setGridSize(e.target.value);
-    selectedMap.gridSize = parseInt(e.target.value);
+  const handleChangeGridSizeX = async (e: any) => {
+    setGridSizeX(e.target.value);
+    selectedMap.gridSizeX = parseInt(e.target.value);
     const grid: any = document.querySelector('.grid');
-    grid.style.setProperty('--grid-x', selectedMap.gridSize);
-    grid.style.setProperty('--grid-y', selectedMap.gridSize);
+    grid.style.setProperty('--grid-x', selectedMap.gridSizeX);
+
+    // Remove tokens
+    document.querySelectorAll('.token').forEach((token) => {
+      token.remove();
+    });
+    clearTokensFromMap();
+  };
+
+  const handleChangeGridSizeY = async (e: any) => {
+    setGridSizeY(e.target.value);
+    selectedMap.gridSizeY = parseInt(e.target.value);
+    const grid: any = document.querySelector('.grid');
+    grid.style.setProperty('--grid-y', selectedMap.gridSizeY);
 
     // Remove tokens
     document.querySelectorAll('.token').forEach((token) => {
@@ -45,7 +60,7 @@ export default function SetGridPopup({ title }: Props) {
   const handleApplyChanges = (e: any) => {
     e.preventDefault();
     setMap(selectedMap);
-    emitServerEvent('SET_GRID', [{ gridSize: gridSize }, roomRef]);
+    emitServerEvent('SET_GRID', [{ gridSizeX: gridSizeX, gridSizeY: gridSizeY }, roomRef]);
   };
 
 
@@ -55,16 +70,30 @@ export default function SetGridPopup({ title }: Props) {
       <input
         className="input--sm"
         type="number"
-        value={gridSize}
-        onChange={(e) => handleChangeGridSize(e)}
+        value={gridSizeX}
+        onChange={(e) => handleChangeGridSizeX(e)}
       />
       <input
         type="range"
         min={5}
         max={65}
         step={5}
-        value={gridSize}
-        onChange={(e) => handleChangeGridSize(e)}
+        value={gridSizeX}
+        onChange={(e) => handleChangeGridSizeX(e)}
+      />
+      <input
+        className="input--sm"
+        type="number"
+        value={gridSizeY}
+        onChange={(e) => handleChangeGridSizeY(e)}
+      />
+      <input
+        type="range"
+        min={5}
+        max={65}
+        step={5}
+        value={gridSizeY}
+        onChange={(e) => handleChangeGridSizeY(e)}
       />
       <center>
         <button type="submit">Apply</button>

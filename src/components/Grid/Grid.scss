@@ -26,8 +26,8 @@
   height: calc(var(--size) * var(--grid-y));
   width: calc(var(--size) * var(--grid-x));
   display: grid;
-  grid-template-columns: repeat(var(--grid-y), var(--size));
-  grid-template-rows: repeat(var(--grid-x), var(--size));
+  grid-template-columns: repeat(calc(var(--grid-y) - (var(--grid-y) - var(--grid-x))), var(--size));
+  grid-template-rows: repeat(calc(var(--grid-x) - (var(--grid-x) - var(--grid-y))), var(--size));
   box-shadow:
     0 -1px var(--grid-color),
     1px 0 var(--grid-color),

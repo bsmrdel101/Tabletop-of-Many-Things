@@ -23,9 +23,8 @@ export default function MapToolbar({ userType }: Props) {
       // Set grid size back to default if changes not applied
       if (currentPopup !== 'grid') {
         const grid: any = document.querySelector('.grid');
-        const defaultGridSize = map.gridSize;
-        grid.style.setProperty('--grid-x', defaultGridSize);
-        grid.style.setProperty('--grid-y', defaultGridSize);
+        grid.style.setProperty('--grid-x', map.gridSizeX);
+        grid.style.setProperty('--grid-y', map.gridSizeY);
       }
     };
     fetchData();

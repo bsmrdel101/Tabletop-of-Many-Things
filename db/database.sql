@@ -19,7 +19,8 @@ CREATE TABLE "maps" (
     "game_id" INTEGER REFERENCES "games_list",
     "name" TEXT,    
     "image" TEXT,
-    "gridSize" INTEGER DEFAULT 40
+    "gridSizeX" INTEGER DEFAULT 40,
+    "gridSizeY" INTEGER DEFAULT 40
 );
 
 CREATE TABLE "tokens" (

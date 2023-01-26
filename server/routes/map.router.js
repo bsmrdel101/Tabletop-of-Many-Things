@@ -96,13 +96,14 @@ router.post('/token', (req, res) => {
 router.put('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       UPDATE "maps"
-      SET "name" = $1, "image" = $2, "gridSize" = $3
-      WHERE "id" = $4;
+      SET "name" = $1, "image" = $2, "gridSizeX" = $3, "gridSizeY" = $4
+      WHERE "id" = $5;
   `);
   const sqlValues = [
       req.body.name,
       req.body.image,
-      req.body.gridSize,
+      req.body.gridSizeX,
+      req.body.gridSizeY,
       req.body.id
   ];
   pool.query(sqlText, sqlValues)
