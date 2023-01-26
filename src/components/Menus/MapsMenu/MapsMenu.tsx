@@ -19,15 +19,17 @@ export default function MapsMenu() {
   const [mapName, setMapName] = useState('');
   const [mapImageInput, setMapImageInput] = useState<any>([]);
 
+
   useEffect(() => {
-    const fetchData = async () => {
-      const game: Game = await getGame(roomRef);
-      setMaps(await getMaps(game.id));
-      selectedMap = await getMap(game.map_id);
-      emitServerEvent('SELECT_MAP', [selectedMap, roomRef]);
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const game: Game = await getGame(roomRef);
+    setMaps(await getMaps(game.id));
+    selectedMap = await getMap(game.map_id);
+    emitServerEvent('SELECT_MAP', [selectedMap, roomRef]);
+  };
 
   // Share map to everyone
   const handleSelectMap = async (map: Map) => {
@@ -42,20 +44,28 @@ export default function MapsMenu() {
     emitServerEvent('VIEW_MAP', [map]);
   };
 
-  const handleCreateNewMap = (e: FormEvent) => {
+  const handleCreateNewMap = async (e: FormEvent) => {
     e.preventDefault();
-    addMap({ name: mapName, image: mapImageInput });
+    await addMap({
+      name: mapName,
+      image: isBlankMap ? 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg' : mapImageInput,
+      isBlank: isBlankMap
+    });
+    closeFormModal();
+    fetchData();
   };
+
+  const closeFormModal = () => setNewMapFormOpen(false);
 
 
   return (
     <>
       {newMapFormOpen &&
-        <FormModal>
+        <FormModal title="New Map" close={closeFormModal}>
           <form onSubmit={(e) => handleCreateNewMap(e)}>
             <label>
               Map Name
-              <input placeholder="default map" onChange={(e) => setMapName(e.target.value)} />
+              <input placeholder="default map" onChange={(e) => setMapName(e.target.value)} required />
             </label>
 
             <label>
@@ -66,7 +76,7 @@ export default function MapsMenu() {
             {!isBlankMap &&
               <label>
                 Map Image
-                <input type="file" onChange={(e) => setMapImageInput(e.target.files[0])} />
+                <input type="file" onChange={(e) => setMapImageInput(e.target.files[0])} required />
               </label>
             }
 

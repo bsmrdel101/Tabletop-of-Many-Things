@@ -66,7 +66,7 @@ export default function Grid({ defaultGridSize }: Props) {
     // Change the selected map
     onServerEvent('SELECT_MAP', ((map: Map) => {
       const grid: any = document.querySelector('.grid');
-      if (map.name === 'Default Map') {
+      if (map.image === 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg') {
         // Set image to nothing
         grid.style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);
       } else {

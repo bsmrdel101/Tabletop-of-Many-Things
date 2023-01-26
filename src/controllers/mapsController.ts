@@ -16,6 +16,7 @@ interface MapTokenData {
 interface NewMap {
   name: string
   image: File
+  isBlank: boolean
 }
 
 
@@ -53,10 +54,10 @@ export const getMapTokens = async (id: number) => {
 export const addMap = async (payload: NewMap) => {
   try {
     // Upload map image to firebase
-    const mapRef = ref(storage, payload.name);
-    uploadBytes(mapRef, payload.image).then((snapshot) => {
-      console.log('Uploaded! ', snapshot);
-    });
+    if (!payload.isBlank) {
+      const mapRef = ref(storage, payload.name);
+      uploadBytes(mapRef, payload.image);
+    }
     
     // Build map data object
     const imageUrl = `https://firebasestorage.googleapis.com/v0/b/tabletop-of-many-things.appspot.com/o/${payload.name}?alt=media&token=43812579-1456-4432-8005-2006de47ce45`;
@@ -64,9 +65,8 @@ export const addMap = async (payload: NewMap) => {
     const mapData = {
       id: game.id,
       name: payload.name,
-      image: imageUrl
+      image: payload.isBlank ? payload.image : imageUrl
     };
-    console.log(mapData);
 
     await axios.post('/api/map', mapData);
   } catch (err) {

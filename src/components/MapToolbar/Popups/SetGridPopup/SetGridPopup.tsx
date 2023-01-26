@@ -76,7 +76,7 @@ export default function SetGridPopup({ title }: Props) {
       <input
         type="range"
         min={5}
-        max={65}
+        max={80}
         step={5}
         value={gridSizeX}
         onChange={(e) => handleChangeGridSizeX(e)}
@@ -90,7 +90,7 @@ export default function SetGridPopup({ title }: Props) {
       <input
         type="range"
         min={5}
-        max={65}
+        max={80}
         step={5}
         value={gridSizeY}
         onChange={(e) => handleChangeGridSizeY(e)}
