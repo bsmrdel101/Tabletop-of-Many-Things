@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getGame } from "../../controllers/dashboardController";
 import { getMap } from "../../controllers/mapsController";
+import { onServerEvent } from "../../scripts/socket-io";
+import { hexToRgb } from "../../scripts/tools/utils";
 import { Game, Map } from "../../scripts/types";
 import { roomRef } from "../../views/GamePage/GamePage";
 import './MapToolbar.scss';
@@ -22,12 +24,18 @@ export default function MapToolbar({ userType }: Props) {
       const map: Map = await getMap(game.map_id);
       // Set grid size back to default if changes not applied
       if (currentPopup !== 'grid') {
-        const grid: any = document.querySelector('.grid');
-        grid.style.setProperty('--grid-x', map.gridSizeX);
-        grid.style.setProperty('--grid-y', map.gridSizeY);
+        const grid: HTMLElement = document.querySelector('.grid');
+        const color = hexToRgb(map.gridColor);
+        grid.style.setProperty('--grid-x', map.gridSizeX.toString());
+        grid.style.setProperty('--grid-y', map.gridSizeY.toString());
+        grid.style.setProperty('--grid-color', `rgb(${color.r}, ${color.g}, ${color.b}, ${map.gridOpacity}%)`);
       }
     };
     fetchData();
+
+    onServerEvent('SELECT_MAP', (() => {
+      setCurrentPopup('');
+    }));
   }, [currentPopup]);
 
   // Handles state of popup menu

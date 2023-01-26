@@ -20,7 +20,7 @@
   --grid-y: 25;
   --size: 30px;
   --map-background: rgb(237 237 237 / 52%);
-  --grid-color: rgb(0 0 0);
+  --grid-color: rgb(0, 0, 0, 100%);
 
   transform: translate(2px, 44px);
   height: calc(var(--size) * var(--grid-y));

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
 import { emitServerEvent, onServerEvent } from "../../scripts/socket-io";
-import { findCell } from "../../scripts/tools/utils";
+import { findCell, hexToRgb } from "../../scripts/tools/utils";
 import { Coord, Game, GridSize, Map, MapToken } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
 import { Token } from "../../scripts/token";
@@ -31,6 +31,7 @@ export default function Grid({ defaultGridSize }: Props) {
     /* === SOCKET.IO === */
     // Add a token to the board
     onServerEvent('PLACE_TOKEN', ((selectedCell: Coord, tokenData: Token) => {
+      selectedCellRef = null;
       const { x, y } = selectedCell;
       const cell: Element = findCell(x, y)!;
       if (cell.childNodes.length > 0) return;
@@ -66,6 +67,7 @@ export default function Grid({ defaultGridSize }: Props) {
     // Change the selected map
     onServerEvent('SELECT_MAP', ((map: Map) => {
       const grid: any = document.querySelector('.grid');
+      const color = hexToRgb(map.gridColor);
       if (map.image === 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg') {
         // Set image to nothing
         grid.style.setProperty('--map-background', `rgb(237 237 237 / 52%)`);
@@ -73,13 +75,19 @@ export default function Grid({ defaultGridSize }: Props) {
         // Set new map image
         grid.style.setProperty('--map-background', `url('${map.image}')`);
       }
+      grid.style.setProperty('--grid-color', `rgb(${color.r}, ${color.g}, ${color.b}, ${map.gridOpacity}%)`);
       setupGrid({ gridSizeX: map.gridSizeX, gridSizeY: map.gridSizeY });
       loadTokens();
     }));
 
     // Modify the grid size
-    onServerEvent('SET_GRID', ((gridSize: GridSize) => {
+    onServerEvent('SET_GRID', ((gridSize: GridSize, gridColor: string, gridOpacity: number) => {
+      const grid: HTMLElement = document.querySelector('.grid');
       setupGrid(gridSize);
+
+      // Set grid color
+      const color = hexToRgb(gridColor);
+      grid.style.setProperty('--grid-color', `rgb(${color.r}, ${color.g}, ${color.b}, ${gridOpacity}%)`);
     }));
 
     /* === END SOCKET.IO === */

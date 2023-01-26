@@ -40,6 +40,8 @@ export type Map = {
   image: string
   gridSizeX: number
   gridSizeY: number
+  gridColor: string
+  gridOpacity: number
 };
 
 export type Character = {

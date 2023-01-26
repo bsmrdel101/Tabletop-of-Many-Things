@@ -95,8 +95,8 @@ io.on('connection', (socket) => {
     socket.emit('SELECT_MAP', map);
   });
 
-  socket.on('SET_GRID', (gridSize, room) => {
-    io.to(room).emit('SET_GRID', { gridSizeX: parseInt(gridSize.gridSizeX), gridSizeY: parseInt(gridSize.gridSizeY) });
+  socket.on('SET_GRID', (gridSize, gridColor, gridOpacity, room) => {
+    io.to(room).emit('SET_GRID', { gridSizeX: parseInt(gridSize.gridSizeX), gridSizeY: parseInt(gridSize.gridSizeY) }, gridColor, gridOpacity);
   });
 
   socket.on('SEND_MESSAGE', (msg, room) => {

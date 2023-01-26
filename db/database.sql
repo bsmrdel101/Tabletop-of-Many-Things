@@ -20,7 +20,9 @@ CREATE TABLE "maps" (
     "name" TEXT,    
     "image" TEXT,
     "gridSizeX" INTEGER DEFAULT 40,
-    "gridSizeY" INTEGER DEFAULT 40
+    "gridSizeY" INTEGER DEFAULT 40,
+    "gridColor" TEXT DEFAULT '#000000',
+    "gridOpacity" INTEGER DEFAULT 100
 );
 
 CREATE TABLE "tokens" (
