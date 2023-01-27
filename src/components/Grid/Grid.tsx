@@ -8,7 +8,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { Token } from "../../scripts/token";
 import { roomRef, userRef } from "../../views/GamePage/GamePage";
 import { getGame } from "../../controllers/dashboardController";
-import { deleteTokenFromMap, getMapTokens } from "../../controllers/mapsController";
+import { getMapTokens } from "../../controllers/mapsController";
 import { getToken } from "../../controllers/tokensController";
 import './Grid.scss';
 
@@ -57,11 +57,9 @@ export default function Grid({ defaultGridSize }: Props) {
       // setTokenArea(tokenData, selectedCell);
     }));
 
-    onServerEvent('REMOVE_TOKEN', ((cell: Coord, token: Token) => {
+    onServerEvent('REMOVE_TOKEN', ((cell: Coord) => {
       const previousCell: Element = findCell(cell.x, cell.y)!;
       previousCell.innerHTML = '';
-      // Delete persistent token data from map
-      // deleteTokenFromMap(token, cell);
     }));
 
     // Change the selected map

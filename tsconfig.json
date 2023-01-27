@@ -22,6 +22,9 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "src/scripts/firebase.ts", "jest.config.js"  ]
+    "src",
+    "src/scripts/firebase.ts",
+    "*.ts",
+    "*.tsx"
+, "src/tests/utils.test.tsx"  ]
 }

@@ -18,7 +18,7 @@
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 2px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .button {
@@ -55,12 +55,11 @@
 }
 
 .asyncButton {
-  composes: button;
   position: relative;
 }
 
-.asyncButton:after {
-  content: '';
+.asyncButton::after {
+  content: "";
   background-color: rgba(112, 76, 182, 0.15);
   display: block;
   position: absolute;
@@ -72,7 +71,7 @@
   transition: width 1s linear, opacity 0.5s ease 1s;
 }
 
-.asyncButton:active:after {
+.asyncButton:active::after {
   width: 0%;
   opacity: 1;
   transition: 0s;

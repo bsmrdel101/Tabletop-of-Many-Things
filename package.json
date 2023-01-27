@@ -5,7 +5,7 @@
   "private": true,
   "proxy": "http://localhost:8000",
   "scripts": {
-    "test": "jest",
+    "test": "react-scripts test",
     "test:coverage": "npm run test -- --coverage",
     "lint:ts": "eslint ./ --ignore-path .gitignore --fix",
     "lint:scss": "stylelint '**/*.scss' --fix",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^29.4.0",
