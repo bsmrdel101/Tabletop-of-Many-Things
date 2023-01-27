@@ -7,6 +7,7 @@
         "color-function-notation": null,
         "at-rule-no-unknown": null,
         "property-no-vendor-prefix": null,
-        "no-empty-source": null
+        "no-empty-source": null,
+        "declaration-block-no-redundant-longhand-properties": null
     }
 }

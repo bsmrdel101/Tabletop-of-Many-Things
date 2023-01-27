@@ -23,5 +23,5 @@
   },
   "include": [
     "src"
-, "src/scripts/firebase.ts"  ]
+, "src/scripts/firebase.ts", "jest.config.js"  ]
 }

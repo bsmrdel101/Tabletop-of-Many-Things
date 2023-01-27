@@ -5,11 +5,11 @@
   "private": true,
   "proxy": "http://localhost:8000",
   "scripts": {
-    "test": "react-scripts test",
+    "test": "jest",
     "test:coverage": "npm run test -- --coverage",
-    "lint:js": "eslint ./ --ignore-path .gitignore --fix",
+    "lint:ts": "eslint ./ --ignore-path .gitignore --fix",
     "lint:scss": "stylelint '**/*.scss' --fix",
-    "lint": "run-s lint:js lint:scss",
+    "lint": "run-s lint:ts lint:scss",
     "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
     "db:reset": "heroku pg:reset --app tabletop-of-many-things --confirm tabletop-of-many-things",
     "db:push": "heroku pg:push tabletop_of_many_things DATABASE_URL",
@@ -33,7 +33,10 @@
     "url": "https://github.com/bsmrdel101/Virtual-Table/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@testing-library/react": "^13.4.0",
     "@types/express": "^4.17.13",
+    "@types/jest": "^29.4.0",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-scroll-to-bottom": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
@@ -50,10 +53,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^27.5.2",
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",

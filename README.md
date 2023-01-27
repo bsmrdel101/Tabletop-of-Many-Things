@@ -1,4 +1,9 @@
 # Tabletop of Many Things
+
+[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
+
+## Description
+
 A virtual tabletop for 5e D&amp;D.
 
 ## Installation
