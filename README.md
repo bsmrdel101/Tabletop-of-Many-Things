@@ -1,6 +1,6 @@
 # Tabletop of Many Things
 
-[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
+[![Jest](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml/badge.svg)](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml)
 
 ## Description
 
