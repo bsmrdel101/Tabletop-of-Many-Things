@@ -13,6 +13,7 @@ export const findCell = (x: number, y: number) => {
 };
 
 export const findRelativeCell = (elmt: any, offsetX: number, offsetY: number) => {
+  if (!elmt) return;
   const cellWidth = elmt.clientWidth;
   const cellHeight = elmt.clientHeight;
   const numXCells = Math.ceil(offsetX / cellWidth) - 1;

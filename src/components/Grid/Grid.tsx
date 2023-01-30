@@ -26,7 +26,6 @@ export default function Grid({ defaultGridSize }: Props) {
   useEffect(() => {
     if (!document.querySelector('.grid__cell')) setupGrid(defaultGridSize);
     // load all tokens onto the board
-    loadTokens();
 
     /* === SOCKET.IO === */
     // Add a token to the board
@@ -57,12 +56,11 @@ export default function Grid({ defaultGridSize }: Props) {
       // setTokenArea(tokenData, selectedCell);
     }));
 
-    onServerEvent('REMOVE_TOKEN', ((cell: Coord) => {
+    onServerEvent('REMOVE_TOKEN', ((cell: Coord, selectedToken: Token) => {
       const previousCell: Element = findCell(cell.x, cell.y)!;
-      // previousCell.childNodes.forEach((token: any) => {
-      //   console.log(token.classList.contains('token--not-dragging'));
-      //   if (token.classList.contains('token--not-dragging')) token.remove();
-      // });
+      previousCell.childNodes.forEach((token: Node) => {
+        if (token === selectedToken.el) console.log(token);
+      });
       previousCell.innerHTML = '';
     }));
 
@@ -107,9 +105,7 @@ export default function Grid({ defaultGridSize }: Props) {
     tokens.forEach(async (mapToken: MapToken) => {
       const { x, y, token_id } = mapToken;
       const token = await getToken(token_id);
-      setTimeout(() => {
-        emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
-      }, 100);
+      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
     });
   };
 
