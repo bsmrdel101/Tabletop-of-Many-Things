@@ -58,10 +58,9 @@ export default function Grid({ defaultGridSize }: Props) {
 
     onServerEvent('REMOVE_TOKEN', ((cell: Coord, selectedToken: Token) => {
       const previousCell: Element = findCell(cell.x, cell.y)!;
-      previousCell.childNodes.forEach((token: Node) => {
-        if (token === selectedToken.el) console.log(token);
+      previousCell.childNodes.forEach((token: any) => {
+        if (parseInt(token.getAttribute('token-id')) === selectedToken.id) token.remove();
       });
-      previousCell.innerHTML = '';
     }));
 
     // Change the selected map

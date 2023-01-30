@@ -36,9 +36,10 @@ export class Token {
   size: number;
   creature: string;
   el?: any;
-  lastPos?: Coord;
-  previewToken?: any;
-  ghostImage?: any;
+  private lastPos?: Coord;
+  private previewToken?: any;
+  private ghostImage?: any;
+  private mousePos: Coord;
       
   constructor(id: number, image: string, size: number, creature: string) {
     this.id = id;
@@ -62,13 +63,17 @@ export class Token {
     this.el.setAttribute('src', this.image);
     this.el.setAttribute('creature', this.creature);
     this.el.setAttribute('size', this.size);
-    let mousePos: Coord = { x: 0, y: 0 };
+    this.mousePos = { x: 0, y: 0 };
+    this.bindTokenEvents();
+  }
 
+  // Add events to the token
+  bindTokenEvents() {
     // Handle start dragging
     this.el.addEventListener('dragstart', (e: any) => {
       // Get token and cell position data
       const tokenPos = this.el.getBoundingClientRect();
-      mousePos = {
+      this.mousePos = {
         x: e.x - tokenPos.x,
         y: e.y - tokenPos.y
       };
@@ -106,7 +111,7 @@ export class Token {
 
     // Handle token placement preview
     this.el.addEventListener('drag', () => {
-      const relativeCell: Element = findRelativeCell(selectedCellRef, mousePos.x, mousePos.y);
+      const relativeCell: Element = findRelativeCell(selectedCellRef, this.mousePos.x, this.mousePos.y);
       if (!relativeCell) return;
       relativeCell.appendChild(this.previewToken);
     });
@@ -115,7 +120,7 @@ export class Token {
     this.el.addEventListener('dragend', () => {
       this.previewToken.remove();
       const selectedCell: Coord = getCoords(selectedCellRef);
-      dropToken(selectedCell, this, mousePos);
+      dropToken(selectedCell, this, this.mousePos);
       updateMapState();
       document.querySelectorAll('.token').forEach((token: Element) => {
         token.classList.remove('token--not-dragging');

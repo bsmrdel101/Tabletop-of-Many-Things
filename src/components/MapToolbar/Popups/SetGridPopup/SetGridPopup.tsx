@@ -28,10 +28,6 @@ export default function SetGridPopup({ title }: Props) {
       setGridSizeY(map.gridSizeY);
       setGridColor(map.gridColor);
       setGridOpacity(map.gridOpacity);
-      // selectedMap.gridSizeX = map.gridSizeX;
-      // selectedMap.gridSizeY = map.gridSizeY;
-      // selectedMap.gridColor = map.gridColor;
-      // selectedMap.gridOpacity = map.gridOpacity;
     };
     setDefaultGridSize();
   }, []);
