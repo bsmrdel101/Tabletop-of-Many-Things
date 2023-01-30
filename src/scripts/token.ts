@@ -107,6 +107,7 @@ export class Token {
     // Handle token placement preview
     this.el.addEventListener('drag', () => {
       const relativeCell: Element = findRelativeCell(selectedCellRef, mousePos.x, mousePos.y);
+      if (!relativeCell) return;
       relativeCell.appendChild(this.previewToken);
     });
 
