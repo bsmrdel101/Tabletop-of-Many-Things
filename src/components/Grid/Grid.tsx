@@ -103,7 +103,9 @@ export default function Grid({ defaultGridSize }: Props) {
     tokens.forEach(async (mapToken: MapToken) => {
       const { x, y, token_id } = mapToken;
       const token = await getToken(token_id);
-      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
+      setTimeout(() => {
+        emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
+      }, 100);
     });
   };
 
