@@ -202,7 +202,8 @@ CREATE TABLE "creature_action_rolls" (
 
 INSERT INTO "users" ("username", "password")
 VALUES
-    ('dev', '$2a$10$3rvmJEyHfGUQhLpuhKBmneeK76Zvw2d7wO0KYob8YKAF.DirAKcga')
+    ('dev', '$2a$10$3rvmJEyHfGUQhLpuhKBmneeK76Zvw2d7wO0KYob8YKAF.DirAKcga'),
+    ('test', '$2a$10$3rvmJEyHfGUQhLpuhKBmneeK76Zvw2d7wO0KYob8YKAF.DirAKcga')
 ;
 
 INSERT INTO "games_list" ("user_id", "name", "code", "dm")

@@ -34,7 +34,7 @@ export default function Grid({ defaultGridSize }: Props) {
       selectedCellRef = null;
       const { x, y } = selectedCell;
       const cell: Element = findCell(x, y)!;
-      if (cell.childNodes.length > 0) return;
+      // if (cell.childNodes.length > 0) return;
       const { size, el, id } = new Token(
         tokenData.id,
         tokenData.image,
@@ -59,6 +59,10 @@ export default function Grid({ defaultGridSize }: Props) {
 
     onServerEvent('REMOVE_TOKEN', ((cell: Coord) => {
       const previousCell: Element = findCell(cell.x, cell.y)!;
+      // previousCell.childNodes.forEach((token: any) => {
+      //   console.log(token.classList.contains('token--not-dragging'));
+      //   if (token.classList.contains('token--not-dragging')) token.remove();
+      // });
       previousCell.innerHTML = '';
     }));
 

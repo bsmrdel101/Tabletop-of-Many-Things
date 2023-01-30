@@ -81,6 +81,11 @@ export class Token {
       // Create ghost image
       this.previewToken = document.createElement('img');
       this.previewToken.classList.add('token', 'token--dragging');
+      document.querySelectorAll('.token').forEach((token: Element) => {
+        if (token !== e.target) {
+          token.classList.add('token--not-dragging');
+        }
+      });
 
       // Style ghost image
       const gridStyles = getComputedStyle(document.querySelector('.grid')!);
@@ -111,6 +116,9 @@ export class Token {
       const selectedCell: Coord = getCoords(selectedCellRef);
       dropToken(selectedCell, this, mousePos);
       updateMapState();
+      document.querySelectorAll('.token').forEach((token: Element) => {
+        token.classList.remove('token--not-dragging');
+      });
     });
   }
 }
