@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { rollDice } from "../../../scripts/diceRolls";
+import { emitServerEvent, onServerEvent } from "../../../scripts/socket-io";
 import { Roll } from "../../../scripts/types";
+import { roomRef } from "../../../views/GamePage/GamePage";
 import './DiceBox.scss';
 
 export default function DiceBox() {
@@ -8,15 +10,17 @@ export default function DiceBox() {
   const [mod, setMod] = useState(0);
   const [log, setLog] = useState([]);
 
-  // useEffect(() => {
-
-  // }, []);
+  useEffect(() => {
+    onServerEvent('ROLL_DICE', (result: Roll[]) => {
+      setLog(result);
+      setTimeout(() => document.querySelector('.dice-box__log').scrollTo(0, 999999), 50);
+    });
+  }, []);
 
   // Select the dice to roll
   const handleSelectDie = (type: number) => {
     const result = rollDice(amount, type, mod);
-    setLog([...log, result]);
-    setTimeout(() => document.querySelector('.dice-box__log').scrollTo(0, 999999), 50);
+    emitServerEvent('ROLL_DICE', [[...log, result], roomRef]);
   };
 
   // Modify the modifier to make it display correctly in the log

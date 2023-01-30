@@ -87,6 +87,10 @@ io.on('connection', (socket) => {
     io.to(room).emit('REMOVE_TOKEN', cell, token);
   });
 
+  socket.on('ROLL_DICE', (result, room) => {
+    io.to(room).emit('ROLL_DICE', result);
+  });
+
   socket.on('SELECT_MAP', (map, room) => {
     io.to(room).emit('SELECT_MAP', map);
   });
