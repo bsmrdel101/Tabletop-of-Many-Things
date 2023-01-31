@@ -25,7 +25,6 @@ export interface GridSize {
 }
 
 export type MapToken = {
-  id: number
   map_id: number
   token_id: number
   x: number
@@ -42,6 +41,7 @@ export type Map = {
   gridSizeY: number
   gridColor: string
   gridOpacity: number
+  boardState: JSON
 };
 
 export type Character = {

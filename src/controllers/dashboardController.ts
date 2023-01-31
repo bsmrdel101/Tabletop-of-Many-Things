@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Game, Map } from "../scripts/types";
-import { roomRef } from "../views/GamePage/GamePage";
+import { gameRef, roomRef } from "../views/GamePage/GamePage";
 
 
 interface newGame {
@@ -60,8 +60,7 @@ export const addGameToHistory = async (payload: Game) => {
 
 export const setSelectedMap = async (payload: Map) => {
   try {
-    const game: Game = await getGame(roomRef);
-    await axios.put(`/api/dashboard/${game.id}`, payload);
+    await axios.put(`/api/dashboard/${gameRef.id}`, payload);
   } catch (err) {
     console.log(err);
   }

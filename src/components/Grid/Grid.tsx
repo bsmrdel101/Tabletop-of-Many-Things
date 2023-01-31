@@ -8,7 +8,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { Token } from "../../scripts/token";
 import { roomRef, userRef } from "../../views/GamePage/GamePage";
 import { getGame } from "../../controllers/dashboardController";
-import { getMapTokens } from "../../controllers/mapsController";
+import { getMap } from "../../controllers/mapsController";
 import { getToken } from "../../controllers/tokensController";
 import './Grid.scss';
 
@@ -30,30 +30,7 @@ export default function Grid({ defaultGridSize }: Props) {
     /* === SOCKET.IO === */
     // Add a token to the board
     onServerEvent('PLACE_TOKEN', ((selectedCell: Coord, tokenData: Token) => {
-      selectedCellRef = null;
-      const { x, y } = selectedCell;
-      const cell: Element = findCell(x, y)!;
-      // if (cell.childNodes.length > 0) return;
-      const { size, el, id } = new Token(
-        tokenData.id,
-        tokenData.image,
-        tokenData.size,
-        tokenData.creature
-      );
-      
-      cell.appendChild(el);
-      el.classList.remove('menu__item', 'menu__item--token');
-      el.setAttribute('token-id', id);
-      
-      // Set token size
-      el.style.setProperty('height', `calc(var(--size) * ${size})`);
-      el.style.setProperty('width', `calc(var(--size) * ${size})`);
-      // Set token position
-      el.style.setProperty('--row', `${x}`);
-      el.style.setProperty('--column', `${y}`);
-
-      // Takes up grid squares for token
-      // setTokenArea(tokenData, selectedCell);
+      placeToken(selectedCell, tokenData);
     }));
 
     onServerEvent('REMOVE_TOKEN', ((cell: Coord, selectedToken: Token) => {
@@ -99,13 +76,41 @@ export default function Grid({ defaultGridSize }: Props) {
     });
 
     const game: Game = await getGame(roomRef);
-    const tokens = await getMapTokens(game.map_id);
+    const map = await getMap(game.map_id);
+    const tokens: MapToken[] = map.boardState;
     // Load tokens onto board
     tokens.forEach(async (mapToken: MapToken) => {
       const { x, y, token_id } = mapToken;
       const token = await getToken(token_id);
-      emitServerEvent('PLACE_TOKEN', [{ x, y }, token, userRef.username, roomRef]);
-    });
+      placeToken({ x, y }, token);
+    }); 
+  };
+
+  // Create and place token on board
+  const placeToken = (selectedCell: Coord, tokenData: Token) => {
+    selectedCellRef = null;
+    const { x, y } = selectedCell;
+    const cell: Element = findCell(x, y)!;
+    const { size, el, id } = new Token(
+      tokenData.id,
+      tokenData.image,
+      tokenData.size,
+      tokenData.creature
+    );
+    
+    cell.appendChild(el);
+    el.classList.remove('menu__item', 'menu__item--token');
+    el.setAttribute('token-id', id);
+    
+    // Set token size
+    el.style.setProperty('height', `calc(var(--size) * ${size})`);
+    el.style.setProperty('width', `calc(var(--size) * ${size})`);
+    // Set token position
+    el.style.setProperty('--row', `${x}`);
+    el.style.setProperty('--column', `${y}`);
+
+    // Takes up grid squares for token
+    // setTokenArea(tokenData, selectedCell);
   };
 
   const selectCell = (e: any) => {    

@@ -1,10 +1,12 @@
 import React from "react";
-import { addTokenToMap } from "../../../controllers/mapsController";
+import { getGame } from "../../../controllers/dashboardController";
+import { updateMapTokens } from "../../../controllers/mapsController";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectedCell } from "../../../redux/reducers/tokenSlice";
 import { dropToken } from "../../../scripts/gridEvents";
 import { Token } from "../../../scripts/token";
-import { Coord } from "../../../scripts/types";
+import { Coord, Game } from "../../../scripts/types";
+import { roomRef } from "../../../views/GamePage/GamePage";
 import './Token.scss';
 
 
@@ -26,10 +28,11 @@ export default function MenuTokenIcon({ token }: Props) {
     };
   };
 
-  const handleDropToken = () => {
+  const handleDropToken = async () => {
     dropToken(cell, token, mousePos);
     // Store token data on map
-    addTokenToMap({ token: token, x: cell.x, y: cell.y, size: parseInt(token.el.getAttribute('size')) });
+    const game: Game = await getGame(roomRef);
+    updateMapTokens({ token: token, x: cell.x, y: cell.y, size: parseInt(token.el.getAttribute('size')), game });
   };
 
   return (
@@ -38,7 +41,6 @@ export default function MenuTokenIcon({ token }: Props) {
       className="menu__item menu__item--token"
       onDragStart={(e) => handleTokenStartDrag(e)}
       onDragEnd={() => handleDropToken()}
-    >
-    </img>
+    />
   );
 }

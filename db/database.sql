@@ -22,7 +22,8 @@ CREATE TABLE "maps" (
     "gridSizeX" INTEGER DEFAULT 40,
     "gridSizeY" INTEGER DEFAULT 40,
     "gridColor" TEXT DEFAULT '#000000',
-    "gridOpacity" INTEGER DEFAULT 100
+    "gridOpacity" INTEGER DEFAULT 100,
+    "boardState" TEXT DEFAULT '[]'
 );
 
 CREATE TABLE "tokens" (
@@ -32,15 +33,6 @@ CREATE TABLE "tokens" (
     "image" TEXT,
     "size" INTEGER,
     "creature" TEXT
-);
-
-CREATE TABLE "map_tokens" (
-    "id" SERIAL PRIMARY KEY,
-    "map_id" INTEGER REFERENCES "maps",
-    "token_id" INTEGER REFERENCES "tokens",
-    "x" INTEGER,
-    "y" INTEGER,
-    "size" INTEGER
 );
 
 CREATE TABLE "game_history" (

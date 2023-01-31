@@ -18,6 +18,7 @@ import '../../components/Menus/Menus.scss';
 
 export let roomRef: string;
 export let userRef: User;
+export let gameRef: Game;
 
 export default function GamePage() {
   const { room }: any = useParams();
@@ -36,6 +37,7 @@ export default function GamePage() {
     const user = await getUser();
     userRef = user;
     const game: Game = await getGame(room);
+    gameRef = game;
     // Check if the game exists
     if (!game) {
       console.error('game doesn\'t exist');

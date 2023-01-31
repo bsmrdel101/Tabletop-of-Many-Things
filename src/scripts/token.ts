@@ -1,33 +1,28 @@
 import { selectedCellRef } from "../components/Grid/Grid";
-import { addTokenToMap, clearTokensFromMap } from "../controllers/mapsController";
+import { getGame } from "../controllers/dashboardController";
+import { clearTokensFromMap, setMapBoardState } from "../controllers/mapsController";
 import { roomRef } from "../views/GamePage/GamePage";
 import { dropToken } from "./gridEvents";
 import { emitServerEvent } from "./socket-io";
 import { findRelativeCell, getCoords } from "./tools/utils";
-import { Coord } from "./types";
+import { Coord, Game } from "./types";
 
 
 const updateMapState = async () => {
   // Clear persistent token data
   await clearTokensFromMap();
   // Save current token positions
-  document.querySelectorAll('.token').forEach((token: Element) => {
+  const game: Game = await getGame(roomRef);
+  const tokens = document.querySelectorAll('.token');
+  let boardState = '';
+
+  tokens.forEach((token: Element) => {
     const coords: Coord = getCoords(token.parentElement);
     const size = parseInt(token.getAttribute('size'));
-    // Add token data to map_tokens
-    addTokenToMap({
-      token: 
-        new Token(
-          parseInt(token.getAttribute('token-id')),
-          token.getAttribute('src'),
-          size,
-          token.getAttribute('creature')
-        ),
-      x: coords.x,
-      y: coords.y,
-      size: size
-    });
+    boardState += `{"map_id": ${game.map_id}, "token_id": ${parseInt(token.getAttribute('token-id'))}, "x": ${coords.x}, "y": ${coords.y}, "size": ${size}}${tokens.length > 1 && token !== tokens[tokens.length - 1] ? ',' : ''}`;
   });
+  // Update the board state
+  setMapBoardState(game.map_id, `[${boardState}]`);
 };
 
 export class Token {

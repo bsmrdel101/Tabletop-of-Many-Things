@@ -21,7 +21,7 @@ export const dropToken = (selectedCell: Coord, token: Token, mousePos: Coord) =>
   }
   
   // Store token data on map
-  // addTokenToMap({ token: token, x: selectedCell.x, y: selectedCell.y, size: parseInt(el.getAttribute('size')) });
+  // updateMapTokens({ token: token, x: selectedCell.x, y: selectedCell.y, size: parseInt(el.getAttribute('size')) });
 };
 
 export const addTokenToBoard = (selectedCell: Element, token: Token) => {
