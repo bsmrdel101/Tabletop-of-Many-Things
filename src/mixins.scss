@@ -3,6 +3,6 @@
 }
 
 @mixin red-border($px) {
-  padding-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
   border-bottom: $px solid var(--color-red-1);
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { makeDraggable } from "../../../scripts/tools/utils";
-import '../Modal.scss';
+import { makeDraggable } from "../../scripts/tools/utils";
+import './Modal.scss';
 
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   close: any
 }
 
-export default function FormModal({ children, title, close }: Props) {
+export default function Modal({ children, title, close }: Props) {
   useEffect(() => {
     makeDraggable(document.getElementById(`modal-${title}`), '.modal__title');
   }, []);

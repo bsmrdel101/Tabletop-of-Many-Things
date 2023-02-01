@@ -4,7 +4,7 @@ import { updateMapTokens } from "../../../controllers/mapsController";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectedCell } from "../../../redux/reducers/tokenSlice";
 import { dropToken } from "../../../scripts/gridEvents";
-import { Token } from "../../../scripts/token";
+import { Token } from "../../../scripts/components/token";
 import { Coord, Game } from "../../../scripts/types";
 import { roomRef } from "../../../views/GamePage/GamePage";
 import './Token.scss';

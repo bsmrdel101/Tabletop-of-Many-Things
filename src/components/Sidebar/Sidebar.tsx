@@ -1,5 +1,6 @@
 import React from "react";
 import { toggleMenu } from "../../scripts/menuManager";
+import { toggleModal } from "../../scripts/modalManager";
 import './Sidebar.scss';
 
 interface Props {
@@ -13,7 +14,7 @@ export default function Sidebar({ userType }: Props) {
         <>
           <button className="sidebar__btn btn--hover" onClick={() => toggleMenu('maps')}>Maps</button>
           <button className="sidebar__btn btn--hover" onClick={() => toggleMenu('tokens')}>Tokens</button>
-          <button className="sidebar__btn btn--hover">Creatures</button>
+          <button className="sidebar__btn btn--hover" onClick={() => toggleModal('creatures')}>Creatures</button>
           <button className="sidebar__btn btn--hover">Encounters</button>
           <button className="sidebar__btn btn--hover">Loot</button>
           <button className="sidebar__btn btn--hover">Items</button>

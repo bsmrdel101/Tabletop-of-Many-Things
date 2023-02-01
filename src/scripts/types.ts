@@ -1,3 +1,13 @@
+export interface NameValue {
+  name: string
+  value: number
+}
+
+export interface NameDesc {
+  name: string
+  desc: string
+}
+
 export type User = {
   id: number
   username: string
@@ -82,38 +92,6 @@ export type Skill = {
   proficient: boolean
 };
 
-export type Creature = {
-  id: number
-  user_id: number
-  index: string
-  name: string
-  size: number
-  type: string
-  alignment: string
-  ac: number
-  hit_points: number
-  hit_dice: string
-  str: number
-  dex: number
-  con: number
-  int: number
-  wis: number
-  char: number
-  cr: number
-  xp: number
-  languages: any
-  speeds: any
-  proficiencies: any
-  vulnerabilities: any
-  resistances: any
-  damageImmunities: any
-  conditionImmunities: any
-  senses: any
-  abilities: any
-  actions: any
-  legActions: any
-};
-
 export type Roll = {
   type: number
   amount: number
@@ -130,7 +108,7 @@ export type ChatMsg = {
 export type MinifiedCreature = {
   index: string
   name: string
-  url: string
+  url?: string
 };
 
 export interface Modifiers {
@@ -141,3 +119,51 @@ export interface Modifiers {
   wisMod: number
   charMod: number
 }
+
+export type AbilityScore = {
+  name: string
+  value: number
+  mod: number
+};
+
+export type Prof = {
+  type: 'skill' | 'save'
+  name: string
+  value: number
+};
+
+export type SpecialAbility = {
+  name: string
+  desc: string
+  dc?: DC
+};
+
+export type Action = {
+  name: string
+  desc: string
+  attackBonus?: number
+  damage?: Damage
+  usage?: Usage
+};
+
+export type Dice = {
+  amount: number
+  type: number
+  mod: number
+};
+
+export type Usage = {
+  type: 'at will' | 'per day' | 'recharge after rest' | 'recharge on roll'
+  times: number
+};
+
+export type DC = {
+  type: string
+  value: 14,
+  successType: 'none' | 'half' | 'other'
+};
+
+export type Damage = {
+  dice: Dice
+  type: string
+};

@@ -1,6 +1,6 @@
 import { roomRef, userRef } from "../views/GamePage/GamePage";
 import { emitServerEvent } from "./socket-io";
-import { Token } from "./token";
+import { Token } from "./components/token";
 import { clamp, findCell, findRelativeCell, getCoords } from "./tools/utils";
 import { Coord } from "./types";
 

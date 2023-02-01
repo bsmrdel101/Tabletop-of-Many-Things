@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Game, Map } from "../scripts/types";
-import { gameRef, roomRef } from "../views/GamePage/GamePage";
+import { gameRef } from "../views/GamePage/GamePage";
 
 
 interface newGame {

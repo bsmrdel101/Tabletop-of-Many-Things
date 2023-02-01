@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Token } from "../scripts/token";
+import { Token } from "../scripts/components/token";
 
 
 // === GET routes === //

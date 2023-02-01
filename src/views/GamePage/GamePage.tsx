@@ -12,6 +12,7 @@ import MapToolbar from "../../components/MapToolbar/MapToolbar";
 import MapsMenu from "../../components/Menus/MapsMenu/MapsMenu";
 import RightSideContent from "../../components/RightSideContent/RightSideContent";
 import { getMap } from "../../controllers/mapsController";
+import CreaturesModal from "../../components/Modals/CreaturesModal/CreaturesModal";
 import './GamePage.scss';
 import '../../components/Menus/Menus.scss';
 
@@ -73,6 +74,7 @@ export default function GamePage() {
       {/* Menus */}
       <TokensMenu />
       <MapsMenu />
+      <CreaturesModal />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Coord } from "../types";
+import { Coord, Damage, DC, Dice } from "../types";
 
 // Clamp number between two values
 export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
@@ -54,15 +54,16 @@ export const composedPath = (el: Element) => {
 // Make a window able to be dragged around
 export const makeDraggable = (el: HTMLElement, selector?: string) => {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.querySelector(selector)) {
+  if (el.querySelector(selector)) {
     // if present, the header is where you move the DIV from:
-    (<HTMLElement>document.querySelector(selector)).onmousedown = dragMouseDown;
+    (<HTMLElement>el.querySelector(selector)).onmousedown = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     el.onmousedown = dragMouseDown;
   }
 
   function dragMouseDown(e: any) {
+    if (e.which !== 1) return;
     e = e || window.event;
     e.preventDefault();
     // get the mouse cursor position at startup:
@@ -100,4 +101,75 @@ export const hexToRgb = (hex: string) => {
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16)
   } : null;
+};
+
+// Returns an array of primitive types with all duplicate items removed from it
+export const sortDuplicateArrayItems = (array: any[]): any => {
+  return Array.from(new Set(array));
+};
+
+// Returns an array of objects with all duplicate items removed from it
+export const sortDuplicateArrayItemsInObjects = (array: any[]): any => {
+  return Array.from(new UniqueNameSet(array));
+};
+
+// Subclass for Set, which allows object functionality
+class UniqueNameSet extends Set {
+  constructor(values: any) {
+    super(values);
+
+    const names: any[] = [];
+    for (const value of values) {
+      if (names.includes(value.name)) {
+        this.delete(value);
+      } else {
+        names.push(value.name);
+      }
+    }
+  }
+}
+
+// Takes an ability score and returns its modifier
+export const getAbilityScoreMod = (score: number): number => {
+  return Math.floor((score - 10) / 2);
+};
+
+// Changes old DC format to new DC format
+export const convertDCTypeFormat = (dc: any): DC => {
+  return { type: dc.dc_type.index, value: dc.dc_value, successType: dc.success_type };
+};
+
+// Changes old damage format to new damage format
+export const convertDamageTypeFormat = (array: any): Damage => {
+  return array.map((arrayItem: any) => {
+    return { type: arrayItem.damage_type.index, dice: convertDiceTypeFormat(arrayItem.damage_dice) };
+  });
+};
+
+// Changes old dice format to new dice format
+export const convertDiceTypeFormat = (dice: string): Dice => {
+  const amount = dice.split('d');
+  const splitString = amount[1].replace('-', ' -').replace('+', ' +').split(' ');
+  return { amount: parseInt(amount[0]), type: parseInt(splitString[0]), mod: splitString[1] ? parseInt(splitString[1]) : 0 };
+};
+
+// Removes null values from an object
+export const removeNullValues = (array: any) => {
+  const results: any = [];
+  array.forEach((item: any, i: number) => {
+    Object.keys(array[i]).forEach((key) => {
+      if (!array[i][key]) delete array[i][key];
+    });
+    results.push(array[i]);
+  });
+  return results;
+};
+
+// Changes old armor class format to new armor class format
+export const convertACTypeFormat = (array: any): number => {
+  let total = 0;
+  array.forEach((armor: any) => {
+    total += armor.value;
+  });
+  return total;
 };

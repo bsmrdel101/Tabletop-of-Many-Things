@@ -78,7 +78,6 @@ CREATE TABLE "characters" (
 CREATE TABLE "creatures" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
-    "image" TEXT,
     "name" VARCHAR (80),
     "size" VARCHAR (80),
     "type" VARCHAR (80),
@@ -93,13 +92,15 @@ CREATE TABLE "creatures" (
     "wis" INTEGER,
     "char" INTEGER,
     "cr" INTEGER,
-    "xp" INTEGER,
-    "index" TEXT,
-    "walk_speed" INTEGER,
-    "swim_speed" INTEGER,
-    "burrow_speed" INTEGER,
-    "fly_speed" INTEGER,
-    "climb_speed" INTEGER
+    "xp" INTEGER
+);
+
+CREATE TABLE "speeds" (
+    "id" SERIAL PRIMARY KEY,
+    "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
+    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
+    "speed_name" TEXT,
+    "speed_value" INTEGER
 );
 
 CREATE TABLE "skills" (
@@ -111,9 +112,10 @@ CREATE TABLE "skills" (
     "proficient" BOOLEAN DEFAULT false
 );
 
-CREATE TABLE "proficiencies" (
+CREATE TABLE "creature_proficiencies" (
     "id" SERIAL PRIMARY KEY,
     "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
+    "prof_type" VARCHAR (40),
     "prof_name" VARCHAR (80),
     "prof_value" INTEGER
 );
@@ -152,7 +154,7 @@ CREATE TABLE "languages" (
     "id" SERIAL PRIMARY KEY,
     "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
     "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "list" TEXT
+    "language_name" TEXT
 );
 
 CREATE TABLE "creature_abilities" (
@@ -244,17 +246,18 @@ VALUES
     (1, 'Forest', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwUhS4RzGYSNBN6rAgSzwcdpzoUkYYIg_Cvg&usqp=CAU')
 ;
 
-INSERT INTO "creatures" ("user_id", "index", "image", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
+INSERT INTO "creatures" ("user_id", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp")
 VALUES
-    (1, 'dough-elemental', 'https://www.dandwiki.com/w/images/3/37/BreadSpawn.jpg', 'Dough Elemental', 'medium', 'elemental', 'neutral', 12, 40, '12d8', 14, 15, 10, 12, 11, 13, 4, 30, 30, null, 5, null, null)
+    (1, 'Dough Elemental', 'Medium', 'elemental', 'neutral', 12, 40, '12d8', 16, 12, 14, 9, 11, 13, 4, 30)
 ;
 
-INSERT INTO "creature_abilities" ("creature_id") VALUES (1);
-INSERT INTO "creature_actions" ("creature_id") VALUES (1);
-INSERT INTO "immunities" ("character_id", "creature_id") VALUES (null, 1);
-INSERT INTO "languages" ("character_id", "creature_id") VALUES (null, 1);
-INSERT INTO "legendary_actions" ("creature_id") VALUES (1);
-INSERT INTO "proficiencies" ("creature_id") VALUES (1);
-INSERT INTO "resistances" ("character_id", "creature_id") VALUES (null, 1);
-INSERT INTO "senses" ("character_id", "creature_id") VALUES (null, 1);
-INSERT INTO "vulnerabilities" ("character_id", "creature_id") VALUES (null, 1);
+INSERT INTO "creature_abilities" ("creature_id", "ability_name", "ability_desc") VALUES (1, 'Regeneration', 'The dough elemental regenerates 10 hp at the start of its turn.');
+INSERT INTO "creature_actions" ("creature_id", "action_name", "action_desc") VALUES (1, 'Multiattack', 'Can make 2 slam attacks.'), (1, 'Slam', 'Make a slam attack.');
+INSERT INTO "speeds" ("character_id", "creature_id", "speed_name", "speed_value") VALUES (null, 1, 'Walk', 30), (null, 1, 'Burrow', 10);
+INSERT INTO "immunities" ("character_id", "creature_id", "immune_name", "immune_type") VALUES (null, 1, 'poison', 'damage'), (null, 1, 'stunned', 'condition');
+INSERT INTO "languages" ("character_id", "creature_id", "language_name") VALUES (null, 1, 'Auran');
+INSERT INTO "legendary_actions" ("creature_id", "leg_action_name", "leg_action_desc") VALUES (1, 'Detect', 'Make a perception check.');
+INSERT INTO "creature_proficiencies" ("creature_id", "prof_type", "prof_name", "prof_value") VALUES (1, 'skill', 'Athletics', 4), (1, 'save', 'Con', 6);
+INSERT INTO "resistances" ("character_id", "creature_id", "res_name") VALUES (null, 1, 'bludgeoning');
+INSERT INTO "senses" ("character_id", "creature_id", "sense_name", "sense_value") VALUES (null, 1, 'Darkvision', 60), (null, 1, 'Passive perception', 12);
+INSERT INTO "vulnerabilities" ("character_id", "creature_id", "vul_name") VALUES (null, 1, 'fire');

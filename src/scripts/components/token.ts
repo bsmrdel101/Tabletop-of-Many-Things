@@ -1,11 +1,11 @@
-import { selectedCellRef } from "../components/Grid/Grid";
-import { getGame } from "../controllers/dashboardController";
-import { clearTokensFromMap, setMapBoardState } from "../controllers/mapsController";
-import { roomRef } from "../views/GamePage/GamePage";
-import { dropToken } from "./gridEvents";
-import { emitServerEvent } from "./socket-io";
-import { findRelativeCell, getCoords } from "./tools/utils";
-import { Coord, Game } from "./types";
+import { selectedCellRef } from "../../components/Grid/Grid";
+import { getGame } from "../../controllers/dashboardController";
+import { clearTokensFromMap, setMapBoardState } from "../../controllers/mapsController";
+import { roomRef } from "../../views/GamePage/GamePage";
+import { dropToken } from "../gridEvents";
+import { emitServerEvent } from "../socket-io";
+import { findRelativeCell, getCoords } from "../tools/utils";
+import { Coord, Game } from "../types";
 
 
 const updateMapState = async () => {

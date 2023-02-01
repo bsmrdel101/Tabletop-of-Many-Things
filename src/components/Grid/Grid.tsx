@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { setSelectedCell } from "../../redux/reducers/tokenSlice";
 import { bindEventsToGrid } from "../../scripts/gridInput";
-import { emitServerEvent, onServerEvent } from "../../scripts/socket-io";
+import { onServerEvent } from "../../scripts/socket-io";
 import { findCell, hexToRgb } from "../../scripts/tools/utils";
 import { Coord, Game, GridSize, Map, MapToken } from "../../scripts/types";
 import { useAppDispatch } from "../../redux/hooks";
-import { Token } from "../../scripts/token";
-import { roomRef, userRef } from "../../views/GamePage/GamePage";
+import { Token } from "../../scripts/components/token";
+import { roomRef } from "../../views/GamePage/GamePage";
 import { getGame } from "../../controllers/dashboardController";
 import { getMap } from "../../controllers/mapsController";
 import { getToken } from "../../controllers/tokensController";

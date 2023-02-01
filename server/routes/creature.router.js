@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-      SELECT * FROM "creatures"
+      SELECT "id" as "index", "name" FROM "creatures"
       WHERE "user_id"=$1
       ORDER BY "creatures"."id";
   `);
@@ -24,27 +24,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/:index', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-      SELECT "creatures"."id", "creatures"."user_id", "image", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "index", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed", "prof_name", "prof_value", "vul_name", "res_name", "immune_name", "immune_type", "sense_name", "sense_value", "ability_name", "ability_desc", "action_name", "action_desc", "list", "leg_action_name", "leg_action_desc" FROM "creatures"
-      JOIN "proficiencies"
-          ON "creatures"."id"="proficiencies"."creature_id"
-      JOIN "vulnerabilities"
-          ON "creatures"."id"="vulnerabilities"."creature_id"
-      JOIN "resistances"
-          ON "creatures"."id"="resistances"."creature_id"
-      JOIN "immunities"
-          ON "creatures"."id"="immunities"."creature_id"
-      JOIN "senses"
-          ON "creatures"."id"="senses"."creature_id"
-      JOIN "creature_abilities"
-          ON "creatures"."id"="creature_abilities"."creature_id"
-      JOIN "creature_actions"
-          ON "creatures"."id"="creature_actions"."creature_id"
-      JOIN "languages"
-          ON "creatures"."id"="languages"."creature_id"
-      JOIN "legendary_actions"
-          ON "creatures"."id"="legendary_actions"."creature_id"
-      WHERE "index"=$1
-      ORDER BY "creatures"."id";
+        SELECT "creatures"."id", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "language_name", "speed_name", "speed_value", "prof_type", "prof_name", "prof_value", "vul_name", "res_name", "immune_name", "immune_type", "sense_name", "sense_value", "ability_name", "ability_desc", "action_name", "action_desc", "leg_action_name", "leg_action_desc" FROM "creatures"
+        JOIN "speeds"
+            ON "creatures"."id"="speeds"."creature_id"
+        JOIN "creature_proficiencies"
+            ON "creatures"."id"="creature_proficiencies"."creature_id"
+        JOIN "vulnerabilities"
+            ON "creatures"."id"="vulnerabilities"."creature_id"
+        JOIN "resistances"
+            ON "creatures"."id"="resistances"."creature_id"
+        JOIN "immunities"
+            ON "creatures"."id"="immunities"."creature_id"
+        JOIN "senses"
+            ON "creatures"."id"="senses"."creature_id"
+        JOIN "creature_abilities"
+            ON "creatures"."id"="creature_abilities"."creature_id"
+        JOIN "creature_actions"
+            ON "creatures"."id"="creature_actions"."creature_id"
+        JOIN "languages"
+            ON "creatures"."id"="languages"."creature_id"
+        JOIN "legendary_actions"
+            ON "creatures"."id"="legendary_actions"."creature_id"
+        WHERE "creatures"."id"=$1
+        ORDER BY "creatures"."id";
   `);
   const sqlValues = [
       req.params.index
@@ -97,11 +99,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/prof', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "proficiencies" ("creature_id", "prof_name", "prof_value")
+      INSERT INTO "creature_proficiencies" ("creature_id", "prof_type", "prof_name", "prof_value")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
       req.body.id,
+      req.body.data.type,
       req.body.data.name,
       req.body.data.value
   ];

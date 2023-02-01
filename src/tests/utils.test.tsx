@@ -1,7 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { clamp, findCell, getCoords } from '../scripts/tools/utils';
+import { clamp, convertACTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, convertDiceTypeFormat, findCell, getAbilityScoreMod, getCoords } from '../scripts/tools/utils';
+
 
 describe('Clamp', () => {
   test('Can set number between min and max', () => {
@@ -44,5 +45,101 @@ describe('Get Coords', () => {
     div.setAttribute('data-cell-x', '1');
     div.setAttribute('data-cell-y', '1');
     expect(getCoords(div)).toEqual({ x: 1, y: 1 });
+  });
+});
+
+describe('Get Ability Score Mod', () => {
+  test('Returns the modifier of an ability score', () => {
+    expect(getAbilityScoreMod(20)).toEqual(5);
+    expect(getAbilityScoreMod(9)).toEqual(-1);
+  });
+});
+
+describe('Convert DC type', () => {
+  test('Change DC from old format to new format', () => {
+    const oldFormat = {
+      dc_type: {index: "con", name: "CON", url: "/api/ability-scores/con"},
+      dc_value: 14,
+      success_type: 'none'
+    };   
+    const newFormat = {
+      type: 'con',
+      value: 14,
+      successType: 'none'
+    };    
+    expect(convertDCTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+});
+
+describe('Convert damage type format', () => {
+  test('Change damage from old format to new format', () => {
+    const oldFormat = [
+      { damage_type: {index: "bludgeoning", name: "Bludgeoning", url: "/api/damage-types/bludgeoning"}, damage_dice: '2d6+5' },
+      { damage_type: {index: "acid", name: "Acid", url: "/api/damage-types/acid"}, damage_dice: '1d12' }
+    ];
+    const newFormat = [
+      { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5 } },
+      { type: 'acid', dice: { amount: 1, type: 12, mod: 0 } }
+    ];
+    expect(convertDamageTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+});
+
+describe('Convert dice type format', () => {
+  test('Change dice from old format to new format', () => {
+    const oldFormat = '3d8+5';
+    const newFormat = { amount: 3, type: 8, mod: 5 };
+    expect(convertDiceTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+
+  test('Change dice from old format to new format with minus mod', () => {
+    const oldFormat = '4d6-2';
+    const newFormat = { amount: 4, type: 6, mod: -2 };
+    expect(convertDiceTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+
+  test('Change dice from old format to new format with no mod', () => {
+    const oldFormat = '1d20';
+    const newFormat = { amount: 1, type: 20, mod: 0 };
+    expect(convertDiceTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+});
+
+describe('Convert AC type format', () => {
+  test('Change AC from old format to new format', () => {
+    const oldFormat = [
+      {
+        type: 'armor',
+        value: 15,
+        armor: [
+          {'index': 'leather-armor','name': 'Leather Armor','url': '/api/equipment/leather-armor'},
+          {'index': 'shield','name': 'Shield','url': '/api/equipment/shield'}
+        ]
+      }
+    ];
+    const newFormat = 15;
+    expect(convertACTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+
+  test('Change AC from old format to new format with multiple armor', () => {
+    const oldFormat = [
+      {
+        type: 'armor',
+        value: 15,
+        armor: [
+          {'index': 'leather-armor','name': 'Leather Armor','url': '/api/equipment/leather-armor'},
+          {'index': 'shield','name': 'Shield','url': '/api/equipment/shield'}
+        ]
+      },
+      {
+        type: 'bonus',
+        value: 2,
+        armor: [
+          {'index': 'gauntlets','name': 'Leather Armor','url': '/api/equipment/leather-armor'}
+        ]
+      }
+    ];
+    const newFormat = 17;
+    expect(convertACTypeFormat(oldFormat)).toEqual(newFormat);
   });
 });

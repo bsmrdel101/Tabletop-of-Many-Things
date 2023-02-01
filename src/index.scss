@@ -24,6 +24,14 @@
   --menu-color-2: #6f6767;
   --menu-color-3: #796f6f;
 
+  /* Modals */
+  --modal-color-0: #342727;
+  --modal-color-1: #4f3d3d;
+  --modal-color-2: #5a4646;
+  --modal-color-3: #584444;
+  --modal-color-4: #604a4a;
+  --modal-color-5: #685050;
+
   /* Buttons */
   --btn-color-0: #605252;
   --btn-color-1: #6f5656;
@@ -32,7 +40,7 @@
   --color-blue-0: rgb(48 102 231 / 39%) 0 3px 8px;
   --color-blue-1: rgb(144 194 255);
   --color-red-0: rgba(212, 20, 20, 0.24) 0 3px 8px;
-  --color-red-1: #7c4e4e;
+  --color-red-1: #985151;
   --color-red-2: #e97d7d;
   --color-red-3: rgb(237 156 156);
 
@@ -177,4 +185,14 @@ p {
 
 .no-select {
   z-index: -1;
+}
+
+.draggable-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: move;
+  width: 100%;
+  height: 100%;
+  // background-color: #6767fd61;
 }

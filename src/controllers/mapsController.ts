@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Token } from "../scripts/token";
-import { Coord, Game, Map, MapToken } from "../scripts/types";
+import { Token } from "../scripts/components/token";
+import { Game, Map } from "../scripts/types";
 import { gameRef, roomRef } from "../views/GamePage/GamePage";
 import { getGame } from "./dashboardController";
 import { ref, uploadBytes } from "firebase/storage";

@@ -1,0 +1,28 @@
+.modal-creatures {
+  overflow-y: auto;
+  max-height: 50vh;
+  max-width: 23rem;
+  border-bottom: 0.5rem solid var(--modal-color-0);
+  padding: 0.5rem;
+
+  h2 {
+    padding: 0.5rem;
+  }
+
+  &__row {
+    background-color: var(--modal-color-1);
+    padding: 0.5rem;
+    text-align: left;
+    cursor: pointer;
+
+    &:nth-child(odd) {
+      background-color: var(--modal-color-2);
+    }
+
+    h3 {
+      margin: 0;
+      font-weight: 400;
+      font-size: 1.15rem;
+    }
+  }
+}
