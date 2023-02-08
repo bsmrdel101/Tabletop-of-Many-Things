@@ -53,6 +53,7 @@ export class Creature {
   }
 }
 
+// Takes creature API data and formats it into a custom data type
 export const convertApiCreature = (creature: any) => {
   const { index, name, size, type, alignment, armor_class, hit_points, hit_dice, strength, dexterity, constitution, intelligence, wisdom, charisma, challenge_rating, xp, languages, speed, proficiencies, damage_vulnerabilities, damage_resistances, damage_immunities, condition_immunities, senses, special_abilities, actions, legendary_actions } = creature;
   const convertedCreature: any = {
@@ -84,7 +85,7 @@ export const convertApiCreature = (creature: any) => {
     senses: getCreatureSenses(senses),
     abilities: getCreatureAbilities(special_abilities),
     actions: getCreatureActions(actions),
-    legActions: legendary_actions
+    legActions: getCreatureActions(legendary_actions)
   };
   return convertedCreature;
 };
@@ -121,3 +122,10 @@ const getCreatureActions = (actions: any) => {
   });
   return removeNullValues(convertedActions);
 };
+
+// const getCreatureLegActions = (legActions: any) => {
+//   const convertedLegActions = legActions.map((action: any) => {
+//     return { name: action.name, desc: action.desc, dc: action.dc && convertDCTypeFormat(action.dc), damage: action.damage && convertDamageTypeFormat(action.damage) };
+//   });
+//   return removeNullValues(convertedLegActions);
+// };
