@@ -1,4 +1,4 @@
-import { Coord, Damage, DC, Dice } from "../types";
+import { AtSpecificLevel, Coord, Damage, DC, Dice } from "../types";
 
 // Clamp number between two values
 export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
@@ -129,7 +129,7 @@ class UniqueNameSet extends Set {
   }
 }
 
-// Takes an ability score and returns its modifier
+// Takes an ability score and returns its modifie
 export const getAbilityScoreMod = (score: number): number => {
   return Math.floor((score - 10) / 2);
 };
@@ -158,7 +158,7 @@ export const removeNullValues = (array: any) => {
   const results: any = [];
   array.forEach((item: any, i: number) => {
     Object.keys(array[i]).forEach((key) => {
-      if (!array[i][key]) delete array[i][key];
+      if (!array[i][key] && array[i][key] !== 0) delete array[i][key];
     });
     results.push(array[i]);
   });
@@ -172,4 +172,12 @@ export const convertACTypeFormat = (array: any): number => {
     total += armor.value;
   });
   return total;
+};
+
+export const convertAtSpecificLevelTypeFormat = (obj: any): AtSpecificLevel[] => {
+  const newObj: AtSpecificLevel[] = [];
+  Object.keys(obj).forEach((key) => {
+    newObj.push({ level: parseInt([key][0]), dice: convertDiceTypeFormat(obj[key]) });
+  });
+  return newObj;
 };

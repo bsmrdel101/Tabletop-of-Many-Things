@@ -120,6 +120,55 @@ export interface Modifiers {
   charMod: number
 }
 
+export interface AtSpecificLevel {
+  level: number
+  dice: Dice
+}
+
+interface SpellSlots {
+  1?: number
+  2?: number
+  3?: number
+  4?: number
+  5?: number
+  6?: number
+  7?: number
+  8?: number
+  9?: number
+}
+
+export type Dice = {
+  amount: number
+  type: number
+  mod: number
+};
+
+export type Usage = {
+  type: 'at will' | 'per day' | 'recharge after rest' | 'recharge on roll'
+  times: number
+};
+
+export type DC = {
+  type: string
+  value?: 14,
+  successType: 'none' | 'half' | 'other'
+};
+
+export type AOE = {
+  type: string
+  size: number
+};
+
+export type Damage = {
+  dice: Dice
+  type: string
+};
+
+export type SpellDamage = {
+  type: string
+  damageAtSpellLevel: AtSpecificLevel[]
+};
+
 export type AbilityScore = {
   name: string
   value: number
@@ -136,6 +185,7 @@ export type SpecialAbility = {
   name: string
   desc: string
   dc?: DC
+  spellcasting?: Spellcasting
 };
 
 export type Action = {
@@ -146,24 +196,34 @@ export type Action = {
   usage?: Usage
 };
 
-export type Dice = {
-  amount: number
-  type: number
-  mod: number
+export type Spell = {
+  name: string
+  desc: string
+  level: number
+  range: string
+  components: string[]
+  ritual: boolean
+  duration: string
+  concentration: boolean
+  castingTime: string
+  higherLevel?: string
+  areaOfEffect?: AOE
+  damage?: SpellDamage
+  dc?: DC
+  healAtSlotLevel?: AtSpecificLevel
+  school: string
+  classes: string[]
+  subclasses?: string[]
+  material?: string
 };
 
-export type Usage = {
-  type: 'at will' | 'per day' | 'recharge after rest' | 'recharge on roll'
-  times: number
-};
-
-export type DC = {
-  type: string
-  value: 14,
-  successType: 'none' | 'half' | 'other'
-};
-
-export type Damage = {
-  dice: Dice
-  type: string
+export type Spellcasting = {
+  level?: number
+  ability: string
+  dc: number
+  modifier: number
+  components: string[]
+  class: string
+  slots: SpellSlots
+  spells: Spell[]
 };

@@ -108,6 +108,44 @@
 
   &__stat-heading {
     margin-top: 0.5rem !important;
+
+    &--spell {
+      display: flex;
+      cursor: pointer;
+
+      img {
+        max-width: 1rem;
+        align-items: center;
+        margin-left: 0.3rem;
+        user-select: none;
+      }
+    }
+  }
+
+  &__spell-details {
+    background-color: var(--modal-color-4);
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+
+    h4 {
+      color: var(--color-red-2);
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem 0;
+    }
+
+    &--subtitle {
+      font-style: italic;
+      margin-bottom: 0.7rem !important;
+    }
+
+    &--desc {
+      margin-top: 0.5rem !important;
+    }
+
+    p {
+      padding: 0;
+      font-size: 0.98rem;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { clamp, convertACTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, convertDiceTypeFormat, findCell, getAbilityScoreMod, getCoords } from '../scripts/tools/utils';
+import { clamp, convertACTypeFormat, convertAtSpecificLevelTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, convertDiceTypeFormat, findCell, getAbilityScoreMod, getCoords } from '../scripts/tools/utils';
 
 
 describe('Clamp', () => {
@@ -141,5 +141,23 @@ describe('Convert AC type format', () => {
     ];
     const newFormat = 17;
     expect(convertACTypeFormat(oldFormat)).toEqual(newFormat);
+  });
+});
+
+describe('Convert at specific level type format', () => {
+  test('Change spell damage type to correct format', () => {
+    const obj = {
+      1: '1d8',
+      5: '2d8',
+      11: '3d8',
+      17: '4d8'
+    };
+    const newObj = [
+      { level: 1, dice: { amount: 1, type: 8, mod: 0 } },
+      { level: 5, dice: { amount: 2, type: 8, mod: 0 } },
+      { level: 11, dice: { amount: 3, type: 8, mod: 0 } },
+      { level: 17, dice: { amount: 4, type: 8, mod: 0 } }
+  ];
+    expect(convertAtSpecificLevelTypeFormat(obj)).toEqual(newObj);
   });
 });

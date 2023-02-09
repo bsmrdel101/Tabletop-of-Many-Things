@@ -1,6 +1,7 @@
+import { getApiSpell } from "../controllers/spellsController";
 import { capitalize } from "./tools/stringUtils";
 import { convertACTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, getAbilityScoreMod, removeNullValues } from "./tools/utils";
-import { AbilityScore, NameDesc, NameValue, Prof, SpecialAbility } from "./types";
+import { AbilityScore, NameDesc, NameValue, Prof, SpecialAbility, Spell, Spellcasting } from "./types";
 
 
 export class Creature {
@@ -55,7 +56,7 @@ export class Creature {
 
 // Takes creature API data and formats it into a custom data type
 export const convertApiCreature = (creature: any) => {
-  const { index, name, size, type, alignment, armor_class, hit_points, hit_dice, strength, dexterity, constitution, intelligence, wisdom, charisma, challenge_rating, xp, languages, speed, proficiencies, damage_vulnerabilities, damage_resistances, damage_immunities, condition_immunities, senses, special_abilities, actions, legendary_actions } = creature;
+  const { index, name, size, type, alignment, armor_class, hit_points, hit_dice, strength, dexterity, constitution, intelligence, wisdom, charisma, challenge_rating, xp, languages, speed, proficiencies, damage_vulnerabilities, damage_resistances, damage_immunities, condition_immunities, senses, special_abilities, actions, legendary_actions } = creature;  
   const convertedCreature: any = {
     index: index,
     name: name,
@@ -111,7 +112,7 @@ const getCreatureSenses = (senses: any): NameValue[] => {
 
 const getCreatureAbilities = (abilities: any) => {
   const convertedAbilities = abilities.map((ability: any) => {
-    return { name: ability.name, desc: ability.desc, dc: ability.dc && convertDCTypeFormat(ability.dc) };
+    return { name: ability.name, desc: ability.desc, dc: ability.dc && convertDCTypeFormat(ability.dc), spellcasting: ability.spellcasting && getCreatureSpellcasting(ability.spellcasting) };
   });
   return removeNullValues(convertedAbilities);
 };
@@ -123,9 +124,25 @@ const getCreatureActions = (actions: any) => {
   return removeNullValues(convertedActions);
 };
 
-// const getCreatureLegActions = (legActions: any) => {
-//   const convertedLegActions = legActions.map((action: any) => {
-//     return { name: action.name, desc: action.desc, dc: action.dc && convertDCTypeFormat(action.dc), damage: action.damage && convertDamageTypeFormat(action.damage) };
-//   });
-//   return removeNullValues(convertedLegActions);
-// };
+const getCreatureSpellcasting = (spellcasting: any): Spellcasting => {
+  return {
+    level: spellcasting.level,
+    ability: spellcasting.ability.index,
+    dc: spellcasting.dc,
+    modifier: spellcasting.modifier,
+    components: spellcasting.components_required,
+    class: spellcasting.school,
+    slots: {
+      1: spellcasting.slots['1'] ? spellcasting.slots['1'] : 0,
+      2: spellcasting.slots['2'] ? spellcasting.slots['2'] : 0,
+      3: spellcasting.slots['3'] ? spellcasting.slots['3'] : 0,
+      4: spellcasting.slots['4'] ? spellcasting.slots['4'] : 0,
+      5: spellcasting.slots['5'] ? spellcasting.slots['5'] : 0,
+      6: spellcasting.slots['6'] ? spellcasting.slots['6'] : 0,
+      7: spellcasting.slots['7'] ? spellcasting.slots['7'] : 0,
+      8: spellcasting.slots['8'] ? spellcasting.slots['8'] : 0,
+      9: spellcasting.slots['9'] ? spellcasting.slots['9'] : 0
+    },
+    spells: spellcasting.spells
+  };
+};

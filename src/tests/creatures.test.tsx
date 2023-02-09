@@ -35,6 +35,197 @@ const doughElemental: any = {
   legActions: [{ name: 'Detect', desc: 'Make a perception check.' }],
 };
 
+const acolyte: any = {
+  id: 1,
+  name: 'Acolyte',
+  size: 'Medium',
+  type: 'humanoid',
+  alignment: 'LG',
+  armor_class: [{ type: 'leather armor', value: 12 }],
+  hit_points: 40,
+  hit_dice: '12d8',
+  strength: 14,
+  dexterity: 15,
+  constitution: 10,
+  intelligence: 12,
+  wisdom: 11,
+  charisma: 13,
+  challenge_rating: 4,
+  xp: 30,
+  languages: 'Common',
+  speed: { walk: '30 ft.' },
+  proficiencies: [],
+  damage_vulnerabilities: [],
+  damage_resistances: [],
+  damage_immunities: [],
+  condition_immunities: [],
+  senses: [],
+  special_abilities: [
+    {
+      name: 'Spellcasting',
+      desc: 'The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:\n- Cantrips (at will): light, sacred flame, thaumaturgy\n- 1st level (3 slots): bless, cure wounds, sanctuary',
+      spellcasting: {
+        level: 1,
+        ability: { index: 'wis' },
+        dc: 12,
+        modifier: 4,
+        components_required: ['V', 'S', 'M'],
+        school: 'cleric',
+        slots: { 1: 3 },
+        spells: [
+          {
+            name: 'Light',
+            level: 0,
+            url: '/api/spells/light'
+          },
+          {
+            name: 'Sacred Flame',
+            level: 0,
+            url: '/api/spells/sacred-flame'
+          },
+          {
+            name: 'Cure Wounds',
+            level: 1,
+            url: '/api/spells/cure-wounds'
+          }
+        ]
+      }
+    }
+  ],
+  actions: [],
+  legendary_actions: []
+};
+
+const convertedAcolyte: any = {
+  id: 1,
+  name: 'Acolyte',
+  size: 'Medium',
+  type: 'humanoid',
+  alignment: 'LG',
+  ac: 12,
+  maxHp: 40,
+  hitDice: '12d8',
+  abilityScores: [
+    { name: 'str', value: 14, mod: 2 },
+    { name: 'dex', value: 15, mod: 2 },
+    { name: 'con', value: 10, mod: 0 },
+    { name: 'int', value: 12, mod: 1 },
+    { name: 'wis', value: 11, mod: 0 },
+    { name: 'char', value: 13, mod: 1 },
+  ],
+  cr: 4,
+  xp: 30,
+  languages: ['Common'],
+  speeds: [{ name: 'walk', value: 30 }],
+  proficiencies: [],
+  vulnerabilities: [],
+  resistances: [],
+  damageImmunities: [],
+  conditionImmunities: [],
+  senses: [],
+  abilities: [
+    {
+      name: 'Spellcasting',
+      desc: 'The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:\n- Cantrips (at will): light, sacred flame, thaumaturgy\n- 1st level (3 slots): bless, cure wounds, sanctuary',
+      spellcasting: {
+        level: 1,
+        ability: 'wis',
+        dc: 12,
+        modifier: 4,
+        components: ['V', 'S', 'M'],
+        class: 'cleric',
+        slots: { 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 },
+        spells: [
+          {
+            name: 'Light',
+            level: 0,
+            url: '/api/spells/light'
+          },
+          {
+            name: 'Sacred Flame',
+            level: 0,
+            url: '/api/spells/sacred-flame'
+          },
+          {
+            name: 'Cure Wounds',
+            level: 1,
+            url: '/api/spells/cure-wounds'
+          }
+          // {
+          //   name: 'Light',
+          //   desc: 'You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\nIf you target an object held or worn by a hostile creature, that creature must succeed on a dexterity saving throw to avoid the spell.',
+          //   level: 0,
+          //   range: 'Touch',
+          //   components: ['V', 'M'],
+          //   ritual: false,
+          //   duration: '1 hour',
+          //   concentration: false,
+          //   castingTime: '1 action',
+          //   school: 'evocation',
+          //   classes: ['Bard', 'Cleric', 'Sorcerer', 'Wizard'],
+          //   subclasses: ['Lore']
+          // },
+          // {
+          //   name: 'Sacred Flame',
+          //   desc: 'Flame-like radiance descends on a creature that you can see within range. The target must succeed on a dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.\nThe spell\'s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).',
+          //   level: 0,
+          //   range: '60 feet',
+          //   components: ['V', 'S'],
+          //   ritual: false,
+          //   duration: 'Instantaneous',
+          //   concentration: false,
+          //   castingTime: '1 action',
+          //   damage: {
+          //     type: 'radiant',
+          //     damageAtCharacterLevel: {
+          //       1: '1d8',
+          //       5: '2d8',
+          //       11: '3d8',
+          //       17: '4d8'
+          //     }
+          //   },
+          //   dc: {
+          //     type: 'dex',
+          //     successType: 'none'
+          //   },
+          //   school: 'evocation',
+          //   classes: ['Cleric'],
+          //   subclasses: ['Lore']
+          // },
+          // {
+          //   name: 'Cure Wounds',
+          //   desc: 'A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.',
+          //   higherLevel: 'When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.',
+          //   level: 1,
+          //   range: 'Touch',
+          //   components: ['V', 'S'],
+          //   ritual: false,
+          //   duration: 'Instantaneous',
+          //   concentration: false,
+          //   castingTime: '1 action',
+          //   healAtSlotLevel: {
+          //     1: '1d8 + MOD',
+          //     2: '2d8 + MOD',
+          //     3: '3d8 + MOD',
+          //     4: '4d8 + MOD',
+          //     5: '5d8 + MOD',
+          //     6: '6d8 + MOD',
+          //     7: '7d8 + MOD',
+          //     8: '8d8 + MOD',
+          //     9: '9d8 + MOD'              
+          //   },
+          //   school: 'evocation',
+          //   classes: ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger'],
+          //   subclasses: ['Lore', 'Life']
+          // },
+        ]
+      }
+    }
+  ],
+  actions: [],
+  legActions: []
+};
+
 const aboleth: any = {
   image: "/api/images/monsters/aboleth.png",
   index: "aboleth",
@@ -228,6 +419,18 @@ describe('CreatureDataStructure', () => {
     const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, skills, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = convertApiCreature(aboleth);
     const creature = new Creature(index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, skills, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions);
     const convertedCreature = getConvertedStats();
+    expect(creature).toEqual(convertedCreature);
+  });
+
+  const getConvertedAcolyte = () => {
+    const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, skills, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = convertedAcolyte;
+    return new Creature(index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, skills, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions);
+  };
+
+  test('Spellcasting data can be parsed', () => {
+    const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, skills, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = convertApiCreature(acolyte);
+    const creature = new Creature(index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, skills, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions);
+    const convertedCreature = getConvertedAcolyte();
     expect(creature).toEqual(convertedCreature);
   });
 });

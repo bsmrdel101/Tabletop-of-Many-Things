@@ -1,7 +1,9 @@
+import { getApiSpell } from "../../controllers/spellsController";
 import { Creature } from "../creatureDataStructure";
 import { capitalize } from "../tools/stringUtils";
 import { makeDraggable } from "../tools/utils";
-import { AbilityScore, NameDesc, Prof } from "../types";
+import { AbilityScore, NameDesc, Prof, SpecialAbility, Spell } from "../types";
+import { spellDetailsHtml } from "./spellDetails";
 
 
 export class CreatureStatsModal {
@@ -54,7 +56,7 @@ export class CreatureStatsModal {
           </div>
         </div>
         
-        ${abilities[0].name && abilities[0].desc ?
+        ${abilities.length > 0 ?
           abilities.map((ability: NameDesc) => {
             return `
               <p class="modal-stats__stat-heading"><span class="bold">${ability.name}</span></p>
@@ -82,6 +84,20 @@ export class CreatureStatsModal {
             `;
           }).join('')
         : ''}
+
+        ${abilities.map((ability: SpecialAbility) => {
+          return (`
+            ${ability.spellcasting ? '<h3 class="modal-stats__subtitle">Spells</h3>' : ''}
+            ${ability.spellcasting ?
+              ability.spellcasting.spells.map((spell: any, i) => {
+                return `
+                  <p id="spell-listing-${i}" class="modal-stats__stat-heading modal-stats__stat-heading--spell" url="${spell.url}"><span class="bold">${spell.name}</span> <img id="spell-listing-img-${i}" src="/images/dropdown-arrow-down.svg" draggable="false" /></p>
+                  <div id="spell-listing-container-${i}"></div>
+                `;
+              }).join('')
+            : ''}
+          `);
+        }).join('')}
       </div>
     `;
     /* eslint-enable */
@@ -97,6 +113,28 @@ export class CreatureStatsModal {
     this.el.querySelector('.modal__close-btn').addEventListener('click', () => {
       this.closeModal();
     });
+
+    this.el.querySelectorAll('.modal-stats__stat-heading--spell').forEach((spellTitle: Element, i) => {
+      spellTitle.addEventListener('click', () => {
+        this.toggleSpellDetails(spellTitle, i);
+      });
+    });
+  }
+
+  private async toggleSpellDetails(spellTitle: Element, id: number) {
+    spellTitle.classList.toggle('spell-details-open');
+    if (spellTitle.classList.contains('spell-details-open')) {
+      document.getElementById(`spell-listing-img-${id}`).setAttribute('src', '/images/dropdown-arrow-up.svg');
+      // Open spell details
+      const spell: Spell = await getApiSpell(spellTitle.getAttribute('url'));
+      document.getElementById(`spell-listing-container-${id}`).insertAdjacentHTML('beforeend', 
+        spellDetailsHtml(spell)
+      );
+    } else {
+      document.getElementById(`spell-listing-img-${id}`).setAttribute('src', '/images/dropdown-arrow-down.svg');
+      // Close spell details
+      document.getElementById(`spell-listing-container-${id}`).innerHTML = '';
+    }
   }
 
   private closeModal() {
