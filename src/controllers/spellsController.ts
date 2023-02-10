@@ -5,13 +5,14 @@ import { Spell } from "../scripts/types";
 export const getApiSpell = async (url: string) => {
   try {
     const res = await axios.get(`https://www.dnd5eapi.co${url}`);
-    const { name, desc, level, range, components, ritual, duration, concentration, casting_time, higher_level, area_of_effect, dc, damage, heal_at_slot_level, school, classes, subclasses } = res.data;
+    const { name, desc, level, range, components, material, ritual, duration, concentration, casting_time, higher_level, area_of_effect, dc, damage, heal_at_slot_level, school, classes, subclasses } = res.data;
     const spell: Spell = {
       name: name,
       desc: desc.map((string: string) => string).join('\n'),
       level: level,
       range: range,
       components: components,
+      material: material,
       ritual: ritual,
       duration: duration,
       concentration: concentration,
