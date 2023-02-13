@@ -157,7 +157,7 @@ describe('Convert at specific level type format', () => {
       { level: 5, dice: { amount: 2, type: 8, mod: 0, display: '2d8' } },
       { level: 11, dice: { amount: 3, type: 8, mod: 0, display: '3d8' } },
       { level: 17, dice: { amount: 4, type: 8, mod: 0, display: '4d8' } }
-  ];
+    ];
     expect(convertAtSpecificLevelTypeFormat(obj)).toEqual(newObj);
   });
 });
