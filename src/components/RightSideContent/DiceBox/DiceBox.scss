@@ -68,3 +68,47 @@
     }
   }
 }
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--dmg-color-physical);
+  color: white;
+
+  &__container {
+    display: inline-flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+
+  &--to-hit {
+    background-color: white;
+    color: black;
+  }
+
+  &--fire { background-color: var(--dmg-color-fire); }
+
+  &--poison { background-color: var(--dmg-color-poison); }
+
+  &--acid { background-color: var(--dmg-color-acid); }
+
+  &--cold { background-color: var(--dmg-color-cold); }
+
+  &--radiant { background-color: var(--dmg-color-radiant); }
+
+  &--necrotic { background-color: var(--dmg-color-necrotic); }
+
+  &--force { background-color: var(--dmg-color-force); }
+
+  &--lightning { background-color: var(--dmg-color-lightning); }
+
+  &--psychic { background-color: var(--dmg-color-psychic); }
+
+  &--thunder { background-color: var(--dmg-color-thunder); }
+
+  img {
+    width: 100%;
+    max-width: 1.1rem;
+    margin-left: 0.25rem;
+  }
+}

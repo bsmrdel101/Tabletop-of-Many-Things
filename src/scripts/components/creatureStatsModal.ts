@@ -2,7 +2,8 @@ import { getApiSpell } from "../../controllers/spellsController";
 import { Creature } from "../creatureDataStructure";
 import { capitalize } from "../tools/stringUtils";
 import { makeDraggable } from "../tools/utils";
-import { AbilityScore, NameDesc, Prof, SpecialAbility, Spell } from "../types";
+import { AbilityScore, Action, NameDesc, Prof, SpecialAbility, Spell } from "../types";
+import { actionButtons } from "./actionButtons";
 import { spellDetailsHtml } from "./spellDetails";
 
 
@@ -67,17 +68,18 @@ export class CreatureStatsModal {
         
         ${actions.length > 0 ? '<h3 class="modal-stats__subtitle">Actions</h3>' : ''}
         ${actions.length > 0 ?
-          actions.map((action: NameDesc) => {
+          actions.map((action: Action, i) => {
             return `
               <p class="modal-stats__stat-heading"><span class="bold">${action.name}</span></p>
               <p>${action.desc}</p>
+              ${actionButtons(this.creature, action, i)}
             `;
           }).join('')
         : ''}
 
         ${legActions.length > 0 ? '<h3 class="modal-stats__subtitle">Legendary Actions</h3>' : ''}
         ${legActions.length > 0 ?
-          legActions.map((action: NameDesc) => {
+          legActions.map((action: Action) => {
             return `
               <p class="modal-stats__stat-heading"><span class="bold">${action.name}</span></p>
               <p>${action.desc}</p>

@@ -53,6 +53,19 @@
   --depth-1: rgba(0, 0, 0, 0.1) 0 4px 12px;
   --depth-2: 0 1px 6px 1px rgb(172 172 172 / 50%);
   --depth-3: 0 0 9px -2px rgba(132, 132, 132, 0.612);
+
+  /* Damage type colors */
+  --dmg-color-physical: rgba(213, 213, 213, 0.431);
+  --dmg-color-fire: #B06117;
+  --dmg-color-poison: #1B8834;
+  --dmg-color-acid: #6F7C13;
+  --dmg-color-cold: #2B8088;
+  --dmg-color-radiant: #7A7715;
+  --dmg-color-necrotic: #46495b;
+  --dmg-color-force: #9960A4;
+  --dmg-color-lightning: #777718;
+  --dmg-color-psychic: #892cc5;
+  --dmg-color-thunder: #4c53ad;
 }
 
 * {

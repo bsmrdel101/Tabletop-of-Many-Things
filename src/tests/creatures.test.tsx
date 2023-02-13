@@ -151,73 +151,6 @@ const convertedAcolyte: any = {
             level: 1,
             url: '/api/spells/cure-wounds'
           }
-          // {
-          //   name: 'Light',
-          //   desc: 'You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\nIf you target an object held or worn by a hostile creature, that creature must succeed on a dexterity saving throw to avoid the spell.',
-          //   level: 0,
-          //   range: 'Touch',
-          //   components: ['V', 'M'],
-          //   ritual: false,
-          //   duration: '1 hour',
-          //   concentration: false,
-          //   castingTime: '1 action',
-          //   school: 'evocation',
-          //   classes: ['Bard', 'Cleric', 'Sorcerer', 'Wizard'],
-          //   subclasses: ['Lore']
-          // },
-          // {
-          //   name: 'Sacred Flame',
-          //   desc: 'Flame-like radiance descends on a creature that you can see within range. The target must succeed on a dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.\nThe spell\'s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).',
-          //   level: 0,
-          //   range: '60 feet',
-          //   components: ['V', 'S'],
-          //   ritual: false,
-          //   duration: 'Instantaneous',
-          //   concentration: false,
-          //   castingTime: '1 action',
-          //   damage: {
-          //     type: 'radiant',
-          //     damageAtCharacterLevel: {
-          //       1: '1d8',
-          //       5: '2d8',
-          //       11: '3d8',
-          //       17: '4d8'
-          //     }
-          //   },
-          //   dc: {
-          //     type: 'dex',
-          //     successType: 'none'
-          //   },
-          //   school: 'evocation',
-          //   classes: ['Cleric'],
-          //   subclasses: ['Lore']
-          // },
-          // {
-          //   name: 'Cure Wounds',
-          //   desc: 'A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.',
-          //   higherLevel: 'When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.',
-          //   level: 1,
-          //   range: 'Touch',
-          //   components: ['V', 'S'],
-          //   ritual: false,
-          //   duration: 'Instantaneous',
-          //   concentration: false,
-          //   castingTime: '1 action',
-          //   healAtSlotLevel: {
-          //     1: '1d8 + MOD',
-          //     2: '2d8 + MOD',
-          //     3: '3d8 + MOD',
-          //     4: '4d8 + MOD',
-          //     5: '5d8 + MOD',
-          //     6: '6d8 + MOD',
-          //     7: '7d8 + MOD',
-          //     8: '8d8 + MOD',
-          //     9: '9d8 + MOD'              
-          //   },
-          //   school: 'evocation',
-          //   classes: ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger'],
-          //   subclasses: ['Lore', 'Life']
-          // },
         ]
       }
     }
@@ -357,8 +290,8 @@ const convertedAboleth: any = {
     {
       attackBonus: 9,
       damage: [
-        { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5 } },
-        { type: 'acid', dice: { amount: 1, type: 12, mod: 0 } }
+        { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5, display: '2d6+5' } },
+        { type: 'acid', dice: { amount: 1, type: 12, mod: 0, display: '1d12' } }
       ],
       dc: {
         type: 'con',
@@ -371,7 +304,7 @@ const convertedAboleth: any = {
     {
       attackBonus: 9,
       damage: [
-        { type: 'bludgeoning', dice: { amount: 3, type: 6, mod: 5 } },
+        { type: 'bludgeoning', dice: { amount: 3, type: 6, mod: 5, display: '3d6+5' } },
       ],
       name: "Tail",
       desc: "Melee Weapon Attack: +9 to hit, reach 10 ft. one target. Hit: 15 (3d6 + 5) bludgeoning damage."
@@ -379,8 +312,8 @@ const convertedAboleth: any = {
     {
       attackBonus: 9,
       damage: [
-        { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5 } },
-        { type: 'acid', dice: { amount: 1, type: 12, mod: 0 } }
+        { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5, display: '2d6+5' } },
+        { type: 'acid', dice: { amount: 1, type: 12, mod: 0, display: '1d12' } }
       ],
       dc: {
         type: 'wis',

@@ -141,6 +141,7 @@ export type Dice = {
   amount: number
   type: number
   mod: number
+  display: string
 };
 
 export type Usage = {
@@ -192,7 +193,7 @@ export type Action = {
   name: string
   desc: string
   attackBonus?: number
-  damage?: Damage
+  damage?: Damage[]
   usage?: Usage
 };
 

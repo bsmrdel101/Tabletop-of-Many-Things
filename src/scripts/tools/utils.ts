@@ -150,7 +150,7 @@ export const convertDamageTypeFormat = (array: any): Damage => {
 export const convertDiceTypeFormat = (dice: string): Dice => {
   const amount = dice.split('d');
   const splitString = amount[1].replace('-', ' -').replace('+', ' +').split(' ');
-  return { amount: parseInt(amount[0]), type: parseInt(splitString[0]), mod: splitString[1] ? parseInt(splitString[1]) : 0 };
+  return { amount: parseInt(amount[0]), type: parseInt(splitString[0]), mod: splitString[1] ? parseInt(splitString[1]) : 0, display: dice };
 };
 
 // Removes null values from an object
