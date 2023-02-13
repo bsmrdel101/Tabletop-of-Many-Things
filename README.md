@@ -1,6 +1,6 @@
 # Tabletop of Many Things
 
-[![Jest](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml/badge.svg)](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/3974686a4361bd168cb1/maintainability)](https://codeclimate.com/github/bsmrdel101/Tabletop-of-Many-Things/maintainability)
+[![Jest](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml/badge.svg)](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml)
 
 ## Description
 
