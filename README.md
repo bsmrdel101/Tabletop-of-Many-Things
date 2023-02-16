@@ -21,8 +21,7 @@ A virtual tabletop for 5e D&amp;D, that allows users prepare and play their game
 
 ## Technologies Used
 - React
-- Typescript
-- SCSS
+- TypeScript
 - Node/Express
 - Socket.io
 - Docker
