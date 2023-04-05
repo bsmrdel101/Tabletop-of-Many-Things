@@ -14,8 +14,8 @@ interface Props {
 
 export default function CreatureStatsModal({ creature }: Props) {
   const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
-  const spells = abilities.map((ability: SpecialAbility) => ability.spellcasting && ability.spellcasting.spells)[0];
-
+  const spells: Spell[] = abilities.find((ability: SpecialAbility) => ability.spellcasting).spellcasting.spells;
+  
   useEffect(() => {
     console.log(creature);
     makeDraggable(document.getElementById(`modal-stats-${index}`), '.draggable-area');
