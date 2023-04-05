@@ -11,7 +11,8 @@
     flex-wrap: wrap;
   }
 
-  &--to-hit {
+  &--to-hit,
+  &--dc {
     background-color: white;
     color: black;
   }

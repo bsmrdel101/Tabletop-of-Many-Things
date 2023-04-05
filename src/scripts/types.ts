@@ -193,6 +193,7 @@ export type Action = {
   name: string
   desc: string
   attackBonus?: number
+  dc?: DC
   damage?: Damage[]
   usage?: Usage
 };

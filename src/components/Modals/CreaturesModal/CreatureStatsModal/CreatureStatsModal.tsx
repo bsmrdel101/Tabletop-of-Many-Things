@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getApiSpell } from "../../../../controllers/spellsController";
 import { Creature } from "../../../../scripts/creatureDataStructure";
 import { capitalize } from "../../../../scripts/tools/stringUtils";
 import { makeDraggable } from "../../../../scripts/tools/utils";
-import { AbilityScore, Action, MinifiedSpell, Prof, SpecialAbility, Spellcasting } from "../../../../scripts/types";
+import { AbilityScore, Action, MinifiedSpell, Prof, SpecialAbility } from "../../../../scripts/types";
 import CreatureSpellDetails from "./CreatureSpellDetails";
+import ActionButton from "../../../ActionButton/ActionButton";
 import '../../Modal';
 import './CreatureStatsModal.scss';
-import ActionButton from "../../../ActionButton/ActionButton";
 
 
 interface Props {
@@ -26,6 +25,7 @@ export default function CreatureStatsModal({ creature }: Props) {
     console.log(creature);
     makeDraggable(document.getElementById(`modal-stats-${index}`), '.draggable-area');
   }, []);
+
 
   const closeModal = () => {
     document.getElementById(`modal-stats-${index}`).remove();
@@ -88,6 +88,7 @@ export default function CreatureStatsModal({ creature }: Props) {
           <div key={i}>
             <p className="modal-stats__stat-heading"><span className="bold">{ability.name}</span></p>
             <p>{ability.desc}</p>
+            <ActionButton action={ability} />
           </div>
         );
       })}
@@ -100,7 +101,7 @@ export default function CreatureStatsModal({ creature }: Props) {
             <div key={i}>
               <p className="modal-stats__stat-heading"><span className="bold">{action.name}</span></p>
               <p>{action.desc}</p>
-              <ActionButton creature={creature} action={action} id={i} />
+              <ActionButton action={action} />
             </div>
           );
         })}
@@ -108,12 +109,13 @@ export default function CreatureStatsModal({ creature }: Props) {
       {/* Legendary actions */}
       {legActions.length > 0 && <h3 className="modal-stats__subtitle">Legendary Actions</h3>}
       {legActions.length > 0 &&
-        legActions.map((action: Action) => {
+        legActions.map((action: Action, i) => {
           return (
-            <>
+            <div key={i}>
               <p className="modal-stats__stat-heading"><span className="bold">{action.name}</span></p>
               <p>{action.desc}</p>
-            </>
+              <ActionButton action={action} />
+            </div>
           );
         })}
 

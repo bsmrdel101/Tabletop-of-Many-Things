@@ -9,10 +9,12 @@ export default function DiceBox() {
   const [amount, setAmount] = useState(1);
   const [mod, setMod] = useState(0);
   const [log, setLog] = useState([]);
+  let logHistory: Roll[] = [];
 
   useEffect(() => {
-    onServerEvent('ROLL_DICE', (result: Roll[]) => {
-      setLog(result);
+    onServerEvent('ROLL_DICE', (result: Roll) => {
+      logHistory = [...logHistory, result];
+      setLog(logHistory);
       setTimeout(() => document.querySelector('.dice-box__log').scrollTo(0, 999999), 50);
     });
   }, []);
@@ -20,7 +22,7 @@ export default function DiceBox() {
   // Select the dice to roll
   const handleSelectDie = (type: number) => {
     const result = rollDice(amount, type, mod);
-    emitServerEvent('ROLL_DICE', [[...log, result], roomRef]);
+    emitServerEvent('ROLL_DICE', [result, roomRef]);
   };
 
   // Modify the modifier to make it display correctly in the log
