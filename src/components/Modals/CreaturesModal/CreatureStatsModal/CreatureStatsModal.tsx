@@ -3,10 +3,11 @@ import { getApiSpell } from "../../../../controllers/spellsController";
 import { Creature } from "../../../../scripts/creatureDataStructure";
 import { capitalize } from "../../../../scripts/tools/stringUtils";
 import { makeDraggable } from "../../../../scripts/tools/utils";
-import { AbilityScore, Action, MinifiedSpell, Prof, SpecialAbility } from "../../../../scripts/types";
+import { AbilityScore, Action, MinifiedSpell, Prof, SpecialAbility, Spellcasting } from "../../../../scripts/types";
 import CreatureSpellDetails from "./CreatureSpellDetails";
 import '../../Modal';
 import './CreatureStatsModal.scss';
+import ActionButton from "../../../ActionButton/ActionButton";
 
 
 interface Props {
@@ -15,7 +16,8 @@ interface Props {
 
 export default function CreatureStatsModal({ creature }: Props) {
   const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
-  const spells: MinifiedSpell[] = abilities.find((ability: SpecialAbility) => ability.spellcasting).spellcasting.spells;
+  const spellcasting = abilities.find((ability: SpecialAbility) => ability.spellcasting);
+  const spells: MinifiedSpell[] = spellcasting && spellcasting.spellcasting.spells;
   
   const [spellDetailsUrl, setSpellDetailsUrl] = useState<string | null>(null);
   const [openedSpellDetailsId, setOpenedSpellDetailsId] = useState<number | null>(null);
@@ -98,7 +100,7 @@ export default function CreatureStatsModal({ creature }: Props) {
             <div key={i}>
               <p className="modal-stats__stat-heading"><span className="bold">{action.name}</span></p>
               <p>{action.desc}</p>
-              {/* {actionButtons(this.creature, action, i)} */}
+              <ActionButton creature={creature} action={action} id={i} />
             </div>
           );
         })}
