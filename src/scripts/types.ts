@@ -197,6 +197,12 @@ export type Action = {
   usage?: Usage
 };
 
+export type MinifiedSpell = {
+  name: string
+  level: number
+  url: string
+};
+
 export type Spell = {
   name: string
   desc: string
@@ -226,5 +232,5 @@ export type Spellcasting = {
   components: string[]
   class: string
   slots: SpellSlots
-  spells: Spell[]
+  spells: MinifiedSpell[]
 };

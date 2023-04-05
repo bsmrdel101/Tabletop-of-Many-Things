@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getApiSpell } from "../../../../controllers/spellsController";
 import { Creature } from "../../../../scripts/creatureDataStructure";
 import { capitalize } from "../../../../scripts/tools/stringUtils";
 import { makeDraggable } from "../../../../scripts/tools/utils";
-import { AbilityScore, Action, Prof, SpecialAbility, Spell } from "../../../../scripts/types";
+import { AbilityScore, Action, MinifiedSpell, Prof, SpecialAbility } from "../../../../scripts/types";
+import CreatureSpellDetails from "./CreatureSpellDetails";
 import '../../Modal';
 import './CreatureStatsModal.scss';
 
@@ -14,8 +15,11 @@ interface Props {
 
 export default function CreatureStatsModal({ creature }: Props) {
   const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
-  const spells: Spell[] = abilities.find((ability: SpecialAbility) => ability.spellcasting).spellcasting.spells;
+  const spells: MinifiedSpell[] = abilities.find((ability: SpecialAbility) => ability.spellcasting).spellcasting.spells;
   
+  const [spellDetailsUrl, setSpellDetailsUrl] = useState<string | null>(null);
+  const [openedSpellDetailsId, setOpenedSpellDetailsId] = useState<number | null>(null);
+
   useEffect(() => {
     console.log(creature);
     makeDraggable(document.getElementById(`modal-stats-${index}`), '.draggable-area');
@@ -25,21 +29,16 @@ export default function CreatureStatsModal({ creature }: Props) {
     document.getElementById(`modal-stats-${index}`).remove();
   };
 
-  //   const toggleSpellDetails = async (spellTitle: Element, id: number) => {
-  //     spellTitle.classList.toggle('spell-details-open');
-  //     if (spellTitle.classList.contains('spell-details-open')) {
-  //       document.getElementById(`spell-listing-img-${id}`).setAttribute('src', '/images/dropdown-arrow-up.svg');
-  //       // Open spell details
-  //       const spell: Spell = await getApiSpell(spellTitle.getAttribute('url'));
-  //       document.getElementById(`spell-listing-container-${id}`).insertAdjacentHTML('beforeend', 
-  //         spellDetailsHtml(spell)
-  //       );
-  //     } else {
-  //       document.getElementById(`spell-listing-img-${id}`).setAttribute('src', '/images/dropdown-arrow-down.svg');
-  //       // Close spell details
-  //       document.getElementById(`spell-listing-container-${id}`).innerHTML = '';
-  //     }
-  //   };
+  // Handle the state of opening and closing spell details
+  const toggleSpellDetails = (spell: MinifiedSpell, id: number) => {
+    if (openedSpellDetailsId === id) {
+      setOpenedSpellDetailsId(null);
+      setSpellDetailsUrl(null);
+    } else {
+      setOpenedSpellDetailsId(id);
+      setSpellDetailsUrl(spell.url);
+    }
+  };
 
 
   return (
@@ -82,12 +81,12 @@ export default function CreatureStatsModal({ creature }: Props) {
       </div>
 
       {/* Abilities */}
-      {abilities.map((ability: SpecialAbility) => {
+      {abilities.map((ability: SpecialAbility, i) => {
         return (
-          <>
+          <div key={i}>
             <p className="modal-stats__stat-heading"><span className="bold">{ability.name}</span></p>
             <p>{ability.desc}</p>
-          </>
+          </div>
         );
       })}
         
@@ -96,11 +95,11 @@ export default function CreatureStatsModal({ creature }: Props) {
       {actions.length > 0 &&
         actions.map((action: Action, i) => {
           return (
-            <>
+            <div key={i}>
               <p className="modal-stats__stat-heading"><span className="bold">{action.name}</span></p>
               <p>{action.desc}</p>
               {/* {actionButtons(this.creature, action, i)} */}
-            </>
+            </div>
           );
         })}
 
@@ -118,11 +117,13 @@ export default function CreatureStatsModal({ creature }: Props) {
 
       {/* Spells */}
       {spells && <h3 className="modal-stats__subtitle">Spells</h3>}
-      {spells && spells.map((spell: Spell, i) => {
+      {spells && spells.map((spell: MinifiedSpell, i) => {
         return (
-          <div key={i}>
-            <p id={`spell-listing-${i}`} className="modal-stats__stat-heading modal-stats__stat-heading--spell"><span className="bold">{spell.name}</span> <img src="/images/dropdown-arrow-down.svg" draggable="false" /></p>
-            <div id={`spell-listing-container-${i}`}></div>
+          <div key={i} onClick={() => toggleSpellDetails(spell, i)}>
+            <p className="modal-stats__stat-heading modal-stats__stat-heading--spell"><span className="bold">{spell.name}</span> <img src={openedSpellDetailsId === i ? '/images/dropdown-arrow-up.svg' : '/images/dropdown-arrow-down.svg'} alt={openedSpellDetailsId === i ? 'Collapse spell details' : 'Expand spell details'} draggable="false" /></p>
+            {openedSpellDetailsId === i && 
+              <CreatureSpellDetails url={spellDetailsUrl} />
+            }
           </div>
         );
       })}
