@@ -75,8 +75,12 @@ io.on('connection', (socket) => {
     io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
   });
 
-  socket.on('PLACE_TOKEN', (cell, token, username, room) => {
-    io.to(room).emit('PLACE_TOKEN', cell, token, username);
+  socket.on('PLACE_TOKEN', (boardState, mapId, room) => {
+    io.to(room).emit('PLACE_TOKEN', boardState, mapId);
+  });
+
+  socket.on('ADD_TOKEN_TO_BOARD', (x, y, token, mapId, room) => {
+    io.to(room).emit('ADD_TOKEN_TO_BOARD', x, y, token, mapId);
   });
 
   socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, room) => {
@@ -96,11 +100,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('VIEW_MAP', (map) => {
-    socket.emit('SELECT_MAP', map);
+    socket.emit('VIEW_MAP', map);
   });
 
-  socket.on('SET_GRID', (gridSize, gridColor, gridOpacity, room) => {
-    io.to(room).emit('SET_GRID', { gridSizeX: parseInt(gridSize.gridSizeX), gridSizeY: parseInt(gridSize.gridSizeY) }, gridColor, gridOpacity);
+  socket.on('SET_GRID', (room) => {
+    io.to(room).emit('SET_GRID');
   });
 
   socket.on('SEND_MESSAGE', (msg, room) => {

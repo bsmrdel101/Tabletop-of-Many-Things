@@ -24,11 +24,11 @@ export default function MapToolbar({ userType }: Props) {
       const map: Map = await getMap(game.map_id);
       // Set grid size back to default if changes not applied
       if (currentPopup !== 'grid') {
-        const grid: HTMLElement = document.querySelector('.grid');
-        const color = hexToRgb(map.gridColor);
-        grid.style.setProperty('--grid-x', map.gridSizeX.toString());
-        grid.style.setProperty('--grid-y', map.gridSizeY.toString());
-        grid.style.setProperty('--grid-color', `rgb(${color.r}, ${color.g}, ${color.b}, ${map.gridOpacity}%)`);
+        // const grid: HTMLElement = document.querySelector('.grid');
+        // const color = hexToRgb(map.gridColor);
+        // grid.style.setProperty('--grid-x', map.gridSizeX.toString());
+        // grid.style.setProperty('--grid-y', map.gridSizeY.toString());
+        // grid.style.setProperty('--grid-color', `rgb(${color.r}, ${color.g}, ${color.b}, ${map.gridOpacity}%)`);
       }
     };
     fetchData();

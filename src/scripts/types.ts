@@ -34,11 +34,13 @@ export interface GridSize {
   gridSizeY: number
 }
 
-export type MapToken = {
-  map_id: number
-  token_id: number
-  x: number
-  y: number
+export type Token = {
+  id: number
+  map_id?: number
+  image: string
+  creature: string
+  x?: number
+  y?: number
   size: number
 };
 
@@ -47,11 +49,12 @@ export type Map = {
   game_id: number
   name: string
   image: string
-  gridSizeX: number
-  gridSizeY: number
+  cellSize: number
   gridColor: string
   gridOpacity: number
-  boardState: JSON
+  offsetX: number
+  offsetY: number
+  boardState: Token[]
 };
 
 export type Character = {

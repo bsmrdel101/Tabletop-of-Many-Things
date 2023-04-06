@@ -1,10 +1,10 @@
 import axios from "axios";
-import { Token } from "../scripts/components/token";
-import { Game, Map } from "../scripts/types";
+import { Game, Map, Token } from "../scripts/types";
 import { gameRef, roomRef } from "../views/GamePage/GamePage";
 import { getGame } from "./dashboardController";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../scripts/firebase";
+import { selectedMap } from "../components/Menus/MapsMenu/MapsMenu";
 
 interface MapTokenData {
   token: Token
@@ -66,13 +66,12 @@ export const addMap = async (payload: NewMap) => {
   }
 };
 
-export const updateMapTokens = async (payload: MapTokenData) => {
+export const updateMapTokens = (token: Token) => {
   try {
-    const map: Map = await getMap(payload.game.map_id);
-    const boardState: string = JSON.stringify(map.boardState).replace(']', '').replace('[', '');
-    const { token, x, y, size } = payload;
-    const newState = `[${`${boardState}{"map_id": ${map.id}, "token_id": ${token.id}, "x": ${x}, "y": ${y}, "size": ${size}}`}]`.replaceAll('}{', '},{');
-    setMapBoardState(map.id, newState);
+    const boardState: string = JSON.stringify(selectedMap.boardState).replace(']', '').replace('[', '');
+    const { id, x, y, size, image } = token;
+    const newState = `[${`${boardState}{"map_id": ${selectedMap.id}, "id": ${id}, "x": ${x}, "y": ${y}, "size": ${size}, "image": "${image}"}`}]`.replaceAll('}{', '},{');
+    setMapBoardState(selectedMap.id, newState);
   } catch (err) {
     console.log(err);
   }

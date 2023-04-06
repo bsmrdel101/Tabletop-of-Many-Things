@@ -19,10 +19,11 @@ CREATE TABLE "maps" (
     "game_id" INTEGER REFERENCES "games_list",
     "name" TEXT,    
     "image" TEXT,
-    "gridSizeX" INTEGER DEFAULT 40,
-    "gridSizeY" INTEGER DEFAULT 40,
+    "cellSize" INTEGER DEFAULT 50,
     "gridColor" TEXT DEFAULT '#000000',
     "gridOpacity" INTEGER DEFAULT 100,
+    "offsetX" INTEGER DEFAULT 0,
+    "offsetY" INTEGER DEFAULT 0,
     "boardState" TEXT DEFAULT '[]'
 );
 
@@ -232,12 +233,12 @@ VALUES
   (1,'Persuasion', 'char', 0, FALSE)
 ;
 
-INSERT INTO "tokens" ("user_id", "image", "size", "creature")
+INSERT INTO "tokens" ("user_id", "game_id", "image", "size", "creature")
 VALUES 
-    (1, 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', 1, 'bandit'),
-    (1, 'https://i.imgur.com/zURSSgl.png', 1, 'fire-elemental'),
-    (1, 'https://i.imgur.com/5cibmUw.png', 2, null),
-    (1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
+    (1, 1, 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', 1, 'bandit'),
+    (1, 1, 'https://i.imgur.com/zURSSgl.png', 1, 'fire-elemental'),
+    (1, 1, 'https://i.imgur.com/5cibmUw.png', 2, null),
+    (1, 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
 ;
 
 INSERT INTO "maps" ("game_id", "name", "image")

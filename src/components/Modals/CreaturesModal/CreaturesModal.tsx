@@ -25,7 +25,7 @@ export default function CreaturesModal() {
 
 
   return (
-    <div className="modal modal-creatures" id="modal-creatures">
+    <div className="modal modal-creatures hidden" id="modal-creatures">
       <h2 className="modal__title">Creatures</h2>
       <button className="modal__close-btn" onClick={closeModal}>X</button>
       <div className="modal__filters">

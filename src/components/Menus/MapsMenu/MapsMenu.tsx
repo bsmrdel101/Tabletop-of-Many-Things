@@ -11,6 +11,7 @@ import './MapsMenu.scss';
 
 
 export let selectedMap: Map;
+export const setSelectedMapObject = (map: Map) => selectedMap = map;
 
 export default function MapsMenu() {
   const [maps, setMaps] = useState<Map[]>([]);
@@ -28,21 +29,21 @@ export default function MapsMenu() {
     const game: Game = await getGame(roomRef);
     setMaps(await getMaps(game.id));
     selectedMap = await getMap(game.map_id);
-    emitServerEvent('SELECT_MAP', [selectedMap, roomRef]);
+    setTimeout(() => emitServerEvent('SELECT_MAP', [selectedMap, roomRef]), 10);
   };
 
   // Share map to everyone
   const handleSelectMap = async (map: Map) => {
-    selectedMap = map;
     await setSelectedMap(map);
-    emitServerEvent('SELECT_MAP', [map, roomRef]);
+    selectedMap = await getMap(map.id);
+    emitServerEvent('SELECT_MAP', [selectedMap, roomRef]);
   };
 
   // Change map only for dm
   const handleViewMap = async (map: Map) => {
-    selectedMap = map;
-    await setSelectedMap(map);
-    emitServerEvent('VIEW_MAP', [map]);
+    // await setSelectedMap(map);
+    selectedMap = await getMap(map.id);
+    emitServerEvent('VIEW_MAP', [selectedMap]);
   };
 
   const handleCreateNewMap = async (e: FormEvent) => {

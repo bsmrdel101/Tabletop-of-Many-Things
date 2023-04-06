@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getTokens } from "../../../controllers/tokensController";
 import { toggleMenu } from "../../../scripts/menuManager";
-import { Token } from "../../../scripts/components/token";
 import MenuTokenIcon from "./MenuTokenIcon";
+import { Token } from "../../../scripts/types";
 
 
 export default function TokensMenu() {

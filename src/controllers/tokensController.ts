@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Token } from "../scripts/components/token";
+import { Token } from "../scripts/types";
 
 
 // === GET routes === //
@@ -7,7 +7,9 @@ import { Token } from "../scripts/components/token";
 export const getTokens = async () => {
   try {
     const res: any = await axios.get('/api/token');
-    const newTokenRes = res.data.map((token: Token) => new Token(token.id, token.image, token.size, token.creature));
+    const newTokenRes = res.data.map((token: Token) => {
+      return { id: token.id, image: token.image, size: token.size, creature: token.creature };
+    });
     return newTokenRes;
   } catch (err) {
     console.log(err);

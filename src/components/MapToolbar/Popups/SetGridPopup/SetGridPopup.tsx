@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getGame } from "../../../../controllers/dashboardController";
 import { clearTokensFromMap, getMap, setMap } from "../../../../controllers/mapsController";
 import { emitServerEvent } from "../../../../scripts/socket-io";
-import { hexToRgb } from "../../../../scripts/tools/utils";
-import { Game, Map } from "../../../../scripts/types";
+import { Game } from "../../../../scripts/types";
 import { roomRef } from "../../../../views/GamePage/GamePage";
-import { selectedMap } from "../../../Menus/MapsMenu/MapsMenu";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { fetchGrid, setGrid } from "../../../../redux/reducers/gridSlice";
 import './SetGridPopup.scss';
 
 
@@ -14,74 +14,78 @@ interface Props {
 }
 
 export default function SetGridPopup({ title }: Props) {
-  const [gridSizeX, setGridSizeX] = useState(0);
-  const [gridSizeY, setGridSizeY] = useState(0);
-  const [gridColor, setGridColor] = useState('#000000');
-  const [gridOpacity, setGridOpacity] = useState(100);
+  const dispatch = useAppDispatch();
+  const gridState = useAppSelector(fetchGrid);
 
-  useEffect(() => {
-    // Sets size for grid on load
-    const setDefaultGridSize = async () => {
-      const game: Game = await getGame(roomRef);
-      const map: Map = await getMap(game.map_id);
-      setGridSizeX(map.gridSizeX);
-      setGridSizeY(map.gridSizeY);
-      setGridColor(map.gridColor);
-      setGridOpacity(map.gridOpacity);
-    };
-    setDefaultGridSize();
-  }, []);
-
-  // Handle visual change for grid resizing width
-  const handleChangeGridSizeX = async (e: any) => {
-    setGridSizeX(e.target.value);
-    selectedMap.gridSizeX = parseInt(e.target.value);
-    const grid: any = document.querySelector('.grid');
-    grid.style.setProperty('--grid-x', selectedMap.gridSizeX);
-
-    // Remove tokens
-    document.querySelectorAll('.token').forEach((token) => {
-      token.remove();
-    });
-    clearTokensFromMap();
+  // Handle visual change for grid cell size
+  const handleChangeGridCellSize = (e: any) => {
+    dispatch(
+      setGrid({
+        cellSize: parseInt(e.target.value),
+        gridColor: gridState.gridColor,
+        gridOpacity: gridState.gridOpacity,
+        offsetX: gridState.offsetX,
+        offsetY: gridState.offsetY,
+      })
+    );
   };
 
-  // Handle visual change for grid resizing height
-  const handleChangeGridSizeY = async (e: any) => {
-    setGridSizeY(e.target.value);
-    selectedMap.gridSizeY = parseInt(e.target.value);
-    const grid: any = document.querySelector('.grid');
-    grid.style.setProperty('--grid-y', selectedMap.gridSizeY);
-
-    // Remove tokens
-    document.querySelectorAll('.token').forEach((token) => {
-      token.remove();
-    });
-    clearTokensFromMap();
+  // Handle offsetX to the bgImage
+  const handleChangeOffsetX = (value: number) => {
+    dispatch(
+      setGrid({
+        cellSize: gridState.cellSize,
+        gridColor: gridState.gridColor,
+        gridOpacity: gridState.gridOpacity,
+        offsetX: value,
+        offsetY: gridState.offsetY,
+      })
+    );
   };
 
-  // Update grid color and opacity to preview
-  const handleChangeColor = () => {
-    const grid: HTMLElement = document.querySelector('.grid');
-    const color = hexToRgb(gridColor);
-    grid.style.setProperty('--grid-color', `rgb(${color.r}, ${color.g}, ${color.b}, ${gridOpacity}%)`);
-    selectedMap.gridColor = gridColor;
-    selectedMap.gridOpacity = gridOpacity;
+  // Handle offsetY to the bgImage
+  const handleChangeOffsetY = (value: number) => {
+    dispatch(
+      setGrid({
+        cellSize: gridState.cellSize,
+        gridColor: gridState.gridColor,
+        gridOpacity: gridState.gridOpacity,
+        offsetX: gridState.offsetX,
+        offsetY: value,
+      })
+    );
+  };
+
+  const handleResetOffset = () => {
+    dispatch(
+      setGrid({
+        cellSize: gridState.cellSize,
+        gridColor: gridState.gridColor,
+        gridOpacity: gridState.gridOpacity,
+        offsetX: 0,
+        offsetY: 0,
+      })
+    );
   };
 
   // Apply grid size to the map
-  const handleApplyChanges = (e: any) => {
+  const handleApplyChanges = async (e: any) => {
     e.preventDefault();
-    setMap(selectedMap);
-    emitServerEvent('SET_GRID', [
-      {
-        gridSizeX: gridSizeX,
-        gridSizeY: gridSizeY
-      },
-      gridColor,
-      gridOpacity,
-      roomRef
-    ]);
+    const game: Game = await getGame(roomRef);
+    const map = await getMap(game.map_id);
+    setMap({ 
+      id: map.id,
+      game_id: map.game_id,
+      name: map.name,
+      image: map.image,
+      cellSize: gridState.cellSize,
+      gridColor: gridState.gridColor,
+      gridOpacity: gridState.gridOpacity,
+      offsetX: gridState.offsetX,
+      offsetY: gridState.offsetY,
+      boardState: map.boardState
+    });
+    emitServerEvent('SET_GRID', [roomRef]);
   };
 
 
@@ -89,38 +93,31 @@ export default function SetGridPopup({ title }: Props) {
     <form onSubmit={(e) => handleApplyChanges(e)} className="set-grid-popup">
       <h3>{title}</h3>
       <label>
-        Width
-        <input
-          className="input--sm"
-          type="number"
-          value={gridSizeX}
-          onChange={(e) => handleChangeGridSizeX(e)}
-        />
-        <input
-          type="range"
-          min={5}
-          max={80}
-          step={5}
-          value={gridSizeX}
-          onChange={(e) => handleChangeGridSizeX(e)}
-        />
+        Map Image Position
+        <div>
+          <button type="button" onClick={() => handleChangeOffsetY(gridState.offsetY - 1)}>Up</button>
+          <button type="button" onClick={() => handleChangeOffsetY(gridState.offsetY + 1)}>Down</button>
+          <button type="button" onClick={() => handleChangeOffsetX(gridState.offsetX - 1)}>Left</button>
+          <button type="button" onClick={() => handleChangeOffsetX(gridState.offsetX + 1)}>Right</button>
+          <button type="button" onClick={() => handleResetOffset()}>Reset</button>
+        </div>
       </label>
 
       <label>
-        Height
+        Grid Scale
         <input
           className="input--sm"
           type="number"
-          value={gridSizeY}
-          onChange={(e) => handleChangeGridSizeY(e)}
+          value={gridState.cellSize}
+          onChange={(e) => handleChangeGridCellSize(e)}
         />
         <input
           type="range"
-          min={5}
+          min={15}
           max={80}
           step={5}
-          value={gridSizeY}
-          onChange={(e) => handleChangeGridSizeY(e)}
+          value={gridState.cellSize}
+          onChange={(e) => handleChangeGridCellSize(e)}
         />
       </label>
       
@@ -128,10 +125,17 @@ export default function SetGridPopup({ title }: Props) {
         Color
         <input
           type="color"
-          value={gridColor}
+          value={gridState.gridColor}
           onChange={(e) => {
-            setGridColor(e.target.value);
-            handleChangeColor();
+            dispatch(
+              setGrid({
+                cellSize: gridState.cellSize,
+                gridColor: e.target.value,
+                gridOpacity: gridState.gridOpacity,
+                offsetX: gridState.offsetX,
+                offsetY: gridState.offsetY,
+              })
+            );
           }}
         />
       </label>
@@ -142,10 +146,17 @@ export default function SetGridPopup({ title }: Props) {
           type="range"
           min={0}
           max={100}
-          value={gridOpacity}
+          value={gridState.gridOpacity}
           onChange={(e) => {
-            setGridOpacity(parseInt(e.target.value));
-            handleChangeColor();
+            dispatch(
+              setGrid({
+                cellSize: gridState.cellSize,
+                gridColor: gridState.gridColor,
+                gridOpacity: parseInt(e.target.value),
+                offsetX: gridState.offsetX,
+                offsetY: gridState.offsetY,
+              })
+            );
           }}
         />
       </label>
