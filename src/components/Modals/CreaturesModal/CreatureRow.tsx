@@ -1,8 +1,9 @@
 import React from "react";
+import { createRoot } from "react-dom/client";
 import { getCreature } from "../../../controllers/creaturesController";
-import { CreatureStatsModal } from "../../../scripts/components/creatureStatsModal";
 import { Creature } from "../../../scripts/creatureDataStructure";
 import { MinifiedCreature } from "../../../scripts/types";
+import CreatureStatsModal from "./CreatureStatsModal/CreatureStatsModal";
 import './CreaturesModal.scss';
 
 
@@ -17,8 +18,9 @@ export default function CreatureRow({ minCreature }: Props) {
       document.getElementById(`modal-stats-${minCreature.index}`).remove();
     }
     const creature: Creature = await getCreature(minCreature.index, minCreature.url ? false : true);
-    const creatureStatsModal = new CreatureStatsModal(creature);
-    document.querySelector('body').append(creatureStatsModal.el);
+    const div = document.querySelector('body').appendChild(document.createElement('div'));
+    const container = createRoot(div);
+    container.render(<CreatureStatsModal creature={creature} />);
   };
 
 

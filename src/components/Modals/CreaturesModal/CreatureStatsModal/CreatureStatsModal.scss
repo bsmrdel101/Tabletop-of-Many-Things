@@ -1,0 +1,114 @@
+@import "../../../../mixins";
+
+.modal-stats {
+  overflow-y: auto;
+  max-height: 50vh;
+  max-width: 23rem;
+  text-align: left;
+  font-weight: 200;
+
+  h2 {
+    margin: 0;
+    padding-left: 0.2rem;
+  }
+
+  p {
+    margin: 0;
+    padding: 0.2rem;
+  }
+
+  &__header {
+    @include red-border(3px);
+
+    position: relative;
+  }
+
+  &__subtitle {
+    color: var(--color-red-2);
+    font-weight: 200;
+    font-size: 1.4em;
+
+    @include red-border(1px);
+  }
+
+  &__general-stats {
+    @include red-border(3px);
+
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+  }
+
+  &__stat-heading {
+    margin-top: 1rem !important;
+
+    &--spell {
+      display: flex;
+      cursor: pointer;
+
+      img {
+        max-width: 1rem;
+        align-items: center;
+        margin-left: 0.3rem;
+        user-select: none;
+      }
+    }
+  }
+
+  &__spell-details {
+    background-color: var(--modal-color-4);
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+
+    h4 {
+      color: var(--color-red-2);
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+    }
+
+    &--subtitle {
+      font-style: italic;
+      margin-bottom: 0.7rem !important;
+    }
+
+    &--desc {
+      margin-top: 0.5rem !important;
+    }
+
+    p {
+      padding: 0;
+      font-size: 0.98rem;
+    }
+  }
+}
+
+.modal-score-container {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.6rem 0;
+
+  &__score-box {
+    padding: 0.2rem;
+    background-color: var(--modal-color-1);
+    text-align: center;
+    border-radius: 0.3rem;
+    max-width: 5rem;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+
+    &--value {
+      background-color: var(--modal-color-4);
+      font-size: 0.8em;
+      border-radius: 0.3rem;
+      justify-content: center;
+      display: inline-flex;
+      width: 100%;
+      max-height: 0.7rem;
+      max-width: 2rem;
+      align-items: center;
+    }
+
+    &--mod {
+      margin-bottom: 0.1rem !important;
+    }
+  }
+}

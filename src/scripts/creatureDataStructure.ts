@@ -119,7 +119,7 @@ const getCreatureAbilities = (abilities: any) => {
 
 const getCreatureActions = (actions: any) => {
   const convertedActions = actions.map((action: any) => {
-    return { name: action.name, desc: action.desc, attackBonus: action.attack_bonus, dc: action.dc && convertDCTypeFormat(action.dc),  damage: action.damage && convertDamageTypeFormat(action.damage), usage: action.usage };
+    return { name: action.name, desc: action.desc.replace(' .', '.'), attackBonus: action.attack_bonus, dc: action.dc && convertDCTypeFormat(action.dc),  damage: action.damage && convertDamageTypeFormat(action.damage), usage: action.usage };
   });
   return removeNullValues(convertedActions);
 };

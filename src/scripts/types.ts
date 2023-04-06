@@ -141,6 +141,7 @@ export type Dice = {
   amount: number
   type: number
   mod: number
+  display: string
 };
 
 export type Usage = {
@@ -192,8 +193,15 @@ export type Action = {
   name: string
   desc: string
   attackBonus?: number
-  damage?: Damage
+  dc?: DC
+  damage?: Damage[]
   usage?: Usage
+};
+
+export type MinifiedSpell = {
+  name: string
+  level: number
+  url: string
 };
 
 export type Spell = {
@@ -225,5 +233,5 @@ export type Spellcasting = {
   components: string[]
   class: string
   slots: SpellSlots
-  spells: Spell[]
+  spells: MinifiedSpell[]
 };

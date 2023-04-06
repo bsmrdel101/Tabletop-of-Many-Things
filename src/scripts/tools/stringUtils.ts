@@ -6,3 +6,6 @@ export const capitalize = (str: string) => {
   }
   return firstLetter + result;
 };
+
+// Returns a + if the number is positive
+export const numIsPos = (num: number): string => num >= 0 ? `+${num}` : `${num}`;

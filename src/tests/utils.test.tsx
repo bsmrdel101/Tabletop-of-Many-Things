@@ -78,8 +78,8 @@ describe('Convert damage type format', () => {
       { damage_type: {index: "acid", name: "Acid", url: "/api/damage-types/acid"}, damage_dice: '1d12' }
     ];
     const newFormat = [
-      { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5 } },
-      { type: 'acid', dice: { amount: 1, type: 12, mod: 0 } }
+      { type: 'bludgeoning', dice: { amount: 2, type: 6, mod: 5, display: '2d6+5' } },
+      { type: 'acid', dice: { amount: 1, type: 12, mod: 0, display: '1d12' } }
     ];
     expect(convertDamageTypeFormat(oldFormat)).toEqual(newFormat);
   });
@@ -88,19 +88,19 @@ describe('Convert damage type format', () => {
 describe('Convert dice type format', () => {
   test('Change dice from old format to new format', () => {
     const oldFormat = '3d8+5';
-    const newFormat = { amount: 3, type: 8, mod: 5 };
+    const newFormat = { amount: 3, type: 8, mod: 5, display: oldFormat };
     expect(convertDiceTypeFormat(oldFormat)).toEqual(newFormat);
   });
 
   test('Change dice from old format to new format with minus mod', () => {
     const oldFormat = '4d6-2';
-    const newFormat = { amount: 4, type: 6, mod: -2 };
+    const newFormat = { amount: 4, type: 6, mod: -2, display: oldFormat };
     expect(convertDiceTypeFormat(oldFormat)).toEqual(newFormat);
   });
 
   test('Change dice from old format to new format with no mod', () => {
     const oldFormat = '1d20';
-    const newFormat = { amount: 1, type: 20, mod: 0 };
+    const newFormat = { amount: 1, type: 20, mod: 0, display: oldFormat };
     expect(convertDiceTypeFormat(oldFormat)).toEqual(newFormat);
   });
 });
@@ -153,11 +153,11 @@ describe('Convert at specific level type format', () => {
       17: '4d8'
     };
     const newObj = [
-      { level: 1, dice: { amount: 1, type: 8, mod: 0 } },
-      { level: 5, dice: { amount: 2, type: 8, mod: 0 } },
-      { level: 11, dice: { amount: 3, type: 8, mod: 0 } },
-      { level: 17, dice: { amount: 4, type: 8, mod: 0 } }
-  ];
+      { level: 1, dice: { amount: 1, type: 8, mod: 0, display: '1d8' } },
+      { level: 5, dice: { amount: 2, type: 8, mod: 0, display: '2d8' } },
+      { level: 11, dice: { amount: 3, type: 8, mod: 0, display: '3d8' } },
+      { level: 17, dice: { amount: 4, type: 8, mod: 0, display: '4d8' } }
+    ];
     expect(convertAtSpecificLevelTypeFormat(obj)).toEqual(newObj);
   });
 });
