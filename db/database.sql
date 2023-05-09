@@ -243,8 +243,8 @@ VALUES
 
 INSERT INTO "maps" ("game_id", "name", "image")
 VALUES
-    (1, 'Default Map', 'https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429139759127-KFHWAFFFVXJWZNWTITKK/learning-the-grid-method.jpg'),
-    (1, 'Forest', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwUhS4RzGYSNBN6rAgSzwcdpzoUkYYIg_Cvg&usqp=CAU')
+    (1, 'Default Map', 'https://i2.wp.com/azgaar.files.wordpress.com/2019/07/antique-big.jpg'),
+    (1, 'Forest', 'https://i.etsystatic.com/18388031/r/il/8b7a49/2796267092/il_fullxfull.2796267092_aezx.jpg')
 ;
 
 INSERT INTO "creatures" ("user_id", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp")
