@@ -83,13 +83,13 @@ io.on('connection', (socket) => {
     io.to(room).emit('ADD_TOKEN_TO_BOARD', x, y, token, mapId);
   });
 
-  socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, room) => {
-    io.to(room).emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size);
+  socket.on('REMOVE_TOKEN', (token, room) => {
+    io.to(room).emit('REMOVE_TOKEN', token);
   });
 
-  socket.on('REMOVE_TOKEN', (cell, token, room) => {
-    io.to(room).emit('REMOVE_TOKEN', cell, token);
-  });
+  // socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, room) => {
+  //   io.to(room).emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size);
+  // });
 
   socket.on('ROLL_DICE', (result, room) => {
     io.to(room).emit('ROLL_DICE', result);

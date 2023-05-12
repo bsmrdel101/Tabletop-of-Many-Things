@@ -1,27 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
+import { Token } from '../../scripts/types';
 
 
 interface RightClickMenuState {
   rightClickMenuType: string
+  token?: Token
 }
 
 const initialState: RightClickMenuState = {
-  rightClickMenuType: ''
+  rightClickMenuType: '',
+  token: null
 };
 
 export const rightClickMenuSlice = createSlice({
   name: 'rightClickMenu',
   initialState,
   reducers: {
-    setRightClickMenuType: (state, action) => {
-      state.rightClickMenuType = action.payload;
+    setRightClickMenu: (state, action) => {
+      state.rightClickMenuType = action.payload.type;
+      state.token = action.payload.token;
     },
   }
 });
 
-export const { setRightClickMenuType } = rightClickMenuSlice.actions;
+export const { setRightClickMenu } = rightClickMenuSlice.actions;
 
-export const fetchRightClickMenuType = (state: RootState) => state.rightClickMenu.rightClickMenuType;
+export const fetchRightClickMenu = (state: RootState) => state.rightClickMenu;
 
 export default rightClickMenuSlice.reducer;

@@ -8,9 +8,8 @@ import { clamp } from "../../scripts/tools/utils";
 import { getMap, setMapBoardState } from "../../controllers/mapsController";
 import { roomRef } from "../../views/GamePage/GamePage";
 import { setSelectedMap } from "../../controllers/dashboardController";
+import { setRightClickMenu } from "../../redux/reducers/rightClickMenuSlice";
 import './Canvas.scss';
-import { setRightClickMenuType } from "../../redux/reducers/rightClickMenuSlice";
-import RightClickMenu from "../RightClickMenus/RightClickMenu";
 
 
 export default function Canvas() {
@@ -89,6 +88,29 @@ export default function Canvas() {
       addTokenToBoard(x, y, token, mapId);
     });
 
+    onServerEvent('REMOVE_TOKEN', (token: Token) => {
+      removeToken(token);
+      drawGrid();
+    });
+
+
+    const removeToken = async (token: Token) => {
+      // Remove token from board state
+      let filteredBoardState = '[';
+      selectedMap.boardState.forEach((boardToken: Token) => {
+        const { id, x, y, size, image } = boardToken;
+        if (JSON.stringify(boardToken) !== JSON.stringify(token)) {
+          filteredBoardState += `{"map_id": ${selectedMap.id}, "id": ${id}, "x": ${x}, "y": ${y}, "size": ${size}, "image": "${image}"}`;
+        }
+      });
+      filteredBoardState += ']';
+
+      // Update board state
+      const newState: string = filteredBoardState.replaceAll('}{', '},{');
+      await setMapBoardState(selectedMap.id, newState);
+      setSelectedMapObject(await getMap(selectedMap.id));
+      drawGrid();
+    };
 
     // Create and place a token on grid cell
     const addTokenToBoard = (x: number, y: number, token: Token, mapId: number) => {
@@ -101,6 +123,7 @@ export default function Canvas() {
       });
       filteredBoardState += `{"map_id": ${selectedMap.id}, "id": ${token.id}, "x": ${x}, "y": ${y}, "size": ${token.size}, "image": "${token.image}"}`;
       filteredBoardState += ']';
+      
       // Drop token
       handleDropToken(filteredBoardState, mapId);
     };
@@ -318,7 +341,13 @@ export default function Canvas() {
           document.querySelector('body').classList.add('grabbing');
         }
         // Hide context menu
-        document.getElementById('right-click-menu').classList.add('hidden');
+        if (!(e.target as HTMLElement).classList.contains('right-click-menu__btn')) {
+          document.getElementById('right-click-menu').classList.add('hidden');
+        }
+        // Reset right click menu state
+        dispatch(
+          setRightClickMenu({ type: '' })
+        );
         break;
       case 4: // Middle click
         isDragging = true;
@@ -360,10 +389,23 @@ export default function Canvas() {
     // Handles clicks that are on the grid container
     const handleRightClick = (e: MouseEvent) => {
       if (e.buttons !== 2) return;
-      const rightClickMenu = document.getElementById('right-click-menu');
+
+      // Reset right click menu state
       dispatch(
-        setRightClickMenuType('token')
+        setRightClickMenu({ type: '' })
       );
+      const token: Token = getTokenSelected(e.pageX, e.pageY);
+      const rightClickMenu = document.getElementById('right-click-menu');
+
+      // Check if right clicking on token
+      console.log(token);
+      
+      if (token) {
+        dispatch(
+          setRightClickMenu({ type: 'token', token: token })
+        );
+      }
+
       rightClickMenu.classList.remove('hidden');
       rightClickMenu.style.setProperty('left', `${e.pageX}px`);
       rightClickMenu.style.setProperty('top', `${e.pageY}px`);
@@ -404,9 +446,6 @@ export default function Canvas() {
       <canvas className="canvas--grid" ref={gridCanvasRef}
         onContextMenu={(e) => { e.preventDefault(); }}
       ></canvas>
-      
-      {/* Right click menu */}
-      {/* <RightClickMenu /> */}
     </>
   );
 }
