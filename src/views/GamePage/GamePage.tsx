@@ -17,6 +17,7 @@ import { setGrid } from "../../redux/reducers/gridSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import './GamePage.scss';
 import '../../components/Menus/Menus.scss';
+import RightClickMenu from "../../components/RightClickMenus/RightClickMenu";
 
 
 export let roomRef: string;
@@ -81,6 +82,11 @@ export default function GamePage() {
       <TokensMenu />
       <MapsMenu />
       <CreaturesModal />
+
+      {/* Right click menu */}
+      <div onContextMenu={(e) => { e.preventDefault(); }}>
+        <RightClickMenu />
+      </div>
     </div>
   );
 }

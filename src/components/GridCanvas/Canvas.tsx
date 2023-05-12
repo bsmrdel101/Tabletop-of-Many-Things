@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { emitServerEvent, offServerEvent, onServerEvent } from "../../scripts/socket-io";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchGrid, setGrid } from "../../redux/reducers/gridSlice";
@@ -9,6 +9,8 @@ import { getMap, setMapBoardState } from "../../controllers/mapsController";
 import { roomRef } from "../../views/GamePage/GamePage";
 import { setSelectedMap } from "../../controllers/dashboardController";
 import './Canvas.scss';
+import { setRightClickMenuType } from "../../redux/reducers/rightClickMenuSlice";
+import RightClickMenu from "../RightClickMenus/RightClickMenu";
 
 
 export default function Canvas() {
@@ -26,6 +28,7 @@ export default function Canvas() {
   const dispatch = useAppDispatch();
   const gridState = useAppSelector(fetchGrid);
 
+
   useEffect(() => {
     const bgCanvas = bgCanvasRef.current;
     const bgCtx = bgCanvas.getContext('2d');
@@ -42,7 +45,6 @@ export default function Canvas() {
     let gridOpacity = 1;
     let gridLineWidth = 0.4;
     let selectedToken: Token;
-
 
     if (!selectedMap) return;
 
@@ -315,6 +317,8 @@ export default function Canvas() {
           isDraggingToken = true;
           document.querySelector('body').classList.add('grabbing');
         }
+        // Hide context menu
+        document.getElementById('right-click-menu').classList.add('hidden');
         break;
       case 4: // Middle click
         isDragging = true;
@@ -353,6 +357,18 @@ export default function Canvas() {
       }
     };
 
+    // Handles clicks that are on the grid container
+    const handleRightClick = (e: MouseEvent) => {
+      if (e.buttons !== 2) return;
+      const rightClickMenu = document.getElementById('right-click-menu');
+      dispatch(
+        setRightClickMenuType('token')
+      );
+      rightClickMenu.classList.remove('hidden');
+      rightClickMenu.style.setProperty('left', `${e.pageX}px`);
+      rightClickMenu.style.setProperty('top', `${e.pageY}px`);
+    };
+
     const handleMouseWheel = (e: WheelEvent) => {
       e.preventDefault();
       zoomGrid(e);
@@ -365,6 +381,7 @@ export default function Canvas() {
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
+    gridContainer.addEventListener('mousedown', handleRightClick);
     gridContainer.addEventListener('wheel', handleMouseWheel);
 
     return () => {
@@ -372,6 +389,7 @@ export default function Canvas() {
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
+      gridContainer.removeEventListener('mousedown', handleRightClick);
       gridContainer.removeEventListener('wheel', handleMouseWheel);
       offServerEvent('SET_GRID');
       offServerEvent('SELECT_MAP');
@@ -383,7 +401,12 @@ export default function Canvas() {
   return (
     <>
       <canvas className="canvas--bg" ref={bgCanvasRef}></canvas>
-      <canvas className="canvas--grid" ref={gridCanvasRef}></canvas>
+      <canvas className="canvas--grid" ref={gridCanvasRef}
+        onContextMenu={(e) => { e.preventDefault(); }}
+      ></canvas>
+      
+      {/* Right click menu */}
+      {/* <RightClickMenu /> */}
     </>
   );
 }
