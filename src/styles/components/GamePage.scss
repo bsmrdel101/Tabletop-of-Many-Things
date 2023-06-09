@@ -1,0 +1,27 @@
+.game-page {
+  display: flex;
+  gap: 1rem;
+}
+
+.game-content {
+  &--box {
+    display: flex;
+  }
+}
+
+.grid-container {
+  overflow: hidden;
+  height: 90vh;
+  width: 80vw;
+  margin-top: 0.8rem;
+  margin-right: 0.5rem;
+  border: 2px solid var(--grid-border-color);
+  background-color: var(--background-color-1);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+}

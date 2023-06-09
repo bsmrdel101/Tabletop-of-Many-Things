@@ -36,6 +36,15 @@ CREATE TABLE "tokens" (
     "creature" TEXT
 );
 
+CREATE TABLE "map_tokens" (
+    "id" SERIAL PRIMARY KEY,
+    "map_id" INTEGER REFERENCES "maps",
+    "token_id" INTEGER REFERENCES "tokens",
+    "x" INTEGER DEFAULT 0,
+    "y" INTEGER DEFAULT 0,
+    "size" INTEGER
+);
+
 CREATE TABLE "game_history" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",

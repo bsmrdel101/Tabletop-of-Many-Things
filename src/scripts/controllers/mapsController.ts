@@ -1,0 +1,100 @@
+import axios from "axios";
+import { Game, Map, Token } from "../types";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../config/firebase";
+
+
+interface NewMap {
+  name: string
+  image: File
+  isBlank: boolean
+}
+
+// === GET routes === //
+
+export const getMaps = async (id: number) => {
+  try {    
+    const res = await axios.get(`/api/map/all/${id}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getMap = async (id: number) => {
+  try {
+    const res = await axios.get(`/api/map/${id}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// === POST routes === //
+
+export const addMap = async (payload: NewMap, gameId: number) => {
+  try {
+    // Upload map image to firebase
+    if (!payload.isBlank) {
+      const mapRef = ref(storage, payload.name);
+      uploadBytes(mapRef, payload.image);
+    }
+    
+    // Build map data object
+    const imageUrl = `https://firebasestorage.googleapis.com/v0/b/tabletop-of-many-things.appspot.com/o/${payload.name}?alt=media&token=43812579-1456-4432-8005-2006de47ce45`;
+    const mapData = {
+      id: gameId,
+      name: payload.name,
+      image: payload.isBlank ? payload.image : imageUrl
+    };
+
+    await axios.post('/api/map', mapData);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const addTokenToMap = async (token: Token, map: Map, x: number, y: number) => {
+  try {
+    await axios.post('/api/map/token', {
+      mapId: map.id,
+      tokenId: token.id,
+      x: x,
+      y: y,
+      size: token.size
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// === PUT routes === //
+
+export const setMap = async (payload: Map) => {
+  try {
+    await axios.put('/api/map', payload);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Update token board state
+export const updateToken = async (id: number, size: number, x: number, y: number) => {
+  try {
+    await axios.put('/api/map/token', {
+      id: id,
+      x: x,
+      y: y,
+      size: size
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const clearTokensFromMap = async (game: Game) => {
+  // try {
+  // } catch (err) {
+  //   console.log(err);
+  // }
+};

@@ -1,10 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { getCreature } from "../../../controllers/creaturesController";
+import { getCreature } from "../../../scripts/controllers/creaturesController";
 import { Creature } from "../../../scripts/creatureDataStructure";
 import { MinifiedCreature } from "../../../scripts/types";
-import CreatureStatsModal from "./CreatureStatsModal/CreatureStatsModal";
-import './CreaturesModal.scss';
+import CreatureStatsModal from "../CreatureStatsModal";
 
 
 interface Props {

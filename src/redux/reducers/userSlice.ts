@@ -2,13 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
 
 interface UserState {
-  username: string;
-  password: string;
+  id: number
+  username: string
+  newUser: boolean
 }
 
 const initialState: UserState = {
+  id: -1,
   username: '',
-  password: '',
+  newUser: true
 };
 
 export const userSlice = createSlice({
@@ -17,13 +19,12 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.username = action.payload.username;
-      state.password = action.payload.password;
     },
   }
 });
 
 export const { setUser } = userSlice.actions;
 
-export const selectUser = (state: RootState) => state.user;
+export const fetchUser = (state: RootState) => state.user;
 
 export default userSlice.reducer;

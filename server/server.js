@@ -14,10 +14,7 @@ const io = new Server(server);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Passport Session Configuration //
 app.use(sessionMiddleware);
-
-// start up passport sessions
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -75,8 +72,8 @@ io.on('connection', (socket) => {
     io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
   });
 
-  socket.on('PLACE_TOKEN', (boardState, mapId, room) => {
-    io.to(room).emit('PLACE_TOKEN', boardState, mapId);
+  socket.on('MOVE_TOKEN', (token, mapId, room) => {
+    io.to(room).emit('MOVE_TOKEN', token, mapId);
   });
 
   socket.on('ADD_TOKEN_TO_BOARD', (x, y, token, mapId, room) => {
@@ -86,11 +83,7 @@ io.on('connection', (socket) => {
   socket.on('REMOVE_TOKEN', (token, room) => {
     io.to(room).emit('REMOVE_TOKEN', token);
   });
-
-  // socket.on('REMOVE_OCCUPIED_TOKEN_SPACE', (lastPosX, lastPosY, size, room) => {
-  //   io.to(room).emit('REMOVE_OCCUPIED_TOKEN_SPACE', lastPosX, lastPosY, size);
-  // });
-
+  
   socket.on('ROLL_DICE', (result, room) => {
     io.to(room).emit('ROLL_DICE', result);
   });

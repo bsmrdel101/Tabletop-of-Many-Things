@@ -1,9 +1,8 @@
-import React, { DragEvent } from "react";
+import { DragEvent } from "react";
 import { Token } from "../../../scripts/types";
-import { roomRef } from "../../../views/GamePage/GamePage";
-import { emitServerEvent } from "../../../scripts/socket-io";
-import { selectedMap } from "../MapsMenu/MapsMenu";
-import './Token.scss';
+import { emitServerEvent } from "../../../scripts/config/socket-io";
+import { useAppSelector } from "../../../redux/hooks";
+import { fetchGameData } from "../../../redux/reducers/gameSlice";
 
 
 interface Props {
@@ -11,8 +10,10 @@ interface Props {
 }
 
 export default function MenuTokenIcon({ token }: Props) {
+  const { room, map } = useAppSelector(fetchGameData).game;
+  
   const handleDropToken = (e: DragEvent) => {
-    emitServerEvent('ADD_TOKEN_TO_BOARD', [e.clientX, e.clientY, token, selectedMap.id, roomRef]);
+    emitServerEvent('ADD_TOKEN_TO_BOARD', [e.clientX, e.clientY, token, map.id, room]);
   };
 
   return (

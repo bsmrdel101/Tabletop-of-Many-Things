@@ -1,14 +1,23 @@
-import React from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchRightClickMenu, setRightClickMenu } from "../../redux/reducers/rightClickMenuSlice";
-import { emitServerEvent } from "../../scripts/socket-io";
-import { roomRef } from "../../views/GamePage/GamePage";
-import "./RightClickMenus.scss";
+import { emitServerEvent } from "../../scripts/config/socket-io";
+import { fetchGameData } from "../../redux/reducers/gameSlice";
+import { useEffect } from "react";
 
 
 export default function RightClickMenu() {
+  const { room } = useAppSelector(fetchGameData).game;
   const { rightClickMenuType, token } = useAppSelector(fetchRightClickMenu);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const deleteBtn = document.getElementById('right-click-menu__delete-token-btn');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('mousedown', () => {
+        deleteToken();
+      });
+    }
+  }, [rightClickMenuType]);
 
   const hideContextMenu = () => {
     document.getElementById('right-click-menu').classList.add('hidden');
@@ -19,7 +28,7 @@ export default function RightClickMenu() {
 
   const deleteToken = () => {
     hideContextMenu();
-    emitServerEvent('REMOVE_TOKEN', [token, roomRef]);
+    emitServerEvent('REMOVE_TOKEN', [token, room]);
   };
 
   
@@ -27,7 +36,7 @@ export default function RightClickMenu() {
     <div id="right-click-menu" className="right-click-menu hidden">
       {rightClickMenuType === 'token' &&
         <>
-          <button className="right-click-menu__btn" onClick={deleteToken}>Delete</button>
+          <button id="right-click-menu__delete-token-btn" className="right-click-menu__btn">Delete</button>
         </>
       }
     </div>

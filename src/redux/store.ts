@@ -1,17 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from './features/counter/counterSlice';
 import userReducer from './reducers/userSlice';
 import tokenReducer from './reducers/tokenSlice';
 import gridReducer from './reducers/gridSlice';
 import rightClickMenuReducer from './reducers/rightClickMenuSlice';
+import gameSlice from './reducers/gameSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     user: userReducer,
     token: tokenReducer,
     grid: gridReducer,
     rightClickMenu: rightClickMenuReducer,
+    game: gameSlice,
   },
 });
 

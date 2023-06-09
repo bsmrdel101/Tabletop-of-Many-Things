@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { getGame } from "../../controllers/dashboardController";
-import { getMap } from "../../controllers/mapsController";
-import { onServerEvent } from "../../scripts/socket-io";
-import { hexToRgb } from "../../scripts/tools/utils";
-import { Game, Map } from "../../scripts/types";
-import { roomRef } from "../../views/GamePage/GamePage";
-import './MapToolbar.scss';
-import PopupMenuToolbar from "./PopupMenuToolbar";
-import SetGridPopup from "./Popups/SetGridPopup/SetGridPopup";
+import { useEffect, useState } from "react";
+import { onServerEvent } from "../../scripts/config/socket-io";
+import SetGridPopup from "./Popups/SetGridPopup";
+import { useAppSelector } from "../../redux/hooks";
+import { fetchGameData } from "../../redux/reducers/gameSlice";
 
 
 interface Props {
@@ -15,13 +10,12 @@ interface Props {
 }
 
 export default function MapToolbar({ userType }: Props) {
+  const { room, game, map } = useAppSelector(fetchGameData).game;
   const [currentPopup, setCurrentPopup] = useState('');
   const [popupTitle, setPopupTitle] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      const game: Game = await getGame(roomRef);
-      const map: Map = await getMap(game.map_id);
       // Set grid size back to default if changes not applied
       if (currentPopup !== 'grid') {
         // const grid: HTMLElement = document.querySelector('.grid');
@@ -68,11 +62,11 @@ export default function MapToolbar({ userType }: Props) {
 
       {/* Popup menu */}
       {currentPopup !== '' && 
-        <PopupMenuToolbar>
+        <div className="popup-menu-toolbar">
           {currentPopup === 'grid' &&
             <SetGridPopup title={popupTitle} />
           }
-        </PopupMenuToolbar>
+        </div>
       }
     </div>
   );

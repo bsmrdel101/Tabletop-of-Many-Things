@@ -8,7 +8,7 @@ interface Props {
   close: any
 }
 
-export default function Modal({ children, title, close }: Props) {
+export default function FormModal({ children, title, close }: Props) {
   useEffect(() => {
     makeDraggable(document.getElementById(`modal-${title}`), '.modal__title');
   }, []);

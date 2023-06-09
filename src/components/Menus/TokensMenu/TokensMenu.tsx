@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getTokens } from "../../../controllers/tokensController";
+import { useEffect, useState } from "react";
+import { getTokens } from "../../../scripts/controllers/tokensController";
 import { toggleMenu } from "../../../scripts/menuManager";
 import MenuTokenIcon from "./MenuTokenIcon";
 import { Token } from "../../../scripts/types";
