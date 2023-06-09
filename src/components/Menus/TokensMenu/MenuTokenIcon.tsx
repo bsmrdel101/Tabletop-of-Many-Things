@@ -1,9 +1,8 @@
 import React, { DragEvent } from "react";
 import { Token } from "../../../scripts/types";
-import { roomRef } from "../../../views/GamePage/GamePage";
+import { roomRef } from "../../../views/GamePage";
 import { emitServerEvent } from "../../../scripts/socket-io";
-import { selectedMap } from "../MapsMenu/MapsMenu";
-import './Token.scss';
+import { selectedMap } from "../MapsMenu";
 
 
 interface Props {

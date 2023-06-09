@@ -1,4 +1,4 @@
-import { getApiSpell } from "../controllers/spellsController";
+import { getApiSpell } from "./controllers/spellsController";
 import { capitalize } from "./tools/stringUtils";
 import { convertACTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, getAbilityScoreMod, removeNullValues } from "./tools/utils";
 import { AbilityScore, NameDesc, NameValue, Prof, SpecialAbility, Spell, Spellcasting } from "./types";

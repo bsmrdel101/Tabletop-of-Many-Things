@@ -2,13 +2,13 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchRightClickMenu, setRightClickMenu } from "../../redux/reducers/rightClickMenuSlice";
 import { emitServerEvent } from "../../scripts/socket-io";
-import { roomRef } from "../../views/GamePage/GamePage";
-import "./RightClickMenus.scss";
+import { roomRef } from "../../views/GamePage";
 
 
 export default function RightClickMenu() {
   const { rightClickMenuType, token } = useAppSelector(fetchRightClickMenu);
   const dispatch = useAppDispatch();
+
 
   const hideContextMenu = () => {
     document.getElementById('right-click-menu').classList.add('hidden');

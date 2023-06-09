@@ -1,0 +1,183 @@
+@import "./settings/colors";
+@import "./mixins/mixins";
+@import "./components/DashboardPage";
+@import "./components/GamePage";
+@import "./components/LoginPage";
+@import "./components/RegisterPage";
+@import "./components/ActionButton";
+@import "./components/Canvas";
+@import "./components/GameCard";
+@import "./components/GameList";
+@import "./components/GameListHistory";
+@import "./components/MapToolbar";
+@import "./components/RightClickMenus";
+@import "./components/Sidebar";
+@import "./components/Toolbar";
+@import "./components/Token";
+@import "./components/TextWarning";
+@import "./components/modals/CreaturesModal";
+@import "./components/modals/CreatureStatsModal";
+@import "./components/modals/Modal";
+@import "./components/menus/MapsMenu";
+@import "./components/menus/Menus";
+@import "./components/RightSideContent";
+@import "./components/DiceBox";
+@import "./components/Chat";
+@import "./components/SetGridPopup";
+@import "./components/NewGameForm";
+
+
+:root {
+  /* Grid */
+  --zoom: 1rem;
+  --background-image: "";
+
+  /* Tokens */
+  --token-radius: 50%;
+
+  /* Font size */
+  --font-sm: 0.9375rem; /* 15px */
+  --font-md: 1.4375rem; /* 23px */
+
+  /* Box shadow */
+  --depth-0: 0 1px 6px 1px rgba(0, 0, 0, 0.404);
+  --depth-1: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  --depth-2: 0 1px 6px 1px rgb(172 172 172 / 50%);
+  --depth-3: 0 0 9px -2px rgba(132, 132, 132, 0.612);
+}
+
+* {
+  content: border-box;
+  font-family: Ubuntu, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color-0);
+  font-size: 100%;
+}
+
+.page-title {
+  font-size: 1.875em; /* 30px / 16px */
+}
+
+input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  transition: all ease-in-out 200ms;
+  box-shadow: var(--depth-1);
+  margin-top: 0.08rem;
+}
+
+[type="file"] {
+  box-shadow: none;
+}
+
+.input--hover:hover {
+  transform: scale(1.025, 1.025);
+}
+
+.input--sm {
+  @include input(3rem);
+}
+
+.input--md {
+  @include input(8rem);
+}
+
+.form__input-add input {
+  margin: 0.1rem auto;
+}
+
+.form__btn--remove {
+  background-color: rgb(212 62 62);
+  color: white;
+  max-height: 1.5rem;
+  margin-top: 0.34rem;
+}
+
+select {
+  padding: 0.2rem;
+  border-radius: 5px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  transition: all ease-in-out 200ms;
+  box-shadow: var(--depth-1);
+  cursor: pointer;
+}
+
+.btn {
+  &--hover:hover {
+    transform: scale(1.025, 1.025);
+  }
+
+  &--modal-close {
+    border: none;
+    background-color: var(--menu-color-0);
+    margin: 0;
+    box-shadow: none;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &--logout {
+    margin: 3rem 0 3rem 1rem;
+  }
+
+  &--attack {
+    margin-top: 0.3rem;
+  }
+
+  &--search {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #c6c6c6;
+  }
+}
+
+input[type="range"] {
+  padding: 0;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.relative {
+  position: relative;
+}
+
+p {
+  margin: 0.4rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.no-select {
+  z-index: -1;
+}
+
+.draggable-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: move;
+  width: 100%;
+  height: 100%;
+}

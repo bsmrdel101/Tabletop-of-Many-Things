@@ -1,7 +1,7 @@
 import React from "react";
-import Chat from "./Chat/Chat";
-import DiceBox from "./DiceBox/DiceBox";
-import './RightSideContent.scss';
+import Chat from "./Chat";
+import DiceBox from "./DiceBox";
+
 
 export default function RightSideContent() {
   const popOutChat = () => {

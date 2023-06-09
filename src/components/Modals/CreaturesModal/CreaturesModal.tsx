@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeDraggable } from "../../../scripts/tools/utils";
 import { MinifiedCreature } from "../../../scripts/types";
 import CreatureRow from "./CreatureRow";
-import { getAllCreatures } from "../../../controllers/creaturesController";
-import '../Modal.scss';
-import './CreaturesModal.scss';
+import { getAllCreatures } from "../../../scripts/controllers/creaturesController";
 
 
 export default function CreaturesModal() {

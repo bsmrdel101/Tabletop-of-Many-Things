@@ -1,4 +1,4 @@
-import { socket } from '../components/App/App';
+import { socket } from '../components/App';
 
 export const emitServerEvent = (event: string, params: any[]) => {
   socket.emit(event, ...params);

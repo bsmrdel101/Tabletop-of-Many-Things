@@ -1,0 +1,54 @@
+:root {
+  /* Main */
+  --background-color-0: #b59696;
+  --background-color-1: rgb(208, 195, 195);
+  --background-color-2: #e8dcdc;
+
+  /* Grid */
+  --grid-color: #d9c6c6;
+  --grid-border-color: black;
+  --cell-border-color: black;
+
+  /* Tokens */
+  --token-selected-color: #6767fd;
+  --enemy-background: #c27474;
+
+  /* Menu */
+  --menu-color-0: #413a3a;
+  --menu-color-1: #575252;
+  --menu-color-2: #6f6767;
+  --menu-color-3: #796f6f;
+
+  /* Modals */
+  --modal-color-0: #342727;
+  --modal-color-1: #4f3d3d;
+  --modal-color-2: #5a4646;
+  --modal-color-3: #584444;
+  --modal-color-4: #604a4a;
+  --modal-color-5: #685050;
+
+  /* Buttons */
+  --btn-color-0: #605252;
+  --btn-color-1: #6f5656;
+
+  /* Colors */
+  --color-blue-0: rgb(48 102 231 / 39%) 0 3px 8px;
+  --color-blue-1: rgb(144 194 255);
+  --color-red-0: rgba(212, 20, 20, 0.24) 0 3px 8px;
+  --color-red-1: #985151;
+  --color-red-2: #e97d7d;
+  --color-red-3: rgb(237 156 156);
+
+  /* Damage type colors */
+  --dmg-color-physical: rgba(213, 213, 213, 0.431);
+  --dmg-color-fire: #b06117;
+  --dmg-color-poison: #1b8834;
+  --dmg-color-acid: #6f7c13;
+  --dmg-color-cold: #2b8088;
+  --dmg-color-radiant: #7a7715;
+  --dmg-color-necrotic: #46495b;
+  --dmg-color-force: #9960a4;
+  --dmg-color-lightning: #a9a957;
+  --dmg-color-psychic: #892cc5;
+  --dmg-color-thunder: #4c53ad;
+}

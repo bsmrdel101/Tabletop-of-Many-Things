@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getGame } from "../../controllers/dashboardController";
-import { getMap } from "../../controllers/mapsController";
+import { getGame } from "../../scripts/controllers/dashboardController";
+import { getMap } from "../../scripts/controllers/mapsController";
 import { onServerEvent } from "../../scripts/socket-io";
-import { hexToRgb } from "../../scripts/tools/utils";
 import { Game, Map } from "../../scripts/types";
-import { roomRef } from "../../views/GamePage/GamePage";
-import './MapToolbar.scss';
-import PopupMenuToolbar from "./PopupMenuToolbar";
-import SetGridPopup from "./Popups/SetGridPopup/SetGridPopup";
+import { roomRef } from "../../views/GamePage";
+import SetGridPopup from "./Popups/SetGridPopup";
 
 
 interface Props {
@@ -68,11 +65,11 @@ export default function MapToolbar({ userType }: Props) {
 
       {/* Popup menu */}
       {currentPopup !== '' && 
-        <PopupMenuToolbar>
+        <div className="popup-menu-toolbar">
           {currentPopup === 'grid' &&
             <SetGridPopup title={popupTitle} />
           }
-        </PopupMenuToolbar>
+        </div>
       }
     </div>
   );
