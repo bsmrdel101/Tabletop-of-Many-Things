@@ -13,6 +13,7 @@
     "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
     "db:reset": "heroku pg:reset --app tabletop-of-many-things --confirm tabletop-of-many-things",
     "db:push": "heroku pg:push tabletop_of_many_things DATABASE_URL",
+    "db": "heroku pg:psql",
     "dev": "run-p docker:setup server",
     "start": "node server/server.js",
     "server": "nodemon server/server.js",

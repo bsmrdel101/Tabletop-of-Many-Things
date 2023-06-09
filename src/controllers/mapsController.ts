@@ -6,13 +6,6 @@ import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../scripts/firebase";
 import { selectedMap } from "../components/Menus/MapsMenu/MapsMenu";
 
-interface MapTokenData {
-  token: Token
-  x: number
-  y: number
-  size: number
-  game: Game
-}
 
 interface NewMap {
   name: string

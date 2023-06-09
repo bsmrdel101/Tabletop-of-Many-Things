@@ -29,7 +29,7 @@ export default function MapsMenu() {
     const game: Game = await getGame(roomRef);
     setMaps(await getMaps(game.id));
     selectedMap = await getMap(game.map_id);
-    setTimeout(() => emitServerEvent('SELECT_MAP', [selectedMap, roomRef]), 10);
+    emitServerEvent('SELECT_MAP', [selectedMap, roomRef]);
   };
 
   // Share map to everyone
