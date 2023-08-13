@@ -4,6 +4,7 @@ const app = express();
 const http = require('http');
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
+const path = require('path');
 require('dotenv').config();
 
 const server = http.createServer(app);
@@ -33,7 +34,6 @@ app.use('/api/character', characterRouter);
 app.use('/api/creature', creatureRouter);
 app.use('/api/map', mapRouter);
 app.use('/api/token', tokenRouter);
-
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "build", "index.html"));
