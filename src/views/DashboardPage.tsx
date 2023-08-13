@@ -17,8 +17,6 @@ export default function DashboardPage() {
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
     const map: Map = await getMap(game.id);
-    console.log(game, map);
-    
 
     dispatch(
       setGameData({
@@ -33,7 +31,7 @@ export default function DashboardPage() {
       return;
     }
     
-    // changeRoute(`/game/${roomCode}`);
+    changeRoute(`/game/${roomCode}`);
   };
 
   const handleJoinRoom = (e: any) => {
