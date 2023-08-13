@@ -17,7 +17,7 @@ import { setUser } from '../redux/reducers/userSlice';
 
 export default function App() {
   const dispatch = useAppDispatch();
-  const [userState, setUserState] = useState({});
+  const [userState, setUserState] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
