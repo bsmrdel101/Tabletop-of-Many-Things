@@ -64,7 +64,8 @@ export default function App() {
           <Route exact path="/game/:room">
             {
               userState ?
-                <GamePage />
+                // <GamePage />
+                <p>HELLO WORLD</p>
                 :
                 <LoginPage />
             }
