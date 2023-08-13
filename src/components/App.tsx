@@ -39,7 +39,7 @@ export default function App() {
               userState ?
                 <DashboardPage />
                 :
-                <Redirect to="/login" />
+                <LoginPage />
             }
           </Route>
 
@@ -66,7 +66,7 @@ export default function App() {
               userState ?
                 <GamePage />
                 :
-                <Redirect to="/login" />
+                <LoginPage />
             }
           </Route>
 
