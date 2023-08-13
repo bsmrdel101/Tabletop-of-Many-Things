@@ -61,11 +61,18 @@ export default function App() {
           </Route>
 
           {/* Game page */}
-          <Route exact path="/game/:room">
+          {/* <Route exact path="/game/:room">
             {
               userState ?
-                // <GamePage />
-                <p>HELLO WORLD</p>
+                <GamePage />
+                :
+                <LoginPage />
+            }
+          </Route> */}
+          <Route exact path="/game">
+            {
+              userState ?
+                <GamePage />
                 :
                 <LoginPage />
             }
