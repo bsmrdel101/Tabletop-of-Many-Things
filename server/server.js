@@ -35,6 +35,10 @@ app.use('/api/map', mapRouter);
 app.use('/api/token', tokenRouter);
 
 
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
+
 // Serve static files
 app.use(express.static('build'));
 
