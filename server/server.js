@@ -19,6 +19,11 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
 
 // Routes
 const userRouter = require('./routes/user.router');
@@ -34,10 +39,6 @@ app.use('/api/character', characterRouter);
 app.use('/api/creature', creatureRouter);
 app.use('/api/map', mapRouter);
 app.use('/api/token', tokenRouter);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
-});
 
 // Serve static files
 app.use(express.static('build'));
