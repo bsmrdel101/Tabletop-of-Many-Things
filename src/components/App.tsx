@@ -33,16 +33,6 @@ export default function App() {
     <Router>
       <div>
         <Switch>
-          {/* Dashboard page */}
-          <Route exact path="/">
-            {
-              userState ?
-                <DashboardPage />
-                :
-                <LoginPage />
-            }
-          </Route>
-
           {/* Login page */}
           <Route exact path="/login">
             {
@@ -65,6 +55,16 @@ export default function App() {
             {
               userState ?
                 <GamePage />
+                :
+                <LoginPage />
+            }
+          </Route>
+
+          {/* Dashboard page */}
+          <Route exact path="/">
+            {
+              userState ?
+                <DashboardPage />
                 :
                 <LoginPage />
             }
