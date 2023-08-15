@@ -54,10 +54,10 @@ export const addMap = async (payload: NewMap, gameId: number) => {
   }
 };
 
-export const addTokenToMap = async (token: Token, map: Map, x: number, y: number) => {
+export const addTokenToMap = async (token: Token, mapId: number, x: number, y: number) => {
   try {
     await axios.post('/api/map/token', {
-      mapId: map.id,
+      mapId: mapId,
       tokenId: token.id,
       x: x,
       y: y,

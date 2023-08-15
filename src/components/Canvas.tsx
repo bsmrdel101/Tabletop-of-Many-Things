@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { emitServerEvent, offServerEvent, onServerEvent } from "../scripts/config/socket-io";
+import { emitServerEvent, offServerEvent, onServerEvent, socket } from "../scripts/config/socket-io";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGrid, setGrid } from "../redux/reducers/gridSlice";
 import { Coord, Map, Token } from "../scripts/types";
@@ -8,6 +8,7 @@ import { addTokenToMap, getMap, updateToken } from "../scripts/controllers/mapsC
 import { setSelectedMap } from "../scripts/controllers/dashboardController";
 import { setRightClickMenu } from "../redux/reducers/rightClickMenuSlice";
 import { fetchGameData, setMap } from "../redux/reducers/gameSlice";
+import { setGridPanOffset, setGridZoom } from "../redux/reducers/gridCoordSlice";
 
 
 export default function Canvas() {
@@ -92,9 +93,9 @@ export default function Canvas() {
       handleDropToken(token, mapId);
     });
 
-    onServerEvent('ADD_TOKEN_TO_BOARD', async (clientX: number, clientY: number, token: Token, mapId: number) => {
-      const { x, y } = getGridCellCoords(clientX, clientY);
-      await addTokenToMap(token, map, x, y);
+    onServerEvent('ADD_TOKEN_TO_BOARD', async (clientX: number, clientY: number, token: Token, mapId: number, zoom: number, offsetX: number, offsetY: number, socketId: string) => {
+      const { x, y } = getGridCellCoords(clientX, clientY, zoom, offsetX, offsetY);
+      if (socketId === socket.id) await addTokenToMap(token, mapId, x, y);
       boardState = [...boardState, { ...token, x: x, y: y }];
       drawGrid();
     });
@@ -223,7 +224,8 @@ export default function Canvas() {
       offsetY += deltaY;
       bgOffsetX += deltaX;
       bgOffsetY += deltaY;
-    
+      dispatch(setGridPanOffset({ offsetX: offsetX, offsetY: offsetY }));
+
       bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
       bgCtx.drawImage(bgImage, bgOffsetX, bgOffsetY, bgCanvas.width * currentZoom, bgCanvas.height * currentZoom);
       drawGrid();
@@ -256,6 +258,7 @@ export default function Canvas() {
       bgOffsetX = (bgOffsetX - mouseX) * (clampedZoom / currentZoom) + mouseX;
       bgOffsetY = (bgOffsetY - mouseY) * (clampedZoom / currentZoom) + mouseY;
       currentZoom = clampedZoom;
+      dispatch(setGridZoom(clampedZoom));
     
       // Redraw the image
       bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
@@ -264,13 +267,13 @@ export default function Canvas() {
     };
 
     // Returns the coordinates of the grid cell clicked on
-    const getGridCellCoords = (clickX: number, clickY: number): Coord => {
+    const getGridCellCoords = (clickX: number, clickY: number, zoom: number = currentZoom, _offsetX: number = offsetX, _offsetY: number = offsetY): Coord => {
       const rect = gridCanvasRef.current.getBoundingClientRect();
       const mouseX = clickX - rect.left;
       const mouseY = clickY - rect.top;
-      const cellSize = gridCellSize * currentZoom;
-      const gridX = Math.floor((mouseX - offsetX) / cellSize);
-      const gridY = Math.floor((mouseY - offsetY) / cellSize);
+      const cellSize = gridCellSize * zoom;
+      const gridX = Math.floor((mouseX - _offsetX) / cellSize);
+      const gridY = Math.floor((mouseY - _offsetY) / cellSize);
       return { x: clamp(gridX, 0, gridWidth - 1), y: clamp(gridY, 0, gridHeight - 1) };
     };
 
@@ -299,10 +302,9 @@ export default function Canvas() {
     };
     
     // Update board state
-    const handleDropToken = async (token: Token, mapId: number) => {
+    const handleDropToken = (token: Token, mapId: number) => {
       // Make sure that if this map isn't shared, this should only run for DM
       if (map.id !== mapId) return;
-      await updateToken(token.id, token.size, token.x, token.y);
       boardState = boardState.map((_token: Token) => {
         if (_token.id !== token.id) return _token;
         return { ...token, x: token.x, y: token.y };
@@ -352,7 +354,7 @@ export default function Canvas() {
       }
     };
 
-    const handleMouseUp = (e: MouseEvent) => {
+    const handleMouseUp = async (e: MouseEvent) => {
       isDragging = false;
       leftMouseDown = false;
       document.querySelector('body').classList.remove('panning');
@@ -360,6 +362,7 @@ export default function Canvas() {
     
       if (isDraggingToken && selectedToken) {
         isDraggingToken = false;
+        await updateToken(selectedToken.id, selectedToken.size, selectedToken.x, selectedToken.y);
         emitServerEvent('MOVE_TOKEN', [selectedToken, map.id, room]);
       }
     };
@@ -413,6 +416,7 @@ export default function Canvas() {
       offServerEvent('SELECT_MAP');
       offServerEvent('VIEW_MAP');
       offServerEvent('MOVE_TOKEN');
+      offServerEvent('ADD_TOKEN_TO_BOARD');
     };
   }, [gridState]);
 
