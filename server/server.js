@@ -19,12 +19,6 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.join(__dirname, 'client', 'build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
-
 // Routes
 const userRouter = require('./routes/user.router');
 const dashboardRouter = require('./routes/dashboard.router');
