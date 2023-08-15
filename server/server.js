@@ -5,13 +5,14 @@ const http = require('http');
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-// Body parser middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -35,10 +36,11 @@ app.use('/api/map', mapRouter);
 app.use('/api/token', tokenRouter);
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
+// Serve index.html for all routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 // Socket.io
