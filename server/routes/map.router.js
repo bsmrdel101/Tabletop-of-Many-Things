@@ -173,4 +173,20 @@ router.put('/', rejectUnauthenticated, (req, res) => {
   })  
 });
 
+router.delete('/token/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = (`
+        DELETE FROM "map_tokens"
+        WHERE "id" = $1;
+    `);
+    const sqlValues = [
+        req.params.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then(() => res.sendStatus(201))
+        .catch((dberror) => {
+        console.log('Oops you did a goof: ', dberror);
+        res.sendStatus(500)
+    })  
+  });
+
 module.exports = router;

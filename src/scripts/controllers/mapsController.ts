@@ -22,7 +22,7 @@ export const getMaps = async (id: number) => {
 };
 
 export const getMap = async (id: number) => {
-  try {
+  try {    
     const res = await axios.get(`/api/map/${id}`);
     return res.data;
   } catch (err) {
@@ -92,9 +92,12 @@ export const updateToken = async (id: number, size: number, x: number, y: number
   }
 };
 
-export const clearTokensFromMap = async (game: Game) => {
-  // try {
-  // } catch (err) {
-  //   console.log(err);
-  // }
+// === POST routes === //
+
+export const deleteTokenFromMap = async (id: number) => {
+  try {
+    await axios.delete(`/api/map/token/${id}`);
+  } catch (err) {
+    console.log(err);
+  }
 };

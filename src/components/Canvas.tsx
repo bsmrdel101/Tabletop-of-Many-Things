@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGrid, setGrid } from "../redux/reducers/gridSlice";
 import { Coord, Map, Token } from "../scripts/types";
 import { clamp } from "../scripts/tools/utils";
-import { addTokenToMap, getMap, updateToken } from "../scripts/controllers/mapsController";
+import { addTokenToMap, deleteTokenFromMap, getMap, updateToken } from "../scripts/controllers/mapsController";
 import { setSelectedMap } from "../scripts/controllers/dashboardController";
 import { setRightClickMenu } from "../redux/reducers/rightClickMenuSlice";
 import { fetchGameData, setMap } from "../redux/reducers/gameSlice";
@@ -96,7 +96,9 @@ export default function Canvas() {
     onServerEvent('ADD_TOKEN_TO_BOARD', async (clientX: number, clientY: number, token: Token, mapId: number, zoom: number, offsetX: number, offsetY: number, socketId: string) => {
       const { x, y } = getGridCellCoords(clientX, clientY, zoom, offsetX, offsetY);
       if (socketId === socket.id) await addTokenToMap(token, mapId, x, y);
-      boardState = [...boardState, { ...token, x: x, y: y }];
+      const newMap = await getMap(map.id);
+      boardState = newMap.boardState;
+      dispatch(setMap(newMap));
       drawGrid();
     });
 
@@ -106,6 +108,7 @@ export default function Canvas() {
 
 
     const removeToken = async (token: Token) => {
+      await deleteTokenFromMap(token.id);
       boardState = boardState.filter((_token: Token) => {
         return _token.id !== token.id;
       });
