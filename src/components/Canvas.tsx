@@ -95,12 +95,29 @@ export default function Canvas() {
 
     onServerEvent('ADD_TOKEN_TO_BOARD', async (clientX: number, clientY: number, token: Token, mapId: number, zoom: number, offsetX: number, offsetY: number, socketId: string) => {
       const { x, y } = getGridCellCoords(clientX, clientY, zoom, offsetX, offsetY);
-      if (socketId === socket.id) await addTokenToMap(token, mapId, x, y);
-      const newMap = await getMap(map.id);
-      boardState = newMap.boardState;
-      dispatch(setMap(newMap));
-      drawGrid();
+    
+      if (socketId === socket.id) {
+        // Only the player who dropped the token awaits the token addition
+        await addTokenToMap(token, mapId, x, y);
+        const newMap = await getMap(mapId);
+        boardState = newMap.boardState;
+        dispatch(setMap(newMap));
+        drawGrid();
+      } else {
+        // Other players listen for the "TOKEN_ADDED" event from the player who dropped the token
+        onServerEvent('ADD_TOKEN_TO_BOARD_SUCCESS', async () => {
+          const newMap = await getMap(mapId);
+          boardState = newMap.boardState;
+          dispatch(setMap(newMap));
+          drawGrid();
+        });
+      }
+    
+      if (socketId === socket.id) {
+        emitServerEvent('ADD_TOKEN_TO_BOARD_SUCCESS', [room]);
+      }
     });
+    
 
     onServerEvent('REMOVE_TOKEN', (token: Token) => {
       removeToken(token);

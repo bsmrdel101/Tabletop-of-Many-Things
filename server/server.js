@@ -85,6 +85,10 @@ io.on('connection', (socket) => {
     io.to(room).emit('ADD_TOKEN_TO_BOARD', x, y, token, mapId, zoom, offsetX, offsetY, socket.id);
   });
 
+  socket.on('ADD_TOKEN_TO_BOARD_SUCCESS', (room) => {
+    io.to(room).emit('ADD_TOKEN_TO_BOARD_SUCCESS');
+  });
+
   socket.on('REMOVE_TOKEN', (token, room) => {
     io.to(room).emit('REMOVE_TOKEN', token);
   });
