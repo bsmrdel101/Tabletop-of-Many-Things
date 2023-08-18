@@ -2,7 +2,6 @@
 @import "./mixins/mixins";
 @import "./components/DashboardPage";
 @import "./components/GamePage";
-@import "./components/LoginPage";
 @import "./components/RegisterPage";
 @import "./components/ActionButton";
 @import "./components/Canvas";
@@ -52,12 +51,11 @@
 
 body {
   margin: 0;
-  background-color: var(--background-color-0);
+  // background-color: var(--background-color-0);
+  background: url('../../public/images/tabletop-bg-3.jpg') no-repeat;
+  background-size: cover;
   font-size: 100%;
-}
-
-.page-title {
-  font-size: 1.875em; /* 30px / 16px */
+  height: 95vh;
 }
 
 input {
@@ -133,7 +131,7 @@ button {
   }
 
   &--logout {
-    margin: 3rem 0 3rem 1rem;
+    margin: auto 0.8rem;
   }
 
   &--attack {

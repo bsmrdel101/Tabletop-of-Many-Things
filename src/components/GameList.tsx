@@ -29,6 +29,7 @@ export default function GameList({ joinGame }: Props) {
   return (
     <>
       <div className="games-list">
+        <p className="games-list__title">Game List</p>
         {gamesList.map((game) => {
           return <GameCard key={game.id} game={game} joinGame={joinGame} />;
         })}
@@ -36,7 +37,7 @@ export default function GameList({ joinGame }: Props) {
           <NewGameForm />
         }
         <button className="btn--hover" onClick={toggleGameForm}>
-          Create Campaign
+          { gameFormOpen ? 'Cancel' : 'Create Campaign' }
         </button>
       </div>
     </>

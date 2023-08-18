@@ -20,6 +20,7 @@ export default function GameListHistory({ joinGame }: Props) {
   
   return (
     <div className="games-list">
+      <p className="games-list__title">Game History</p>
       {gameHistory.map((game) => {
         return <GameCard key={game.id} game={game} joinGame={joinGame} />;
       })}

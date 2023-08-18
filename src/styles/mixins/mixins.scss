@@ -4,5 +4,5 @@
 
 @mixin red-border($px) {
   margin-bottom: 0.4rem;
-  border-bottom: $px solid var(--color-red-1);
+  border-bottom: $px solid var(--red-1);
 }

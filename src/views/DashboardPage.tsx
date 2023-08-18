@@ -6,13 +6,15 @@ import GameList from "../components/GameList";
 import GameListHistory from "../components/GameListHistory";
 import { getGame } from "../scripts/controllers/dashboardController";
 import { setGameData } from "../redux/reducers/gameSlice";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { getMap } from "../scripts/controllers/mapsController";
+import { fetchUser } from "../redux/reducers/userSlice";
 
 
 export default function DashboardPage() {
   const dispatch = useAppDispatch();
   const [roomCodeInput, setRoomCodeInput] = useState('');
+  const user = useAppSelector(fetchUser);
 
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
@@ -41,8 +43,14 @@ export default function DashboardPage() {
 
   return (
     <div className="dashboard-page">
-      <h1 className="page-title">Dashboard</h1>
-      <div className="dashboard-container">
+      <div className="dashboard-page__container">
+        <h1>Tabletop of <br /> Many Things</h1>
+        {/* <div>
+          <button>Play</button>
+        </div> */}
+      </div>
+
+      <div className="dashboard-page__container--right-side">
         <form onSubmit={(e) => handleJoinRoom(e)}>
           <input
             className="dashboard-page__join-room-input"
@@ -53,8 +61,14 @@ export default function DashboardPage() {
           />
           <button type="submit">Join Room</button>
         </form>
-        <GameList joinGame={joinGame} />
-        <GameListHistory joinGame={joinGame} />
+        <div style={{ display:'flex', gap:'1rem' }}>
+          <GameList joinGame={joinGame} />
+          <GameListHistory joinGame={joinGame} />
+        </div>
+      </div>
+
+      <div className="dashboard-page__user-box">
+        <p>{ user.username }</p>
         <LogoutBtn />
       </div>
     </div>

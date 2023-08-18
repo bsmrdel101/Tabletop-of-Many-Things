@@ -1,7 +1,7 @@
 :root {
   /* Main */
   --background-color-0: #b59696;
-  --background-color-1: rgb(208, 195, 195);
+  --background-color-1: rgba(208, 195, 195, 0.295);
   --background-color-2: #e8dcdc;
 
   /* Grid */
@@ -32,12 +32,13 @@
   --btn-color-1: #6f5656;
 
   /* Colors */
-  --color-blue-0: rgb(48 102 231 / 39%) 0 3px 8px;
-  --color-blue-1: rgb(144 194 255);
-  --color-red-0: rgba(212, 20, 20, 0.24) 0 3px 8px;
-  --color-red-1: #985151;
-  --color-red-2: #e97d7d;
-  --color-red-3: rgb(237 156 156);
+  --blue-0: rgb(48 102 231 / 39%) 0 3px 8px;
+  --blue-1: rgb(144 194 255);
+  --red-0: rgba(212, 20, 20, 0.24) 0 3px 8px;
+  --red-1: #985151;
+  --red-2: #e97d7d;
+  --red-3: rgb(237 156 156);
+  --purple-0: #500150;
 
   /* Damage type colors */
   --dmg-color-physical: rgba(213, 213, 213, 0.431);

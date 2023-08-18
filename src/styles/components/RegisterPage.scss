@@ -12,7 +12,7 @@
   margin: 0 25%;
 
   &--login-user-form {
-    margin-top: 20%;
+    margin-top: 10rem;
     background-color: var(--background-color-1);
     position: relative;
 
@@ -32,6 +32,11 @@
       left: 0;
       right: 0;
       bottom: 1.3rem;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     input {
