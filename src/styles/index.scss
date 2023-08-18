@@ -1,13 +1,13 @@
 @import "./settings/colors";
 @import "./mixins/mixins";
-@import "./components/DashboardPage";
+@import "./components/dashboard/DashboardPage.scss";
 @import "./components/GamePage";
 @import "./components/RegisterPage";
 @import "./components/ActionButton";
 @import "./components/Canvas";
-@import "./components/GameCard";
-@import "./components/GameList";
-@import "./components/GameListHistory";
+@import "./components/dashboard/GameCard";
+@import "./components/dashboard/GameList";
+@import "./components/dashboard/GameListHistory";
 @import "./components/MapToolbar";
 @import "./components/RightClickMenus";
 @import "./components/Sidebar";
@@ -52,7 +52,7 @@
 body {
   margin: 0;
   // background-color: var(--background-color-0);
-  background: url('../../public/images/tabletop-bg-3.jpg') no-repeat;
+  background: url("../../public/images/tabletop-bg-3.jpg") no-repeat;
   background-size: cover;
   font-size: 100%;
   height: 95vh;

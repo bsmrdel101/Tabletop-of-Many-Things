@@ -27,6 +27,10 @@ export default function Canvas({ userType }: Props) {
   let leftMouseDown = false;
   let lastX = 0;
   let lastY = 0;
+  let initialClickX = 0;
+  let initialClickY = 0;
+  let initialTokenTopLeftX = 0;
+  let initialTokenTopLeftY = 0;
   
   const dispatch = useAppDispatch();
   const { room, game, map } = useAppSelector(fetchGameData).game;
@@ -309,22 +313,35 @@ export default function Canvas({ userType }: Props) {
     const getTokenSelected = (clickX: number, clickY: number): Token | null => {
       const tokens: Token[] = boardState;
       const { x, y } = getGridCellCoords(clickX, clickY);
-    
+  
       for (const token of tokens) {
-        if (token.x === x && token.y === y) {
+        const tokenRight = token.x + token.size - 1;
+        const tokenBottom = token.y + token.size - 1;
+  
+        if (x >= token.x && x <= tokenRight && y >= token.y && y <= tokenBottom) {
           return token;
         }
       }
       return null;
     };
-
+    
     // Create a ghost image to show token movement
     const handleTokenGhostImage = (e: MouseEvent) => {
       const { x, y } = getGridCellCoords(e.clientX, e.clientY);
-      selectedToken = { ...selectedToken, x: x, y: y };
+      const offsetX = x - initialClickX;
+      const offsetY = y - initialClickY;
+  
+      // Calculate the new top-left position of the token based on the initial token position and the cursor movement
+      const newTopLeftX = initialTokenTopLeftX + offsetX;
+      const newTopLeftY = initialTokenTopLeftY + offsetY;
+  
+      // Update the token's position based on the new top-left position
+      selectedToken = { ...selectedToken, x: newTopLeftX, y: newTopLeftY };
+  
+      // Update the board state and redraw
       boardState = boardState.map((token: Token) => {
         if (token.id !== selectedToken.id) return token;
-        return { ...selectedToken, x: x, y: y };
+        return { ...selectedToken };
       });
       drawGrid();
     };
@@ -354,6 +371,11 @@ export default function Canvas({ userType }: Props) {
         leftMouseDown = true;
         selectedToken = getTokenSelected(e.clientX, e.clientY);
         if (selectedToken) {
+          const { x, y } = getGridCellCoords(e.clientX, e.clientY);
+          initialClickX = x;
+          initialClickY = y;
+          initialTokenTopLeftX = selectedToken.x;
+          initialTokenTopLeftY = selectedToken.y;
           document.querySelector('body').classList.add('grabbing');
         }
         // Hide context menu
