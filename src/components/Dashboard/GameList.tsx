@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getGames } from "../scripts/controllers/dashboardController";
-import { Game } from "../scripts/types";
-import NewGameForm from "./NewGameForm";
+import { getGames } from "../../scripts/controllers/dashboardController";
+import { Game } from "../../scripts/types";
 import GameCard from "./GameCard";
+import NewGameForm from "./NewGameForm";
 
 
 interface Props {

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { addGame } from "../scripts/controllers/dashboardController";
+import { addGame } from "../../scripts/controllers/dashboardController";
 
 
 export default function GameList() {

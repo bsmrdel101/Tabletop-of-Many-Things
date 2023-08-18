@@ -330,12 +330,9 @@ export default function Canvas({ userType }: Props) {
       const { x, y } = getGridCellCoords(e.clientX, e.clientY);
       const offsetX = x - initialClickX;
       const offsetY = y - initialClickY;
-  
-      // Calculate the new top-left position of the token based on the initial token position and the cursor movement
       const newTopLeftX = initialTokenTopLeftX + offsetX;
       const newTopLeftY = initialTokenTopLeftY + offsetY;
   
-      // Update the token's position based on the new top-left position
       selectedToken = { ...selectedToken, x: newTopLeftX, y: newTopLeftY };
   
       // Update the board state and redraw

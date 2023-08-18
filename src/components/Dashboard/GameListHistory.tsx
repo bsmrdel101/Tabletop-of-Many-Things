@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getGamesHistory } from "../scripts/controllers/dashboardController";
-import { Game } from "../scripts/types";
+import { getGamesHistory } from "../../scripts/controllers/dashboardController";
+import { Game } from "../../scripts/types";
 import GameCard from "./GameCard";
 
 
