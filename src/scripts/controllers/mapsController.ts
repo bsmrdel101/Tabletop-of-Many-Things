@@ -21,9 +21,9 @@ export const getMaps = async (id: number) => {
   }
 };
 
-export const getMap = async (id: number) => {
-  try {    
-    const res = await axios.get(`/api/map/${id}`);
+export const getMap = async (mapId: number, gameId: number) => {
+  try {
+    const res = await axios.get(`/api/map/{"mapId":${mapId}, "gameId":${gameId}}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -54,9 +54,10 @@ export const addMap = async (payload: NewMap, gameId: number) => {
   }
 };
 
-export const addTokenToMap = async (token: Token, mapId: number, x: number, y: number) => {
+export const addTokenToMap = async (gameId: number, token: Token, mapId: number, x: number, y: number) => {
   try {
     await axios.post('/api/map/token', {
+      gameId: gameId,
       mapId: mapId,
       tokenId: token.id,
       x: x,

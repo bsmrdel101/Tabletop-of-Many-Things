@@ -22,14 +22,16 @@ import { fetchGameData, setGameData } from "../redux/reducers/gameSlice";
 export default function GamePage() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(fetchUser);
-  const { game, map } = useAppSelector(fetchGameData).game;
+  const { game } = useAppSelector(fetchGameData).game;
   const { room }: any = useParams();
   const [userType, setUserType] = useState<'dm' | 'player'>('player');
+
 
   useEffect(() => {
     const setupGame = async () => {
       const game: Game = await getGame(room);
-      const map: Map = await getMap(game.map_id);
+      const map: Map = await getMap(game.map_id, game.id);
+      
       // Check if the game exists
       if (!game) {
         console.error('game doesn\'t exist');
@@ -54,7 +56,7 @@ export default function GamePage() {
         })
       );
   
-      emitServerEvent('JOIN_ROOM', [room, (type: 'dm' | 'player') => {
+      emitServerEvent('JOIN_ROOM', [user.username, room, (type: 'dm' | 'player') => {
         setUserType(type);
       }]);
     };

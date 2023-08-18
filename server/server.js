@@ -46,12 +46,17 @@ app.get('*', function (req, res) {
 // Socket.io
 io.on('connection', (socket) => {
   // Makes the user join a room
-  socket.on('JOIN_ROOM', (room, fn) => {
+  socket.on('JOIN_ROOM', (username, room, fn) => {
     // Join room
     socket.join(room);
 
     // Get all socket data
     const clients = io.sockets.adapter.rooms.get(room);
+    clients.forEach((clientId) => {
+      const clientSocket = io.sockets.sockets.get(clientId);
+      clientSocket.data.username = username;
+    });
+
     let dmExists = false;
     io.sockets.sockets.forEach((client) => {
       if (client.data.clientType === 'dm') dmExists = true;
@@ -70,10 +75,10 @@ io.on('connection', (socket) => {
   socket.on('UPDATE_PLAYER_LIST', (room) => {
     let clientList = [];
     const clients = io.sockets.adapter.rooms.get(room);
-    for (const clientId of clients) {
+    clients.forEach((clientId) => {
       const clientSocket = io.sockets.sockets.get(clientId);
       clientList.push(clientSocket.data.nickname);
-    }
+    });
     io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
   });
 

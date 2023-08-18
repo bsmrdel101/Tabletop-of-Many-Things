@@ -23,48 +23,48 @@ router.get('/all/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const { mapId, gameId } = JSON.parse(req.params.id);
   const sqlText = (`
     SELECT
-      "maps"."id",
-      "maps"."game_id",
-      "maps"."name",
-      "maps"."image",
-      "maps"."cellSize",
-      "maps"."gridColor",
-      "maps"."gridOpacity",
-      "maps"."offsetX",
-      "maps"."offsetY",
-      CASE
-          WHEN COUNT("map_tokens"."id") > 0 THEN
-              json_agg(
-                  json_build_object(
-                      'id', "map_tokens"."id",
-                      'token_id', "tokens"."id",
-                      'user_id', "tokens"."user_id",
-                      'image', "tokens"."image",
-                      'size', "tokens"."size",
-                      'creature', "tokens"."creature",
-                      'x', "map_tokens"."x",
-                      'y', "map_tokens"."y"
-                  )
-              )
-          ELSE
-              json_build_array()
-      END AS "boardState"
+    "maps"."id",
+    "maps"."game_id",
+    "maps"."name",
+    "maps"."image",
+    "maps"."cellSize",
+    "maps"."gridColor",
+    "maps"."gridOpacity",
+    "maps"."offsetX",
+    "maps"."offsetY",
+    COALESCE(
+        json_agg(
+            json_build_object(
+                'id', "map_tokens"."id",
+                'token_id', "tokens"."id",
+                'user_id', "tokens"."user_id",
+                'image', "tokens"."image",
+                'size', "tokens"."size",
+                'creature', "tokens"."creature",
+                'x', "map_tokens"."x",
+                'y', "map_tokens"."y"
+            )
+        ),
+        json_build_array()
+    ) AS "boardState"
     FROM
-      "maps"
+    "maps"
     LEFT JOIN
-      "map_tokens" ON "maps"."id" = "map_tokens"."map_id"
+    "map_tokens" ON "maps"."id" = "map_tokens"."map_id" AND "map_tokens"."game_id" = $2
     LEFT JOIN
-      "tokens" ON "map_tokens"."token_id" = "tokens"."id"
+    "tokens" ON "map_tokens"."token_id" = "tokens"."id"
     WHERE
-      "maps"."id" = $1
+    "maps"."id" = $1
     GROUP BY
-      "maps"."id", "maps"."game_id", "maps"."name", "maps"."image", "maps"."cellSize",
-      "maps"."gridColor", "maps"."gridOpacity", "maps"."offsetX", "maps"."offsetY";
+    "maps"."id", "maps"."game_id", "maps"."name", "maps"."image", "maps"."cellSize",
+    "maps"."gridColor", "maps"."gridOpacity", "maps"."offsetX", "maps"."offsetY";
   `);
   const sqlValues = [
-      req.params.id
+    mapId,
+    gameId
   ];
   pool.query(sqlText, sqlValues)
     .then((dbres) => res.send(dbres.rows[0]))
@@ -111,10 +111,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/token', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-        INSERT INTO "map_tokens" ("map_id", "token_id", "x", "y", "size")
-        VALUES ($1, $2, $3, $4, $5);
+        INSERT INTO "map_tokens" ("game_id", "map_id", "token_id", "x", "y", "size")
+        VALUES ($1, $2, $3, $4, $5, $6);
     `;
     const sqlValues = [
+        req.body.gameId,
         req.body.mapId,
         req.body.tokenId,
         req.body.x,

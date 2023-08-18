@@ -16,7 +16,7 @@ export default function DashboardPage() {
 
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
-    const map: Map = await getMap(game.id);
+    const map: Map = await getMap(game.map_id, game.id);
 
     dispatch(
       setGameData({
@@ -30,7 +30,7 @@ export default function DashboardPage() {
       console.warn('game doesn\'t exist');
       return;
     }
-    
+
     changeRoute(`/game/${roomCode}`);
   };
 

@@ -38,6 +38,7 @@ CREATE TABLE "tokens" (
 
 CREATE TABLE "map_tokens" (
     "id" SERIAL PRIMARY KEY,
+    "game_id" INTEGER REFERENCES "games_list",
     "map_id" INTEGER REFERENCES "maps",
     "token_id" INTEGER REFERENCES "tokens",
     "x" INTEGER DEFAULT 0,

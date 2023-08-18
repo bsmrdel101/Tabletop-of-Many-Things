@@ -49,7 +49,7 @@ export default function Canvas() {
     onServerEvent('SELECT_MAP', async (selectedMap: Map) => {
       bgImage.src = selectedMap.image;
       await setSelectedMap(selectedMap, game.id);
-      const newMap = await getMap(selectedMap.id);
+      const newMap = await getMap(selectedMap.id, game.id);
       boardState = newMap.boardState;
       dispatch(setMap(newMap));
       
@@ -70,7 +70,7 @@ export default function Canvas() {
 
     onServerEvent('VIEW_MAP', async (selectedMap: Map) => {
       bgImage.src = selectedMap.image;
-      const newMap = await getMap(selectedMap.id);
+      const newMap = await getMap(selectedMap.id, game.id);
       boardState = newMap.boardState;
       dispatch(setMap(newMap));
 
@@ -95,18 +95,18 @@ export default function Canvas() {
 
     onServerEvent('ADD_TOKEN_TO_BOARD', async (clientX: number, clientY: number, token: Token, mapId: number, zoom: number, offsetX: number, offsetY: number, socketId: string) => {
       const { x, y } = getGridCellCoords(clientX, clientY, zoom, offsetX, offsetY);
-    
+      
       if (socketId === socket.id) {
         // Only the player who dropped the token awaits the token addition
-        await addTokenToMap(token, mapId, x, y);
-        const newMap = await getMap(mapId);
+        await addTokenToMap(game.id, token, mapId, x, y);
+        const newMap = await getMap(mapId, game.id);
         boardState = newMap.boardState;
         dispatch(setMap(newMap));
         drawGrid();
       } else {
         // Other players listen for the "TOKEN_ADDED" event from the player who dropped the token
         onServerEvent('ADD_TOKEN_TO_BOARD_SUCCESS', async () => {
-          const newMap = await getMap(mapId);
+          const newMap = await getMap(mapId, game.id);
           boardState = newMap.boardState;
           dispatch(setMap(newMap));
           drawGrid();
@@ -183,6 +183,10 @@ export default function Canvas() {
 
     // Place all tokens from boardState onto the grid
     const placeTokens = () => {
+      // Check if array is null
+      const filteredBoardState = boardState.filter((token: Token) => token.id);
+      if (!boardState || filteredBoardState.length === 0) return;
+
       boardState.forEach((mapToken: Token) => {
         drawToken(mapToken.x, mapToken.y, mapToken.image, mapToken.size);
       });
