@@ -13,8 +13,8 @@ export default function RightClickMenu() {
   useEffect(() => {
     const deleteBtn = document.getElementById('right-click-menu__delete-token-btn');
     if (deleteBtn) {
-      deleteBtn.addEventListener('mousedown', () => {
-        deleteToken();
+      deleteBtn.addEventListener('mousedown', (e: MouseEvent) => {
+        if(e.buttons === 1) deleteToken();
       });
     }
   }, [rightClickMenuType]);

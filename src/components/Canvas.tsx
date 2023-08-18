@@ -126,7 +126,6 @@ export default function Canvas({ userType }: Props) {
       }
     });
     
-
     onServerEvent('REMOVE_TOKEN', (token: Token) => {
       removeToken(token);
     });
@@ -401,7 +400,7 @@ export default function Canvas({ userType }: Props) {
       }
     };
 
-    const handleMouseUp = async (e: MouseEvent) => {
+    const handleMouseUp = async () => {
       isDragging = false;
       leftMouseDown = false;
       document.querySelector('body').classList.remove('panning');
