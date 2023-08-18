@@ -4,7 +4,7 @@ import { toggleModal } from "../scripts/modalManager";
 
 
 interface Props {
-    userType: 'dm' | 'player';
+  userType: 'dm' | 'player';
 }
 
 export default function Sidebar({ userType }: Props) {

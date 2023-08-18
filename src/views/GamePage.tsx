@@ -74,7 +74,7 @@ export default function GamePage() {
             <div className="game-content--box">
               <div className="grid-container">
                 <MapToolbar userType={userType} />
-                <GridCanvas />
+                <GridCanvas userType={userType} />
               </div>
               <RightSideContent />
             </div>

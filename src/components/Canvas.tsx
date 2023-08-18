@@ -11,7 +11,11 @@ import { fetchGameData, setMap } from "../redux/reducers/gameSlice";
 import { setGridPanOffset, setGridZoom } from "../redux/reducers/gridCoordSlice";
 
 
-export default function Canvas() {
+interface Props {
+  userType: 'dm' | 'player';
+}
+
+export default function Canvas({ userType }: Props) {
   const bgCanvasRef = useRef<HTMLCanvasElement>(null);
   const gridCanvasRef = useRef<HTMLCanvasElement>(null);
   let offsetX = 0;
@@ -227,11 +231,11 @@ export default function Canvas() {
       gridCellSize = gridState.cellSize;
       gridColor = gridState.gridColor;
       gridOpacity = convertedOpacity;
-
+      
       offsetX = 0;
-      offsetY = 0;
+      offsetY = userType === 'dm' ? 40 : 0;
       bgOffsetX = gridState.offsetX;
-      bgOffsetY = gridState.offsetY;
+      bgOffsetY = userType === 'dm' ? 40 : gridState.offsetY;
 
       bgImage.src = map.image;
       drawGrid();
@@ -442,7 +446,7 @@ export default function Canvas() {
       offServerEvent('MOVE_TOKEN');
       offServerEvent('ADD_TOKEN_TO_BOARD');
     };
-  }, [gridState]);
+  }, [gridState, userType]);
 
   return (
     <>
