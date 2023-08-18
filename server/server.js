@@ -72,14 +72,14 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('UPDATE_PLAYER_LIST', (room) => {
+  socket.on('GET_PLAYER_LIST', (room, fn) => {
     let clientList = [];
     const clients = io.sockets.adapter.rooms.get(room);
     clients.forEach((clientId) => {
       const clientSocket = io.sockets.sockets.get(clientId);
-      clientList.push(clientSocket.data.nickname);
+      clientList.push(clientSocket.data.username);
     });
-    io.to(room).emit('UPDATE_PLAYER_LIST', clientList);
+    fn(clientList);
   });
 
   socket.on('MOVE_TOKEN', (token, mapId, room) => {

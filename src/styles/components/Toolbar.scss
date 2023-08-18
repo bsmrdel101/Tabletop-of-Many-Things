@@ -20,13 +20,15 @@
   &__text {
     margin: 0.4rem 0;
   }
-}
 
-.players-list {
-  position: absolute;
-  top: 0.3rem;
-  right: 0.3rem;
-  background-color: grey;
-  color: white;
-  padding: 0.5rem;
+  &__player-list {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    background-color: grey;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    z-index: 2;
+  }
 }
