@@ -16,13 +16,12 @@ export default function CreatureStatsModal({ creature }: Props) {
   const { index, name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
   const spellcasting = abilities.find((ability: SpecialAbility) => ability.spellcasting);
   const spells: MinifiedSpell[] = spellcasting && spellcasting.spellcasting.spells;
-  
   const [spellDetailsUrl, setSpellDetailsUrl] = useState<string | null>(null);
   const [openedSpellDetailsId, setOpenedSpellDetailsId] = useState<number | null>(null);
 
   useEffect(() => {
     console.log(creature);
-    makeDraggable(document.getElementById(`modal-stats-${index}`), '.draggable-area');
+    makeDraggable(document.getElementById(`modal-stats-${index}`));
   }, []);
 
 

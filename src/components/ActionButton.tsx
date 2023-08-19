@@ -1,4 +1,3 @@
-import React from "react";
 import { Action, Damage, Dice } from "../scripts/types";
 import { numIsPos } from "../scripts/tools/stringUtils";
 import { emitServerEvent } from "../scripts/config/socket-io";

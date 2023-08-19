@@ -140,9 +140,15 @@ button {
 
   &--search {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: -2rem;
+    top: 0.2rem;
     background-color: #c6c6c6;
+    padding: 0.3rem;
+    padding-bottom: 0.05rem;
+
+    img {
+      max-width: 1.5rem;
+    }
   }
 }
 

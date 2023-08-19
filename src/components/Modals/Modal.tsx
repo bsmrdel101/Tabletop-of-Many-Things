@@ -10,7 +10,7 @@ interface Props {
 
 export default function Modal({ children, title, close }: Props) {
   useEffect(() => {
-    makeDraggable(document.getElementById(`modal-${title}`), '.modal__title');
+    makeDraggable(document.getElementById(`modal-${title}`));
   }, []);
 
   return (

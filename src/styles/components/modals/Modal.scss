@@ -7,7 +7,7 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 0.5rem;
   width: 100%;
-  max-width: 16rem;
+  max-width: 21rem;
   z-index: 2;
   text-align: center;
   color: white;
@@ -26,7 +26,6 @@
 
   &__title {
     margin: 0 0 0.5rem;
-    cursor: move;
   }
 
   &__close-btn {
@@ -48,8 +47,13 @@
     align-items: center;
     align-items: baseline;
 
+    &--search {
+      display: flex;
+      align-items: baseline;
+    }
+
     label {
-      margin: 0;
+      margin: 0 0.3rem 0 0 !important;
     }
   }
 
