@@ -52,7 +52,13 @@ export default function CreatureStatsModal({ creature }: Props) {
       <div>
         <p><span className="bold">Armor Class</span> {ac}</p>
         <p><span className="bold">Health</span> {maxHp} {hitDice && `(${hitDice})`}</p>
-        <p><span className="bold">Speed</span> {speeds.map((speed) => `${speed.name} ${speed.value} ft`).join(', ')}</p>
+        <p><span className="bold">Speed</span> {speeds.map((speed) => {
+          if (speed.name === 'hover') {
+            return 'hover';
+          } else {
+            return `${speed.name} ${speed.value} ft`;
+          }
+        }).join(', ')}</p>
         <div className="modal-stats__general-stats">
           <div className="modal-score-container">
             {abilityScores.map((score: AbilityScore) => {

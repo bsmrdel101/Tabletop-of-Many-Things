@@ -149,15 +149,24 @@ export const convertDCTypeFormat = (dc: any): DC => {
 
 // Changes old damage format to new damage format
 export const convertDamageTypeFormat = (array: any): Damage => {
-  return array.map((arrayItem: any) => {
-    return { type: arrayItem.damage_type.index, dice: convertDiceTypeFormat(arrayItem.damage_dice) };
+  const damageOptions: any = [];
+  const updatedDamages = array.map((arrayItem: any) => {
+    if (arrayItem.damage_type) {
+      return { type: arrayItem.damage_type.index, dice: convertDiceTypeFormat(arrayItem.damage_dice) };
+    } else {
+      damageOptions.push(arrayItem);
+    }
+  }).filter((arrayItem: any) => arrayItem);
+  if (damageOptions.length > 0) damageOptions.forEach((arrayItem: any) => {
+    updatedDamages.push({ type: arrayItem.from.options[0].damage_type.index, dice: convertDiceTypeFormat(arrayItem.from.options[0].damage_dice) });
   });
+  return updatedDamages;
 };
 
 // Changes old dice format to new dice format
 export const convertDiceTypeFormat = (dice: string): Dice => {
   const amount = dice.split('d');
-  const splitString = amount[1].replace('-', ' -').replace('+', ' +').split(' ');
+  const splitString = amount[1] ? amount[1].replace('-', ' -').replace('+', ' +').split(' ') : '';
   return { amount: parseInt(amount[0]), type: parseInt(splitString[0]), mod: splitString[1] ? parseInt(splitString[1]) : 0, display: dice };
 };
 

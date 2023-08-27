@@ -1,6 +1,6 @@
 import { capitalize } from "./tools/stringUtils";
 import { convertACTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, getAbilityScoreMod, removeNullValues } from "./tools/utils";
-import { AbilityScore, Character, NameDesc, NameValue, Prof, SpecialAbility, Spell, Spellcasting } from "./types";
+import { AbilityScore, Character, NameDesc, NameValue, Prof, SpecialAbility, Spellcasting } from "./types";
 
 
 export class Creature {
@@ -94,8 +94,8 @@ export const convertApiCreature = (creature: any) => {
 };
 
 const getCreatureSpeeds = (speed: string): NameValue[] => {
-  return Object.keys(speed).map((key: any) => { 
-    return { name: key, value: parseInt(speed[key].replace(' ft.', '')) };
+  return Object.keys(speed).map((key: any) => {
+    return { name: key, value: parseInt(typeof speed[key] === 'string' && speed[key].replace(' ft.', '')) };
   });
 };
 
@@ -135,15 +135,15 @@ const getCreatureSpellcasting = (spellcasting: any): Spellcasting => {
     components: spellcasting.components_required,
     class: spellcasting.school,
     slots: {
-      1: spellcasting.slots['1'] ? spellcasting.slots['1'] : 0,
-      2: spellcasting.slots['2'] ? spellcasting.slots['2'] : 0,
-      3: spellcasting.slots['3'] ? spellcasting.slots['3'] : 0,
-      4: spellcasting.slots['4'] ? spellcasting.slots['4'] : 0,
-      5: spellcasting.slots['5'] ? spellcasting.slots['5'] : 0,
-      6: spellcasting.slots['6'] ? spellcasting.slots['6'] : 0,
-      7: spellcasting.slots['7'] ? spellcasting.slots['7'] : 0,
-      8: spellcasting.slots['8'] ? spellcasting.slots['8'] : 0,
-      9: spellcasting.slots['9'] ? spellcasting.slots['9'] : 0
+      1: spellcasting.slots && spellcasting.slots['1'] ? spellcasting.slots['1'] : 0,
+      2: spellcasting.slots && spellcasting.slots['2'] ? spellcasting.slots['2'] : 0,
+      3: spellcasting.slots && spellcasting.slots['3'] ? spellcasting.slots['3'] : 0,
+      4: spellcasting.slots && spellcasting.slots['4'] ? spellcasting.slots['4'] : 0,
+      5: spellcasting.slots && spellcasting.slots['5'] ? spellcasting.slots['5'] : 0,
+      6: spellcasting.slots && spellcasting.slots['6'] ? spellcasting.slots['6'] : 0,
+      7: spellcasting.slots && spellcasting.slots['7'] ? spellcasting.slots['7'] : 0,
+      8: spellcasting.slots && spellcasting.slots['8'] ? spellcasting.slots['8'] : 0,
+      9: spellcasting.slots && spellcasting.slots['9'] ? spellcasting.slots['9'] : 0
     },
     spells: spellcasting.spells
   };
