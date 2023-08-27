@@ -98,8 +98,8 @@ io.on('connection', (socket) => {
     io.to(room).emit('REMOVE_TOKEN', token);
   });
   
-  socket.on('ROLL_DICE', (result, room) => {
-    io.to(room).emit('ROLL_DICE', result);
+  socket.on('ROLL_DICE', (result, owner, rollType, targets, damageType, room) => {
+    io.to(room).emit('ROLL_DICE', result, owner, rollType, targets, damageType);
   });
 
   socket.on('SELECT_MAP', (map, room) => {

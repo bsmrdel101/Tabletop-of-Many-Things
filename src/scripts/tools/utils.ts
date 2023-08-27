@@ -72,7 +72,7 @@ export const makeDraggable = (el: HTMLElement, selector?: string) => {
     e.preventDefault();
   
     // Define the sensitivity factor (adjust as needed):
-    const sensitivity = 0.7; // Increase for more sensitivity, decrease for less
+    const sensitivity = 0.9; // Increase for more sensitivity, decrease for less
   
     // Calculate the new cursor position with sensitivity:
     pos1 = (pos3 - e.clientX) * sensitivity;

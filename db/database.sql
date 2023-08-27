@@ -248,7 +248,7 @@ VALUES
     (1, 1, 'https://i.pinimg.com/236x/88/4a/05/884a056ba7a5a004becacbfd1bfd78fe.jpg', 1, 'bandit'),
     (1, 1, 'https://i.imgur.com/zURSSgl.png', 1, 'fire-elemental'),
     (1, 1, 'https://i.imgur.com/5cibmUw.png', 2, null),
-    (1, 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 4, 'tarrasque')
+    (1, 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlW_xekRD291YBhLdPKYifDnF2HV74Csz0KQ&usqp=CAU', 5, 'tarrasque')
 ;
 
 INSERT INTO "maps" ("game_id", "name", "image")

@@ -1,7 +1,6 @@
-import { getApiSpell } from "./controllers/spellsController";
 import { capitalize } from "./tools/stringUtils";
 import { convertACTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, getAbilityScoreMod, removeNullValues } from "./tools/utils";
-import { AbilityScore, NameDesc, NameValue, Prof, SpecialAbility, Spell, Spellcasting } from "./types";
+import { AbilityScore, Character, NameDesc, NameValue, Prof, SpecialAbility, Spell, Spellcasting } from "./types";
 
 
 export class Creature {
@@ -27,6 +26,7 @@ export class Creature {
   abilities: SpecialAbility[];
   actions: NameDesc[];
   legActions: NameDesc[];
+  targets: (Creature | Character)[];
 
   constructor(index: string, name: string, size: string, type: string, alignment: string, ac: number, maxHp: number, hitDice: string, abilityScores: AbilityScore[], cr: number, xp: number, languages: string[], speeds: NameValue[], proficiencies: Prof[], vulnerabilities: string[], resistances: string[], damageImmunities: string[], conditionImmunities: string[], senses: NameValue[], abilities: SpecialAbility[], actions: NameDesc[], legActions: NameDesc[]) {
     this.index = index;
@@ -51,6 +51,7 @@ export class Creature {
     this.abilities = abilities;
     this.actions = actions;
     this.legActions = legActions;
+    this.targets = [];
   }
 }
 
@@ -86,7 +87,8 @@ export const convertApiCreature = (creature: any) => {
     senses: getCreatureSenses(senses),
     abilities: getCreatureAbilities(special_abilities),
     actions: getCreatureActions(actions),
-    legActions: getCreatureActions(legendary_actions)
+    legActions: getCreatureActions(legendary_actions),
+    targets: []
   };
   return convertedCreature;
 };

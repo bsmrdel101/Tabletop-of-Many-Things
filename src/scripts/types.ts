@@ -1,3 +1,5 @@
+import { Creature } from "./creatureDataStructure";
+
 export interface NameValue {
   name: string
   value: number
@@ -101,6 +103,18 @@ export type Roll = {
   mod: number
   roll: number
   total: number
+};
+
+export type RollResult = {
+  type: number
+  amount: number
+  mod: number
+  roll: number
+  total: number
+  owner: string
+  rollType: string
+  targets: (Creature | Character)[]
+  damageType: string
 };
 
 export type ChatMsg = {

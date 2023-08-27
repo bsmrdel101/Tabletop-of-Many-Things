@@ -86,7 +86,7 @@ export default function CreatureStatsModal({ creature }: Props) {
           <div key={i}>
             <p className="modal-stats__stat-heading"><span className="bold">{ability.name}</span></p>
             <p>{ability.desc}</p>
-            <ActionButton action={ability} />
+            <ActionButton creature={creature} action={ability} />
           </div>
         );
       })}
@@ -99,7 +99,7 @@ export default function CreatureStatsModal({ creature }: Props) {
             <div key={i}>
               <p className="modal-stats__stat-heading"><span className="bold">{action.name}</span></p>
               <p>{action.desc}</p>
-              <ActionButton action={action} />
+              <ActionButton creature={creature} action={action} />
             </div>
           );
         })}
@@ -112,7 +112,7 @@ export default function CreatureStatsModal({ creature }: Props) {
             <div key={i}>
               <p className="modal-stats__stat-heading"><span className="bold">{action.name}</span></p>
               <p>{action.desc}</p>
-              <ActionButton action={action} />
+              <ActionButton creature={creature} action={action} />
             </div>
           );
         })}
@@ -121,8 +121,14 @@ export default function CreatureStatsModal({ creature }: Props) {
       {spells && <h3 className="modal-stats__subtitle">Spells</h3>}
       {spells && spells.map((spell: MinifiedSpell, i) => {
         return (
-          <div key={i} onClick={() => toggleSpellDetails(spell, i)}>
-            <p className="modal-stats__stat-heading modal-stats__stat-heading--spell"><span className="bold">{spell.name}</span> <img src={openedSpellDetailsId === i ? '/images/dropdown-arrow-up.svg' : '/images/dropdown-arrow-down.svg'} alt={openedSpellDetailsId === i ? 'Collapse spell details' : 'Expand spell details'} draggable="false" /></p>
+          <div key={i}>
+            <p
+              className="modal-stats__stat-heading modal-stats__stat-heading--spell"
+              onClick={() => toggleSpellDetails(spell, i)}
+            >
+              <span className="bold">{spell.name}</span>
+              <img src={openedSpellDetailsId === i ? '/images/dropdown-arrow-up.svg' : '/images/dropdown-arrow-down.svg'} alt={openedSpellDetailsId === i ? 'Collapse spell details' : 'Expand spell details'} draggable="false" />
+            </p>
             {openedSpellDetailsId === i && 
               <CreatureSpellDetails url={spellDetailsUrl} />
             }

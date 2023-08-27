@@ -26,6 +26,24 @@
       max-width: 18.5rem;
     }
 
+    &--total {
+      font-size: 1.2rem;
+      background-color: rgb(91, 87, 87);
+      color: white;
+      padding: 0 0.2rem;
+      border-radius: 0.3rem;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+
+    &__owner {
+      font-weight: 600;
+
+      &--self {
+        color: #3527c9;
+        font-weight: 600;
+      }
+    }
+
     &::-webkit-scrollbar {
       width: 0.45rem;
     }
@@ -67,4 +85,26 @@
       max-height: 67.5%;
     }
   }
+}
+
+.roll-damage {
+  &--fire { color: var(--dmg-color-fire); }
+
+  &--poison { color: var(--dmg-color-poison); }
+
+  &--acid { color: var(--dmg-color-acid); }
+
+  &--cold { color: var(--dmg-color-cold); }
+
+  &--radiant { color: var(--dmg-color-radiant); }
+
+  &--necrotic { color: var(--dmg-color-necrotic); }
+
+  &--force { color: var(--dmg-color-force); }
+
+  &--lightning { color: var(--dmg-color-lightning); }
+
+  &--psychic { color: var(--dmg-color-psychic); }
+
+  &--thunder { color: var(--dmg-color-thunder); }
 }
