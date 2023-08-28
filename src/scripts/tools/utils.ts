@@ -170,7 +170,7 @@ export const convertDiceTypeFormat = (dice: string): Dice => {
   return { amount: parseInt(amount[0]), type: parseInt(splitString[0]), mod: splitString[1] ? parseInt(splitString[1]) : 0, display: dice };
 };
 
-// Removes null values from an object
+// Removes null values from an array object
 export const removeNullValues = (array: any) => {
   const results: any = [];
   array.forEach((item: any, i: number) => {
@@ -181,6 +181,8 @@ export const removeNullValues = (array: any) => {
   });
   return results;
 };
+
+export const removeNullObjProps = (obj: any) => Object.entries(obj).reduce((a: any, [k, v]) => (v == null ? a : (a[k] = v, a)), {});
 
 // Changes old armor class format to new armor class format
 export const convertACTypeFormat = (array: any): number => {

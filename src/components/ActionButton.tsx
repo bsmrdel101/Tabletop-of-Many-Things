@@ -4,7 +4,7 @@ import { emitServerEvent } from "../scripts/config/socket-io";
 import { rollDice } from "../scripts/diceRolls";
 import { useAppSelector } from "../redux/hooks";
 import { fetchGameData } from "../redux/reducers/gameSlice";
-import { Creature } from "../scripts/creatureDataStructure";
+import { Creature } from "../scripts/types";
 
 
 interface Props {

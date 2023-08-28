@@ -13,6 +13,9 @@ import LoginPage from '../views/LoginPage';
 import RegisterPage from '../views/RegisterPage';
 import { useAppDispatch } from '../redux/hooks';
 import { setUser } from '../redux/reducers/userSlice';
+import { Creature } from '../scripts/types';
+import { getAllCreatures } from '../scripts/controllers/creaturesController';
+import { setCreatureData } from '../redux/reducers/creaturesSlice';
 
 
 export default function App() {
@@ -24,6 +27,9 @@ export default function App() {
       const user = await getUser();
       setUserState(user);
       dispatch(setUser(user));
+
+      const creatures: Creature[] = await getAllCreatures();
+      dispatch(setCreatureData(creatures));
     };
     fetchData();
   }, []);

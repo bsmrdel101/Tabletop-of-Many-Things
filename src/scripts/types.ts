@@ -1,5 +1,3 @@
-import { Creature } from "./creatureDataStructure";
-
 export interface NameValue {
   name: string
   value: number
@@ -89,6 +87,32 @@ export type Character = {
   climb_speed: number
 };
 
+export type Creature = {
+  id: number;
+  name: string;
+  size: string;
+  type: string;
+  alignment: string;
+  ac: number;
+  maxHp: number;
+  hitDice: string;
+  abilityScores: AbilityScore[];
+  cr: number;
+  xp: number;
+  languages: string[];
+  speeds: NameValue[];
+  proficiencies: Prof[];
+  vulnerabilities: string[];
+  resistances: string[];
+  damageImmunities: string[];
+  conditionImmunities: string[];
+  senses: NameValue[];
+  abilities: SpecialAbility[];
+  actions: NameDesc[];
+  legActions: NameDesc[];
+  targets: (Creature | Character)[];
+};
+
 export type Skill = {
   id: number
   name: string
@@ -122,12 +146,6 @@ export type ChatMsg = {
   sender: string
 };
 
-export type MinifiedCreature = {
-  index: string
-  name: string
-  url?: string
-};
-
 export interface Modifiers {
   strMod: number
   dexMod: number
@@ -143,15 +161,15 @@ export interface AtSpecificLevel {
 }
 
 interface SpellSlots {
-  1?: number
-  2?: number
-  3?: number
-  4?: number
-  5?: number
-  6?: number
-  7?: number
-  8?: number
-  9?: number
+  1: number
+  2: number
+  3: number
+  4: number
+  5: number
+  6: number
+  7: number
+  8: number
+  9: number
 }
 
 export type Dice = {
@@ -184,7 +202,8 @@ export type Damage = {
 
 export type SpellDamage = {
   type: string
-  damageAtSpellLevel: AtSpecificLevel[]
+  damageAtSpellLevel?: AtSpecificLevel[]
+  damageAtCharacterLevel?: AtSpecificLevel[]
 };
 
 export type AbilityScore = {
@@ -202,7 +221,9 @@ export type Prof = {
 export type SpecialAbility = {
   name: string
   desc: string
+  attackBonus?: number
   dc?: DC
+  damage?: Damage[]
   spellcasting?: Spellcasting
 };
 
@@ -216,12 +237,13 @@ export type Action = {
 };
 
 export type MinifiedSpell = {
+  id?: number
   name: string
   level: number
-  url: string
 };
 
 export type Spell = {
+  id?: number
   name: string
   desc: string
   level: number
@@ -243,11 +265,9 @@ export type Spell = {
 };
 
 export type Spellcasting = {
-  level?: number
   ability: string
   dc: number
   modifier: number
-  components: string[]
   class: string
   slots: SpellSlots
   spells: MinifiedSpell[]

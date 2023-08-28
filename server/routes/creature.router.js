@@ -7,46 +7,71 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-      SELECT "id" as "index", "name" FROM "creatures"
-      WHERE "user_id"=$1
+      SELECT
+        "creatures"."id",
+        "name",
+        "size",
+        "type",
+        "alignment",
+        "ac",
+        "health",
+        "hitDice",
+        "abilityScores"::json,
+        "cr",
+        "xp",
+        "speeds"::json,
+        "vulnerabilities"::json,
+        "resistances"::json,
+        "immunities"::json,
+        "senses"::json,
+        "languages"::json,
+        "abilities"::json,
+        "actions"::json,
+        "legendaryActions"::json,
+        "proficiencies"::json
+      FROM "creatures"
+      WHERE "user_id" = $1 OR "user_id" IS NULL
+      GROUP BY "creatures"."id"
       ORDER BY "creatures"."id";
   `);
   const sqlValues = [
-      req.user.id
+    req.user.id
   ];
   pool.query(sqlText, sqlValues)
-      .then((dbres) => res.send(dbres.rows))
-      .catch((dberror) => {
-      console.log('Oops you did a goof: ', dberror);
-      res.sendStatus(500)
+    .then((dbres) => res.send(dbres.rows))
+    .catch((dberror) => {
+    console.log('Oops you did a goof: ', dberror);
+    res.sendStatus(500)
   })  
 });
 
 router.get('/:index', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-        SELECT "creatures"."id", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "language_name", "speed_name", "speed_value", "prof_type", "prof_name", "prof_value", "vul_name", "res_name", "immune_name", "immune_type", "sense_name", "sense_value", "ability_name", "ability_desc", "action_name", "action_desc", "leg_action_name", "leg_action_desc" FROM "creatures"
-        JOIN "speeds"
-            ON "creatures"."id"="speeds"."creature_id"
-        JOIN "creature_proficiencies"
-            ON "creatures"."id"="creature_proficiencies"."creature_id"
-        JOIN "vulnerabilities"
-            ON "creatures"."id"="vulnerabilities"."creature_id"
-        JOIN "resistances"
-            ON "creatures"."id"="resistances"."creature_id"
-        JOIN "immunities"
-            ON "creatures"."id"="immunities"."creature_id"
-        JOIN "senses"
-            ON "creatures"."id"="senses"."creature_id"
-        JOIN "creature_abilities"
-            ON "creatures"."id"="creature_abilities"."creature_id"
-        JOIN "creature_actions"
-            ON "creatures"."id"="creature_actions"."creature_id"
-        JOIN "languages"
-            ON "creatures"."id"="languages"."creature_id"
-        JOIN "legendary_actions"
-            ON "creatures"."id"="legendary_actions"."creature_id"
-        WHERE "creatures"."id"=$1
-        ORDER BY "creatures"."id";
+    SELECT
+      "creatures"."id",
+      "name",
+      "size",
+      "type",
+      "alignment",
+      "ac",
+      "health",
+      "hitDice",
+      "abilityScores"::json,
+      "cr",
+      "xp",
+      "speeds"::json,
+      "vulnerabilities",
+      "resistances",
+      "immunities"::json,
+      "senses"::json,
+      "languages",
+      "abilities"::json,
+      "actions"::json,
+      "legendaryActions"::json,
+      "proficiencies"::json
+    FROM "creatures"
+    WHERE "creatures"."id" = $1
+    GROUP BY "creatures"."id";
   `);
   const sqlValues = [
       req.params.index

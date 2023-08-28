@@ -55,6 +55,29 @@ CREATE TABLE "game_history" (
     "map_id" INTEGER DEFAULT 1
 );
 
+CREATE TABLE "spells" (
+    "id" SERIAL PRIMARY KEY,
+    "game_id" INTEGER REFERENCES "games_list",
+    "name" TEXT,
+    "desc" TEXT,
+    "level" INTEGER,
+    "range" TEXT,
+    "components" TEXT,
+    "ritual" BOOLEAN,
+    "duration" TEXT,
+    "concentration" BOOLEAN,
+    "castingTime" TEXT,
+    "higherLevel" TEXT,
+    "areaOfEffect" TEXT,
+    "damage" TEXT,
+    "dc" TEXT,
+    "healAtSlotLevel" TEXT,
+    "school" TEXT,
+    "classes" TEXT,
+    "subclasses" TEXT,
+    "material" TEXT
+);
+
 CREATE TABLE "characters" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
@@ -94,24 +117,21 @@ CREATE TABLE "creatures" (
     "type" VARCHAR (80),
     "alignment" VARCHAR (80),
     "ac" INTEGER,
-    "hit_points" INTEGER,
-    "hit_dice" VARCHAR (80),
-    "str" INTEGER,
-    "dex" INTEGER,
-    "con" INTEGER,
-    "int" INTEGER,
-    "wis" INTEGER,
-    "char" INTEGER,
+    "health" INTEGER,
+    "hitDice" VARCHAR (80),
+    "abilityScores" TEXT,
     "cr" INTEGER,
-    "xp" INTEGER
-);
-
-CREATE TABLE "speeds" (
-    "id" SERIAL PRIMARY KEY,
-    "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "speed_name" TEXT,
-    "speed_value" INTEGER
+    "xp" INTEGER,
+    "speeds" TEXT,
+    "vulnerabilities" TEXT,
+    "resistances" TEXT,
+    "immunities" TEXT,
+    "senses" TEXT,
+    "languages" TEXT,
+    "abilities" TEXT,
+    "actions" TEXT,
+    "legendaryActions" TEXT,
+    "proficiencies" TEXT
 );
 
 CREATE TABLE "skills" (
@@ -123,83 +143,29 @@ CREATE TABLE "skills" (
     "proficient" BOOLEAN DEFAULT false
 );
 
-CREATE TABLE "creature_proficiencies" (
-    "id" SERIAL PRIMARY KEY,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "prof_type" VARCHAR (40),
-    "prof_name" VARCHAR (80),
-    "prof_value" INTEGER
-);
-
-CREATE TABLE "vulnerabilities" (
-    "id" SERIAL PRIMARY KEY,
-    "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "vul_name" VARCHAR (80)
-);
-
-CREATE TABLE "resistances" (
-    "id" SERIAL PRIMARY KEY,
-    "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "res_name" VARCHAR (80)
-);
-
-CREATE TABLE "immunities" (
-    "id" SERIAL PRIMARY KEY,
-    "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "immune_name" VARCHAR (80),
-    "immune_type" VARCHAR (80)
-);
-
 CREATE TABLE "senses" (
     "id" SERIAL PRIMARY KEY,
     "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
     "sense_name" VARCHAR (80),
     "sense_value" INTEGER
 );
 
 CREATE TABLE "languages" (
     "id" SERIAL PRIMARY KEY,
-    "character_id" INTEGER REFERENCES "characters" ON DELETE CASCADE,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "language_name" TEXT
+    "name" TEXT
 );
 
-CREATE TABLE "creature_abilities" (
-    "id" SERIAL PRIMARY KEY,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "ability_name" VARCHAR (120),
-    "ability_desc" TEXT
-);
-
-CREATE TABLE "creature_actions" (
-    "id" SERIAL PRIMARY KEY,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "action_name" VARCHAR (120),
-    "action_desc" TEXT
-);
-
-CREATE TABLE "legendary_actions" (
-    "id" SERIAL PRIMARY KEY,
-    "creature_id" INTEGER REFERENCES "creatures" ON DELETE CASCADE,
-    "leg_action_name" VARCHAR (120),
-    "leg_action_desc" TEXT
-);
-
-CREATE TABLE "creature_action_rolls" (
-    "id" SERIAL PRIMARY KEY,
-    "action_id" INTEGER REFERENCES "creature_actions" ON DELETE CASCADE,
-    "ability_id" INTEGER REFERENCES "creature_abilities" ON DELETE CASCADE,
-    "leg_action_id" INTEGER REFERENCES "legendary_actions" ON DELETE CASCADE,
-    "name" VARCHAR (120),
-    "amount" VARCHAR (80),
-    "dice_type" VARCHAR (80),
-    "dmg_type" VARCHAR (80),
-    "to_hit" VARCHAR (80)
-);
+-- CREATE TABLE "creature_action_rolls" (
+--     "id" SERIAL PRIMARY KEY,
+--     "action_id" INTEGER REFERENCES "creature_actions" ON DELETE CASCADE,
+--     "ability_id" INTEGER REFERENCES "creature_abilities" ON DELETE CASCADE,
+--     "leg_action_id" INTEGER REFERENCES "legendary_actions" ON DELETE CASCADE,
+--     "name" VARCHAR (120),
+--     "amount" VARCHAR (80),
+--     "dice_type" VARCHAR (80),
+--     "dmg_type" VARCHAR (80),
+--     "to_hit" VARCHAR (80)
+-- );
 
 -------------------------
 -- INSERT DEFAULT DATA --
@@ -257,18 +223,17 @@ VALUES
     (1, 'Forest', 'https://i.etsystatic.com/18388031/r/il/8b7a49/2796267092/il_fullxfull.2796267092_aezx.jpg')
 ;
 
-INSERT INTO "creatures" ("user_id", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp")
+INSERT INTO "spells" ("game_id", "name", "desc", "level", "range", "components", "ritual", "duration", "concentration", "castingTime", "higherLevel", "areaOfEffect", "damage", "dc", "healAtSlotLevel", "school", "classes", "subclasses", "material")
 VALUES
-    (1, 'Dough Elemental', 'Medium', 'elemental', 'neutral', 12, 40, '12d8', 16, 12, 14, 9, 11, 13, 4, 30)
+    (NULL),
 ;
 
-INSERT INTO "creature_abilities" ("creature_id", "ability_name", "ability_desc") VALUES (1, 'Regeneration', 'The dough elemental regenerates 10 hp at the start of its turn.');
-INSERT INTO "creature_actions" ("creature_id", "action_name", "action_desc") VALUES (1, 'Multiattack', 'Can make 2 slam attacks.'), (1, 'Slam', 'Make a slam attack.');
-INSERT INTO "speeds" ("character_id", "creature_id", "speed_name", "speed_value") VALUES (null, 1, 'Walk', 30), (null, 1, 'Burrow', 10);
-INSERT INTO "immunities" ("character_id", "creature_id", "immune_name", "immune_type") VALUES (null, 1, 'poison', 'damage'), (null, 1, 'stunned', 'condition');
-INSERT INTO "languages" ("character_id", "creature_id", "language_name") VALUES (null, 1, 'Auran');
-INSERT INTO "legendary_actions" ("creature_id", "leg_action_name", "leg_action_desc") VALUES (1, 'Detect', 'Make a perception check.');
-INSERT INTO "creature_proficiencies" ("creature_id", "prof_type", "prof_name", "prof_value") VALUES (1, 'skill', 'Athletics', 4), (1, 'save', 'Con', 6);
-INSERT INTO "resistances" ("character_id", "creature_id", "res_name") VALUES (null, 1, 'bludgeoning');
-INSERT INTO "senses" ("character_id", "creature_id", "sense_name", "sense_value") VALUES (null, 1, 'Darkvision', 60), (null, 1, 'Passive perception', 12);
-INSERT INTO "vulnerabilities" ("character_id", "creature_id", "vul_name") VALUES (null, 1, 'fire');
+INSERT INTO "creatures" ("user_id", "name", "size", "type", "alignment", "ac", "health", "hitDice", "abilityScores", "cr", "xp", "speeds", "vulnerabilities", "resistances", "immunities", "senses", "languages", "abilities", "actions", "legendaryActions", "proficiencies")
+VALUES
+    (1, 'Dough Elemental', 'Medium', 'elemental', 'neutral', 12, 40, '12d8', '[{"name":"str","value":16,"mod":3},{"name":"dex","value":12,"mod":1},{"name":"con","value":14,"mod":2},{"name":"int","value":9,"mod":-1},{"name":"wis","value":11,"mod":0},{"name":"char","value":13,"mod":1}]', 4, 30, '[{"name":"fly","value":30},{"name":"burrow","value":10}]', '["fire"]', '["bludgeoning"]', '[{"type":"damage","name":"poison"},{"type":"condition","name":"stunned"}]', '[{"name":"Darkvision","value":60},{"name":"Passive perception","value":12}]', '["Common", "Auran"]', '[{"name":"Regeneration", "desc":"The dough elemental regenerates 10 hp at the start of its turn."}]', '[{"name":"Multiattack", "desc":"Can make 2 slam attacks."},{"name":"Slam", "desc":"Make a slam attack.", "attackBonus":7, "damage":[{"type":"bludgeoning","dice":{"amount":1,"type":8,"mod":4,"display":"1d8+4"}}]}]', '[{"name":"Detect", "desc":"Make a perception check."}]', '[{"type":"skill", "name":"Athletics", "value":4}, {"type":"save", "name":"CON", "value":6}]')
+;
+
+INSERT INTO "languages" ("name")
+VALUES
+    ('Auran')
+;

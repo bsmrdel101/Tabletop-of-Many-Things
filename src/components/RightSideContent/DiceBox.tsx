@@ -5,7 +5,7 @@ import { Character, Roll, RollResult } from "../../scripts/types";
 import { useAppSelector } from "../../redux/hooks";
 import { fetchGameData } from "../../redux/reducers/gameSlice";
 import { fetchUser } from "../../redux/reducers/userSlice";
-import { Creature } from "../../scripts/creatureDataStructure";
+import { Creature } from "../../scripts/types";
 
 
 export default function DiceBox() {
@@ -18,6 +18,7 @@ export default function DiceBox() {
 
   useEffect(() => {
     onServerEvent('ROLL_DICE', (result: Roll, owner: string, rollType: string, targets: (Creature | Character)[], damageType: string) => {
+      if (!targets) targets = [];
       const rollResult: RollResult = { ...result, owner: owner, rollType: rollType, targets: targets, damageType: damageType };
       logHistory = [...logHistory, rollResult];
       setLog(logHistory);

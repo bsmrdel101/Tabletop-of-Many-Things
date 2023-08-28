@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { makeDraggable } from "../../../scripts/tools/utils";
-import { MinifiedCreature } from "../../../scripts/types";
-import { getAllCreatures } from "../../../scripts/controllers/creaturesController";
+import { Creature } from "../../../scripts/types";
 import CreatureRow from "./CreatureRow";
+import { useAppSelector } from "../../../redux/hooks";
+import { fetchCreaturesData } from "../../../redux/reducers/creaturesSlice";
 
 
 export default function CreaturesModal() {
-  const [creatures, setCreatures] = useState<MinifiedCreature[]>([]);
+  const creatures: Creature[] = useAppSelector(fetchCreaturesData);
 
   useEffect(() => {
     makeDraggable(document.getElementById('modal-creatures'));
-    
-    const fetchData = async () => {
-      setCreatures(await getAllCreatures());
-    };
-    fetchData();
   }, []);
 
   const closeModal = () => {
@@ -47,8 +43,8 @@ export default function CreaturesModal() {
         <button className="btn--hover" id="new-creature-btn">New Creature</button>
       </div>
       <form className="modal-creatures__form"></form>
-      {creatures.map((creature: MinifiedCreature, i) => {
-        return <CreatureRow key={i} minCreature={creature} />;
+      {creatures.map((creature: Creature, i) => {
+        return <CreatureRow key={i} creature={creature} />;
       })}
     </div>
   );

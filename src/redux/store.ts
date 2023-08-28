@@ -5,6 +5,7 @@ import gridReducer from './reducers/gridSlice';
 import rightClickMenuReducer from './reducers/rightClickMenuSlice';
 import gameSlice from './reducers/gameSlice';
 import gridCoordSlice from './reducers/gridCoordSlice';
+import creatureSlice from './reducers/creaturesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     gridCoord: gridCoordSlice,
     rightClickMenu: rightClickMenuReducer,
     game: gameSlice,
+    creatures: creatureSlice,
   },
 });
 
