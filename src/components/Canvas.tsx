@@ -45,7 +45,7 @@ export default function Canvas({ userType }: Props) {
     let currentZoom = 1;
     let gridWidth: number;
     let gridHeight: number;
-    const zoomMin = 0.22, zoomMax = 1;
+    const zoomMin = 0.22, zoomMax = 1.3;
     const bgImage = new Image();
     let gridCellSize = 64;
     let gridColor = '#000000';
@@ -195,11 +195,7 @@ export default function Canvas({ userType }: Props) {
       if (!boardState || filteredBoardState.length === 0) return;
 
       boardState.forEach((mapToken: Token) => {
-        if (mapToken.x > gridWidth - 1 || mapToken.y > gridHeight - 1) {
-          removeToken(mapToken);
-        } else {
-          drawToken(mapToken.x, mapToken.y, mapToken.image, mapToken.size);
-        }
+        drawToken(mapToken.x, mapToken.y, mapToken.image, mapToken.size);
       });
     };
 
