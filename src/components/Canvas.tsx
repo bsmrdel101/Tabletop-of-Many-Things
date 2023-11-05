@@ -195,7 +195,11 @@ export default function Canvas({ userType }: Props) {
       if (!boardState || filteredBoardState.length === 0) return;
 
       boardState.forEach((mapToken: Token) => {
-        drawToken(mapToken.x, mapToken.y, mapToken.image, mapToken.size);
+        if (mapToken.x > gridWidth - 1 || mapToken.y > gridHeight - 1) {
+          removeToken(mapToken);
+        } else {
+          drawToken(mapToken.x, mapToken.y, mapToken.image, mapToken.size);
+        }
       });
     };
 
