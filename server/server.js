@@ -26,14 +26,14 @@ const dashboardRouter = require('./routes/dashboard.router');
 const characterRouter = require('./routes/character.router');
 const creatureRouter = require('./routes/creature.router');
 const mapRouter = require('./routes/map.router');
-const tokenRouter = require('./routes/token.router');
+const assetRouter = require('./routes/asset.router');
 
 app.use('/api/user', userRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/character', characterRouter);
 app.use('/api/creature', creatureRouter);
 app.use('/api/map', mapRouter);
-app.use('/api/token', tokenRouter);
+app.use('/api/asset', assetRouter);
 
 // Serve static files
 app.use(express.static('build'));

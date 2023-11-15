@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Game, Map, Token } from "../types";
+import { Asset, Game, Map, Token } from "../types";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../config/firebase";
 
@@ -59,10 +59,11 @@ export const addTokenToMap = async (gameId: number, token: Token, mapId: number,
     await axios.post('/api/map/token', {
       gameId: gameId,
       mapId: mapId,
-      tokenId: token.id,
+      assetId: token.id,
       x: x,
       y: y,
-      size: token.size
+      size: token.size || 1,
+      creature: token.creature || null
     });
   } catch (err) {
     console.log(err);

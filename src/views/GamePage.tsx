@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import TokensMenu from "../components/Menus/TokensMenu/TokensMenu";
+import TokensMenu from "../components/Menus/AssetsMenu/AssetsMenu";
 import Sidebar from "../components/Sidebar";
 import Toolbar from "../components/Toolbar";
 import { getGame } from "../scripts/controllers/dashboardController";
 import { emitServerEvent } from "../scripts/config/socket-io";
-import { Game, Map } from "../scripts/types";
+import { Creature, Game, Map } from "../scripts/types";
 import MapToolbar from "../components/MapToolbar/MapToolbar";
 import MapsMenu from "../components/Menus/MapsMenu";
 import RightSideContent from "../components/RightSideContent/RightSideContent";
@@ -17,6 +17,8 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import RightClickMenu from "../components/RightClickMenus/RightClickMenu";
 import { fetchUser } from "../redux/reducers/userSlice";
 import { fetchGameData, setGameData } from "../redux/reducers/gameSlice";
+import { getAllCreatures } from "../scripts/controllers/creaturesController";
+import { setCreatureData } from "../redux/reducers/creaturesSlice";
 
 
 export default function GamePage() {
@@ -55,6 +57,10 @@ export default function GamePage() {
           offsetY: map.offsetY,
         })
       );
+
+      // Global state data
+      const creatures: Creature[] = await getAllCreatures(game.id);
+      dispatch(setCreatureData(creatures));
   
       emitServerEvent('JOIN_ROOM', [user.username, room, (type: 'dm' | 'player') => {
         setUserType(type);

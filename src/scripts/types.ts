@@ -34,13 +34,18 @@ export interface GridSize {
   gridSizeY: number
 }
 
+export type Asset = {
+  id: number
+  image: string
+};
+
 export type Token = {
   id: number
-  map_id?: number
+  map_id: number
   image: string
   creature: string
-  x?: number
-  y?: number
+  x: number
+  y: number
   size: number
 };
 

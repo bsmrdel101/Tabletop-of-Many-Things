@@ -13,7 +13,7 @@ export default function Sidebar({ userType }: Props) {
       {userType === 'dm' ?
         <>
           <button className="sidebar__btn btn--hover" onClick={() => toggleMenu('maps')}>Maps</button>
-          <button className="sidebar__btn btn--hover" onClick={() => toggleMenu('tokens')}>Tokens</button>
+          <button className="sidebar__btn btn--hover" onClick={() => toggleMenu('assets')}>Assets</button>
           <button className="sidebar__btn btn--hover" onClick={() => toggleModal('creatures')}>Creatures</button>
           <button className="sidebar__btn btn--hover">Encounters</button>
           <button className="sidebar__btn btn--hover">Loot</button>

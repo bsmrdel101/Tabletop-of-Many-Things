@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { emitServerEvent, offServerEvent, onServerEvent, socket } from "../scripts/config/socket-io";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGrid, setGrid } from "../redux/reducers/gridSlice";
-import { Coord, Map, Token } from "../scripts/types";
+import { Asset, Coord, Map, Token } from "../scripts/types";
 import { clamp } from "../scripts/tools/utils";
 import { addTokenToMap, deleteTokenFromMap, getMap, updateToken } from "../scripts/controllers/mapsController";
 import { setSelectedMap } from "../scripts/controllers/dashboardController";
@@ -45,7 +45,7 @@ export default function Canvas({ userType }: Props) {
     let currentZoom = 1;
     let gridWidth: number;
     let gridHeight: number;
-    const zoomMin = 0.22, zoomMax = 1.3;
+    const zoomMin = 0.22, zoomMax = 1;
     const bgImage = new Image();
     let gridCellSize = 64;
     let gridColor = '#000000';

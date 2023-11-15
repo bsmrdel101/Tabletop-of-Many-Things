@@ -39,11 +39,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         json_agg(
             json_build_object(
                 'id', "map_tokens"."id",
-                'token_id', "tokens"."id",
-                'user_id', "tokens"."user_id",
-                'image', "tokens"."image",
-                'size', "tokens"."size",
-                'creature', "tokens"."creature",
+                'asset_id', "assets"."id",
+                'user_id', "assets"."user_id",
+                'image', "assets"."image",
+                'size', "map_tokens"."size",
+                'creature', "map_tokens"."creature",
                 'x', "map_tokens"."x",
                 'y', "map_tokens"."y"
             )
@@ -55,7 +55,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     LEFT JOIN
     "map_tokens" ON "maps"."id" = "map_tokens"."map_id" AND "map_tokens"."game_id" = $2
     LEFT JOIN
-    "tokens" ON "map_tokens"."token_id" = "tokens"."id"
+    "assets" ON "map_tokens"."asset_id" = "assets"."id"
     WHERE
     "maps"."id" = $1
     GROUP BY
@@ -111,16 +111,17 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/token', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-        INSERT INTO "map_tokens" ("game_id", "map_id", "token_id", "x", "y", "size")
-        VALUES ($1, $2, $3, $4, $5, $6);
+        INSERT INTO "map_tokens" ("game_id", "map_id", "asset_id", "x", "y", "size", "creature")
+        VALUES ($1, $2, $3, $4, $5, $6, $7);
     `;
     const sqlValues = [
         req.body.gameId,
         req.body.mapId,
-        req.body.tokenId,
+        req.body.assetId,
         req.body.x,
         req.body.y,
-        req.body.size
+        req.body.size,
+        req.body.creature
     ];
     pool.query(sqlText, sqlValues)
         .then(() => res.sendStatus(201))

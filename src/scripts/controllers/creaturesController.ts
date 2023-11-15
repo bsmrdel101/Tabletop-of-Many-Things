@@ -2,9 +2,9 @@ import axios from "axios";
 
 
 // === GET routes === //
-export const getAllCreatures = async () => {
+export const getAllCreatures = async (gameId: number) => {
   try {
-    const res = await axios.get('/api/creature');
+    const res = await axios.get(`/api/creature/all/${gameId}`);
     res.data.forEach((creature: any, i: number) => {
       // Parse creature data
       creature.maxHp = creature.health;

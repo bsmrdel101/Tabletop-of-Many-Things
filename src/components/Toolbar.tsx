@@ -25,7 +25,7 @@ export default function Toolbar({ room }: Props) {
 
   return (
     <div className="toolbar">
-      <button className="toolbar__btn" onClick={togglePlayerList}>{ showPlayerList ? 'Hide' : 'Show' } Player List</button>
+      {/* <button className="toolbar__btn" onClick={togglePlayerList}>{ showPlayerList ? 'Hide' : 'Show' } Player List</button> */}
       <p className="toolbar__text">Room: {room}</p>
       <a className="toolbar__leave-btn" onClick={leaveGame}>Leave Game</a>
 

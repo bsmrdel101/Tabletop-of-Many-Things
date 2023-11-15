@@ -5,10 +5,11 @@ const {
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/all/:gameId', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       SELECT
         "creatures"."id",
+        "game_id",
         "name",
         "size",
         "type",
@@ -30,12 +31,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         "legendaryActions"::json,
         "proficiencies"::json
       FROM "creatures"
-      WHERE "user_id" = $1 OR "user_id" IS NULL
+      WHERE ("user_id" = $1 OR "user_id" IS NULL) AND ("game_id" = $2 OR "game_id" IS NULL)
       GROUP BY "creatures"."id"
       ORDER BY "creatures"."id";
   `);
   const sqlValues = [
-    req.user.id
+    req.user.id,
+    req.params.gameId
   ];
   pool.query(sqlText, sqlValues)
     .then((dbres) => res.send(dbres.rows))

@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-      SELECT * FROM "tokens"
+      SELECT * FROM "assets"
       WHERE "user_id"=$1
       ORDER BY "id";
   `);
@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-    SELECT * FROM "tokens"
+    SELECT * FROM "assets"
     WHERE "id"=$1
   `);
   const sqlValues = [
@@ -40,14 +40,12 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "tokens" ("user_id", "image", "size", "creature")
-      VALUES ($1, $2, $3, $4);
+      INSERT INTO "assets" ("user_id", "image")
+      VALUES ($1, $2);
   `;
   const sqlValues = [
       req.user.id,
-      req.body.image,
-      req.body.size,
-      req.body.creature
+      req.body.image
   ];
   pool.query(sqlText, sqlValues)
       .then(() => res.sendStatus(201))
@@ -57,24 +55,26 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   });
 });
 
-router.post('/map', rejectUnauthenticated, (req, res) => {
-  const sqlText =`
-      INSERT INTO "map_tokens" ("user_id", "map_id", "token_id", "x", "y")
-      VALUES ($1, $2, $3, $4, $5);
-  `;
-  const sqlValues = [
-      req.user.id,
-      req.body.map,
-      req.body.token,
-      req.body.x,
-      req.body.y
-  ];
-  pool.query(sqlText, sqlValues)
-      .then(() => res.sendStatus(201))
-      .catch((dberror) => {
-      console.log('Oops you did a goof: ', dberror);
-      res.sendStatus(500)
-  });
-});
+// router.post('/map', rejectUnauthenticated, (req, res) => {
+//   const sqlText =`
+//       INSERT INTO "map_tokens" ("game_id", "map_id", "asset_id", "x", "y", "size", "creature")
+//       VALUES ($1, $2, $3, $4, $5, $6, $7);
+//   `;
+//   const sqlValues = [
+//       req.body.gameId,
+//       req.body.mapId,
+//       req.body.assetId,
+//       req.body.x,
+//       req.body.y,
+//       req.body.size,
+//       req.body.creature
+//   ];
+//   pool.query(sqlText, sqlValues)
+//       .then(() => res.sendStatus(201))
+//       .catch((dberror) => {
+//       console.log('Oops you did a goof: ', dberror);
+//       res.sendStatus(500)
+//   });
+// });
 
 module.exports = router;
