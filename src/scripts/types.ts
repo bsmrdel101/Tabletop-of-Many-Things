@@ -43,7 +43,7 @@ export type Token = {
   id: number
   map_id: number
   image: string
-  creature: string
+  creature: Creature
   x: number
   y: number
   size: number
@@ -93,29 +93,30 @@ export type Character = {
 };
 
 export type Creature = {
-  id: number;
-  name: string;
-  size: string;
-  type: string;
-  alignment: string;
-  ac: number;
-  maxHp: number;
-  hitDice: string;
-  abilityScores: AbilityScore[];
-  cr: number;
-  xp: number;
-  languages: string[];
-  speeds: NameValue[];
-  proficiencies: Prof[];
-  vulnerabilities: string[];
-  resistances: string[];
-  damageImmunities: string[];
-  conditionImmunities: string[];
-  senses: NameValue[];
-  abilities: SpecialAbility[];
-  actions: NameDesc[];
-  legActions: NameDesc[];
-  targets: (Creature | Character)[];
+  id: number
+  asset: Asset
+  name: string
+  size: string
+  type: string
+  alignment: string
+  ac: number
+  maxHp: number
+  hitDice: string
+  abilityScores: AbilityScore[]
+  cr: number
+  xp: number
+  languages: string[]
+  speeds: NameValue[]
+  proficiencies: Prof[]
+  vulnerabilities: string[]
+  resistances: string[]
+  damageImmunities: string[]
+  conditionImmunities: string[]
+  senses: NameValue[]
+  abilities: SpecialAbility[]
+  actions: NameDesc[]
+  legActions: NameDesc[]
+  targets: (Creature | Character)[]
 };
 
 export type Skill = {

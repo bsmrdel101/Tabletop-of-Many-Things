@@ -9,6 +9,7 @@ import { setSelectedMap } from "../scripts/controllers/dashboardController";
 import { setRightClickMenu } from "../redux/reducers/rightClickMenuSlice";
 import { fetchGameData, setMap } from "../redux/reducers/gameSlice";
 import { setGridPanOffset, setGridZoom } from "../redux/reducers/gridCoordSlice";
+import { openCreatureWindow } from "./Modals/CreaturesModal/CreatureRow";
 
 
 interface Props {
@@ -441,6 +442,11 @@ export default function Canvas({ userType }: Props) {
       zoomGrid(e);
     };
 
+    const handleDoubleClick = (e: MouseEvent) => {
+      const token = getTokenSelected(e.clientX, e.clientY);
+      openCreatureWindow(token.creature);
+    };
+
     updateGrid(); // Call updateGrid initially
 
     const gridContainer: HTMLElement = document.querySelector('.grid-container');
@@ -450,6 +456,7 @@ export default function Canvas({ userType }: Props) {
     document.addEventListener('mouseup', handleMouseUp);
     gridContainer.addEventListener('mousedown', handleRightClick);
     gridContainer.addEventListener('wheel', handleMouseWheel);
+    gridContainer.addEventListener('dblclick', handleDoubleClick);
 
     return () => {
       // Cleanup event listeners
@@ -458,6 +465,7 @@ export default function Canvas({ userType }: Props) {
       document.removeEventListener('mouseup', handleMouseUp);
       gridContainer.removeEventListener('mousedown', handleRightClick);
       gridContainer.removeEventListener('wheel', handleMouseWheel);
+      gridContainer.removeEventListener('dblclick', handleDoubleClick);
       offServerEvent('SET_GRID');
       offServerEvent('SELECT_MAP');
       offServerEvent('VIEW_MAP');

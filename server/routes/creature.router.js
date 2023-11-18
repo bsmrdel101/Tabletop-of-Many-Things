@@ -7,33 +7,44 @@ const router = express.Router();
 
 router.get('/all/:gameId', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
-      SELECT
-        "creatures"."id",
-        "game_id",
-        "name",
-        "size",
-        "type",
-        "alignment",
-        "ac",
-        "health",
-        "hitDice",
-        "abilityScores"::json,
-        "cr",
-        "xp",
-        "speeds"::json,
-        "vulnerabilities"::json,
-        "resistances"::json,
-        "immunities"::json,
-        "senses"::json,
-        "languages"::json,
-        "abilities"::json,
-        "actions"::json,
-        "legendaryActions"::json,
-        "proficiencies"::json
-      FROM "creatures"
-      WHERE ("user_id" = $1 OR "user_id" IS NULL) AND ("game_id" = $2 OR "game_id" IS NULL)
-      GROUP BY "creatures"."id"
-      ORDER BY "creatures"."id";
+    SELECT
+      "creatures"."id",
+      "creatures"."game_id",
+      CASE
+        WHEN "assets"."id" IS NOT NULL THEN
+          json_build_object('id', "assets"."id", 'image', "assets"."image")
+        ELSE
+          null
+      END AS "asset",
+      "creatures"."name",
+      "creatures"."size",
+      "creatures"."type",
+      "creatures"."alignment",
+      "creatures"."ac",
+      "creatures"."health",
+      "creatures"."hitDice",
+      "creatures"."abilityScores"::json,
+      "creatures"."cr",
+      "creatures"."xp",
+      "creatures"."speeds"::json,
+      "creatures"."vulnerabilities"::json,
+      "creatures"."resistances"::json,
+      "creatures"."immunities"::json,
+      "creatures"."senses"::json,
+      "creatures"."languages"::json,
+      "creatures"."abilities"::json,
+      "creatures"."actions"::json,
+      "creatures"."legendaryActions"::json,
+      "creatures"."proficiencies"::json
+    FROM
+      "creatures"
+    LEFT JOIN
+      "assets" ON "creatures"."token" = "assets"."id"
+    WHERE
+      ("creatures"."user_id" = $1 OR "creatures"."user_id" IS NULL)
+      AND ("creatures"."game_id" = $2 OR "creatures"."game_id" IS NULL)
+    ORDER BY
+      "creatures"."id";
   `);
   const sqlValues = [
     req.user.id,

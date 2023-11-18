@@ -112,6 +112,7 @@ CREATE TABLE "creatures" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
     "game_id" INTEGER REFERENCES "games_list" ON DELETE CASCADE,
+    "token" INTEGER REFERENCES "assets" ON DELETE CASCADE,
     "name" VARCHAR (80),
     "size" VARCHAR (80),
     "type" VARCHAR (80),

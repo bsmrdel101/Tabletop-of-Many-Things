@@ -14,6 +14,10 @@
     padding: 0.5rem;
     text-align: left;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.4rem;
 
     &:nth-child(odd) {
       background-color: var(--modal-color-2);
@@ -24,5 +28,10 @@
       font-weight: 400;
       font-size: 1.15rem;
     }
+  }
+
+  &__token {
+    max-width: 1.7rem;
+    border-radius: 50%;
   }
 }

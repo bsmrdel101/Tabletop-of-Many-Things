@@ -52,17 +52,35 @@ export const composedPath = (el: Element) => {
 };
 
 // Make a window able to be dragged around
-export const makeDraggable = (el: HTMLElement, selector?: string) => {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+export const makeDraggable = (el: HTMLElement | null, selector?: string) => {
+  if (!el) {
+    console.error("Element not found");
+    return;
+  }
+
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
   el.onmousedown = dragMouseDown;
 
   function dragMouseDown(e: any) {
     if (e.which !== 1) return;
     e = e || window.event;
+
+    // Check if a selector is provided and if the clicked element or its parent matches it
+    if (
+      selector &&
+      !e.target.matches(selector) &&
+      !e.target.closest(selector)
+    ) {
+      return;
+    }
+
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
-    
+
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
@@ -70,32 +88,30 @@ export const makeDraggable = (el: HTMLElement, selector?: string) => {
   function elementDrag(e: any) {
     e = e || window.event;
     e.preventDefault();
-  
-    // Define the sensitivity factor (adjust as needed):
-    const sensitivity = 0.9; // Increase for more sensitivity, decrease for less
-  
-    // Calculate the new cursor position with sensitivity:
-    pos1 = (pos3 - e.clientX) * sensitivity;
-    pos2 = (pos4 - e.clientY) * sensitivity;
+
+    // Calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-  
-    // Calculate the boundaries of the modal:
-    const modalRect = el.getBoundingClientRect();
-    const modalLeft = 0;
-    const modalTop = 0;
-    const modalRight = window.innerWidth - modalRect.width;
-    const modalBottom = window.innerHeight - modalRect.height;
-  
-    // Ensure the element stays within the modal boundaries:
-    const newLeft = Math.max(modalLeft, Math.min(modalRight, el.offsetLeft - pos1));
-    const newTop = Math.max(modalTop, Math.min(modalBottom, el.offsetTop - pos2));
-  
+
+    // Calculate the new element position:
+    const newLeft = el.offsetLeft - pos1;
+    const newTop = el.offsetTop - pos2;
+
+    // Get the boundaries of the window:
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Limit the element's position to stay within the window boundaries:
+    const limitedLeft = Math.max(0, Math.min(windowWidth - el.offsetWidth, newLeft));
+    const limitedTop = Math.max(0, Math.min(windowHeight - el.offsetHeight, newTop));
+
     // Set the element's new position:
-    el.style.left = newLeft + "px";
-    el.style.top = newTop + "px";
+    el.style.left = limitedLeft + "px";
+    el.style.top = limitedTop + "px";
   }
-  
+
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;

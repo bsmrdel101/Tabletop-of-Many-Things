@@ -24,6 +24,9 @@ export const getMaps = async (id: number) => {
 export const getMap = async (mapId: number, gameId: number) => {
   try {
     const res = await axios.get(`/api/map/{"mapId":${mapId}, "gameId":${gameId}}`);
+    res.data.boardState = res.data.boardState.map((token: any) => {
+      return { ...token, creature: JSON.parse(token.creature) };
+    });
     return res.data;
   } catch (err) {
     console.log(err);

@@ -10,7 +10,7 @@ export default function CreaturesModal() {
   const creatures: Creature[] = useAppSelector(fetchCreaturesData);
 
   useEffect(() => {
-    makeDraggable(document.getElementById('modal-creatures'));
+    makeDraggable(document.getElementById('modal-creatures'), '.modal__header-container');
   }, []);
 
   const closeModal = () => {
@@ -20,8 +20,10 @@ export default function CreaturesModal() {
 
   return (
     <div className="modal modal-creatures hidden" id="modal-creatures">
-      <h2 className="modal__title">Creatures</h2>
-      <button className="modal__close-btn" onClick={closeModal}>X</button>
+      <div className="modal__header-container">
+        <h2 className="modal__title">Creatures</h2>
+        <button className="modal__close-btn" onClick={closeModal}>X</button>
+      </div>
       <div className="modal__filters">
         <div className="modal__filters--search">
           <label>
