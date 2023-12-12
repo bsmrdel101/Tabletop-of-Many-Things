@@ -27,7 +27,7 @@ export default function ActionButton({ action, creature }: Props) {
 
   return (
     <div>
-      {action.attackBonus ?
+      {action.attackBonus || action.attackBonus === 0 ?
         <button className="action-btn action-btn--to-hit" onClick={() => handleAttackRole(action.attackBonus)}>
           {numIsPos(action.attackBonus)} <img src="/images/d20.svg" alt="d20" draggable={false} />
         </button>
