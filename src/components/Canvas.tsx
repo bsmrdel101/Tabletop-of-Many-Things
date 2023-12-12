@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { emitServerEvent, offServerEvent, onServerEvent, socket } from "../scripts/config/socket-io";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGrid, setGrid } from "../redux/reducers/gridSlice";
-import { Asset, Coord, Map, Token } from "../scripts/types";
+import { Coord, Map, Token } from "../scripts/types";
 import { clamp } from "../scripts/tools/utils";
 import { addTokenToMap, deleteTokenFromMap, getMap, updateToken } from "../scripts/controllers/mapsController";
 import { setSelectedMap } from "../scripts/controllers/dashboardController";
@@ -32,6 +32,7 @@ export default function Canvas({ userType }: Props) {
   let initialClickY = 0;
   let initialTokenTopLeftX = 0;
   let initialTokenTopLeftY = 0;
+  let scaleBtnPressed = false;
   
   const dispatch = useAppDispatch();
   const { room, game, map } = useAppSelector(fetchGameData).game;
@@ -354,6 +355,19 @@ export default function Canvas({ userType }: Props) {
       drawGrid();
     };
 
+    const resizeToken = (token: Token, dir: 'up' | 'down') => {
+      if (!token) return;
+      boardState = boardState.map((_token: Token) => {
+        if (_token.id !== token.id) return _token;
+        if (dir === 'up') {
+          return { ...token, size: clamp(token.size + 1, 1, 100) };
+        } else {
+          return { ...token, size: clamp(token.size - 1, 1, 100) };
+        }
+      });
+      drawGrid();
+    };
+
 
     // ==============
     // Event handlers
@@ -439,12 +453,29 @@ export default function Canvas({ userType }: Props) {
 
     const handleMouseWheel = (e: WheelEvent) => {
       e.preventDefault();
-      zoomGrid(e);
+      if (scaleBtnPressed) {
+        const token = getTokenSelected(e.clientX, e.clientY);
+        if ((e as any).wheelDeltaY < 0) {
+          resizeToken(token,'up');
+        } else {
+          resizeToken(token,'down');
+        }
+      } else {
+        zoomGrid(e);
+      }
     };
 
     const handleDoubleClick = (e: MouseEvent) => {
       const token = getTokenSelected(e.clientX, e.clientY);
-      openCreatureWindow(token.creature);
+      if (token) openCreatureWindow(token.creature);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Control' || e.key === 'Meta') scaleBtnPressed = true;
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Control' || e.key === 'Meta') scaleBtnPressed = false;
     };
 
     updateGrid(); // Call updateGrid initially
@@ -457,6 +488,8 @@ export default function Canvas({ userType }: Props) {
     gridContainer.addEventListener('mousedown', handleRightClick);
     gridContainer.addEventListener('wheel', handleMouseWheel);
     gridContainer.addEventListener('dblclick', handleDoubleClick);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
 
     return () => {
       // Cleanup event listeners
@@ -466,6 +499,8 @@ export default function Canvas({ userType }: Props) {
       gridContainer.removeEventListener('mousedown', handleRightClick);
       gridContainer.removeEventListener('wheel', handleMouseWheel);
       gridContainer.removeEventListener('dblclick', handleDoubleClick);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
       offServerEvent('SET_GRID');
       offServerEvent('SELECT_MAP');
       offServerEvent('VIEW_MAP');

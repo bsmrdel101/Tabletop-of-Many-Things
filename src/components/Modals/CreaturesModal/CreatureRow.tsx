@@ -11,6 +11,7 @@ interface Props {
 }
 
 export const openCreatureWindow = async (creature: Creature) => {
+  if (!creature) return;
   if (document.getElementById(`modal-stats-${creature.id}`)) {
     document.getElementById(`modal-stats-${creature.id}`).remove();
   }
