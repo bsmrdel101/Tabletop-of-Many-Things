@@ -28,6 +28,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     SELECT
     "maps"."id",
     "maps"."game_id",
+    "maps"."filepath",
     "maps"."name",
     "maps"."image",
     "maps"."cellSize",

@@ -53,6 +53,7 @@ export type Map = {
   id: number
   game_id: number
   name: string
+  filepath: string
   image: string
   cellSize: number
   gridColor: string

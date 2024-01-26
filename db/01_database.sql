@@ -17,6 +17,7 @@ CREATE TABLE "games_list" (
 CREATE TABLE "maps" (
     "id" SERIAL PRIMARY KEY,
     "game_id" INTEGER REFERENCES "games_list",
+    "filepath" TEXT DEFAULT 'maps',
     "name" TEXT,    
     "image" TEXT,
     "cellSize" INTEGER DEFAULT 50,
@@ -31,6 +32,7 @@ CREATE TABLE "assets" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users",
     "game_id" INTEGER REFERENCES "games_list",
+    "filepath" TEXT DEFAULT 'assets',
     "image" TEXT
 );
 

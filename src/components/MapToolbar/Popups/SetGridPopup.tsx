@@ -72,6 +72,7 @@ export default function SetGridPopup({ title }: Props) {
       id: map.id,
       game_id: map.game_id,
       name: map.name,
+      filepath: map.filepath,
       image: map.image,
       cellSize: gridState.cellSize,
       gridColor: gridState.gridColor,

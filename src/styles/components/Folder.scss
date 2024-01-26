@@ -1,0 +1,14 @@
+.folder {
+  position: relative;
+
+  img {
+    max-width: 6rem;
+  }
+
+  p {
+    position: absolute;
+    inset: 0;
+    top: 2rem;
+    color: black;
+  }
+}

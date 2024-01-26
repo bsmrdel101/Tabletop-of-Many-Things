@@ -17,6 +17,28 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  &__filepath {
+    position: absolute;
+    left: 0.3rem;
+    top: 0.3rem;
+    color: white;
+    font-size: 0.9rem;
+    display: inline-flex;
+
+    p {
+      margin: 0 0.2rem;
+    }
+
+    &--link {
+      transition: all ease-in-out 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .menu__btn--close {
