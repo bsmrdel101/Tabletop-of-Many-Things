@@ -1,0 +1,50 @@
+dialog {
+  padding: 1.8rem 1rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--modal-color-0);
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  margin: 0;
+  text-align: start;
+  position: absolute;
+  bottom: 25%;
+  color: white;
+  border: none;
+  z-index: 2;
+}
+
+.dialog {
+  &__title {
+    text-align: center;
+    user-select: none;
+    font-size: var(--font-lg);
+    border-bottom: 2px solid var(--red-1);
+    padding-bottom: 0.3rem;
+  }
+
+  &__content {
+    overflow-y: auto;
+    margin-top: 2rem;
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &--creature-stats {
+    padding: 1.8rem 0 1rem 0.3rem;
+
+    .dialog__title {
+      border-bottom: none;
+      text-align: start;
+      padding: 0.3rem 1rem;
+      line-height: 1.3rem;
+    }
+
+    .dialog__content {
+      margin-top: -1rem;
+      max-height: 27.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+}

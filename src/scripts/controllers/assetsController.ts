@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Asset } from "../types";
 
 
 // === GET routes === //

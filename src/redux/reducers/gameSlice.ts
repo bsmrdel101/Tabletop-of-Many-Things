@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
-import { Game, Map } from '../../scripts/types';
 
 interface GameState {
   game: Game
   room: string
-  map: Map
+  map: Board
 }
 
 const initialState: GameState = {

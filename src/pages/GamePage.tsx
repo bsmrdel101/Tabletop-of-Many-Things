@@ -5,11 +5,9 @@ import Sidebar from "../components/Sidebar";
 import Toolbar from "../components/Toolbar";
 import { getGame } from "../scripts/controllers/dashboardController";
 import { emitServerEvent } from "../scripts/config/socket-io";
-import { Creature, Game, Map } from "../scripts/types";
 import MapToolbar from "../components/MapToolbar/MapToolbar";
 import MapsMenu from "../components/Menus/MapsMenu";
 import RightSideContent from "../components/RightSideContent/RightSideContent";
-import CreaturesModal from "../components/Modals/CreaturesModal/CreaturesModal";
 import GridCanvas from "../components/Canvas";
 import { getMap } from "../scripts/controllers/mapsController";
 import { setGrid } from "../redux/reducers/gridSlice";
@@ -19,6 +17,9 @@ import { fetchUser } from "../redux/reducers/userSlice";
 import { fetchGameData, setGameData } from "../redux/reducers/gameSlice";
 import { getAllCreatures } from "../scripts/controllers/creaturesController";
 import { setCreatureData } from "../redux/reducers/creaturesSlice";
+import CreaturesDialog from "../components/Dialogs/Creatures/CreaturesDialog";
+import { useAtom } from "jotai";
+import { creaturesDialogAtom } from "../scripts/atoms/dialogs";
 
 
 export default function GamePage() {
@@ -27,14 +28,13 @@ export default function GamePage() {
   const { game } = useAppSelector(fetchGameData).game;
   const { room }: any = useParams();
   const [userType, setUserType] = useState<'dm' | 'player'>('player');
-
+  const [creaturesModalOpen, setCreaturesModalOpen] = useAtom(creaturesDialogAtom);
 
   useEffect(() => {
     const setupGame = async () => {
       const game: Game = await getGame(room);
-      const map: Map = await getMap(game.map_id, game.id);
+      const map: Board = await getMap(game.map_id, game.id);
       
-      // Check if the game exists
       if (!game) {
         console.error('game doesn\'t exist');
         return;
@@ -58,7 +58,6 @@ export default function GamePage() {
         })
       );
 
-      // Global state data
       const creatures: Creature[] = await getAllCreatures(game.id);
       dispatch(setCreatureData(creatures));
   
@@ -86,12 +85,10 @@ export default function GamePage() {
             </div>
           </div>
 
-          {/* Menus */}
           <TokensMenu />
           <MapsMenu />
-          <CreaturesModal />
+          <CreaturesDialog open={creaturesModalOpen} setOpen={setCreaturesModalOpen} />
 
-          {/* Right click menu */}
           <div onContextMenu={(e) => { e.preventDefault(); }}>
             <RightClickMenu />
           </div>

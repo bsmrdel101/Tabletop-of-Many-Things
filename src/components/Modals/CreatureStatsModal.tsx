@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AbilityScore, Action, Creature, MinifiedSpell, NameValue, Prof, SpecialAbility } from "../../scripts/types";
 import CreatureSpellDetails from "./CreaturesModal/CreatureSpellDetails";
 import { makeDraggable } from "../../scripts/tools/utils";
 import { capitalize } from "../../scripts/tools/stringUtils";

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { makeDraggable } from "../../../scripts/tools/utils";
-import { Creature } from "../../../scripts/types";
 import CreatureRow from "./CreatureRow";
 import { useAppSelector } from "../../../redux/hooks";
 import { fetchCreaturesData } from "../../../redux/reducers/creaturesSlice";
+import Input from "../../Library/Input";
+import Button from "../../Library/Button";
 
 
 export default function CreaturesModal() {
@@ -34,12 +35,12 @@ export default function CreaturesModal() {
             </select>
           </label>
           <form>
-            <label className="relative">
-              <input placeholder="search" />
-              <button type="submit" className="btn--search">
-                <img src="/images/magnifying-glass.svg" alt="magnifying glass" />
-              </button>
-            </label>
+            <Input
+              variant={['search', 'small']}
+              placeholder="goblin"
+            >
+              <Button type="submit" variant={['search', 'small']}>Search</Button>
+            </Input>
           </form>
         </div>
         <button className="btn--hover" id="new-creature-btn">New Creature</button>

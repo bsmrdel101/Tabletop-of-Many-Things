@@ -1,7 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { addMap, getMaps } from "../../scripts/controllers/mapsController";
 import { emitServerEvent } from "../../scripts/config/socket-io";
-import { Map } from "../../scripts/types";
 import FormModal from "../Modals/FormModal";
 import { useAppSelector } from "../../redux/hooks";
 import { fetchGameData } from "../../redux/reducers/gameSlice";
@@ -11,7 +10,7 @@ import Folder from "../Folder";
 
 export default function MapsMenu() {
   const { room, game, map } = useAppSelector(fetchGameData).game;
-  const [maps, setMaps] = useState<Map[]>([]);
+  const [maps, setMaps] = useState<Board[]>([]);
   const [newMapFormOpen, setNewMapFormOpen] = useState(false);
   const [isBlankMap, setIsBlankMap] = useState(false);
   const [mapName, setMapName] = useState('');
@@ -42,12 +41,12 @@ export default function MapsMenu() {
   }, []);
 
   // Share map to everyone
-  const handleSelectMap = (map: Map) => {
+  const handleSelectMap = (map: Board) => {
     emitServerEvent('SELECT_MAP', [map, room]);
   };
 
   // Change map only for dm
-  const handleViewMap = (map: Map) => {
+  const handleViewMap = (map: Board) => {
     emitServerEvent('VIEW_MAP', [map]);
   };
 

@@ -1,6 +1,5 @@
 import axios from "axios";
-import { convertAtSpecificLevelTypeFormat, convertDamageTypeFormat, convertDCTypeFormat, removeNullValues } from "../tools/utils";
-import { Spell } from "../types";
+import { convertAtSpecificLevelTypeFormat, removeNullValues } from "../tools/utils";
 
 export const getApiSpell = async (url: string) => {
   try {

@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { getGames } from "../../scripts/controllers/dashboardController";
-import { Game } from "../../scripts/types";
 import GameCard from "./GameCard";
 import NewGameForm from "./NewGameForm";
-
 
 interface Props {
   joinGame: (roomCode: string) => void
 }
+
 
 export default function GameList({ joinGame }: Props) {
   const [gameFormOpen, setGameFormOpen] = useState(false);

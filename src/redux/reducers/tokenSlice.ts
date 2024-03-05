@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../redux/store';
-import { Coord } from '../../scripts/types';
+import { RootState } from '../store';
 
 
 interface TokenState {

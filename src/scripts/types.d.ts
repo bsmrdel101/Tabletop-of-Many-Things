@@ -1,21 +1,24 @@
-export interface NameValue {
+type ButtonHTML = React.HTMLProps<HTMLButtonElement>
+type InputHTML = React.HTMLProps<HTMLInputElement>
+
+interface NameValue {
   name: string
   value: number
 }
 
-export interface NameDesc {
+interface NameDesc {
   name: string
   desc: string
 }
 
-export type User = {
+type User = {
   id: number
   username: string
   password: string
   newUser: boolean
 };
 
-export type Game = {
+type Game = {
   id: number
   user_id: number
   name: string
@@ -24,22 +27,22 @@ export type Game = {
   map_id: number
 };
 
-export interface Coord {
+interface Coord {
   x: number
   y: number
 }
 
-export interface GridSize {
+interface GridSize {
   gridSizeX: number
   gridSizeY: number
 }
 
-export type Asset = {
+type Asset = {
   id: number
   image: string
 };
 
-export type Token = {
+type Token = {
   id: number
   map_id: number
   image: string
@@ -49,7 +52,7 @@ export type Token = {
   size: number
 };
 
-export type Map = {
+type Board = {
   id: number
   game_id: number
   name: string
@@ -63,7 +66,7 @@ export type Map = {
   boardState: Token[]
 };
 
-export type Character = {
+type Character = {
   id?: number
   name: string
   class: string
@@ -93,7 +96,7 @@ export type Character = {
   climb_speed: number
 };
 
-export type Creature = {
+type Creature = {
   id: number
   asset: Asset
   name: string
@@ -120,7 +123,7 @@ export type Creature = {
   targets: (Creature | Character)[]
 };
 
-export type Skill = {
+type Skill = {
   id: number
   name: string
   type: string
@@ -128,7 +131,7 @@ export type Skill = {
   proficient: boolean
 };
 
-export type Roll = {
+type Roll = {
   type: number
   amount: number
   mod: number
@@ -136,7 +139,7 @@ export type Roll = {
   total: number
 };
 
-export type RollResult = {
+type RollResult = {
   type: number
   amount: number
   mod: number
@@ -148,12 +151,12 @@ export type RollResult = {
   damageType: string
 };
 
-export type ChatMsg = {
+type ChatMsg = {
   text: string
   sender: string
 };
 
-export interface Modifiers {
+interface Modifiers {
   strMod: number
   dexMod: number
   conMod: number
@@ -162,7 +165,7 @@ export interface Modifiers {
   charMod: number
 }
 
-export interface AtSpecificLevel {
+interface AtSpecificLevel {
   level: number
   dice: Dice
 }
@@ -179,53 +182,53 @@ interface SpellSlots {
   9: number
 }
 
-export type Dice = {
+type Dice = {
   amount: number
   type: number
   mod: number
   display: string
 };
 
-export type Usage = {
+type Usage = {
   type: 'at will' | 'per day' | 'recharge after rest' | 'recharge on roll'
   times: number
 };
 
-export type DC = {
+type DC = {
   type: string
   value?: 14,
   successType: 'none' | 'half' | 'other'
 };
 
-export type AOE = {
+type AOE = {
   type: string
   size: number
 };
 
-export type Damage = {
+type Damage = {
   dice: Dice
   type: string
 };
 
-export type SpellDamage = {
+type SpellDamage = {
   type: string
   damageAtSpellLevel?: AtSpecificLevel[]
   damageAtCharacterLevel?: AtSpecificLevel[]
 };
 
-export type AbilityScore = {
+type AbilityScore = {
   name: string
   value: number
   mod: number
 };
 
-export type Prof = {
+type Prof = {
   type: 'skill' | 'save'
   name: string
   value: number
 };
 
-export type SpecialAbility = {
+type SpecialAbility = {
   name: string
   desc: string
   attackBonus?: number
@@ -234,7 +237,7 @@ export type SpecialAbility = {
   spellcasting?: Spellcasting
 };
 
-export type Action = {
+type Action = {
   name: string
   desc: string
   attackBonus?: number
@@ -243,13 +246,13 @@ export type Action = {
   usage?: Usage
 };
 
-export type MinifiedSpell = {
+type MinifiedSpell = {
   id?: number
   name: string
   level: number
 };
 
-export type Spell = {
+type Spell = {
   id?: number
   name: string
   desc: string
@@ -271,7 +274,7 @@ export type Spell = {
   material?: string
 };
 
-export type Spellcasting = {
+type Spellcasting = {
   ability: string
   dc: number
   modifier: number

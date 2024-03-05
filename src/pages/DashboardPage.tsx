@@ -1,7 +1,6 @@
 import { useState } from "react";
 import LogoutBtn from "../components/LogoutBtn";
 import { changeRoute } from "../scripts/tools/router";
-import { Game, Map } from "../scripts/types";
 import GameList from "../components/Dashboard/GameList";
 import GameListHistory from "../components/Dashboard/GameListHistory";
 import { getGame } from "../scripts/controllers/dashboardController";
@@ -18,7 +17,7 @@ export default function DashboardPage() {
 
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
-    const map: Map = await getMap(game.map_id, game.id);
+    const map: Board = await getMap(game.map_id, game.id);
 
     dispatch(
       setGameData({

@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: var(--background-color-2);
+  background-color: var(--bg-color-2);
   padding: 0 0.4rem;
   box-shadow: var(--depth-0);
   max-width: 10rem;
@@ -9,27 +9,11 @@
   flex-direction: column;
   gap: 10px;
 
-  &__btn {
+  button {
     padding: 0.62rem;
-    background-color: var(--btn-color-0);
-    color: white;
 
     &:first-child {
       margin-top: 0.4rem;
     }
   }
-
-  // @media (max-width: 748px) {
-  //   min-width: 100%;
-  //   min-height: 12vh;
-  //   flex-flow: wrap;
-
-  //   .game-page {
-  //     flex-wrap: wrap;
-  //   }
-
-  //   .game-content {
-  //     margin-left: 2rem;
-  //   }
-  // }
 }

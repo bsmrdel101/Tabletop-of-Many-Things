@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
-import { Creature } from '../../scripts/types';
 
 interface CreaturesState {
   creatures: Creature[]

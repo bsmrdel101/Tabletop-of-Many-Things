@@ -1,0 +1,10 @@
+.draggable {
+  background-color: var(--grey-dark-2);
+  padding: 0.5rem;
+  position: absolute;
+  left: -8px;
+  top: 0;
+  width: 100%;
+  height: 1.6rem;
+  cursor: move;
+}

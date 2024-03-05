@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { getGamesHistory } from "../../scripts/controllers/dashboardController";
-import { Game } from "../../scripts/types";
 import GameCard from "./GameCard";
-
 
 interface Props {
   joinGame: (roomCode: string) => void
 }
+
 
 export default function GameListHistory({ joinGame }: Props) {
   const [gameHistory, setGameHistory] = useState<Game[]>([]);

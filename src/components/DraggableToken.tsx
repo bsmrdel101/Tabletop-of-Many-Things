@@ -3,13 +3,13 @@ import { fetchGameData } from "../redux/reducers/gameSlice";
 import { fetchCoordGridData } from "../redux/reducers/gridCoordSlice";
 import { emitServerEvent } from "../scripts/config/socket-io";
 import { getNumberFromSize } from "../scripts/tools/stringUtils";
-import { Asset, Creature } from "../scripts/types";
 
 interface Props {
   asset: Asset
   creature?: Creature
   className?: string
 }
+
 
 export default function DraggableToken({ asset, creature, className }: Props) {
   const { room, map } = useAppSelector(fetchGameData).game;

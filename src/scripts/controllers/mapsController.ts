@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Asset, Game, Map, Token } from "../types";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../config/firebase";
 
@@ -75,7 +74,7 @@ export const addTokenToMap = async (gameId: number, token: Token, mapId: number,
 
 // === PUT routes === //
 
-export const setMap = async (payload: Map) => {
+export const setMap = async (payload: Board) => {
   try {
     await axios.put('/api/map', payload);
   } catch (err) {

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { capitalize } from "../../../scripts/tools/stringUtils";
-import { Spell } from "../../../scripts/types";
 import { getApiSpell } from "../../../scripts/controllers/spellsController";
 
 

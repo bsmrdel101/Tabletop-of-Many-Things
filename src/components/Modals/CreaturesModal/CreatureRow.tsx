@@ -1,38 +1,34 @@
 import { createRoot } from "react-dom/client";
 import { Provider } from 'react-redux';
 import { store } from "../../../redux/store";
-import CreatureStatsModal from "../CreatureStatsModal";
-import { Creature } from "../../../scripts/types";
 import DraggableToken from "../../DraggableToken";
-
+import CreatureStatsDialog from "../../Dialogs/Creatures/CreatureStatsDialog";
 
 interface Props {
   creature: Creature
 }
 
+
 export const openCreatureWindow = async (creature: Creature) => {
   if (!creature) return;
-  if (document.getElementById(`modal-stats-${creature.id}`)) {
-    document.getElementById(`modal-stats-${creature.id}`).remove();
-  }
   const div = document.querySelector('body').appendChild(document.createElement('div'));
   const container = createRoot(div);
   container.render(
     <Provider store={store}>
-      <CreatureStatsModal creature={creature} />
+      <CreatureStatsDialog creature={creature} />
     </Provider>
   );
 };
 
 export default function CreatureRow({ creature }: Props) {
   return (
-    <div className="modal-creatures__row" onClick={() => openCreatureWindow(creature)}>
-      <h3>{ creature.name }</h3>
+    <div className="creatures-dialog__row" onClick={() => openCreatureWindow(creature)}>
+      <p>{ creature.name }</p>
       {creature.asset &&
         <DraggableToken
           asset={creature.asset}
           creature={creature}
-          className="modal-creatures__token"
+          className="creatures-dialog__token"
         />
       }
     </div>

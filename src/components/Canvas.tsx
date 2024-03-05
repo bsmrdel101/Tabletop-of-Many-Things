@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { emitServerEvent, offServerEvent, onServerEvent, socket } from "../scripts/config/socket-io";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGrid, setGrid } from "../redux/reducers/gridSlice";
-import { Coord, Map, Token } from "../scripts/types";
 import { clamp } from "../scripts/tools/utils";
 import { addTokenToMap, deleteTokenFromMap, getMap, updateToken } from "../scripts/controllers/mapsController";
 import { setSelectedMap } from "../scripts/controllers/dashboardController";
@@ -56,7 +55,7 @@ export default function Canvas({ userType }: Props) {
     let selectedToken: Token;
     let boardState = map.boardState;
 
-    onServerEvent('SELECT_MAP', async (selectedMap: Map) => {
+    onServerEvent('SELECT_MAP', async (selectedMap: Board) => {
       bgImage.src = selectedMap.image;
       await setSelectedMap(selectedMap, game.id);
       const newMap = await getMap(selectedMap.id, game.id);
@@ -78,7 +77,7 @@ export default function Canvas({ userType }: Props) {
       drawGrid();
     });
 
-    onServerEvent('VIEW_MAP', async (selectedMap: Map) => {
+    onServerEvent('VIEW_MAP', async (selectedMap: Board) => {
       bgImage.src = selectedMap.image;
       const newMap = await getMap(selectedMap.id, game.id);
       boardState = newMap.boardState;

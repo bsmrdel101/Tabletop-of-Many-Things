@@ -1,11 +1,10 @@
 import React from "react";
-import { Game } from "../../scripts/types";
-
 
 interface Props {
   game: Game
   joinGame: (roomCode: string) => void
 }
+
 
 export default function GameCard({ game, joinGame }: Props) {
   return (

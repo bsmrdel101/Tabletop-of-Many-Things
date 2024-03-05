@@ -1,32 +1,8 @@
-.modal-stats {
+.creature-stats-dialog {
   overflow-y: auto;
-  max-height: 50vh;
-  max-width: 23rem;
-  text-align: left !important;
-  font-weight: 200;
-
-  h2 {
-    margin: 0;
-    padding-left: 0.2rem;
-  }
-
-  p {
-    margin: 0;
-    padding: 0.2rem;
-  }
 
   &__header {
     @include red-border(3px);
-
-    position: relative;
-  }
-
-  &__subtitle {
-    color: var(--red-2);
-    font-weight: 200;
-    font-size: 1.4em;
-
-    @include red-border(1px);
   }
 
   &__general-stats {
@@ -36,8 +12,16 @@
     padding-bottom: 0.3rem;
   }
 
+  &__subtitle {
+    color: var(--red-4);
+    font-weight: 200;
+    font-size: 1.4em;
+    margin: 0.8rem 0.3rem;
+    @include red-border(1px);
+  }
+
   &__stat-heading {
-    margin-top: 1rem !important;
+    margin-top: 1rem;
 
     &--spell {
       display: flex;
@@ -58,7 +42,7 @@
     border-radius: 0.5rem;
 
     h4 {
-      color: var(--red-2);
+      color: var(--red-4);
       font-size: 1.25rem;
       margin: 0 0 0.5rem;
     }
@@ -79,7 +63,7 @@
   }
 }
 
-.modal-score-container {
+.ability-score-container {
   display: flex;
   gap: 0.4rem;
   margin: 0.6rem 0;

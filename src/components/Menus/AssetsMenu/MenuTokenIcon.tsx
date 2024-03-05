@@ -1,5 +1,4 @@
 import { DragEvent } from "react";
-import { Asset } from "../../../scripts/types";
 import { emitServerEvent } from "../../../scripts/config/socket-io";
 import { useAppSelector } from "../../../redux/hooks";
 import { fetchGameData } from "../../../redux/reducers/gameSlice";

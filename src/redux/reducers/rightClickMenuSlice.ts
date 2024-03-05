@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
-import { Token } from '../../scripts/types';
 
 
 interface RightClickMenuState {

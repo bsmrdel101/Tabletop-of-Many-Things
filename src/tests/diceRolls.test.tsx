@@ -1,5 +1,4 @@
 import { rollDice } from '../scripts/diceRolls';
-import { Roll } from '../scripts/types';
 
 
 describe('Roll Dice', () => {

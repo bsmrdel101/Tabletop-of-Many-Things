@@ -1,5 +1,3 @@
-import { AtSpecificLevel, Coord, Damage, DC, Dice } from "../types";
-
 // Clamp number between two values
 export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
@@ -215,4 +213,13 @@ export const convertAtSpecificLevelTypeFormat = (obj: any): AtSpecificLevel[] =>
     newObj.push({ level: parseInt([key][0]), dice: convertDiceTypeFormat(obj[key]) });
   });
   return newObj;
+};
+
+export const generateClasses = (className: string, variantList: string[], elmt: string): string => {
+  const variants = variantList ? variantList.map((i) => `${elmt}--${i}`).join(' ') : '';
+  return [className, variants && variants].filter(Boolean).join(' ');
+};
+
+export const parseClasses = (classes: string): object => {
+  return classes ? { className: classes } : {};
 };

@@ -1,0 +1,69 @@
+input,
+textarea {
+  width: 100%;
+  max-width: 16.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  margin: 0.3rem auto;
+  resize: none;
+  font-family: Ubuntu, sans-serif;
+}
+
+.input {
+  &--thin {
+    padding: 0.3rem;
+  }
+
+  &--small {
+    max-width: 10rem;
+  }
+
+  &--x-small {
+    max-width: 5rem;
+    margin: 0.3rem 0;
+  }
+
+  &--search {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &--md-text {
+    font-size: var(--font-md);
+  }
+
+  &--range {
+    box-shadow: none;
+    max-width: fit-content;
+  }
+
+  &--label-stack {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+
+  &--label-no-stack {
+    margin-left: 0.5rem;
+  }
+
+  &--label-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      margin: 0.3rem 0;
+    }
+  }
+
+  &--label-full-width {
+    width: 100%;
+  }
+
+  &--label-bold {
+    font-weight: bold;
+  }
+}

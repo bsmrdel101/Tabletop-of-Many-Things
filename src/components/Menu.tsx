@@ -1,5 +1,6 @@
 import React from "react";
 import { toggleMenu } from "../scripts/menuManager";
+import Button from "./Library/Button";
 
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 export default function Menu({ name, onLocationClick, location, children }: Props) {
   return (
     <div className="menu hidden" id={`${name}-menu`}>
-      <button className="menu__btn menu__btn--close" onClick={() => toggleMenu(name)}>X</button>
+      <Button className="menu__btn menu__btn--close" onClick={() => toggleMenu(name)}>X</Button>
       <div className="menu__filepath">
         {location.split('/').map((loc, i) => {
           const isLast = i === location.split('/').length - 1;

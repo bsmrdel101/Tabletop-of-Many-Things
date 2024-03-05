@@ -7,10 +7,10 @@ import {
 } from 'react-router-dom';
 import { getUser } from '../scripts/controllers/userController';
 
-import DashboardPage from '../views/DashboardPage';
-import GamePage from '../views/GamePage';
-import LoginPage from '../views/LoginPage';
-import RegisterPage from '../views/RegisterPage';
+import DashboardPage from '../pages/DashboardPage';
+import GamePage from '../pages/GamePage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
 import { useAppDispatch } from '../redux/hooks';
 import { setUser } from '../redux/reducers/userSlice';
 

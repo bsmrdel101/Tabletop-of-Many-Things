@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  background-color: var(--grey-dark-3);
+  box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+  border-bottom-left-radius: 0.3rem;
+  border: solid 2px black;
+  border-top-width: 0;
+  align-items: center;
+
+  p {
+    margin: 0.2rem 0.3rem;
+    user-select: none;
+  }
+
+  button {
+    box-shadow: none;
+
+    &:hover {
+      background-color: var(--grey-light-2);
+    }
+  }
+
+  &--selected {
+    background-color: var(--grey-light-2);
+  }
+}

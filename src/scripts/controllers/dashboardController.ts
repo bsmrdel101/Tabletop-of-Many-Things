@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Game, Map } from "../types";
 
 
 interface newGame {
@@ -57,7 +56,7 @@ export const addGameToHistory = async (payload: Game) => {
 
 // === PUT routes === //
 
-export const setSelectedMap = async (payload: Map, gameId: number) => {
+export const setSelectedMap = async (payload: Board, gameId: number) => {
   try {
     await axios.put(`/api/dashboard/${gameId}`, payload);
   } catch (err) {

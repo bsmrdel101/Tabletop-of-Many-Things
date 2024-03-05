@@ -1,5 +1,5 @@
 .chat {
-  background-color: var(--background-color-2);
+  background-color: var(--bg-color-2);
   width: 98%;
   height: 100%;
   max-height: 20rem;
@@ -53,7 +53,7 @@
   &__text-box {
     position: absolute;
     bottom: 0;
-    background-color: var(--background-color-1);
+    background-color: var(--bg-color-1);
     padding: 1rem;
     width: 100%;
 

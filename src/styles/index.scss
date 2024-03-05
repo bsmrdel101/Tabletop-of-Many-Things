@@ -1,5 +1,12 @@
 @import "./settings/colors";
+@import "./settings/fonts";
 @import "./mixins/mixins";
+@import "./components/library/button";
+@import "./components/library/dialog";
+@import "./components/library/draggable";
+@import "./components/library/grid";
+@import "./components/library/input";
+@import "./components/library/pagination";
 @import "./components/dashboard/DashboardPage.scss";
 @import "./components/GamePage";
 @import "./components/RegisterPage";
@@ -14,9 +21,9 @@
 @import "./components/Toolbar";
 @import "./components/Token";
 @import "./components/TextWarning";
-@import "./components/modals/CreaturesModal";
-@import "./components/modals/CreatureStatsModal";
-@import "./components/modals/Modal";
+@import "./components/dialogs/CreaturesDialog";
+@import "./components/dialogs/CreatureStatsDialog";
+@import "./components/dialogs/Modal";
 @import "./components/menus/MapsMenu";
 @import "./components/menus/Menus";
 @import "./components/RightSideContent";
@@ -27,18 +34,9 @@
 @import "./components/Folder";
 
 :root {
-  /* Grid */
   --zoom: 1rem;
   --background-image: "";
-
-  /* Tokens */
   --token-radius: 50%;
-
-  /* Font size */
-  --font-sm: 0.9375rem; /* 15px */
-  --font-md: 1.4375rem; /* 23px */
-
-  /* Box shadow */
   --depth-0: 0 1px 6px 1px rgba(0, 0, 0, 0.404);
   --depth-1: rgba(0, 0, 0, 0.1) 0 4px 12px;
   --depth-2: 0 1px 6px 1px rgb(172 172 172 / 50%);
@@ -46,8 +44,23 @@
 }
 
 * {
-  content: border-box;
   font-family: Ubuntu, sans-serif;
+  // box-sizing: border-box;
+  scrollbar-width: auto;
+  scrollbar-color: var(--red-2) var(--modal-color-1);
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--grey-dark-2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--red-2);
+    border-radius: 15px;
+  }
 }
 
 body {
@@ -58,33 +71,9 @@ body {
   height: 100vh;
 }
 
-input {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  transition: all ease-in-out 200ms;
-  box-shadow: var(--depth-1);
-  margin-top: 0.08rem;
-}
-
-[type="file"] {
-  box-shadow: none;
-}
-
-.input--hover:hover {
-  transform: scale(1.025, 1.025);
-}
-
-.input--sm {
-  @include input(3rem);
-}
-
-.input--md {
-  @include input(8rem);
-}
-
-.form__input-add input {
-  margin: 0.1rem auto;
+h2,
+h3 {
+  margin: 0;
 }
 
 .form__btn--remove {
@@ -94,74 +83,8 @@ input {
   margin-top: 0.34rem;
 }
 
-select {
-  padding: 0.2rem;
-  border-radius: 5px;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-button {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  transition: all ease-in-out 200ms;
-  box-shadow: var(--depth-1);
-  cursor: pointer;
-}
-
-.btn {
-  &--hover:hover {
-    transform: scale(1.025, 1.025);
-  }
-
-  &--modal-close {
-    border: none;
-    background-color: var(--menu-color-0);
-    margin: 0;
-    box-shadow: none;
-    color: white;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  &--logout {
-    margin: auto 0.8rem;
-  }
-
-  &--attack {
-    margin-top: 0.3rem;
-  }
-
-  &--search {
-    position: absolute;
-    right: -2rem;
-    top: 0.2rem;
-    background-color: #c6c6c6;
-    padding: 0.3rem;
-    padding-bottom: 0.05rem;
-
-    img {
-      max-width: 1.5rem;
-    }
-  }
-}
-
-input[type="range"] {
-  padding: 0;
-}
-
 .bold {
   font-weight: 600;
-}
-
-.relative {
-  position: relative;
 }
 
 p {
@@ -173,7 +96,7 @@ p {
 }
 
 .no-select {
-  z-index: -1;
+  user-select: none;
 }
 
 .draggable-area {

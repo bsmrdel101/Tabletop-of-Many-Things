@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getAssets } from "../../../scripts/controllers/assetsController";
 import { toggleMenu } from "../../../scripts/menuManager";
 import MenuTokenIcon from "./MenuTokenIcon";
-import { Asset } from "../../../scripts/types";
 
 
 export default function AssetsMenu() {
