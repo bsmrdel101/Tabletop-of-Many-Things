@@ -3,6 +3,8 @@ import { io, Socket } from "socket.io-client";
 const getUrl = () => {
   if (window.location.host === 'localhost:3000') {
     return 'http://localhost:3000';
+  } else if (window.location.host === 'tabletop-of-many-things.up.railway.app') {
+    return 'https://tabletop-of-many-things.up.railway.app';
   } else {
     return 'https://www.tabletop-of-many-things.com';
   }
