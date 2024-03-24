@@ -4,7 +4,7 @@ import { fetchCreaturesData } from "../../../redux/reducers/creaturesSlice";
 import Button from "../../Library/Button";
 import Dialog from "../../Library/Dialog";
 import Input from "../../Library/Input";
-import CreatureRow from "../../Modals/CreaturesModal/CreatureRow";
+import CreatureRow from "./CreatureRow";
 
 interface Props {
   open: boolean

@@ -10,6 +10,7 @@ dialog {
   color: white;
   border: none;
   z-index: 2;
+  box-sizing: content-box;
 }
 
 .dialog {

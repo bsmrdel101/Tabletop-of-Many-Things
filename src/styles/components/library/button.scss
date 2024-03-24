@@ -3,7 +3,7 @@ button {
   border: none;
   border-radius: 5px;
   transition: all ease-in-out 0.3s;
-  box-shadow: var(--depth-1);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   cursor: pointer;
 }
 

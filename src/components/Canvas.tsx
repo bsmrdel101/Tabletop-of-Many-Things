@@ -8,7 +8,7 @@ import { setSelectedMap } from "../scripts/controllers/dashboardController";
 import { setRightClickMenu } from "../redux/reducers/rightClickMenuSlice";
 import { fetchGameData, setMap } from "../redux/reducers/gameSlice";
 import { setGridPanOffset, setGridZoom } from "../redux/reducers/gridCoordSlice";
-import { openCreatureWindow } from "./Modals/CreaturesModal/CreatureRow";
+import { openCreatureWindow } from "./Dialogs/Creatures/CreatureRow";
 
 
 interface Props {

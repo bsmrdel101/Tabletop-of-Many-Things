@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <Router>
-      <div>
+      <>
         <Switch>
           {/* Login page */}
           <Route exact path="/login">
@@ -74,7 +74,7 @@ export default function App() {
             <h1>404 you did a goof</h1>
           </Route>
         </Switch>
-      </div>
+      </>
     </Router>
   );
 }
