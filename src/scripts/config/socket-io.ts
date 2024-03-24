@@ -1,7 +1,13 @@
 import { io, Socket } from "socket.io-client";
 
-const url = window.location.host === 'www.tabletop-of-many-things.com' ? 'http://www.tabletop-of-many-things.com' : 'http://localhost:8000';
-export const socket: Socket = io(url, {
+const getUrl = () => {
+  if (window.location.host === 'localhost:3000') {
+    return 'http://localhost:3000';
+  } else {
+    return 'https://www.tabletop-of-many-things.com';
+  }
+};
+export const socket: Socket = io(getUrl(), {
   transports: ["websocket"],
 });
 
