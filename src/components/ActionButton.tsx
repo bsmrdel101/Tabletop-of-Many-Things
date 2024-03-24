@@ -2,7 +2,8 @@ import { numIsPos } from "../scripts/tools/stringUtils";
 import { emitServerEvent } from "../scripts/config/socket-io";
 import { rollDice } from "../scripts/diceRolls";
 import { useAppSelector } from "../redux/hooks";
-import { fetchGameData } from "../redux/reducers/gameSlice";
+import { useAtom } from "jotai";
+import { gameAtom } from "../scripts/atoms/state";
 
 
 interface Props {
@@ -11,16 +12,16 @@ interface Props {
 }
 
 export default function ActionButton({ action, creature }: Props) {
-  const { room } = useAppSelector(fetchGameData).game;
+  const [gameData] = useAtom(gameAtom);
 
   const handleAttackRole = (attackBonus: number) => {
     const result = rollDice(1, 20, attackBonus);
-    emitServerEvent('ROLL_DICE', [result, creature.name, 'attack', creature.targets, null, room]);
+    emitServerEvent('ROLL_DICE', [result, creature.name, 'attack', creature.targets, null, gameData.room]);
   };
 
   const handleDamageRole = (dice: Dice, damageType: string) => {
     const result = rollDice(dice.amount, dice.type, dice.mod);
-    emitServerEvent('ROLL_DICE', [result, creature.name, 'dmg', creature.targets, damageType, room]);
+    emitServerEvent('ROLL_DICE', [result, creature.name, 'dmg', creature.targets, damageType, gameData.room]);
   };
 
   return (

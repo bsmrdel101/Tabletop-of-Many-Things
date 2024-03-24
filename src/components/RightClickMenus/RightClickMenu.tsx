@@ -1,42 +1,31 @@
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchRightClickMenu, setRightClickMenu } from "../../redux/reducers/rightClickMenuSlice";
+import { useAtom } from "jotai";
 import { emitServerEvent } from "../../scripts/config/socket-io";
-import { fetchGameData } from "../../redux/reducers/gameSlice";
-import { useEffect } from "react";
+import { gameAtom, rightClickMenuAtom } from "../../scripts/atoms/state";
+import { useRef } from "react";
 
 
 export default function RightClickMenu() {
-  const { room } = useAppSelector(fetchGameData).game;
-  const { rightClickMenuType, token } = useAppSelector(fetchRightClickMenu);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const deleteBtn = document.getElementById('right-click-menu__delete-token-btn');
-    if (deleteBtn) {
-      deleteBtn.addEventListener('mousedown', (e: MouseEvent) => {
-        if(e.buttons === 1) deleteToken();
-      });
-    }
-  }, [rightClickMenuType]);
+  const [gameData] = useAtom(gameAtom);
+  const [rightClickMenu, setRightClickMenu] = useAtom(rightClickMenuAtom);
+  const { menuType, token } = rightClickMenu;
+  const ref = useRef<HTMLDivElement>(null);
 
   const hideContextMenu = () => {
-    document.getElementById('right-click-menu').classList.add('hidden');
-    dispatch(
-      setRightClickMenu({ type: '', token: token })
-    );
+    ref.current.classList.add('hidden');
+    setRightClickMenu({ ...rightClickMenu, menuType: '' });
   };
 
   const deleteToken = () => {
     hideContextMenu();
-    emitServerEvent('REMOVE_TOKEN', [token, room]);
+    emitServerEvent('REMOVE_TOKEN', [token, gameData.room]);
   };
 
   
   return (
-    <div id="right-click-menu" className="right-click-menu hidden">
-      {rightClickMenuType === 'token' &&
+    <div ref={ref} id="right-click-menu" className="right-click-menu hidden">
+      {menuType === 'token' &&
         <>
-          <button id="right-click-menu__delete-token-btn" className="right-click-menu__btn">Delete</button>
+          <button onClick={() => deleteToken()} className="right-click-menu__btn">Delete</button>
         </>
       }
     </div>

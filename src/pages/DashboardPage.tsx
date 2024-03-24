@@ -4,29 +4,28 @@ import { changeRoute } from "../scripts/tools/router";
 import GameList from "../components/Dashboard/GameList";
 import GameListHistory from "../components/Dashboard/GameListHistory";
 import { getGame } from "../scripts/controllers/dashboardController";
-import { setGameData } from "../redux/reducers/gameSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../redux/hooks";
 import { getMap } from "../scripts/controllers/mapsController";
 import { fetchUser } from "../redux/reducers/userSlice";
+import { useAtom } from "jotai";
+import { gameAtom } from "../scripts/atoms/state";
 
 
 export default function DashboardPage() {
-  const dispatch = useAppDispatch();
   const [roomCodeInput, setRoomCodeInput] = useState('');
   const user = useAppSelector(fetchUser);
+  const [gameData, setGameData] = useAtom(gameAtom);
 
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
     const map: Board = await getMap(game.map_id, game.id);
+    
+    setGameData({
+      game: game,
+      room: roomCode,
+      map: map
+    });
 
-    dispatch(
-      setGameData({
-        game: game,
-        room: roomCode,
-        map: map
-      })
-    );
-    // Check if the game exists
     if (!game) {
       console.warn('game doesn\'t exist');
       return;
@@ -44,9 +43,6 @@ export default function DashboardPage() {
     <div className="dashboard-page">
       <div className="dashboard-page__container">
         <h1>Tabletop of <br /> Many Things</h1>
-        {/* <div>
-          <button>Play</button>
-        </div> */}
       </div>
 
       <div className="dashboard-page__container--right-side">

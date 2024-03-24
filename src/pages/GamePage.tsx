@@ -8,24 +8,24 @@ import { emitServerEvent } from "../scripts/config/socket-io";
 import MapToolbar from "../components/MapToolbar/MapToolbar";
 import MapsMenu from "../components/Menus/MapsMenu";
 import RightSideContent from "../components/RightSideContent/RightSideContent";
-import GridCanvas from "../components/Canvas";
+import Canvas from "../components/Canvas";
 import { getMap } from "../scripts/controllers/mapsController";
 import { setGrid } from "../redux/reducers/gridSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import RightClickMenu from "../components/RightClickMenus/RightClickMenu";
 import { fetchUser } from "../redux/reducers/userSlice";
-import { fetchGameData, setGameData } from "../redux/reducers/gameSlice";
 import { getAllCreatures } from "../scripts/controllers/creaturesController";
 import { setCreatureData } from "../redux/reducers/creaturesSlice";
 import CreaturesDialog from "../components/Dialogs/Creatures/CreaturesDialog";
 import { useAtom } from "jotai";
 import { creaturesDialogAtom } from "../scripts/atoms/dialogs";
+import { gameAtom } from "../scripts/atoms/state";
 
 
 export default function GamePage() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(fetchUser);
-  const { game } = useAppSelector(fetchGameData).game;
+  const [gameData, setGameData] = useAtom(gameAtom);
   const { room }: any = useParams();
   const [userType, setUserType] = useState<'dm' | 'player'>('player');
   const [creaturesModalOpen, setCreaturesModalOpen] = useAtom(creaturesDialogAtom);
@@ -40,13 +40,11 @@ export default function GamePage() {
         return;
       }
   
-      dispatch(
-        setGameData({
-          game: game,
-          room: room,
-          map: map
-        })
-      );
+      setGameData({
+        game: game,
+        room: room,
+        map: map
+      });
   
       dispatch(
         setGrid({
@@ -71,7 +69,7 @@ export default function GamePage() {
 
   return (
     <div className="game-page">
-      {game &&
+      {gameData.game &&
         <>
           <Sidebar userType={userType} />
           <div className="game-content">
@@ -79,7 +77,7 @@ export default function GamePage() {
             <div className="game-content--box">
               <div className="grid-container">
                 <MapToolbar userType={userType} />
-                <GridCanvas userType={userType} />
+                <Canvas />
               </div>
               <RightSideContent />
             </div>

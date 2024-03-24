@@ -25,7 +25,7 @@ export const getMap = async (mapId: number, gameId: number) => {
     const res = await axios.get(`/api/map/{"mapId":${mapId}, "gameId":${gameId}}`);
     res.data.boardState = res.data.boardState.map((token: any) => {
       return { ...token, creature: JSON.parse(token.creature) };
-    });
+    }).filter((token: Token) => token.id);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -61,7 +61,7 @@ export const addTokenToMap = async (gameId: number, token: Token, mapId: number,
     await axios.post('/api/map/token', {
       gameId: gameId,
       mapId: mapId,
-      assetId: token.id,
+      assetId: token.asset_id,
       x: x,
       y: y,
       size: token.size || 1,

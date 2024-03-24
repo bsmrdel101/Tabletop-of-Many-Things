@@ -2,9 +2,10 @@ import { setMap } from "../../../scripts/controllers/mapsController";
 import { emitServerEvent } from "../../../scripts/config/socket-io";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { fetchGrid, setGrid } from "../../../redux/reducers/gridSlice";
-import { fetchGameData } from "../../../redux/reducers/gameSlice";
 import Button from "../../Library/Button";
 import Input from "../../Library/Input";
+import { useAtom } from "jotai";
+import { gameAtom } from "../../../scripts/atoms/state";
 
 interface Props {
   title: string
@@ -13,7 +14,8 @@ interface Props {
 
 export default function SetGridPopup({ title }: Props) {
   const dispatch = useAppDispatch();
-  const { room, map } = useAppSelector(fetchGameData).game;
+  const [gameData, setGameData] = useAtom(gameAtom);
+  const { map, room } = gameData;
   const gridState = useAppSelector(fetchGrid);
 
   const handleChangeGridCellSize = (e: any) => {

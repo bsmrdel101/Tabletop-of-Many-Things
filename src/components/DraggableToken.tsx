@@ -1,8 +1,9 @@
-import { useAppSelector } from "../redux/hooks";
-import { fetchGameData } from "../redux/reducers/gameSlice";
-import { fetchCoordGridData } from "../redux/reducers/gridCoordSlice";
+import { useAtom } from "jotai";
+import { getGridCellCoords } from "../scripts/canvas/gridCanvas";
 import { emitServerEvent } from "../scripts/config/socket-io";
 import { getNumberFromSize } from "../scripts/tools/stringUtils";
+import { gameAtom } from "../scripts/atoms/state";
+import { addTokenToMap } from "../scripts/controllers/mapsController";
 
 interface Props {
   asset: Asset
@@ -12,11 +13,14 @@ interface Props {
 
 
 export default function DraggableToken({ asset, creature, className }: Props) {
-  const { room, map } = useAppSelector(fetchGameData).game;
-  const { currentZoom, panOffsetX, panOffsetY } = useAppSelector(fetchCoordGridData);
+  const [gameData] = useAtom(gameAtom);
+  const { game, map, room } = gameData;
 
-  const handleDropToken = (e: DragEvent) => {
-    emitServerEvent('ADD_TOKEN_TO_BOARD', [e.clientX, e.clientY, { id: asset.id, image: asset.image, creature: creature, size: getNumberFromSize(creature.size) }, map.id, currentZoom, panOffsetX, panOffsetY, room]);
+  const handleDropToken = async (e: DragEvent) => {
+    const { x, y } = getGridCellCoords(e.clientX, e.clientY);
+    const token: Token = { id: null, asset_id: asset.id, map_id: map.id, x, y, image: asset.image, size: getNumberFromSize(creature.size), creature: creature };
+    await addTokenToMap(game.id, token, map.id, x, y);
+    emitServerEvent('ADD_TOKEN_TO_BOARD', [room]);
   };
 
 

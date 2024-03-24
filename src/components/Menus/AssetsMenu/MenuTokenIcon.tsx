@@ -1,21 +1,26 @@
 import { DragEvent } from "react";
 import { emitServerEvent } from "../../../scripts/config/socket-io";
-import { useAppSelector } from "../../../redux/hooks";
-import { fetchGameData } from "../../../redux/reducers/gameSlice";
-import { fetchCoordGridData } from "../../../redux/reducers/gridCoordSlice";
-
+import { useAtom } from "jotai";
+import { gameAtom } from "../../../scripts/atoms/state";
+import { getGridCellCoords } from "../../../scripts/canvas/gridCanvas";
+import { addTokenToMap } from "../../../scripts/controllers/mapsController";
 
 interface Props {
   asset: Asset
 }
 
+
 export default function AssetImage({ asset }: Props) {
-  const { room, map } = useAppSelector(fetchGameData).game;
-  const { currentZoom, panOffsetX, panOffsetY } = useAppSelector(fetchCoordGridData);
-  
-  const handleDropToken = (e: DragEvent) => {
-    emitServerEvent('ADD_TOKEN_TO_BOARD', [e.clientX, e.clientY, asset, map.id, currentZoom, panOffsetX, panOffsetY, room]);
+  const [gameData] = useAtom(gameAtom);
+  const { game, map, room } = gameData;
+
+  const handleDropToken = async (e: DragEvent) => {
+    const { x, y } = getGridCellCoords(e.clientX, e.clientY);
+    const token: Token = { id: null, asset_id: asset.id, map_id: map.id, x, y, image: asset.image, size: 1, creature: null };
+    await addTokenToMap(game.id, token, map.id, x, y);
+    emitServerEvent('ADD_TOKEN_TO_BOARD', [room]);
   };
+
 
   return (
     <img

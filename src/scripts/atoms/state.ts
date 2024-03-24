@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
 
-interface CoordGridState {
-  currentZoom: number;
-  panOffsetX: number;
-  panOffsetY: number;
+interface GameState {
+  game: Game
+  room: string
+  map: Board
 }
 
 interface GridState {
@@ -14,15 +14,14 @@ interface GridState {
   offsetY: number;
 }
 
-interface RightClickMenuState {
-  rightClickMenuType: string
-  token?: Token
-}
+const intialGameState = {
+  game: null,
+  room: '',
+  map: null
+} as GameState;
 
 export const userAtom = atom<User>(null);
-export const gameAtom = atom<Game>(null);
-export const gridCoordAtom = atom<CoordGridState>(null);
+export const gameAtom = atom<GameState>(intialGameState);
 export const gridAtom = atom<GridState>(null);
-export const rightClickMenuAtom = atom<RightClickMenuState>(null);
-export const tokenAtom = atom<Coord>(null);
+export const rightClickMenuAtom = atom<RightClickMenuState>({ menuType: '' });
 export const creaturesAtom = atom<Creature[]>([]);

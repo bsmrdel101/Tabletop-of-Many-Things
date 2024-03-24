@@ -82,16 +82,16 @@ io.on('connection', (socket) => {
     fn(clientList);
   });
 
-  socket.on('MOVE_TOKEN', (token, mapId, room) => {
-    io.to(room).emit('MOVE_TOKEN', token, mapId);
+  socket.on('MOVE_TOKEN', (token, room) => {
+    io.to(room).emit('MOVE_TOKEN', token);
   });
 
-  socket.on('ADD_TOKEN_TO_BOARD', (x, y, token, mapId, zoom, offsetX, offsetY, room) => {
-    io.to(room).emit('ADD_TOKEN_TO_BOARD', x, y, token, mapId, zoom, offsetX, offsetY, socket.id);
+  socket.on('RESIZE_TOKEN', (token, dir, room) => {
+    io.to(room).emit('RESIZE_TOKEN', token, dir);
   });
 
-  socket.on('ADD_TOKEN_TO_BOARD_SUCCESS', (room) => {
-    io.to(room).emit('ADD_TOKEN_TO_BOARD_SUCCESS');
+  socket.on('ADD_TOKEN_TO_BOARD', (room) => {
+    io.to(room).emit('ADD_TOKEN_TO_BOARD');
   });
 
   socket.on('REMOVE_TOKEN', (token, room) => {

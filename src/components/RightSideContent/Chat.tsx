@@ -1,14 +1,15 @@
 import { FormEvent, useState } from "react";
 import { emitServerEvent, onServerEvent } from "../../scripts/config/socket-io";
 import { useAppSelector } from "../../redux/hooks";
-import { fetchGameData } from "../../redux/reducers/gameSlice";
 import { fetchUser } from "../../redux/reducers/userSlice";
 import Input from "../Library/Input";
+import { useAtom } from "jotai";
+import { gameAtom } from "../../scripts/atoms/state";
 
 
 export default function Chat() {
   const user = useAppSelector(fetchUser);
-  const { room } = useAppSelector(fetchGameData).game;
+  const [gameData, setGameData] = useAtom(gameAtom);
   const [chat, setChat] = useState([]);
   const [messageText, setMessageText] = useState(localStorage.getItem('messageText') || '');
 
@@ -20,7 +21,7 @@ export default function Chat() {
   const handleSubmitMessage = (e: FormEvent) => {
     e.preventDefault();
     if (messageText === '') return;
-    emitServerEvent('SEND_MESSAGE', [{ text: messageText, sender: user.username }, room]);
+    emitServerEvent('SEND_MESSAGE', [{ text: messageText, sender: user.username }, gameData.room]);
     setMessageText('');
     localStorage.setItem('messageText', '');
   };

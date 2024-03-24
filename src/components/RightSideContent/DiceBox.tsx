@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { rollDice } from "../../scripts/diceRolls";
 import { emitServerEvent, onServerEvent } from "../../scripts/config/socket-io";
 import { useAppSelector } from "../../redux/hooks";
-import { fetchGameData } from "../../redux/reducers/gameSlice";
 import { fetchUser } from "../../redux/reducers/userSlice";
 import Button from "../Library/Button";
+import { useAtom } from "jotai";
+import { gameAtom } from "../../scripts/atoms/state";
 
 
 export default function DiceBox() {
-  const { room } = useAppSelector(fetchGameData).game;
+  const [gameData] = useAtom(gameAtom);
   const user = useAppSelector(fetchUser);
   const [amount, setAmount] = useState(1);
   const [mod, setMod] = useState(0);
@@ -28,7 +29,7 @@ export default function DiceBox() {
   // Select the dice to roll
   const handleSelectDie = (type: number) => {
     const result: Roll = rollDice(amount, type, mod);
-    emitServerEvent('ROLL_DICE', [result, user.username, 'roll', null, null, room]);
+    emitServerEvent('ROLL_DICE', [result, user.username, 'roll', null, null, gameData.room]);
   };
 
   // Modify the modifier to make it display correctly in the log

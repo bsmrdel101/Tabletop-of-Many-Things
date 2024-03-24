@@ -11,6 +11,11 @@ interface NameDesc {
   desc: string
 }
 
+interface RightClickMenuState {
+  menuType: string
+  token?: Token
+}
+
 type User = {
   id: number
   username: string
@@ -44,7 +49,9 @@ type Asset = {
 
 type Token = {
   id: number
+  asset_id: number
   map_id: number
+  user_id?: number
   image: string
   creature: Creature
   x: number

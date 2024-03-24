@@ -2,14 +2,15 @@ import { FormEvent, useEffect, useState } from "react";
 import { addMap, getMaps } from "../../scripts/controllers/mapsController";
 import { emitServerEvent } from "../../scripts/config/socket-io";
 import FormModal from "../Modals/FormModal";
-import { useAppSelector } from "../../redux/hooks";
-import { fetchGameData } from "../../redux/reducers/gameSlice";
 import Menu from "../Menu";
 import Folder from "../Folder";
+import { useAtom } from "jotai";
+import { gameAtom } from "../../scripts/atoms/state";
 
 
 export default function MapsMenu() {
-  const { room, game, map } = useAppSelector(fetchGameData).game;
+  const [gameData] = useAtom(gameAtom);
+  const { game, room } = gameData;
   const [maps, setMaps] = useState<Board[]>([]);
   const [newMapFormOpen, setNewMapFormOpen] = useState(false);
   const [isBlankMap, setIsBlankMap] = useState(false);

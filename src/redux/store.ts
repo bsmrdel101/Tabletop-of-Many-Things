@@ -2,8 +2,6 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userReducer from './reducers/userSlice';
 import tokenReducer from './reducers/tokenSlice';
 import gridReducer from './reducers/gridSlice';
-import rightClickMenuReducer from './reducers/rightClickMenuSlice';
-import gameSlice from './reducers/gameSlice';
 import gridCoordSlice from './reducers/gridCoordSlice';
 import creatureSlice from './reducers/creaturesSlice';
 
@@ -13,8 +11,6 @@ export const store = configureStore({
     token: tokenReducer,
     grid: gridReducer,
     gridCoord: gridCoordSlice,
-    rightClickMenu: rightClickMenuReducer,
-    game: gameSlice,
     creatures: creatureSlice,
   },
 });

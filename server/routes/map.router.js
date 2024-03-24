@@ -149,7 +149,7 @@ router.put('/token', rejectUnauthenticated, (req, res) => {
       .catch((dberror) => {
       console.log('Oops you did a goof: ', dberror);
       res.sendStatus(500)
-  })  
+  });
 });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
