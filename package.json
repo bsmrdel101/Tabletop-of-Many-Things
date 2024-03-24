@@ -14,7 +14,7 @@
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "deploy": "npx railway up"
   },
   "engines": {
