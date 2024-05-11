@@ -16,7 +16,6 @@ export default function MapsMenu() {
   const [isBlankMap, setIsBlankMap] = useState(false);
   const [mapName, setMapName] = useState('');
   const [mapImageInput, setMapImageInput] = useState<any>([]);
-  
   const [location, setLocation] = useState('maps');
 
   const handleLocationClick = (loc: string) => {
@@ -41,12 +40,10 @@ export default function MapsMenu() {
     fetchData();
   }, []);
 
-  // Share map to everyone
   const handleSelectMap = (map: Board) => {
     emitServerEvent('SELECT_MAP', [map, room]);
   };
 
-  // Change map only for dm
   const handleViewMap = (map: Board) => {
     emitServerEvent('VIEW_MAP', [map]);
   };
@@ -94,7 +91,6 @@ export default function MapsMenu() {
         </FormModal>
       }
       <Menu name="maps" location={location} onLocationClick={handleLocationClick}>
-        {/* New map button */}
         <div className="menu__body--container">
           <button
             className="new-map-btn"
@@ -103,6 +99,7 @@ export default function MapsMenu() {
             New Map
           </button>
         </div>
+
         {/* Folders */}
         {
           Object.keys(

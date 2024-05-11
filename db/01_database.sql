@@ -158,17 +158,6 @@ CREATE TABLE "languages" (
     "name" TEXT
 );
 
--- CREATE TABLE "creature_action_rolls" (
---     "id" SERIAL PRIMARY KEY,
---     "action_id" INTEGER REFERENCES "creature_actions" ON DELETE CASCADE,
---     "ability_id" INTEGER REFERENCES "creature_abilities" ON DELETE CASCADE,
---     "leg_action_id" INTEGER REFERENCES "legendary_actions" ON DELETE CASCADE,
---     "name" VARCHAR (120),
---     "amount" VARCHAR (80),
---     "dice_type" VARCHAR (80),
---     "dmg_type" VARCHAR (80),
---     "to_hit" VARCHAR (80)
--- );
 
 -------------------------
 -- INSERT DEFAULT DATA --
@@ -222,7 +211,7 @@ VALUES
 
 INSERT INTO "maps" ("game_id", "name", "image")
 VALUES
-    (1, 'Default Map', 'https://i2.wp.com/azgaar.files.wordpress.com/2019/07/antique-big.jpg'),
+    (1, 'Default Map', '/images/maps/default-map.webp'),
     (1, 'Forest', 'https://i.etsystatic.com/18388031/r/il/8b7a49/2796267092/il_fullxfull.2796267092_aezx.jpg')
 ;
 
