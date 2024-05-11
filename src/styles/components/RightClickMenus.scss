@@ -4,7 +4,10 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   min-width: 8rem;
-  min-height: 4rem;
+  min-height: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 
   &__btn {
     background-color: var(--menu-color-2);

@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import { emitServerEvent } from "../../scripts/config/socket-io";
 import { gameAtom, rightClickMenuAtom } from "../../scripts/atoms/state";
 import { useRef } from "react";
+import { openCreatureWindow } from "../Dialogs/Creatures/CreatureRow";
 
 
 export default function RightClickMenu() {
@@ -20,11 +21,17 @@ export default function RightClickMenu() {
     emitServerEvent('REMOVE_TOKEN', [token, gameData.room]);
   };
 
+  const openTokenStats = () => {
+    hideContextMenu();
+    openCreatureWindow(token.creature);
+  };
+
   
   return (
     <div ref={ref} id="right-click-menu" className="right-click-menu hidden">
       {menuType === 'token' &&
         <>
+          { token.creature && <button onClick={() => openTokenStats()} className="right-click-menu__btn">Open Stats</button> }
           <button onClick={() => deleteToken()} className="right-click-menu__btn">Delete</button>
         </>
       }
