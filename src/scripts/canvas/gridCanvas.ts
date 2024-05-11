@@ -8,9 +8,9 @@ let offsetX = 0;
 let offsetY = 0;
 let gridWidth: number;
 let gridHeight: number;
-const gridCellSize = 60;
-const gridColor = '#000000';
-const gridOpacity = 1;
+let gridCellSize = 60;
+let gridColor = '#000000';
+let gridOpacity = 1;
 let gridLineWidth = 0.4;
 let currentZoom = 1;
 let boardState: Token[] = [];
@@ -24,6 +24,9 @@ export default function setCanvasGrid(zoom: number, map: Board) {
   gridWidth = Math.ceil(bgImage.naturalWidth / (gridCellSize * currentZoom)) + 10;
   gridHeight = Math.ceil(bgImage.naturalHeight / (gridCellSize * currentZoom)) + 10;
   boardState = map.boardState;
+  gridColor = map.gridColor;
+  gridOpacity = map.gridOpacity / 100;
+  gridCellSize = map.cellSize;
   drawCanvasGrid(zoom);
 }
 

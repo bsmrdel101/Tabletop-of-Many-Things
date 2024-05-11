@@ -26,6 +26,8 @@ export const getMap = async (mapId: number, gameId: number) => {
     res.data.boardState = res.data.boardState.map((token: any) => {
       return { ...token, creature: JSON.parse(token.creature) };
     }).filter((token: Token) => token.id);
+    res.data.offsetX = Number(res.data.offsetX);
+    res.data.offsetY = Number(res.data.offsetY);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -74,7 +76,7 @@ export const addTokenToMap = async (gameId: number, token: Token, mapId: number,
 
 // === PUT routes === //
 
-export const setMap = async (payload: Board) => {
+export const updateMap = async (payload: Board) => {
   try {
     await axios.put('/api/map', payload);
   } catch (err) {

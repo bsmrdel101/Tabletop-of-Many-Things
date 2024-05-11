@@ -23,8 +23,8 @@ CREATE TABLE "maps" (
     "cellSize" INTEGER DEFAULT 50,
     "gridColor" TEXT DEFAULT '#000000',
     "gridOpacity" INTEGER DEFAULT 100,
-    "offsetX" INTEGER DEFAULT 0,
-    "offsetY" INTEGER DEFAULT 0,
+    "offsetX" DECIMAL DEFAULT 0,
+    "offsetY" DECIMAL DEFAULT 0,
     "boardState" TEXT DEFAULT '[]'
 );
 

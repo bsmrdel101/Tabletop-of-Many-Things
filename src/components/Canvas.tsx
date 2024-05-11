@@ -10,7 +10,7 @@ export default function Canvas() {
 
   useEffect(() => {
     initializeCanvas(gameData.map, gameData.game, gameData.room, updateMapAtom, updateContextMenuAtom);
-  }, []);
+  }, [gameData.map]);
 
   const updateMapAtom = (map: Board) => {
     setGameData({ ...gameData, map });

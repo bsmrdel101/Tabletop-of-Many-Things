@@ -110,10 +110,6 @@ io.on('connection', (socket) => {
     socket.emit('VIEW_MAP', map);
   });
 
-  socket.on('SET_GRID', (room) => {
-    io.to(room).emit('SET_GRID');
-  });
-
   socket.on('SEND_MESSAGE', (msg, room) => {
     io.to(room).emit('SEND_MESSAGE', msg);
   });

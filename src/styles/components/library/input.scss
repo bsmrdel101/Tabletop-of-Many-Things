@@ -9,6 +9,10 @@ textarea {
   margin: 0.3rem auto;
   resize: none;
   font-family: Ubuntu, sans-serif;
+
+  &[type="range"] {
+    padding: 0;
+  }
 }
 
 .input {
