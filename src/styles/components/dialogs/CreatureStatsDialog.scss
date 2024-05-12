@@ -78,7 +78,7 @@
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 
-    &--value {
+    &--mod {
       background-color: var(--modal-color-4);
       font-size: 0.8em;
       border-radius: 0.3rem;
@@ -90,7 +90,7 @@
       align-items: center;
     }
 
-    &--mod {
+    &--value {
       margin-bottom: 0.1rem !important;
     }
   }

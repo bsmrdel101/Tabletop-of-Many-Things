@@ -45,8 +45,8 @@ export default function CreatureStatsDialog({ creature }: Props) {
               return (
                 <div className="ability-score-container__score-box" key={score.name}>
                   <p><span className="bold">{capitalize(score.name)}</span></p>
-                  <p className="ability-score-container__score-box--mod">{score.mod >= 0 && '+'}{score.mod}</p>
                   <p className="ability-score-container__score-box--value">{score.value}</p>
+                  <p className="ability-score-container__score-box--mod">{score.mod >= 0 && '+'}{score.mod}</p>
                 </div>
               );
             })}
