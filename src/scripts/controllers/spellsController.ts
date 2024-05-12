@@ -17,7 +17,7 @@ export const getApiSpell = async (url: string) => {
       concentration: concentration,
       castingTime: casting_time,
       higherLevel: higher_level.map((string: string) => string).join('\n'),
-      areaOfEffect: area_of_effect && area_of_effect,
+      aoe: area_of_effect && area_of_effect,
       dc: dc && { type: dc.dc_type.index, successType: dc.dc_success },
       damage: damage && { type: damage.damage_type.index, damageAtSpellLevel: convertAtSpecificLevelTypeFormat(damage.damage_at_character_level) },
       healAtSlotLevel: heal_at_slot_level && heal_at_slot_level,

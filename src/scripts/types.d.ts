@@ -271,7 +271,7 @@ type Spell = {
   concentration: boolean
   castingTime: string
   higherLevel?: string
-  areaOfEffect?: AOE
+  aoe?: AOE
   damage?: SpellDamage
   dc?: DC
   healAtSlotLevel?: AtSpecificLevel
