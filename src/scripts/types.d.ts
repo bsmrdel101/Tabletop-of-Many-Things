@@ -128,6 +128,7 @@ type Creature = {
   actions: NameDesc[]
   legActions: NameDesc[]
   targets: (Creature | Character)[]
+  spellcasting?: Spellcasting
 };
 
 type Skill = {
@@ -241,7 +242,6 @@ type SpecialAbility = {
   attackBonus?: number
   dc?: DC
   damage?: Damage[]
-  spellcasting?: Spellcasting
 };
 
 type Action = {
@@ -281,5 +281,5 @@ type Spellcasting = {
   modifier: number
   class: string
   slots: SpellSlots
-  spells: MinifiedSpell[]
+  spells: Spell[]
 };

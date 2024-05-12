@@ -134,7 +134,8 @@ CREATE TABLE "creatures" (
     "abilities" TEXT,
     "actions" TEXT,
     "legendaryActions" TEXT,
-    "proficiencies" TEXT
+    "proficiencies" TEXT,
+    "spellcasting" TEXT
 );
 
 CREATE TABLE "skills" (

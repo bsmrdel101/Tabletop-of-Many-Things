@@ -30,6 +30,7 @@ export const getAllCreatures = async (gameId: number) => {
       
       res.data[i] = creature;
     });
+    console.log(res.data);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -39,7 +40,6 @@ export const getAllCreatures = async (gameId: number) => {
 export const getCreature = async (id: number) => {
   try {
     const res = await axios.get(`/api/creature/${id}`);
-    console.log(res.data);
     return res.data;
   } catch (err) {
     console.log(err);

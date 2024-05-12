@@ -11,10 +11,8 @@ interface Props {
 
 export default function CreatureStatsDialog({ creature }: Props) {
   const { name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
-  const spellcasting = abilities.find((ability: SpecialAbility) => ability.spellcasting);
-  const [spells, setSpells] = useState<Spell[]>(spellcasting.spellcasting.spells);
   const [openedSpell, setOpenedSpell] = useState<Spell>(null);
-  
+  const spells = creature.spellcasting && creature.spellcasting.spells;
 
 
   return (
