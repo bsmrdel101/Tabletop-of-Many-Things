@@ -1,23 +1,11 @@
-import { useEffect, useState } from "react";
 import { capitalize } from "../../../scripts/tools/stringUtils";
-import { getApiSpell } from "../../../scripts/controllers/spellsController";
-
 
 interface Props {
-  url: string
+  spell: Spell
 }
 
-export default function CreatureSpellDetails({ url }: Props) {
-  const [spell, setSpell] = useState<Spell>(null);
 
-  useEffect(() => {
-    const fetchSpell = async () => {
-      setSpell(await getApiSpell(url));
-    };
-    fetchSpell();
-  }, []);
-
-
+export default function CreatureSpellDetails({ spell }: Props) {
   return (
     <div className="modal-stats__spell-details">
       {spell &&

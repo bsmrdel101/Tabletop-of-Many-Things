@@ -12,18 +12,9 @@ interface Props {
 export default function CreatureStatsDialog({ creature }: Props) {
   const { name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
   const spellcasting = abilities.find((ability: SpecialAbility) => ability.spellcasting);
-  const spells: MinifiedSpell[] = spellcasting && spellcasting.spellcasting.spells;
-  const [spellDetailsUrl, setSpellDetailsUrl] = useState<string | null>(null);
-  const [openedSpellDetailsId, setOpenedSpellDetailsId] = useState<number | null>(null);
-
-  const toggleSpellDetails = (spell: MinifiedSpell, id: number) => {
-    if (openedSpellDetailsId === id) {
-      setOpenedSpellDetailsId(null);
-      setSpellDetailsUrl(null);
-    } else {
-      setOpenedSpellDetailsId(id);
-    }
-  };
+  const [spells, setSpells] = useState<Spell[]>(spellcasting.spellcasting.spells);
+  const [openedSpell, setOpenedSpell] = useState<Spell>(null);
+  
 
 
   return (
@@ -116,19 +107,18 @@ export default function CreatureStatsDialog({ creature }: Props) {
 
       {/* Spells */}
       {spells && <h3 className="creature-stats-dialog__subtitle">Spells</h3>}
-      {spells && spells.map((spell: MinifiedSpell, i) => {
+      {spells && spells.map((spell: Spell) => {
         return (
-          <div key={i}>
+          <div key={spell.id}>
             <p
               className="creature-stats-dialog__stat-heading creature-stats-dialog__stat-heading--spell"
-              onClick={() => toggleSpellDetails(spell, i)}
+              onClick={() => setOpenedSpell(spell)}
             >
               <span className="bold">{spell.name}</span>
-              <img src={openedSpellDetailsId === i ? '/images/dropdown-arrow-up.svg' : '/images/dropdown-arrow-down.svg'} alt={openedSpellDetailsId === i ? 'Collapse spell details' : 'Expand spell details'} draggable="false" />
+              <img src={openedSpell && spell.id === openedSpell.id ? '/images/dropdown-arrow-up.svg' : '/images/dropdown-arrow-down.svg'} alt={'Toggle spell details'} draggable="false" />
             </p>
-            {openedSpellDetailsId === i && 
-              <CreatureSpellDetails url={spellDetailsUrl} />
-            }
+            
+            <CreatureSpellDetails spell={openedSpell} />
           </div>
         );
       })}

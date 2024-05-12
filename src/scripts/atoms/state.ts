@@ -25,3 +25,4 @@ export const gameAtom = atom<GameState>(intialGameState);
 export const gridAtom = atom<GridState>(null);
 export const rightClickMenuAtom = atom<RightClickMenuState>({ menuType: '' });
 export const creaturesAtom = atom<Creature[]>([]);
+export const spellsAtom = atom<Spell[]>([]);

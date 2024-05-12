@@ -253,14 +253,8 @@ type Action = {
   usage?: Usage
 };
 
-type MinifiedSpell = {
-  id?: number
-  name: string
-  level: number
-};
-
 type Spell = {
-  id?: number
+  id: number
   name: string
   desc: string
   level: number
