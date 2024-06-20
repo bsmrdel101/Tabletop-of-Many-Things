@@ -1,6 +1,7 @@
-# Tabletop of Many Things
-
+[![Epic Badge](https://img.shields.io/badge/:3-purple?style=plastic&logoColor=purple)](https://bennett-smrdel.netlify.app/0_0)
 [![Jest](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml/badge.svg)](https://github.com/bsmrdel101/Tabletop-of-Many-Things/actions/workflows/jest.yml)
+
+# Tabletop of Many Things
 
 ## Description
 
