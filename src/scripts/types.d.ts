@@ -199,7 +199,9 @@ type Dice = {
 
 type Usage = {
   type: 'at will' | 'per day' | 'recharge after rest' | 'recharge on roll'
-  times: number
+  times?: number
+  dice?: Dice
+  minValue?: number
 };
 
 type DC = {
