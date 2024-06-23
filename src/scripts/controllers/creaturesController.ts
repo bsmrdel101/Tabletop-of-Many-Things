@@ -10,7 +10,7 @@ export const getAllCreatures = async (gameId: number) => {
       creature.legActions = creature.legendaryActions;
       creature.vulnerabilities = JSON.parse(creature.vulnerabilities);
       creature.resistances = JSON.parse(creature.resistances);
-
+      creature.spellcasting = JSON.parse(creature.spellcasting);
       creature.conditionImmunities = creature.immunities.map((c: any) => {
         if(c.type === 'condition') {
           return c.name;
@@ -27,7 +27,6 @@ export const getAllCreatures = async (gameId: number) => {
           delete creature[key];
         }
       }
-      
       res.data[i] = creature;
     });
     console.log(res.data);

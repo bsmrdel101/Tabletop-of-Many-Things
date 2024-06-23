@@ -21,17 +21,13 @@
     }
 
     button {
-      margin-top: 1rem;
+      margin: 1rem 0;
       padding: 0.5rem;
       font-size: 0.7em;
     }
 
     a {
       font-size: 0.76em;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 1.3rem;
       cursor: pointer;
 
       &:hover {
@@ -41,6 +37,8 @@
 
     input {
       margin-top: 0.2rem;
+      display: flex;
+      flex-direction: column;
 
       &::placeholder {
         color: var(--text-color-0);

@@ -36,7 +36,7 @@ router.get('/all/:gameId', rejectUnauthenticated, (req, res) => {
       "creatures"."actions"::json,
       "creatures"."legendaryActions"::json,
       "creatures"."proficiencies"::json,
-      "creatures"."spellcasting"::json
+      "creatures"."spellcasting"
     FROM
       "creatures"
     LEFT JOIN
