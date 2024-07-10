@@ -285,3 +285,31 @@ type Spellcasting = {
   slots: SpellSlots
   spells: Spell[]
 };
+
+type Cost = {
+  amount: number
+  type: string
+};
+
+interface Range {
+  normal: number
+  long?: number
+  display: string
+}
+
+type EquipmentCategory = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Rod' | 'Staff' | 'Scroll' | 'Wand';
+
+type Item = {
+  id: number
+  name: string
+  desc: string
+  type: EquipmentCategory
+  cost: Cost
+  lbs: number
+  properties: string[]
+  armorType?: 'Light' | 'Medium' | 'Heavy' | 'Shield'
+  weaponType?: 'Simple' | 'Martial' | 'Firearm'
+  damage?: Damage
+  range?: Range
+  rarity?: 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact'
+};
