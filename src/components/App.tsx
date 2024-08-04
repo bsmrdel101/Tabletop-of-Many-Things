@@ -13,6 +13,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import { useAppDispatch } from '../redux/hooks';
 import { setUser } from '../redux/reducers/userSlice';
+import CharactersPage from '../pages/CharactersPage';
 
 
 export default function App() {
@@ -55,6 +56,16 @@ export default function App() {
             {
               userState ?
                 <GamePage />
+                :
+                <LoginPage />
+            }
+          </Route>
+
+          {/* Characters page */}
+          <Route exact path="/characters">
+            {
+              userState ?
+                <CharactersPage />
                 :
                 <LoginPage />
             }

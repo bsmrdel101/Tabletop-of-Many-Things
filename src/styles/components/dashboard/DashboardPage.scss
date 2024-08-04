@@ -9,21 +9,34 @@
     margin-right: 5rem;
   }
 
-  &__container {
+  &__content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-
-    &--right-side {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    flex-direction: column;
+    gap: 1rem;
   }
 
   &__join-room-input {
     margin-right: 0.3rem;
+  }
+
+  &__links-list {
+    display: flex;
+    gap: 0.3rem;
+
+    a {
+      text-decoration: none;
+      color: black;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: all ease-in-out 0.3s;
+      box-shadow: #0000001a 0 4px 12px;
+      cursor: pointer;
+      background-color: var(--bg-color-2);
+
+      &:hover {
+        transform: scale(1.025, 1.025);
+      }
+    }
   }
 
   &__user-box {
