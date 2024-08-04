@@ -9,6 +9,9 @@ import { getMap } from "../scripts/controllers/mapsController";
 import { fetchUser } from "../redux/reducers/userSlice";
 import { useAtom } from "jotai";
 import { gameAtom } from "../scripts/atoms/state";
+import Input from "../components/Library/Input";
+import Button from "../components/Library/Button";
+import { Link } from "react-router-dom";
 
 
 export default function DashboardPage() {
@@ -19,18 +22,13 @@ export default function DashboardPage() {
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
     const map: Board = await getMap(game.map_id, game.id);
-    
     setGameData({
       game: game,
       room: roomCode,
       map: map
     });
 
-    if (!game) {
-      console.warn('game doesn\'t exist');
-      return;
-    }
-
+    if (!game) return;
     changeRoute(`/game/${roomCode}`);
   };
 
@@ -41,21 +39,24 @@ export default function DashboardPage() {
 
   return (
     <div className="dashboard-page">
-      <div className="dashboard-page__container">
-        <h1>Tabletop of <br /> Many Things</h1>
-      </div>
+      <h1>Tabletop of <br /> Many Things</h1>
 
-      <div className="dashboard-page__container--right-side">
+      <div className="dashboard-page__content">
         <form onSubmit={(e) => handleJoinRoom(e)}>
-          <input
+          <Input
             className="dashboard-page__join-room-input"
             placeholder="room code"
             value={roomCodeInput}
-            onChange={(e) => setRoomCodeInput(e.target.value)}
+            onChange={(e: any) => setRoomCodeInput(e.target.value)}
             required
           />
-          <button type="submit">Join Room</button>
+          <Button type="submit">Join Room</Button>
         </form>
+
+        <div className="dashboard-page__links-list">
+          <Link to="/characters">Characters</Link>
+        </div>
+
         <div style={{ display:'flex', gap:'1rem' }}>
           <GameList joinGame={joinGame} />
           <GameListHistory joinGame={joinGame} />

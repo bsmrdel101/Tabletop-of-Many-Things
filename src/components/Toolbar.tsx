@@ -12,7 +12,7 @@ export default function Toolbar({ room }: Props) {
   const [playerList, setPlayerList] = useState([]);
 
   const leaveGame = () => {
-    socket.disconnect();
+    socket.close();
     changeRoute('/');
   };
 

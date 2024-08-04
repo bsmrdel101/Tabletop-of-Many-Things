@@ -6,7 +6,6 @@ export const getAllCreatures = async (gameId: number) => {
   try {
     const res = await axios.get(`/api/creature/all/${gameId}`);
     res.data.forEach((creature: any, i: number) => {
-      console.log(creature);
       creature.maxHp = creature.health;
       creature.legActions = creature.legendaryActions;
       creature.vulnerabilities = JSON.parse(creature.vulnerabilities);

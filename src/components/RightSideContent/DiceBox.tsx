@@ -7,6 +7,14 @@ import Button from "../Library/Button";
 import { useAtom } from "jotai";
 import { gameAtom } from "../../scripts/atoms/state";
 
+interface ROLL_DICE {
+  result: Roll
+  owner: string
+  rollType: string
+  targets: (Creature | Character)[]
+  damageType: string
+} 
+
 
 export default function DiceBox() {
   const [gameData] = useAtom(gameAtom);
@@ -17,13 +25,19 @@ export default function DiceBox() {
   let logHistory: RollResult[] = [];
 
   useEffect(() => {
-    onServerEvent('ROLL_DICE', (result: Roll, owner: string, rollType: string, targets: (Creature | Character)[], damageType: string) => {
-      if (!targets) targets = [];
-      const rollResult: RollResult = { ...result, owner: owner, rollType: rollType, targets: targets, damageType: damageType };
+    onServerEvent('ROLL_DICE', (data: ROLL_DICE) => {
+      const { result, owner, rollType, targets = [], damageType } = data;
+      const rollResult: RollResult = {
+        ...result,
+        owner: owner,
+        rollType: rollType,
+        targets: targets,
+        damageType: damageType
+      };
       logHistory = [...logHistory, rollResult];
       setLog(logHistory);
-      setTimeout(() => document.querySelector('.dice-box__log').scrollTo(0, 999999), 50);
-    });
+      setTimeout(() => { document.querySelector('.dice-box__log').scrollTo(0, 999999); }, 50);
+    });    
   }, []);
 
   // Select the dice to roll
