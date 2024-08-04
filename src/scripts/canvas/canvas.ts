@@ -164,7 +164,8 @@ onServerEvent('MOVE_TOKEN', (token: Token) => {
   handleDropToken(token, map.id);
 });
 
-onServerEvent('RESIZE_TOKEN', (token: Token, dir: 'up' | 'down') => {
+onServerEvent('RESIZE_TOKEN', (data: { token: Token, dir: 'up' | 'down' }) => {
+  const { token, dir } = data;
   resizeToken(token, dir);
 });
 
