@@ -304,6 +304,7 @@ type Item = {
   name: string
   desc: string
   type: EquipmentCategory
+  rarity: 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact'
   cost: Cost
   lbs: number
   properties: string[]
@@ -311,5 +312,4 @@ type Item = {
   weaponType?: 'Simple' | 'Martial' | 'Firearm'
   damage?: Damage
   range?: Range
-  rarity?: 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact'
 };
