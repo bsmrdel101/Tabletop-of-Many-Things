@@ -27,4 +27,4 @@ A virtual tabletop for 5e D&amp;D, that allows users prepare and play their game
 - Socket.io
 - Docker
 - PostgreSQL
-- Firebase
+  
