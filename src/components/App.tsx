@@ -6,14 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 import { getUser } from '../scripts/controllers/userController';
-
+import { useAppDispatch } from '../redux/hooks';
+import { setUser } from '../redux/reducers/userSlice';
 import DashboardPage from '../pages/DashboardPage';
 import GamePage from '../pages/GamePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-import { useAppDispatch } from '../redux/hooks';
-import { setUser } from '../redux/reducers/userSlice';
 import CharactersPage from '../pages/CharactersPage';
+import CharacterSheetPage from '../pages/CharacterSheetPage';
 
 
 export default function App() {
@@ -66,6 +66,16 @@ export default function App() {
             {
               userState ?
                 <CharactersPage />
+                :
+                <LoginPage />
+            }
+          </Route>
+
+          {/* Character Sheet page */}
+          <Route exact path="/characters/:id">
+            {
+              userState ?
+                <CharacterSheetPage />
                 :
                 <LoginPage />
             }

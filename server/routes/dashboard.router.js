@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       SELECT * FROM "games_list"
-      WHERE "user_id"=$1
+      WHERE "userId"=$1
       ORDER BY "id";
   `);
   const sqlValues = [
@@ -41,7 +41,7 @@ router.get('/game/:id', rejectUnauthenticated, (req, res) => {
 router.get('/history', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       SELECT * FROM "game_history"
-      WHERE "user_id"=$1
+      WHERE "userId"=$1
       ORDER BY "id";
   `);
   const sqlValues = [
@@ -58,7 +58,7 @@ router.get('/history', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "games_list" ("user_id", "name", "code", "dm")
+      INSERT INTO "games_list" ("userId", "name", "code", "dm")
       VALUES ($1, $2, $3, $4);
   `;
   const sqlValues = [
@@ -77,7 +77,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/history', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "game_history" ("user_id", "name", "code")
+      INSERT INTO "game_history" ("userId", "name", "code")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
@@ -96,7 +96,7 @@ router.post('/history', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       UPDATE "games_list"
-      SET "map_id" = $1
+      SET "mapId" = $1
       WHERE "id" = $2;
   `);
   const sqlValues = [
@@ -114,7 +114,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
 // router.post('/prev', rejectUnauthenticated, (req, res) => {
 //     const sqlText =`
-//         INSERT INTO "prev_games" ("user_id", "code")
+//         INSERT INTO "prev_games" ("userId", "code")
 //         VALUES ($1, $2);
 //     `;
 //     const sqlValues = [
@@ -132,7 +132,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 // router.delete('/prev', rejectUnauthenticated, (req, res) => {
 //     const sqlText =`
 //         DELETE FROM "prev_games" 
-//         WHERE "user_id"=$1;
+//         WHERE "userId"=$1;
 //     `;
 //     const sqlValues = [
 //       req.user.id

@@ -10,21 +10,10 @@ A virtual tabletop for 5e D&amp;D, that allows users prepare and play their game
 ![image](https://user-images.githubusercontent.com/43832671/218588428-3bb0a6bc-8c2e-45ea-b7fb-a7d57e0de7d4.png)
 
 ## Installation
-- Make sure you have [docker](https://www.docker.com/) installed and running.
 - Clone the repo, and run `npm i`.
-- ~~Create a `.env` file, and put the content from `.env-sample` inside of it.~~
 - Run `npm run dev`.
-- Go to `http://localhost:3000/login` and login with the following credentials.
+- Go to `http://localhost:3000` and login with the following credentials.
 ```
     username: dev
     password: 123
 ```
-
-## Technologies Used
-- React
-- TypeScript
-- Node/Express
-- Socket.io
-- Docker
-- PostgreSQL
-  

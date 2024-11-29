@@ -1,4 +1,4 @@
-import React from "react";
+import Button from "../Library/Button";
 
 interface Props {
   game: Game
@@ -8,8 +8,8 @@ interface Props {
 
 export default function GameCard({ game, joinGame }: Props) {
   return (
-    <button className="game-list__item" onClick={() => joinGame(game.code)}>
+    <Button variant={['secondary']} className="games-list__item" onClick={() => joinGame(game.code)}>
       {game.name}
-    </button>
+    </Button>
   );
 }

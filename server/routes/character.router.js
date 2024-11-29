@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
     SELECT * FROM "characters"
-    WHERE "user_id" = $1
+    WHERE "userId" = $1
     ORDER BY "id";
   `);
   const sqlValues = [
@@ -43,7 +43,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-      INSERT INTO "characters" ("user_id")
+      INSERT INTO "characters" ("userId")
       VALUES ($1);
     `;
     const sqlValues = [

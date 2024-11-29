@@ -1,13 +1,39 @@
-button {
+.btn {
+  background-color: var(--btn-color-1);
+  color: white;
   padding: 0.5rem;
   border: none;
   border-radius: 5px;
   transition: all ease-in-out 0.3s;
   box-shadow: #0000001a 0 4px 12px;
   cursor: pointer;
-}
 
-.btn {
+  &--link {
+    display: flex;
+    padding: 0;
+    align-items: center;
+
+    a {
+      color: white;
+      height: 100%;
+      padding: 0.5rem;;
+      align-content: center;
+      text-decoration: none;
+    }
+
+    &:hover a {
+      color: white;
+    }
+  }
+
+  &--hover {
+    &:hover, a:hover {
+      color: var(--modal-color-1);
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
   &--small {
     width: 5rem;
   }
@@ -43,9 +69,28 @@ button {
     }
   }
 
+  &--edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25rem 0.3rem;
+    border-radius: 50%;
+
+    img {
+      width: 0.8rem;
+      margin: 0.1rem 0 -0.1rem 0;
+      cursor: pointer;
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
   &--plain {
-    background-color: transparent;
+    background-color: buttonface;
     box-shadow: none;
+    color: var(--black-0);
   }
 
   &--danger {
@@ -77,6 +122,37 @@ button {
 
   &--hover-scale:hover {
     transform: scale(1.025, 1.025);
+  }
+
+  &--bold {
+    font-weight: bold;
+  }
+
+  &--danger {
+    color: white;
+    background-color: var(--red-1);
+    
+    &:hover {
+      color: var(--red-2);
+      background-color: transparent;
+      box-shadow: none;
+      border-color: transparent;
+    }
+  }
+
+  &--secondary {
+    color: black;
+    padding: 0.5rem;
+    background-color: var(--bg-color-2);
+    border-radius: 5px;
+    transition: all ease-in-out 200ms;
+    box-shadow: 0 0 9px -2px rgba(132, 132, 132, 0.612);
+    text-align: center;
+  }
+
+  &--fit {
+    width: fit-content;
+    height: fit-content;
   }
 }
 

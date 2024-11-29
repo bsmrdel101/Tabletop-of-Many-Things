@@ -4,7 +4,7 @@ import axios from "axios";
 // === GET routes === //
 export const getAllCreatures = async (gameId: number) => {
   try {
-    const res = await axios.get(`/api/creature/all/${gameId}`);
+    const res = await axios.get(`/api/5e/creature/all/${gameId}`);
     res.data.forEach((creature: any, i: number) => {
       creature.maxHp = creature.health;
       creature.legActions = creature.legendaryActions;
@@ -38,7 +38,7 @@ export const getAllCreatures = async (gameId: number) => {
 
 export const getCreature = async (id: number) => {
   try {
-    const res = await axios.get(`/api/creature/${id}`);
+    const res = await axios.get(`/api/5e/creature/${id}`);
     return res.data;
   } catch (err) {
     console.log(err);

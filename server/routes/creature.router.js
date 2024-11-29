@@ -9,7 +9,7 @@ router.get('/all/:gameId', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
     SELECT
       "creatures"."id",
-      "creatures"."game_id",
+      "creatures"."gameId",
       CASE
         WHEN "assets"."id" IS NOT NULL THEN
           json_build_object('id', "assets"."id", 'image', "assets"."image")
@@ -42,8 +42,8 @@ router.get('/all/:gameId', rejectUnauthenticated, (req, res) => {
     LEFT JOIN
       "assets" ON "creatures"."token" = "assets"."id"
     WHERE
-      ("creatures"."user_id" = $1 OR "creatures"."user_id" IS NULL)
-      AND ("creatures"."game_id" = $2 OR "creatures"."game_id" IS NULL)
+      ("creatures"."userId" = $1 OR "creatures"."userId" IS NULL)
+      AND ("creatures"."gameId" = $2 OR "creatures"."gameId" IS NULL)
     ORDER BY
       "creatures"."id";
   `);
@@ -100,7 +100,7 @@ router.get('/:index', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "creatures" ("user_id", "index", "image", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
+      INSERT INTO "creatures" ("userId", "index", "image", "name", "size", "type", "alignment", "ac", "hit_points", "hit_dice", "str", "dex", "con", "int", "wis", "char", "cr", "xp", "walk_speed", "swim_speed", "burrow_speed", "fly_speed", "climb_speed")
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23);
   `;
   const sqlValues = [
@@ -138,7 +138,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/prof', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "creature_proficiencies" ("creature_id", "prof_type", "prof_name", "prof_value")
+      INSERT INTO "creature_proficiencies" ("creatureId", "prof_type", "prof_name", "prof_value")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
@@ -157,7 +157,7 @@ router.post('/prof', rejectUnauthenticated, (req, res) => {
 
 router.post('/vul', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "vulnerabilities" ("creature_id", "vul_name")
+      INSERT INTO "vulnerabilities" ("creatureId", "vul_name")
       VALUES ($1, $2);
   `;
   const sqlValues = [
@@ -174,7 +174,7 @@ router.post('/vul', rejectUnauthenticated, (req, res) => {
 
 router.post('/res', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "resistances" ("creature_id", "res_name")
+      INSERT INTO "resistances" ("creatureId", "res_name")
       VALUES ($1, $2);
   `;
   const sqlValues = [
@@ -195,7 +195,7 @@ router.post('/immunities', rejectUnauthenticated, (req, res) => {
   if (req.body.data.conImmune) immuneType = 'condition';
 
   const sqlText =`
-      INSERT INTO "immunities" ("creature_id", "immune_name", "immune_type")
+      INSERT INTO "immunities" ("creatureId", "immune_name", "immune_type")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
@@ -213,7 +213,7 @@ router.post('/immunities', rejectUnauthenticated, (req, res) => {
 
 router.post('/senses', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "senses" ("creature_id", "sense_name", "sense_value")
+      INSERT INTO "senses" ("creatureId", "sense_name", "sense_value")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
@@ -231,7 +231,7 @@ router.post('/senses', rejectUnauthenticated, (req, res) => {
 
 router.post('/languages', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "languages" ("creature_id", "list")
+      INSERT INTO "languages" ("creatureId", "list")
       VALUES ($1, $2);
   `;
   const sqlValues = [
@@ -249,7 +249,7 @@ router.post('/languages', rejectUnauthenticated, (req, res) => {
 
 router.post('/abilities', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "creature_abilities" ("creature_id", "ability_name", "ability_desc")
+      INSERT INTO "creature_abilities" ("creatureId", "ability_name", "ability_desc")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
@@ -267,7 +267,7 @@ router.post('/abilities', rejectUnauthenticated, (req, res) => {
 
 router.post('/actions', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "creature_actions" ("creature_id", "action_name", "action_desc")
+      INSERT INTO "creature_actions" ("creatureId", "action_name", "action_desc")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [
@@ -285,7 +285,7 @@ router.post('/actions', rejectUnauthenticated, (req, res) => {
 
 router.post('/leg-actions', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "legendary_actions" ("creature_id", "leg_action_name", "leg_action_desc")
+      INSERT INTO "legendary_actions" ("creatureId", "leg_action_name", "leg_action_desc")
       VALUES ($1, $2, $3);
   `;
   const sqlValues = [

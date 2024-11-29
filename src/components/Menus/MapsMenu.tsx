@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { addMap, getMaps } from "../../scripts/controllers/mapsController";
+import { addMap, getMaps } from "../../scripts/controllers/5e/mapsController";
 import { emitServerEvent } from "../../scripts/config/socket-io";
 import FormModal from "../Modals/FormModal";
 import Menu from "../Menu";

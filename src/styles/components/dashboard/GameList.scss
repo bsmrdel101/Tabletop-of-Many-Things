@@ -8,10 +8,15 @@
   width: 11.1rem;
   height: 16.5rem;
   overflow-y: auto;
+  gap: 0.4rem;
 
   &__title {
     color: white;
     margin-bottom: 1rem;
+  }
+
+  &__item {
+    font-size: var(--font-md);
   }
 
   &::-webkit-scrollbar {

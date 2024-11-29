@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/all/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       SELECT * FROM "maps"
-      WHERE "game_id"=$1
+      WHERE "gameId"=$1
       ORDER BY "id";
   `);
   const sqlValues = [
@@ -27,7 +27,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
     SELECT
     "maps"."id",
-    "maps"."game_id",
+    "maps"."gameId",
     "maps"."filepath",
     "maps"."name",
     "maps"."image",
@@ -40,8 +40,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         json_agg(
             json_build_object(
                 'id', "map_tokens"."id",
-                'asset_id', "assets"."id",
-                'user_id', "assets"."user_id",
+                'assetId', "assets"."id",
+                'userId', "assets"."userId",
                 'image', "assets"."image",
                 'size', "map_tokens"."size",
                 'creature', "map_tokens"."creature",
@@ -54,13 +54,13 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     FROM
     "maps"
     LEFT JOIN
-    "map_tokens" ON "maps"."id" = "map_tokens"."map_id" AND "map_tokens"."game_id" = $2
+    "map_tokens" ON "maps"."id" = "map_tokens"."mapId" AND "map_tokens"."gameId" = $2
     LEFT JOIN
-    "assets" ON "map_tokens"."asset_id" = "assets"."id"
+    "assets" ON "map_tokens"."assetId" = "assets"."id"
     WHERE
     "maps"."id" = $1
     GROUP BY
-    "maps"."id", "maps"."game_id", "maps"."name", "maps"."image", "maps"."cellSize",
+    "maps"."id", "maps"."gameId", "maps"."name", "maps"."image", "maps"."cellSize",
     "maps"."gridColor", "maps"."gridOpacity", "maps"."offsetX", "maps"."offsetY";
   `);
   const sqlValues = [
@@ -78,7 +78,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.get('/token/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       SELECT * FROM "map_tokens"
-      WHERE "map_id"=$1
+      WHERE "mapId"=$1
       ORDER BY "id";
   `);
   const sqlValues = [
@@ -112,7 +112,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/token', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-        INSERT INTO "map_tokens" ("game_id", "map_id", "asset_id", "x", "y", "size", "creature")
+        INSERT INTO "map_tokens" ("gameId", "mapId", "assetId", "x", "y", "size", "creature")
         VALUES ($1, $2, $3, $4, $5, $6, $7);
     `;
     const sqlValues = [

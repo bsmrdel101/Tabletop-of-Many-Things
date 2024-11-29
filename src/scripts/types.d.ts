@@ -1,5 +1,6 @@
 type ButtonHTML = React.HTMLProps<HTMLButtonElement>
 type InputHTML = React.HTMLProps<HTMLInputElement>
+type SelectHTML = React.HTMLProps<HTMLSelectElement>
 
 interface NameValue {
   name: string
@@ -25,11 +26,12 @@ type User = {
 
 type Game = {
   id: number
-  user_id: number
+  userId: number
   name: string
   code: string
   dm: number
-  map_id: number
+  mapId: number
+  ruleset: string
 };
 
 interface Coord {
@@ -44,16 +46,18 @@ interface GridSize {
 
 type Asset = {
   id: number
-  image: string
+  filepath: string
+  img: string
 };
 
 type Token = {
   id: number
-  asset_id: number
-  map_id: number
-  user_id?: number
+  assetId: number
+  mapId: number
+  userId?: number
   image: string
-  creature: Creature
+  creature?: Creature
+  character?: Character
   x: number
   y: number
   size: number
@@ -61,7 +65,7 @@ type Token = {
 
 type Board = {
   id: number
-  game_id: number
+  gameId: number
   name: string
   filepath: string
   image: string
@@ -74,33 +78,106 @@ type Board = {
 };
 
 type Character = {
-  id?: number
+  id: number
+  userId: number
+  img: string
   name: string
-  class: string
-  race: string
-  background: string
   alignment: string
-  level: number
-  ac: number
-  max_health: number
-  current_health: number
-  temp_health: number
-  prof_bonus: number
-  initiative: number
-  inspiration: boolean
-  hit_dice: number | string
-  str: number
-  dex: number
-  con: number
-  int: number
-  wis: number
-  char: number
-  image: string
-  walk_speed: number
-  swim_speed: number
-  burrow_speed: number
-  fly_speed: number
-  climb_speed: number
+  lvl: number
+  xp: number
+  acOverride: number
+  acMod: number
+  maxHpOverride: number
+  maxHpMod: number
+  currentHp: number
+  tempHp: number
+  insp: boolean
+  race?: Race
+  classes: Class[]
+  background?: Background
+  currentHitDice: Dice[]
+  speeds: Speed[]
+  senses: NameValue[]
+  proficiencies: Prof[]
+  resistances: string[]
+  vulnerabilities: string[]
+  condImmunities: string[]
+  dmgImmunities: string[]
+  languages: string[]
+  currency: Cost[]
+  spellcasting: Spellcasting
+  ruleset: string
+  targets: Token
+};
+
+type Race = {
+  id: number
+  gameId: number
+  name: string
+  desc: string
+  abilityBonuses: NameValue[]
+  age: string
+  size: string
+  sizeDesc: string
+  alignment: string
+  startingProficiencies: Prof[]
+  languages: string[]
+  languageDesc: string
+  speeds: Speed[]
+  traits: NameDesc[]
+  subrace?: Subrace
+};
+
+type Subrace = {
+  id: number
+  name: string
+  desc: string
+  abilityBonuses: NameValue[]
+  startingProficiencies: Prof[]
+  languages: string[]
+  languageDesc: string
+  traits: NameDesc[]
+};
+
+type Class = {
+  id: number
+  name: string
+  lvl: number
+  hitDice: number
+  proficiencies: Prof[]
+  skillChoices: Skill[]
+  saves: Skill[]
+  startingItems: Item[]
+  startingItemChoices: Item[]
+  levels: Level[]
+  multiClassing: any[]
+};
+
+type Subclass = {
+  id: number
+  name: string
+  subclassFlavor: string
+  desc: string
+  levels: Level[]
+  spells: Spell[]
+};
+
+type Background = {
+  id: number
+  name: string
+  desc: string
+  proficiencies: string
+  languages: string[]
+  equipment: Item[]
+  features: NameDesc[]
+  personalityTraits: string
+  ideals: string
+  bonds: string
+  flaws: string
+};
+
+type Level = {
+  name: string
 };
 
 type Creature = {
@@ -137,6 +214,12 @@ type Skill = {
   type: string
   bonus_mod: number
   proficient: boolean
+};
+
+type Speed = {
+  name: string
+  value: number
+  hover: boolean
 };
 
 type Roll = {
@@ -178,7 +261,7 @@ interface AtSpecificLevel {
   dice: Dice
 }
 
-interface SpellSlots {
+type SpellSlots = {
   1: number
   2: number
   3: number
@@ -188,7 +271,12 @@ interface SpellSlots {
   7: number
   8: number
   9: number
-}
+};
+
+type PactSlots = {
+  amount: number
+  level: number
+};
 
 type Dice = {
   amount: number
@@ -232,8 +320,9 @@ type AbilityScore = {
   mod: number
 };
 
+type ProfType = 'skill' | 'save' | 'weapon' | 'armor' | 'tool' | 'vehicle';
 type Prof = {
-  type: 'skill' | 'save'
+  type: ProfType
   name: string
   value: number
 };
@@ -280,9 +369,10 @@ type Spell = {
 type Spellcasting = {
   ability: string
   dc: number
-  modifier: number
+  mod: number
   class: string
   slots: SpellSlots
+  pactSlots: PactSlots
   spells: Spell[]
 };
 

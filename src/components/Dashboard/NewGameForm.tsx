@@ -1,45 +1,40 @@
 import { FormEvent, useState } from "react";
 import { addGame } from "../../scripts/controllers/dashboardController";
+import Input from "../Library/Input";
+import Select from "../Library/Select";
+import Button from "../Library/Button";
 
 
 export default function GameList() {
   const [name, setName] = useState('');
   const [ruleset, setRuleset] = useState('');
 
-  // Add game to game_list
-  const handleCreateNewCampaign = (e: FormEvent) => {
+  const handleNewCampaign = async (e: FormEvent) => {
     e.preventDefault();
-    
-    addGame({
-      name: name,
-      ruleset: ruleset
-    });
+    await addGame({ name, ruleset });
     location.reload();
   };
 
+
   return (
     <div className="new-game-form">
-      <form onSubmit={(e) => handleCreateNewCampaign(e)}>
-        <label>
-          Campaign Name
-          <input
-            placeholder="Nelzern"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
+      <form onSubmit={handleNewCampaign}>
+        <Input
+          label="Campaign Name"
+          placeholder="Nelzern"
+          value={name}
+          onChange={(e: any) => setName(e.target.value)}
+        />
+        <Select
+          label="Ruleset"
+          variant={['label-stack', 'fit']}
+          onChange={(e: any) => setRuleset(e.target.value)}
+          value={ruleset}
+        >
+          <option value="5e">5e</option>
+        </Select>
 
-        <label>
-          Ruleset
-          <select
-            onChange={(e) => setRuleset(e.target.value)}
-            value={ruleset}
-          >
-            <option value="5e">5e</option>
-          </select>
-        </label>
-
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );

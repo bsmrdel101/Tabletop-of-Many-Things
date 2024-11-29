@@ -1,7 +1,7 @@
 import { openCreatureWindow } from "../../components/Dialogs/Creatures/CreatureRow";
 import { emitServerEvent, onServerEvent } from "../config/socket-io";
 import { setSelectedMap } from "../controllers/dashboardController";
-import { deleteTokenFromMap, getMap, updateToken } from "../controllers/mapsController";
+import { deleteTokenFromMap, getMap, updateToken } from "../controllers/5e/mapsController";
 import { clamp } from "../tools/utils";
 import setCanvasBg, { panCanvasBg, zoomCanvasBg } from "./bgCanvas";
 import drawCanvasGrid, { getGridCellCoords, panCanvasGrid, zoomCanvasGrid } from "./gridCanvas";

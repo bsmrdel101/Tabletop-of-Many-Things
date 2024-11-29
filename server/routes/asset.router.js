@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = (`
       SELECT * FROM "assets"
-      WHERE "user_id"=$1
+      WHERE "userId"=$1
       ORDER BY "id";
   `);
   const sqlValues = [
@@ -40,7 +40,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText =`
-      INSERT INTO "assets" ("user_id", "image")
+      INSERT INTO "assets" ("userId", "image")
       VALUES ($1, $2);
   `;
   const sqlValues = [
@@ -57,7 +57,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // router.post('/map', rejectUnauthenticated, (req, res) => {
 //   const sqlText =`
-//       INSERT INTO "map_tokens" ("game_id", "map_id", "asset_id", "x", "y", "size", "creature")
+//       INSERT INTO "map_tokens" ("gameId", "mapId", "assetId", "x", "y", "size", "creature")
 //       VALUES ($1, $2, $3, $4, $5, $6, $7);
 //   `;
 //   const sqlValues = [

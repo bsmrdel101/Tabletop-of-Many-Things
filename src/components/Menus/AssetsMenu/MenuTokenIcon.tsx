@@ -3,7 +3,7 @@ import { emitServerEvent } from "../../../scripts/config/socket-io";
 import { useAtom } from "jotai";
 import { gameAtom } from "../../../scripts/atoms/state";
 import { getGridCellCoords } from "../../../scripts/canvas/gridCanvas";
-import { addTokenToMap } from "../../../scripts/controllers/mapsController";
+import { addTokenToMap } from "../../../scripts/controllers/5e/mapsController";
 
 interface Props {
   asset: Asset
@@ -16,7 +16,7 @@ export default function AssetImage({ asset }: Props) {
 
   const handleDropToken = async (e: DragEvent) => {
     const { x, y } = getGridCellCoords(e.clientX, e.clientY);
-    const token: Token = { id: null, asset_id: asset.id, map_id: map.id, x, y, image: asset.image, size: 1, creature: null };
+    const token: Token = { id: null, assetId: asset.id, mapId: map.id, x, y, image: asset.img, size: 1, creature: null, character: null };
     await addTokenToMap(game.id, token, map.id, x, y);
     emitServerEvent('ADD_TOKEN_TO_BOARD', [room]);
   };
@@ -24,7 +24,7 @@ export default function AssetImage({ asset }: Props) {
 
   return (
     <img
-      src={asset.image}
+      src={asset.img}
       className="menu__item menu__item--asset"
       onDragEnd={(e: DragEvent) => handleDropToken(e)}
     />

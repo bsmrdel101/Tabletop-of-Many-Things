@@ -9,12 +9,12 @@ import MapToolbar from "../components/MapToolbar/MapToolbar";
 import MapsMenu from "../components/Menus/MapsMenu";
 import RightSideContent from "../components/RightSideContent/RightSideContent";
 import Canvas from "../components/Canvas";
-import { getMap } from "../scripts/controllers/mapsController";
+import { getMap } from "../scripts/controllers/5e/mapsController";
 import { setGrid } from "../redux/reducers/gridSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import RightClickMenu from "../components/RightClickMenus/RightClickMenu";
 import { fetchUser } from "../redux/reducers/userSlice";
-import { getAllCreatures } from "../scripts/controllers/creaturesController";
+import { getAllCreatures } from "../scripts/controllers/5e/creaturesController";
 import { setCreatureData } from "../redux/reducers/creaturesSlice";
 import CreaturesDialog from "../components/Dialogs/Creatures/CreaturesDialog";
 import { useAtom } from "jotai";
@@ -33,7 +33,7 @@ export default function GamePage() {
   useEffect(() => {
     const setupGame = async () => {
       const game: Game = await getGame(room);
-      const map: Board = await getMap(game.map_id, game.id);
+      const map: Board = await getMap(game.mapId, game.id);
       
       if (!game) {
         console.error('game doesn\'t exist');

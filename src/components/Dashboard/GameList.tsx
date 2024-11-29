@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getGames } from "../../scripts/controllers/dashboardController";
 import GameCard from "./GameCard";
 import NewGameForm from "./NewGameForm";
+import Button from "../Library/Button";
 
 interface Props {
   joinGame: (roomCode: string) => void
@@ -18,11 +19,6 @@ export default function GameList({ joinGame }: Props) {
     };
     fetchData();
   }, []);
-
-  // Form that creates new campaign
-  const toggleGameForm = () => {
-    setGameFormOpen(!gameFormOpen);
-  };
   
 
   return (
@@ -35,9 +31,9 @@ export default function GameList({ joinGame }: Props) {
         {gameFormOpen &&
           <NewGameForm />
         }
-        <button className="btn--hover" onClick={toggleGameForm}>
+        <Button variant={['plain']} onClick={() => setGameFormOpen(!gameFormOpen)}>
           { gameFormOpen ? 'Cancel' : 'Create Campaign' }
-        </button>
+        </Button>
       </div>
     </>
   );

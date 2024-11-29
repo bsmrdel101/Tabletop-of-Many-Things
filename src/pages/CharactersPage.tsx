@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Button from "../components/Library/Button";
-import { useEffect, useState } from "react";
-import { addCharacter, getAllCharacters } from "../scripts/controllers/charactersController";
+import { Fragment, useEffect, useState } from "react";
+import { addCharacter, getAllCharacters } from "../scripts/controllers/5e/charactersController";
+import CharacterCard from "../components/CharacterCard";
 
-export default function LoginPage() {
+export default function CharactersPage() {
   const [characters, setCharacters] = useState<Character[]>([]);
 
   useEffect(() => {
@@ -16,6 +17,7 @@ export default function LoginPage() {
 
   const handleNewCharacter = async () => {
     await addCharacter();
+    location.reload();
   };
 
 
@@ -28,7 +30,13 @@ export default function LoginPage() {
         <Button onClick={handleNewCharacter}>New Character</Button>
       </div>
       <div className="characters-page__content">
-
+        {characters.map((char) => {
+          return (
+            <Fragment key={char.id}>
+              <CharacterCard char={char} characters={characters} setCharacters={setCharacters} />
+            </Fragment>
+          );
+        })}
       </div>
     </div>
   );

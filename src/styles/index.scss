@@ -7,14 +7,13 @@
 @import "./components/library/grid";
 @import "./components/library/input";
 @import "./components/library/pagination";
+@import "./components/library/select";
 @import "./components/dashboard/DashboardPage.scss";
 @import "./components/GamePage";
 @import "./components/RegisterPage";
 @import "./components/ActionButton";
 @import "./components/Canvas";
-@import "./components/dashboard/GameCard";
 @import "./components/dashboard/GameList";
-@import "./components/dashboard/GameListHistory";
 @import "./components/mapToolbar/MapToolbar";
 @import "./components/RightClickMenus";
 @import "./components/Sidebar";
@@ -33,6 +32,7 @@
 @import "./components/NewGameForm";
 @import "./components/Folder";
 @import "./components/characters-page/CharactersPage";
+@import "./components/characters-page/CharacterSheetPage";
 
 :root {
   --zoom: 1rem;
@@ -72,8 +72,7 @@ body {
   height: 100%;
 }
 
-h2,
-h3 {
+h2, h3, h4 {
   margin: 0;
 }
 
@@ -89,7 +88,8 @@ h3 {
 }
 
 p {
-  margin: 0.4rem;
+  // margin: 0.4rem;
+  margin: 0;
 }
 
 .hidden {

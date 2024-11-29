@@ -20,7 +20,7 @@ export const getGames = async () => {
 export const getGame = async (code: string) => {
   try {
     const res = await axios.get(`/api/dashboard/game/${code}`);
-    return res.data[0];
+    return res.data;
   } catch (err) {
     console.log(err);
   }
@@ -40,15 +40,14 @@ export const getGamesHistory = async () => {
 export const addGame = async (payload: newGame) => {
   try {
     await axios.post('/api/dashboard', payload);
-    getGames();
   } catch (err) {
     console.log(err);
   }
 };
 
-export const addGameToHistory = async (payload: Game) => {
+export const addGameToHistory = async (gameId: number) => {
   try {
-    await axios.post('/api/dashboard/history', payload);
+    await axios.post('/api/dashboard/history', { gameId });
   } catch (err) {
     console.log(err);
   }

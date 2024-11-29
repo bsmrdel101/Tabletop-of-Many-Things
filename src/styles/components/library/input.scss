@@ -1,7 +1,7 @@
 input,
 textarea {
   width: 100%;
-  max-width: 16.5rem;
+  max-width: 15.5rem;
   padding: 0.5rem;
   border: none;
   border-radius: 0.3rem;
@@ -69,5 +69,20 @@ textarea {
 
   &--label-bold {
     font-weight: bold;
+  }
+
+  &--h1 {
+    margin: 0;
+    background-color: transparent;
+    color: white;
+    box-shadow: none;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  &--fit {
+    width: fit-content;
+    height: fit-content;
   }
 }

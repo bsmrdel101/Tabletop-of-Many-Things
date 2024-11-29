@@ -1,5 +1,4 @@
-import { updateMap } from "../../../scripts/controllers/mapsController";
-import { emitServerEvent } from "../../../scripts/config/socket-io";
+import { updateMap } from "../../../scripts/controllers/5e/mapsController";
 import Button from "../../Library/Button";
 import Input from "../../Library/Input";
 import { useAtom } from "jotai";

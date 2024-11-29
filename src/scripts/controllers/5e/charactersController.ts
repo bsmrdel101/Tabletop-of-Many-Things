@@ -5,17 +5,17 @@ import axios from "axios";
 
 export const getAllCharacters = async () => {
   try {
-    const res = await axios.get('/api/character');
+    const res = await axios.get(`/api/5e/characters`);
     return res.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const getCharacter = async (id: number) => {
+export const getCharacterById = async (id: number) => {
   try {
-    const res = await axios.get(`/api/character/${id}`);
-    return res.data[0];
+    const res = await axios.get(`/api/5e/characters/${id}`);
+    return res.data;
   } catch (err) {
     console.log(err);
   }
@@ -25,7 +25,7 @@ export const getCharacter = async (id: number) => {
 
 export const addCharacter = async () => {
   try {
-    await axios.post('/api/character');
+    await axios.post(`/api/5e/characters`);
   } catch (err) {
     console.log(err);
   }
@@ -35,7 +35,17 @@ export const addCharacter = async () => {
 
 export const editCharacter = async (character: Character) => {
   try {
-    await axios.put('/api/character', character);
+    await axios.put(`/api/5e/characters`, character);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// === DELETE routes === //
+
+export const deleteCharacter = async (id: number) => {
+  try {
+    await axios.delete(`/api/5e/characters/${id}`);
   } catch (err) {
     console.log(err);
   }

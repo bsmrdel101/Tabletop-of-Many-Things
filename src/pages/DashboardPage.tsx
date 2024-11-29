@@ -5,7 +5,7 @@ import GameList from "../components/Dashboard/GameList";
 import GameListHistory from "../components/Dashboard/GameListHistory";
 import { getGame } from "../scripts/controllers/dashboardController";
 import { useAppSelector } from "../redux/hooks";
-import { getMap } from "../scripts/controllers/mapsController";
+import { getMap } from "../scripts/controllers/5e/mapsController";
 import { fetchUser } from "../redux/reducers/userSlice";
 import { useAtom } from "jotai";
 import { gameAtom } from "../scripts/atoms/state";
@@ -17,11 +17,11 @@ import { Link } from "react-router-dom";
 export default function DashboardPage() {
   const [roomCodeInput, setRoomCodeInput] = useState('');
   const user = useAppSelector(fetchUser);
-  const [gameData, setGameData] = useAtom(gameAtom);
+  const [_, setGameData] = useAtom(gameAtom);
 
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
-    const map: Board = await getMap(game.map_id, game.id);
+    const map: Board = await getMap(game.mapId, game.id);
     setGameData({
       game: game,
       room: roomCode,
@@ -50,7 +50,7 @@ export default function DashboardPage() {
             onChange={(e: any) => setRoomCodeInput(e.target.value)}
             required
           />
-          <Button type="submit">Join Room</Button>
+          <Button variant={['plain']} type="submit">Join Room</Button>
         </form>
 
         <div className="dashboard-page__links-list">

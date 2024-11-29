@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ref, uploadBytes } from "firebase/storage";
-import { storage } from "../config/firebase";
+import { storage } from "../../config/firebase";
 
 
 interface NewMap {
@@ -13,7 +13,7 @@ interface NewMap {
 
 export const getMaps = async (id: number) => {
   try {    
-    const res = await axios.get(`/api/map/all/${id}`);
+    const res = await axios.get(`/api/5e/map/all/${id}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ export const getMaps = async (id: number) => {
 
 export const getMap = async (mapId: number, gameId: number) => {
   try {
-    const res = await axios.get(`/api/map/{"mapId":${mapId}, "gameId":${gameId}}`);
+    const res = await axios.get(`/api/5e/map/{"mapId":${mapId}, "gameId":${gameId}}`);
     res.data.boardState = res.data.boardState.map((token: any) => {
       return { ...token, creature: JSON.parse(token.creature) };
     }).filter((token: Token) => token.id);
@@ -52,7 +52,7 @@ export const addMap = async (payload: NewMap, gameId: number) => {
       image: payload.isBlank ? payload.image : imageUrl
     };
 
-    await axios.post('/api/map', mapData);
+    await axios.post('/api/5e/map', mapData);
   } catch (err) {
     console.log(err);
   }
@@ -60,10 +60,10 @@ export const addMap = async (payload: NewMap, gameId: number) => {
 
 export const addTokenToMap = async (gameId: number, token: Token, mapId: number, x: number, y: number) => {
   try {
-    await axios.post('/api/map/token', {
+    await axios.post('/api/5e/map/token', {
       gameId: gameId,
       mapId: mapId,
-      assetId: token.asset_id,
+      assetId: token.assetId,
       x: x,
       y: y,
       size: token.size || 1,
@@ -78,7 +78,7 @@ export const addTokenToMap = async (gameId: number, token: Token, mapId: number,
 
 export const updateMap = async (payload: Board) => {
   try {
-    await axios.put('/api/map', payload);
+    await axios.put('/api/5e/map', payload);
   } catch (err) {
     console.log(err);
   }
@@ -87,7 +87,7 @@ export const updateMap = async (payload: Board) => {
 // Update token board state
 export const updateToken = async (id: number, size: number, x: number, y: number) => {
   try {
-    await axios.put('/api/map/token', {
+    await axios.put('/api/5e/map/token', {
       id: id,
       x: x,
       y: y,
@@ -102,7 +102,7 @@ export const updateToken = async (id: number, size: number, x: number, y: number
 
 export const deleteTokenFromMap = async (id: number) => {
   try {
-    await axios.delete(`/api/map/token/${id}`);
+    await axios.delete(`/api/5e/map/token/${id}`);
   } catch (err) {
     console.log(err);
   }
