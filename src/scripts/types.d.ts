@@ -89,7 +89,8 @@ type Character = {
   acMod: number
   maxHpOverride: number
   maxHpMod: number
-  currentHp: number
+  maxHp: number
+  hp: number
   tempHp: number
   insp: boolean
   race?: Race

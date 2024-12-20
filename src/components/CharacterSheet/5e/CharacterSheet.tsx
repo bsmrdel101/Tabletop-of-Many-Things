@@ -5,6 +5,7 @@ import { backgroundsAtom, classesAtom, racesAtom } from "../../../scripts/atoms/
 import { getAllRaces } from "../../../scripts/controllers/5e/racesController";
 import { getAllBackgrounds } from "../../../scripts/controllers/5e/backgroundsController";
 import { getAllClasses } from "../../../scripts/controllers/5e/classesController";
+import HealthBar from "./HealthBar";
 
 interface Props {
   character: Character
@@ -30,6 +31,9 @@ export default function CharacterSheet5e({ character }: Props) {
     <div className="character-sheet-page--5e">
       <div className="character-sheet__top-bar">
         <Header character={character} />
+      </div>
+      <div className="character-sheet__section">
+        <HealthBar character={character} />
       </div>
     </div>
   );
