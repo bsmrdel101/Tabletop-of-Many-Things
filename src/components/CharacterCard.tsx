@@ -1,4 +1,5 @@
 import { deleteCharacter } from "../scripts/controllers/5e/charactersController";
+import { getCharacterSubtitle } from "../scripts/tools/5e/characterUtils";
 import Button from "./Library/Button";
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 
 export default function CharacterCard({ char, characters, setCharacters }: Props) {
-  const subtitle = [char.race, ...char.classes.map((c) => c.name), char.background].filter((c) => c).join(', ');
+  const subtitle = getCharacterSubtitle(char);
   
   const handleDelete = async (id: number) => {
     await deleteCharacter(id);

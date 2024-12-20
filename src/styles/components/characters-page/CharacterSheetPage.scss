@@ -11,19 +11,33 @@
         gap: 1rem;
         position: relative;
         width: 100%;
-    
+
         h1 {
           margin: 0;
         }
-    
+
+        &-pic {
+          width: 6rem;
+        }
+
+        &-content-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          padding-right: 2.8rem;
+        }
+
         &-content {
           display: flex;
           flex-direction: column;
           gap: 0.3rem;
         }
 
-        &-pic {
-          width: 6rem;
+        &-right-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          text-align: center;
         }
       }
     }

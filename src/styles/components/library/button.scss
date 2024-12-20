@@ -16,7 +16,7 @@
     a {
       color: white;
       height: 100%;
-      padding: 0.5rem;;
+      padding: 0.5rem;
       align-content: center;
       text-decoration: none;
     }
@@ -27,7 +27,8 @@
   }
 
   &--hover {
-    &:hover, a:hover {
+    &:hover,
+    a:hover {
       color: var(--modal-color-1);
       background-color: transparent;
       box-shadow: none;
@@ -78,7 +79,7 @@
 
     img {
       width: 0.8rem;
-      margin: 0.1rem 0 -0.1rem 0;
+      margin: 0.1rem 0 -0.1rem;
       cursor: pointer;
     }
 
@@ -91,10 +92,6 @@
     background-color: buttonface;
     box-shadow: none;
     color: var(--black-0);
-  }
-
-  &--danger {
-    color: var(--red-2);
   }
 
   &--circle {
@@ -131,7 +128,7 @@
   &--danger {
     color: white;
     background-color: var(--red-1);
-    
+
     &:hover {
       color: var(--red-2);
       background-color: transparent;
