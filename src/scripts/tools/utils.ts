@@ -215,9 +215,9 @@ export const convertAtSpecificLevelTypeFormat = (obj: any): AtSpecificLevel[] =>
   return newObj;
 };
 
-export const generateClasses = (className: string, variantList: string[], elmt: string): string => {
-  const variants = variantList ? variantList.map((i) => `${elmt}--${i}`).join(' ') : '';
-  return [className, variants && variants, elmt].filter(Boolean).join(' ');
+export const generateClasses = (className: string, variantsList: string[], elmt: string): string => {
+  const variantss = variantsList ? variantsList.map((i) => `${elmt}--${i}`).join(' ') : '';
+  return [className, variantss && variantss, elmt].filter(Boolean).join(' ');
 };
 
 export const parseClasses = (classes: string): object => {

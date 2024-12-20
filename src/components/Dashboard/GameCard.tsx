@@ -8,7 +8,7 @@ interface Props {
 
 export default function GameCard({ game, joinGame }: Props) {
   return (
-    <Button variant={['secondary']} className="games-list__item" onClick={() => joinGame(game.code)}>
+    <Button variants={['secondary']} className="games-list__item" onClick={() => joinGame(game.code)}>
       {game.name}
     </Button>
   );

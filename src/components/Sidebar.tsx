@@ -16,34 +16,34 @@ export default function Sidebar({ userType }: Props) {
     <div className="sidebar">
       {userType === 'dm' ?
         <>
-          <Button variant={['brown', 'hover-scale']} onClick={() => toggleMenu('maps')}>
+          <Button variants={['brown', 'hover-scale']} onClick={() => toggleMenu('maps')}>
             Maps
           </Button>
-          <Button variant={['brown', 'hover-scale']} onClick={() => toggleMenu('assets')}>
+          <Button variants={['brown', 'hover-scale']} onClick={() => toggleMenu('assets')}>
             Assets
           </Button>
-          <Button variant={['brown', 'hover-scale']} onClick={() => setCreaturesModalOpen(!creaturesModalOpen)}>
+          <Button variants={['brown', 'hover-scale']} onClick={() => setCreaturesModalOpen(!creaturesModalOpen)}>
             Creatures
           </Button>
-          <Button variant={['brown', 'hover-scale']}>
+          <Button variants={['brown', 'hover-scale']}>
             Encounters
           </Button>
-          <Button variant={['brown', 'hover-scale']}>
+          <Button variants={['brown', 'hover-scale']}>
             Loot
           </Button>
-          <Button variant={['brown', 'hover-scale']}>
+          <Button variants={['brown', 'hover-scale']}>
             Items
           </Button>
-          <Button variant={['brown', 'hover-scale']}>
+          <Button variants={['brown', 'hover-scale']}>
             Shops
           </Button>
         </>
         :
         <>
-          <Button variant={['brown', 'hover-scale']}>
+          <Button variants={['brown', 'hover-scale']}>
             Characters
           </Button>
-          <Button variant={['brown', 'hover-scale']}>
+          <Button variants={['brown', 'hover-scale']}>
             Character Sheet
           </Button>
         </>

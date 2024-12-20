@@ -20,7 +20,7 @@ export default function CreatureStatsDialog({ creature }: Props) {
       title={name}
       open={true}
       className="creature-stats-dialog"
-      variant={['creature-stats']}
+      variants={['creature-stats']}
       height="28rem"
       width="27rem"
       deleteOnClose

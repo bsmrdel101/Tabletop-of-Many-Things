@@ -27,7 +27,7 @@ export default function GameList() {
         />
         <Select
           label="Ruleset"
-          variant={['label-stack', 'fit']}
+          variants={['label-stack', 'fit']}
           onChange={(e: any) => setRuleset(e.target.value)}
           value={ruleset}
         >

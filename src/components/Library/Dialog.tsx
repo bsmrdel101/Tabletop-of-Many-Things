@@ -6,7 +6,7 @@ import Button from "./Button";
 interface Props {
   children: React.ReactNode
   className?: string
-  variant?: ('creature-stats')[]
+  variants?: ('creature-stats')[]
   title?: string
   closeOnOutsideClick?: boolean
   width?: string
@@ -17,9 +17,9 @@ interface Props {
   noTitleStyles?: boolean
 }
 
-export default function Dialog({ children, className, variant, title, closeOnOutsideClick, width, height, open, setOpen, deleteOnClose, noTitleStyles, ...props }: Props) {
+export default function Dialog({ children, className, variants, title, closeOnOutsideClick, width, height, open, setOpen, deleteOnClose, noTitleStyles, ...props }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
-  const classes = generateClasses(className, variant, 'dialog');
+  const classes = generateClasses(className, variants, 'dialog');
 
   useEffect(() => {
     bindEventListeners();
@@ -48,7 +48,7 @@ export default function Dialog({ children, className, variant, title, closeOnOut
 
   return (
     <Draggable handle=".dialog__handlebar">
-      <dialog open={open} ref={ref} className={`dialog ${variant && variant.includes('creature-stats') && 'dialog--creature-stats'}`} style={{ width: width, height: height }}>
+      <dialog open={open} ref={ref} className={`dialog ${variants && variants.includes('creature-stats') && 'dialog--creature-stats'}`} style={{ width: width, height: height }}>
         <div className="dialog__handlebar draggable">
           <h3 className="dialog__title">{ title }</h3>
         </div>
@@ -56,7 +56,7 @@ export default function Dialog({ children, className, variant, title, closeOnOut
           {...parseClasses(classes)}
           {...props}
         >
-          <Button variant={['X']} onClick={closeDialog}>X</Button>
+          <Button variants={['X']} onClick={closeDialog}>X</Button>
           <div className="dialog__content">
             { children }
           </div>

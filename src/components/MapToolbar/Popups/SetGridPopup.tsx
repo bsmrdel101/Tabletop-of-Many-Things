@@ -123,14 +123,14 @@ export default function SetGridPopup({ title }: Props) {
 
       <Input
         label="Grid Scale"
-        variant={['x-small', 'label-stack']}
+        variants={['x-small', 'label-stack']}
         type="number"
         value={map.cellSize}
         onChange={(e) => handleChangeGridCellSize(e)}
       />
       <Input
         type="range"
-        variant={['range']}
+        variants={['range']}
         min={15}
         max={80}
         step={5}
@@ -148,14 +148,14 @@ export default function SetGridPopup({ title }: Props) {
       <Input
         label="Opacity"
         type="range"
-        variant={['range', 'label-stack']}
+        variants={['range', 'label-stack']}
         min={0}
         max={100}
         value={map.gridOpacity}
         onChange={(e: any) => handleChangeGridOpacity(e)}
       />
 
-      <Button variant={['center']} type="submit">Apply</Button>
+      <Button variants={['center']} type="submit">Apply</Button>
     </form>
   );
 }

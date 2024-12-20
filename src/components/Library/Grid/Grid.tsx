@@ -2,7 +2,7 @@ import { generateClasses, parseClasses } from "../../../scripts/tools/utils";
 import React, { useEffect, useRef } from "react";
 
 interface Props {
-  variant?: ('default')[]
+  variants?: ('default')[]
   children: React.ReactNode
   className?: string
   rows?: number
@@ -11,9 +11,9 @@ interface Props {
 }
 
 
-export default function Grid({ children, className, rows = 1, cols = 12, gap = 0, variant }: Props) {
+export default function Grid({ children, className, rows = 1, cols = 12, gap = 0, variants }: Props) {
   const ref = useRef(null) as any;
-  const classes = generateClasses(`grid ${className}`, variant, 'grid');
+  const classes = generateClasses(`grid ${className}`, variants, 'grid');
     
   useEffect(() => {
     const grid = ref.current as HTMLDivElement;

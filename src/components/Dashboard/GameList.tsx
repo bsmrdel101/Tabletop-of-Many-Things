@@ -31,7 +31,7 @@ export default function GameList({ joinGame }: Props) {
         {gameFormOpen &&
           <NewGameForm />
         }
-        <Button variant={['plain']} onClick={() => setGameFormOpen(!gameFormOpen)}>
+        <Button variants={['plain']} onClick={() => setGameFormOpen(!gameFormOpen)}>
           { gameFormOpen ? 'Cancel' : 'Create Campaign' }
         </Button>
       </div>

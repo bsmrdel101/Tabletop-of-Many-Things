@@ -50,12 +50,12 @@ export default function Header({ character }: Props) {
       {editing ?
         <div className="character-sheet__header-content">
           <Input
-            variant={['h1']}
+            variants={['h1']}
             value={name}
             onChange={(e: any) => setName(e.target.value)}
           />
           <Select
-            variant={['label-bold', 'gap']}
+            variants={['label-bold', 'gap']}
             label="Race"
             value={race ? race.id : 0}
             onChange={(e: any) => handleChangeRace(Number(e.target.value))}
@@ -69,7 +69,7 @@ export default function Header({ character }: Props) {
           </Select>
           {race && race.subrace &&
             <Select
-              variant={['label-bold', 'gap']}
+              variants={['label-bold', 'gap']}
               label="Subrace"
               value={race.subrace.id}
               onChange={(e: any) => handleChangeRace(Number(e.target.value))}
@@ -83,7 +83,7 @@ export default function Header({ character }: Props) {
             </Select>
           }
           <Select
-            variant={['label-bold', 'gap']}
+            variants={['label-bold', 'gap']}
             label="Background"
             value={background ? background.id : 0}
             onChange={(e: any) => handleChangeBackground(Number(e.target.value))}
@@ -104,7 +104,7 @@ export default function Header({ character }: Props) {
         </div>
       }
 
-      <Button onClick={() => setEditing(!editing)} variant={['edit']}>E</Button>
+      <Button onClick={() => setEditing(!editing)} variants={['edit']}>E</Button>
     </header>
   );
 }

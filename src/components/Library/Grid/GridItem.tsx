@@ -1,7 +1,7 @@
 import { generateClasses, parseClasses } from "../../../scripts/tools/utils";
 
 interface Props {
-  variant?: ('no-style')[]
+  variants?: ('no-style')[]
   children: React.ReactNode
   className?: string
   rowStart?: number
@@ -10,8 +10,8 @@ interface Props {
   colEnd?: number
 }
 
-export default function GridItem({ children, className, rowEnd = 0, colEnd = 0, rowStart = 0, colStart = 0, variant }: Props) {
-  const classes = generateClasses(`grid__item ${className}`, variant, 'grid__item');
+export default function GridItem({ children, className, rowEnd = 0, colEnd = 0, rowStart = 0, colStart = 0, variants }: Props) {
+  const classes = generateClasses(`grid__item ${className}`, variants, 'grid__item');
 
   
   return (

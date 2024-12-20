@@ -4,7 +4,7 @@ import { generateClasses, parseClasses } from "../../scripts/tools/utils";
 
 interface Props {
   className?: string
-  variant?: ('default')[]
+  variants?: ('default')[]
   data: any[]
   setData: (data: any[], page?: number) => void
   btnCount?: number
@@ -12,8 +12,8 @@ interface Props {
   pageSize: number
 }
 
-export default function Pagination({ className = '', variant, data, setData, btnCount = 5, page = 1, pageSize }: Props) {
-  const classes = generateClasses(`pagination ${className}`, variant, 'pagination');
+export default function Pagination({ className = '', variants, data, setData, btnCount = 5, page = 1, pageSize }: Props) {
+  const classes = generateClasses(`pagination ${className}`, variants, 'pagination');
   const [currentPage, setCurrentPage] = useState(page);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Pagination({ className = '', variant, data, setData, btn
     <div {...parseClasses(classes)}>
       <Button
         onClick={() => handleChangePage(currentPage === 1 ? totalPages : currentPage - 1)}
-        variant={[]}
+        variants={[]}
       >
         Previous
       </Button>
@@ -48,7 +48,7 @@ export default function Pagination({ className = '', variant, data, setData, btn
         <>
           <Button
             onClick={() => handleChangePage(1)}
-            variant={['circle']}
+            variants={['circle']}
             className={currentPage === 1 ? 'pagination--selected' : ''}
           >
             1
@@ -60,7 +60,7 @@ export default function Pagination({ className = '', variant, data, setData, btn
         <Button
           key={pageNum}
           onClick={() => handleChangePage(pageNum)}
-          variant={['circle']}
+          variants={['circle']}
           className={currentPage === pageNum ? 'pagination--selected' : ''}
         >
           {pageNum}
@@ -71,7 +71,7 @@ export default function Pagination({ className = '', variant, data, setData, btn
           <p>...</p>
           <Button
             onClick={() => handleChangePage(totalPages)}
-            variant={['circle']}
+            variants={['circle']}
             className={currentPage === totalPages ? 'pagination--selected' : ''}
           >
             {totalPages}
@@ -80,7 +80,7 @@ export default function Pagination({ className = '', variant, data, setData, btn
       )}
       <Button
         onClick={() => handleChangePage(currentPage === totalPages ? 1 : currentPage + 1)}
-        variant={[]}
+        variants={[]}
       >
         Next
       </Button>

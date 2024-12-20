@@ -39,10 +39,10 @@ export default function CreaturesDialog({ open, setOpen }: Props) {
         </label>
         <form onSubmit={(e) => handleCreatureSearch(e)}>
           <Input
-            variant={['search', 'small']}
+            variants={['search', 'small']}
             placeholder="goblin"
           >
-            <Button type="submit" variant={['search', 'small']}>Search</Button>
+            <Button type="submit" variants={['search', 'small']}>Search</Button>
           </Input>
         </form>
         <Button>New Creature</Button>

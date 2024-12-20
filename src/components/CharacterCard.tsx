@@ -27,13 +27,13 @@ export default function CharacterCard({ char, characters, setCharacters }: Props
         <p className="character-card__ruleset">{ char.ruleset }</p>
         <div className="character-card__buttons">
           <Button
-            variant={['link', 'bold', 'hover']}
+            variants={['link', 'bold', 'hover']}
           >
             <a href={`/characters/${char.id}`}>Open</a>
           </Button>
           <Button
             onClick={() => handleDelete(char.id)}
-            variant={['danger', 'bold']}
+            variants={['danger', 'bold']}
           >
             Delete
           </Button>

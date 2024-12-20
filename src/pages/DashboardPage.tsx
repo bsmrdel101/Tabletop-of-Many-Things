@@ -50,7 +50,7 @@ export default function DashboardPage() {
             onChange={(e: any) => setRoomCodeInput(e.target.value)}
             required
           />
-          <Button variant={['plain']} type="submit">Join Room</Button>
+          <Button variants={['plain']} type="submit">Join Room</Button>
         </form>
 
         <div className="dashboard-page__links-list">
