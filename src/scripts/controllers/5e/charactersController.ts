@@ -31,6 +31,16 @@ export const addCharacter = async () => {
   }
 };
 
+// === PATCH routes === //
+
+export const editCharacterHealth = async (id: number, maxHp: number, hp: number, tempHp: number) => {
+  try {
+    await axios.patch(`/api/5e/characters/health`, { id, maxHp, hp, tempHp });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // === PUT routes === //
 
 export const editCharacter = async (character: Character) => {

@@ -21,7 +21,7 @@ export default function CharacterSheetPage() {
     <div className="character-sheet-page">
       {character &&
       <>
-        <CharacterSheet5e character={character} />
+        <CharacterSheet5e character={character} setCharacter={setCharacter} />
       </>
       }
     </div>

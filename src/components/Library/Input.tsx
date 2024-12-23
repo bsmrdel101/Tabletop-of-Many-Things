@@ -4,7 +4,7 @@ import { generateClasses, parseClasses } from "../../scripts/tools/utils";
 interface Props extends InputHTML {
   children?: any
   className?: string
-  variants?: ('thin' | 'small' | 'x-small' | 'search' | 'range' | 'label-stack' | 'label-no-stack' | 'label-space-between' | 'md-text' | 'label-full-width' | 'label-bold' | 'text-area' | 'h1' | 'fit')[]
+  variants?: ('thin' | 'small' | 'x-small' | 'search' | 'range' | 'label-stack' | 'label-no-stack' | 'label-space-between' | 'md-text' | 'label-full-width' | 'label-bold' | 'text-area' | 'h1' | 'fit' | 'no-arrows')[]
   label?: string
   cols?: number
   rows?: number

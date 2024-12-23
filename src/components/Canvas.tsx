@@ -5,7 +5,7 @@ import { gameAtom, rightClickMenuAtom } from "../scripts/atoms/state";
 
 
 export default function Canvas() {
-  const [gameData, setGameData] = useAtom(gameAtom);
+  const [gameData, setGameData] = useAtom<GameState>(gameAtom);
   const [rightClickMenu, setRightClickMenu] = useAtom(rightClickMenuAtom);
 
   useEffect(() => {

@@ -33,7 +33,7 @@ export default function GamePage() {
   useEffect(() => {
     const setupGame = async () => {
       const game: Game = await getGame(room);
-      const map: Board = await getMap(game.mapId, game.id);
+      const map: Board = await getMap(game.map.id, game.id);
       
       if (!game) {
         console.error('game doesn\'t exist');

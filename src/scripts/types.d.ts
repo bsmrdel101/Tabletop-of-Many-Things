@@ -30,9 +30,15 @@ type Game = {
   name: string
   code: string
   dm: number
-  mapId: number
+  map: Map
   ruleset: string
 };
+
+interface GameState {
+  game: Game
+  room: string
+  map: Board
+}
 
 interface Coord {
   x: number

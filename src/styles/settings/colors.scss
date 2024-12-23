@@ -1,31 +1,20 @@
 :root {
-  --black-0: black;
-  --grey-0: #413a3a;
-  --grey-1: #575252;
-  --grey-2: #6f6767;
-  --grey-3: #796f6f;
-
-  /* Main */
   --bg-color-0: #b59696;
   --bg-color-1: #d0c3c368;
   --bg-color-2: #e8dcdc;
 
-  /* Grid */
   --grid-color: #d9c6c6;
   --grid-border-color: black;
   --cell-border-color: black;
 
-  /* Tokens */
   --token-selected-color: #6767fd;
   --enemy-background: #c27474;
 
-  /* Menu */
   --menu-color-0: var(--grey-0);
   --menu-color-1: var(--grey-1);
   --menu-color-2: var(--grey-2);
   --menu-color-3: var(--grey-3);
 
-  /* Modals */
   --modal-color-0: #342727;
   --modal-color-1: #4f3d3d;
   --modal-color-2: #5a4646;
@@ -33,22 +22,26 @@
   --modal-color-4: #604a4a;
   --modal-color-5: #685050;
 
-  /* Buttons */
   --btn-color-0: #605252;
   --btn-color-1: #6f5656;
 
-  /* Colors */
-  --blue-0: rgb(48 102 231 / 39%) 0 3px 8px;
-  --blue-1: rgb(144 194 255);
-  --red-0: #d414143d;
-  --red-1: #985151;
-  --red-2: #ac3939;
-  --red-3: #f53535;
-  --red-4: #e97d7d;
-  --red-5: #ed9c9c;
-  --purple-0: #500150;
+  --black-0: black;
+  --grey-0: #413a3a;
+  --grey-1: #575252;
+  --grey-2: #6f6767;
+  --grey-3: #796f6f;
 
-  /* Damage type colors */
+  --blue-0: #2e4cb6;
+  --red-0: #d414143d;
+  --red-1: #af4b4b;
+  --red-2: #a92c2c;
+  --red-3: #ac3939;
+  --red-4: #f53535;
+  --red-5: #e97d7d;
+  --red-6: #ed9c9c;
+  --purple-0: #500150;
+  --green-0: #3f904c;
+
   --dmg-color-physical: rgba(213, 213, 213, 0.431);
   --dmg-color-fire: #b06117;
   --dmg-color-poison: #1b8834;

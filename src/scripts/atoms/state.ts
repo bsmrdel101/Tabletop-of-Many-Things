@@ -1,11 +1,5 @@
 import { atom } from 'jotai';
 
-interface GameState {
-  game: Game
-  room: string
-  map: Board
-}
-
 interface GridState {
   cellSize: number;
   gridOpacity: number;

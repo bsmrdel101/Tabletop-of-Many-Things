@@ -5,14 +5,15 @@ import { backgroundsAtom, classesAtom, racesAtom } from "../../../scripts/atoms/
 import { getAllRaces } from "../../../scripts/controllers/5e/racesController";
 import { getAllBackgrounds } from "../../../scripts/controllers/5e/backgroundsController";
 import { getAllClasses } from "../../../scripts/controllers/5e/classesController";
-import HealthBar from "./HealthBar";
+import HealthManagement from "./HealthManagement";
 
 interface Props {
   character: Character
+  setCharacter: (character: Character) => void
 }
 
 
-export default function CharacterSheet5e({ character }: Props) {
+export default function CharacterSheet5e({ character, setCharacter }: Props) {
   const [races, setRaces] = useAtom<Race[]>(racesAtom);
   const [backgrounds, setBackgrounds] = useAtom<Background[]>(backgroundsAtom);
   const [classes, setClasses] = useAtom<Class[]>(classesAtom);
@@ -33,7 +34,7 @@ export default function CharacterSheet5e({ character }: Props) {
         <Header character={character} />
       </div>
       <div className="character-sheet__section">
-        <HealthBar character={character} />
+        <HealthManagement character={character} setCharacter={setCharacter} />
       </div>
     </div>
   );
