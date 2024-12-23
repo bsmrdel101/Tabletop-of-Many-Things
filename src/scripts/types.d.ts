@@ -20,7 +20,6 @@ interface RightClickMenuState {
 type User = {
   id: number
   username: string
-  password: string
   newUser: boolean
 };
 
@@ -56,12 +55,12 @@ type Asset = {
   img: string
 };
 
-type Token = {
+type Token_5e = {
   id: number
   assetId: number
   mapId: number
   userId?: number
-  image: string
+  img: string
   creature?: Creature
   character?: Character
   x: number
@@ -69,12 +68,13 @@ type Token = {
   size: number
 };
 
-type Board = {
+type Board_5e = {
   id: number
-  gameId: number
+  game: Game
   name: string
   filepath: string
-  image: string
+  img: string
+  sharedTo: User[]
   cellSize: number
   gridColor: string
   gridOpacity: number
@@ -83,7 +83,7 @@ type Board = {
   boardState: Token[]
 };
 
-type Character = {
+type Character_5e = {
   id: number
   userId: number
   img: string
@@ -117,7 +117,7 @@ type Character = {
   targets: Token
 };
 
-type Race = {
+type Race_5e = {
   id: number
   gameId: number
   name: string
@@ -135,7 +135,7 @@ type Race = {
   subrace?: Subrace
 };
 
-type Subrace = {
+type Subrace_5e = {
   id: number
   name: string
   desc: string
@@ -146,7 +146,7 @@ type Subrace = {
   traits: NameDesc[]
 };
 
-type Class = {
+type Class_5e = {
   id: number
   name: string
   lvl: number
@@ -160,7 +160,7 @@ type Class = {
   multiClassing: any[]
 };
 
-type Subclass = {
+type Subclass_5e = {
   id: number
   name: string
   subclassFlavor: string
@@ -169,7 +169,7 @@ type Subclass = {
   spells: Spell[]
 };
 
-type Background = {
+type Background_5e = {
   id: number
   name: string
   desc: string
@@ -183,11 +183,11 @@ type Background = {
   flaws: string
 };
 
-type Level = {
+type Level_5e = {
   name: string
 };
 
-type Creature = {
+type Creature_5e = {
   id: number
   asset: Asset
   name: string
@@ -215,7 +215,7 @@ type Creature = {
   spellcasting?: Spellcasting
 };
 
-type Skill = {
+type Skill_5e = {
   id: number
   name: string
   type: string
@@ -223,7 +223,7 @@ type Skill = {
   proficient: boolean
 };
 
-type Speed = {
+type Speed_5e = {
   name: string
   value: number
   hover: boolean
@@ -254,7 +254,7 @@ type ChatMsg = {
   sender: string
 };
 
-interface Modifiers {
+interface Modifiers_5e {
   strMod: number
   dexMod: number
   conMod: number
@@ -263,7 +263,7 @@ interface Modifiers {
   charMod: number
 }
 
-interface AtSpecificLevel {
+interface AtSpecificLevel_5e {
   level: number
   dice: Dice
 }
@@ -310,18 +310,18 @@ type AOE = {
   size: number
 };
 
-type Damage = {
+type Damage_5e = {
   dice: Dice
   type: string
 };
 
-type SpellDamage = {
+type SpellDamage_5e = {
   type: string
   damageAtSpellLevel?: AtSpecificLevel[]
   damageAtCharacterLevel?: AtSpecificLevel[]
 };
 
-type AbilityScore = {
+type AbilityScore_5e = {
   name: string
   value: number
   mod: number
@@ -334,7 +334,7 @@ type Prof = {
   value: number
 };
 
-type SpecialAbility = {
+type SpecialAbility_5e = {
   name: string
   desc: string
   attackBonus?: number
@@ -342,7 +342,7 @@ type SpecialAbility = {
   damage?: Damage[]
 };
 
-type Action = {
+type Action_5e = {
   name: string
   desc: string
   attackBonus?: number
@@ -351,7 +351,7 @@ type Action = {
   usage?: Usage
 };
 
-type Spell = {
+type Spell_5e = {
   id: number
   name: string
   desc: string
@@ -373,7 +373,7 @@ type Spell = {
   material?: string
 };
 
-type Spellcasting = {
+type Spellcasting_5e = {
   ability: string
   dc: number
   mod: number
@@ -388,20 +388,20 @@ type Cost = {
   type: string
 };
 
-interface Range {
+type Range_5e = {
   normal: number
   long?: number
   display: string
-}
+};
 
-type EquipmentCategory = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Instrument' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Ring' | 'Rod' | 'Staff' | 'Scroll' | 'Wand' | 'Gaming Set' | 'Potion';
-
-type Item = {
+type EquipmentCategory_5e = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Instrument' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Ring' | 'Rod' | 'Staff' | 'Scroll' | 'Wand' | 'Gaming Set' | 'Potion';
+type Rarity_5e = 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact';
+type Item_5e = {
   id: number
   name: string
   desc: string
   type: EquipmentCategory
-  rarity: 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact'
+  rarity: Rarity_5e
   cost: Cost
   lbs: number
   properties: string[]
