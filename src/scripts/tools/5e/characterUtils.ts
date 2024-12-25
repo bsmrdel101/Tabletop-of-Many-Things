@@ -1,5 +1,5 @@
 import { emitServerEvent } from "../../config/socket-io";
-import { editCharacter, editCharacterHealth } from "../../controllers/5e/charactersController";
+import { editCharacterHealth, restoreCharacterMaxHp } from "../../controllers/5e/charactersController";
 
 
 export const getCharacterSubtitle = (character: Character): string => {
@@ -56,46 +56,43 @@ export const getXpFromLvl = (lvl: number): number => {
 };
 
 export const dmgPlayerMaxHp = async (character: Character, dmg: number) => {
-  const maxHpMod = character.maxHp - dmg < 0 ? -character.maxHp : -dmg;
-  const hp = character.hp > character.maxHp - dmg ? character.maxHp : character.hp;
-  emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHpMod, hp }]);
-  await editCharacter({ ...character, maxHpMod, hp });
+  const { tempHp } = character;
+  const newMaxHp = Math.max(character.maxHp - dmg, 0);
+  const newHp = Math.min(character.hp, newMaxHp);
+  emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHp: newMaxHp, hp: newHp }]);
+  await editCharacterHealth(character.id, newMaxHp, newHp, tempHp);
 };
 
 export const dmgPlayer = async (character: Character, dmg: number) => {
-  const { maxHp } = character;
-  let totalDmg = dmg;
-  let tempHp = character.tempHp;
-  let hp = character.hp;
+  let { tempHp, hp } = character;
+  let remainingDmg = dmg;
+
   if (tempHp > 0) {
-    tempHp -= dmg;
-    if (tempHp < 0) {
-      totalDmg = Math.abs(tempHp);
-      tempHp = 0;
-    } else {
-      totalDmg = 0;
-    }
+    const absorbed = Math.min(tempHp, dmg);
+    tempHp -= absorbed;
+    remainingDmg -= absorbed;
   }
-  hp -= totalDmg;
-  if (hp < 0) hp = 0;
+  if (remainingDmg > 0) {
+    hp = Math.max(hp - remainingDmg, 0);
+  }
+
   emitServerEvent('UPDATE_PLAYER', [{ ...character, hp, tempHp }]);
-  await editCharacterHealth(character.id, maxHp, hp, tempHp);
+  await editCharacterHealth(character.id, character.maxHp, hp, tempHp);
 };
 
 export const addPlayerTempHp = async (character: Character, tempHp: number) => {
-  const { maxHp, hp } = character;
-  emitServerEvent('UPDATE_PLAYER', [{ ...character, tempHp }]);
-  await editCharacterHealth(character.id, maxHp, hp, tempHp);
+  const updatedTempHp = character.tempHp + tempHp;
+  emitServerEvent('UPDATE_PLAYER', [{ ...character, tempHp: updatedTempHp }]);
+  await editCharacterHealth(character.id, character.maxHp, character.hp, updatedTempHp);
 };
 
 export const healPlayer = async (character: Character, value: number) => {
-  const { maxHp, tempHp } = character;
-  const hp = character.hp + value > character.maxHp ? character.maxHp : character.hp + value;
-  emitServerEvent('UPDATE_PLAYER', [{ ...character, hp }]);
-  await editCharacterHealth(character.id, maxHp, hp, tempHp);
+  const newHp = Math.min(character.hp + value, character.maxHp);
+  emitServerEvent('UPDATE_PLAYER', [{ ...character, hp: newHp }]);
+  await editCharacterHealth(character.id, character.maxHp, newHp, character.tempHp);
 };
 
 export const restorePlayerMaxHp = async (character: Character) => {
-  emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHpMod: 0 }]);
-  await editCharacter({ ...character, maxHpMod: 0 });
+  emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHp: character.prevMaxHp }]);
+  await restoreCharacterMaxHp(character.id);
 };

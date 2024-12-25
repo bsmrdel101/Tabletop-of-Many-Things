@@ -96,6 +96,7 @@ type Character_5e = {
   maxHpOverride: number
   maxHpMod: number
   maxHp: number
+  prevMaxHp: number
   hp: number
   tempHp: number
   insp: boolean

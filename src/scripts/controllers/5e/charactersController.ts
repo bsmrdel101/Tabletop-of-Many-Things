@@ -41,6 +41,14 @@ export const editCharacterHealth = async (id: number, maxHp: number, hp: number,
   }
 };
 
+export const restoreCharacterMaxHp = async (id: number) => {
+  try {
+    await axios.patch(`/api/5e/characters/restore-max-hp`, { id });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // === PUT routes === //
 
 export const editCharacter = async (character: Character) => {
