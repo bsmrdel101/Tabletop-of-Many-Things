@@ -7,8 +7,8 @@ import { addTokenToMap } from "../scripts/controllers/5e/mapsController";
 
 interface Props {
   asset: Asset
-  creature?: Creature
-  character?: Character
+  creature?: Creature_5e
+  character?: Character_5e
   className?: string
 }
 
@@ -19,7 +19,7 @@ export default function DraggableToken({ asset, creature, character, className }
 
   const handleDropToken = async (e: DragEvent) => {
     const { x, y } = getGridCellCoords(e.clientX, e.clientY);
-    const token: Token = { id: null, assetId: asset.id, mapId: map.id, x, y, image: asset.img, size: getNumberFromSize(creature.size), creature, character };
+    const token: Token_5e = { id: null, assetId: asset.id, mapId: map.id, x, y, img: asset.img, size: getNumberFromSize(creature.size), creature, character };
     await addTokenToMap(game.id, token, map.id, x, y);
     emitServerEvent('ADD_TOKEN_TO_BOARD', [room]);
   };

@@ -14,7 +14,7 @@ interface NameDesc {
 
 interface RightClickMenuState {
   menuType: string
-  token?: Token
+  token?: Token_5e
 }
 
 type User = {
@@ -36,7 +36,7 @@ type Game = {
 interface GameState {
   game: Game
   room: string
-  map: Board
+  map: Board_5e
 }
 
 interface Coord {
@@ -61,8 +61,8 @@ type Token_5e = {
   mapId: number
   userId?: number
   img: string
-  creature?: Creature
-  character?: Character
+  creature?: Creature_5e
+  character?: Character_5e
   x: number
   y: number
   size: number
@@ -80,7 +80,7 @@ type Board_5e = {
   gridOpacity: number
   offsetX: number
   offsetY: number
-  boardState: Token[]
+  boardState: Token_5e[]
 };
 
 type Character_5e = {
@@ -100,9 +100,9 @@ type Character_5e = {
   hp: number
   tempHp: number
   insp: boolean
-  race?: Race
-  classes: Class[]
-  background?: Background
+  race?: Race_5e
+  classes: Class_5e[]
+  background?: Background_5e
   currentHitDice: Dice[]
   speeds: Speed[]
   senses: NameValue[]
@@ -115,7 +115,7 @@ type Character_5e = {
   currency: Cost[]
   spellcasting: Spellcasting
   ruleset: string
-  targets: Token
+  targets: Token_5e
 };
 
 type Race_5e = {

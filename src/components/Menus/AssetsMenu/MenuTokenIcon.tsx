@@ -16,7 +16,7 @@ export default function AssetImage({ asset }: Props) {
 
   const handleDropToken = async (e: DragEvent) => {
     const { x, y } = getGridCellCoords(e.clientX, e.clientY);
-    const token: Token = { id: null, assetId: asset.id, mapId: map.id, x, y, image: asset.img, size: 1, creature: null, character: null };
+    const token: Token_5e = { id: null, assetId: asset.id, mapId: map.id, x, y, img: asset.img, size: 1, creature: null, character: null };
     await addTokenToMap(game.id, token, map.id, x, y);
     emitServerEvent('ADD_TOKEN_TO_BOARD', [room]);
   };

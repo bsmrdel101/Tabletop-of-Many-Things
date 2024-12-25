@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
 
 interface CreaturesState {
-  creatures: Creature[]
+  creatures: Creature_5e[]
 }
 
 const initialState: CreaturesState = {

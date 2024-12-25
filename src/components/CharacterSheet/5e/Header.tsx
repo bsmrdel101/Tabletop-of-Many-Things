@@ -7,20 +7,20 @@ import Button from "../../Library/Button";
 import { getCharacterSubtitle, getXpFromLvl } from "../../../scripts/tools/5e/characterUtils";
 
 interface Props {
-  character: Character
+  character: Character_5e
 }
 
 
 export default function Header({ character }: Props) {
-  const [racesData] = useAtom<Race[]>(racesAtom);
-  const [classesData] = useAtom<Class[]>(classesAtom);
-  const [backgroundsData] = useAtom<Background[]>(backgroundsAtom);
+  const [racesData] = useAtom<Race_5e[]>(racesAtom);
+  const [classesData] = useAtom<Class_5e[]>(classesAtom);
+  const [backgroundsData] = useAtom<Background_5e[]>(backgroundsAtom);
   const [editing, setEditing] = useState(false);
   const [subtitle, setSubtitle] = useState('');
   const [name, setName] = useState(character.name);
-  const [race, setRace] = useState<Race>(character.race);
-  const [classes, setClasses] = useState<Class[]>(character.classes);
-  const [background, setBackground] = useState<Background>(character.background);
+  const [race, setRace] = useState<Race_5e>(character.race);
+  const [classes, setClasses] = useState<Class_5e[]>(character.classes);
+  const [background, setBackground] = useState<Background_5e>(character.background);
 
   useEffect(() => {
     setSubtitle(getCharacterSubtitle(character));

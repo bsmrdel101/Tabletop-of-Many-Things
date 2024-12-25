@@ -11,7 +11,7 @@ interface ROLL_DICE {
   result: Roll
   owner: string
   rollType: string
-  targets: (Creature | Character)[]
+  targets: (Creature_5e | Character_5e)[]
   damageType: string
 } 
 
@@ -66,12 +66,12 @@ export default function DiceBox() {
               }
               {roll.rollType === 'attack' &&
                 <p key={i}>
-                  <span className={`dice-box__log__owner${roll.owner === user.username ? '--self' : ''}`}>{roll.owner}</span> {roll.amount}d{roll.type}: ({roll.roll}){roll.mod !== 0 && getDisplayModifier(roll.mod)} = <span className="dice-box__log--total">{roll.total}</span> {roll.targets.length > 0 && '-->'} {roll.targets.map((target: Creature|Character) => target.name).join(', ')}
+                  <span className={`dice-box__log__owner${roll.owner === user.username ? '--self' : ''}`}>{roll.owner}</span> {roll.amount}d{roll.type}: ({roll.roll}){roll.mod !== 0 && getDisplayModifier(roll.mod)} = <span className="dice-box__log--total">{roll.total}</span> {roll.targets.length > 0 && '-->'} {roll.targets.map((target: Creature_5e|Character_5e) => target.name).join(', ')}
                 </p>
               }
               {roll.rollType === 'dmg' &&
                 <p key={i}>
-                  <span className={`dice-box__log__owner${roll.owner === user.username ? '--self' : ''}`}>{roll.owner}</span> {roll.amount}d{roll.type}: ({roll.roll}){roll.mod !== 0 && getDisplayModifier(roll.mod)} = <span className="dice-box__log--total">{roll.total}</span> <span className={`roll-damage--${roll.damageType}`}>{roll.damageType}</span> {roll.targets.length > 0 && '-->'} {roll.targets.map((target: Creature|Character) => target.name).join(', ')}
+                  <span className={`dice-box__log__owner${roll.owner === user.username ? '--self' : ''}`}>{roll.owner}</span> {roll.amount}d{roll.type}: ({roll.roll}){roll.mod !== 0 && getDisplayModifier(roll.mod)} = <span className="dice-box__log--total">{roll.total}</span> <span className={`roll-damage--${roll.damageType}`}>{roll.damageType}</span> {roll.targets.length > 0 && '-->'} {roll.targets.map((target: Creature_5e|Character_5e) => target.name).join(', ')}
                 </p>
               }
             </>

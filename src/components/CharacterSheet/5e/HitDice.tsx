@@ -1,5 +1,5 @@
 interface Props {
-  character: Character
+  character: Character_5e
 }
 
 

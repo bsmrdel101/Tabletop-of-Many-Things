@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { emitServerEvent } from "../../scripts/config/socket-io";
 import { gameAtom, rightClickMenuAtom } from "../../scripts/atoms/state";
 import { useRef } from "react";
-import { openCreatureWindow } from "../Dialogs/Creatures/CreatureRow";
+import { openCreatureWindow } from "../Dialogs/5e/Creatures/CreatureRow";
 
 
 export default function RightClickMenu() {

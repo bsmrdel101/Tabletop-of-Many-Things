@@ -5,7 +5,7 @@ import { addCharacter, getAllCharacters } from "../scripts/controllers/5e/charac
 import CharacterCard from "../components/CharacterCard";
 
 export default function CharactersPage() {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character_5e[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,17 +1,17 @@
 import { useState } from "react";
-import Dialog from "../../Library/Dialog";
-import { capitalize } from "../../../scripts/tools/stringUtils";
-import ActionButton from "../../ActionButton";
-import CreatureSpellDetails from "../../Modals/CreaturesModal/CreatureSpellDetails";
+import Dialog from "../../../Library/Dialog";
+import { capitalize } from "../../../../scripts/tools/stringUtils";
+import ActionButton from "../../../ActionButton";
+import CreatureSpellDetails from "../../../Modals/5e/CreaturesModal/CreatureSpellDetails";
 
 interface Props {
-  creature: Creature
+  creature: Creature_5e
 }
 
 
 export default function CreatureStatsDialog({ creature }: Props) {
   const { name, size, type, alignment, ac, maxHp, hitDice, abilityScores, cr, xp, languages, speeds, proficiencies, vulnerabilities, resistances, damageImmunities, conditionImmunities, senses, abilities, actions, legActions } = creature;
-  const [openedSpell, setOpenedSpell] = useState<Spell>(null);
+  const [openedSpell, setOpenedSpell] = useState<Spell_5e>(null);
   const spells = creature.spellcasting && creature.spellcasting.spells;
 
 
@@ -41,7 +41,7 @@ export default function CreatureStatsDialog({ creature }: Props) {
         }).join(', ')}</p>
         <div className="creature-stats-dialog__general-stats">
           <div className="ability-score-container">
-            {abilityScores.map((score: AbilityScore) => {
+            {abilityScores.map((score: AbilityScore_5e) => {
               return (
                 <div className="ability-score-container__score-box" key={score.name}>
                   <p><span className="bold">{capitalize(score.name)}</span></p>
@@ -67,7 +67,7 @@ export default function CreatureStatsDialog({ creature }: Props) {
       </div>
 
       {/* Abilities */}
-      {abilities && abilities.map((ability: SpecialAbility, i: number) => {
+      {abilities && abilities.map((ability: SpecialAbility_5e, i: number) => {
         return (
           <div key={i}>
             <p className="creature-stats-dialog__stat-heading"><span className="bold">{ability.name}</span></p>
@@ -80,7 +80,7 @@ export default function CreatureStatsDialog({ creature }: Props) {
       {/* Actions */}
       {actions && actions.length > 0 && <h3 className="creature-stats-dialog__subtitle">Actions</h3>}
       {actions && actions.length > 0 &&
-        actions.map((action: Action, i: number) => {
+        actions.map((action: Action_5e, i: number) => {
           return (
             <div key={i}>
               <p className="creature-stats-dialog__stat-heading"><span className="bold">{action.name}</span></p>
@@ -93,7 +93,7 @@ export default function CreatureStatsDialog({ creature }: Props) {
       {/* Legendary actions */}
       {legActions && legActions.length > 0 && <h3 className="creature-stats-dialog__subtitle">Legendary Actions</h3>}
       {legActions && legActions.length > 0 &&
-        legActions.map((action: Action, i: number) => {
+        legActions.map((action: Action_5e, i: number) => {
           return (
             <div key={i}>
               <p className="creature-stats-dialog__stat-heading"><span className="bold">{action.name}</span></p>
@@ -105,7 +105,7 @@ export default function CreatureStatsDialog({ creature }: Props) {
 
       {/* Spells */}
       {spells && <h3 className="creature-stats-dialog__subtitle">Spells</h3>}
-      {spells && spells.map((spell: Spell) => {
+      {spells && spells.map((spell: Spell_5e) => {
         return (
           <div key={spell.id}>
             <p

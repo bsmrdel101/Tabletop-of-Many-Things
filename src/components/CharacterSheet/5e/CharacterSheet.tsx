@@ -8,15 +8,15 @@ import { getAllClasses } from "../../../scripts/controllers/5e/classesController
 import HealthManagement from "./HealthManagement";
 
 interface Props {
-  character: Character
-  setCharacter: (character: Character) => void
+  character: Character_5e
+  setCharacter: (character: Character_5e) => void
 }
 
 
 export default function CharacterSheet5e({ character, setCharacter }: Props) {
-  const [races, setRaces] = useAtom<Race[]>(racesAtom);
-  const [backgrounds, setBackgrounds] = useAtom<Background[]>(backgroundsAtom);
-  const [classes, setClasses] = useAtom<Class[]>(classesAtom);
+  const [races, setRaces] = useAtom<Race_5e[]>(racesAtom);
+  const [backgrounds, setBackgrounds] = useAtom<Background_5e[]>(backgroundsAtom);
+  const [classes, setClasses] = useAtom<Class_5e[]>(classesAtom);
 
   useEffect(() => {
     const fetchData = async () => {

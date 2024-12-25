@@ -4,14 +4,14 @@ import Button from "../../Library/Button";
 import { restorePlayerMaxHp } from "../../../scripts/tools/5e/characterUtils";
 
 interface Props {
-  character: Character
-  setCharacter: (character: Character) => void
+  character: Character_5e
+  setCharacter: (character: Character_5e) => void
 }
 
 
 export default function HealthBar({ character, setCharacter }: Props) {
   useEffect(() => {
-    onServerEvent('UPDATE_PLAYER', (char: Character) => {
+    onServerEvent('UPDATE_PLAYER', (char: Character_5e) => {
       if (character.id === char.id) setCharacter(char);
     });
   }, []);

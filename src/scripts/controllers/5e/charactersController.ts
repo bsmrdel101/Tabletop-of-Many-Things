@@ -51,7 +51,7 @@ export const restoreCharacterMaxHp = async (id: number) => {
 
 // === PUT routes === //
 
-export const editCharacter = async (character: Character) => {
+export const editCharacter = async (character: Character_5e) => {
   try {
     await axios.put(`/api/5e/characters`, character);
   } catch (err) {

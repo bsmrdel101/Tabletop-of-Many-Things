@@ -11,7 +11,7 @@ import { gameAtom } from "../../scripts/atoms/state";
 export default function MapsMenu() {
   const [gameData] = useAtom(gameAtom);
   const { game, room } = gameData;
-  const [maps, setMaps] = useState<Board[]>([]);
+  const [maps, setMaps] = useState<Board_5e[]>([]);
   const [newMapFormOpen, setNewMapFormOpen] = useState(false);
   const [isBlankMap, setIsBlankMap] = useState(false);
   const [mapName, setMapName] = useState('');
@@ -40,11 +40,11 @@ export default function MapsMenu() {
     fetchData();
   }, []);
 
-  const handleSelectMap = (map: Board) => {
+  const handleSelectMap = (map: Board_5e) => {
     emitServerEvent('SELECT_MAP', [map, room]);
   };
 
-  const handleViewMap = (map: Board) => {
+  const handleViewMap = (map: Board_5e) => {
     emitServerEvent('VIEW_MAP', [map]);
   };
 
@@ -134,7 +134,7 @@ export default function MapsMenu() {
                 <img src="/images/share-map.svg" alt="share map" />
               </button>
               <img
-                src={map.image}
+                src={map.img}
                 alt={map.name}
                 draggable={false}
                 onClick={() => handleViewMap(map)}

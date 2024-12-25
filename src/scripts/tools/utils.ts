@@ -162,7 +162,7 @@ export const convertDCTypeFormat = (dc: any): DC => {
 };
 
 // Changes old damage format to new damage format
-export const convertDamageTypeFormat = (array: any): Damage => {
+export const convertDamageTypeFormat = (array: any): Damage_5e => {
   const damageOptions: any = [];
   const updatedDamages = array.map((arrayItem: any) => {
     if (arrayItem.damage_type) {
@@ -207,8 +207,8 @@ export const convertACTypeFormat = (array: any): number => {
   return total;
 };
 
-export const convertAtSpecificLevelTypeFormat = (obj: any): AtSpecificLevel[] => {
-  const newObj: AtSpecificLevel[] = [];
+export const convertAtSpecificLevelTypeFormat = (obj: any): AtSpecificLevel_5e[] => {
+  const newObj: AtSpecificLevel_5e[] = [];
   Object.keys(obj).forEach((key) => {
     newObj.push({ level: parseInt([key][0]), dice: convertDiceTypeFormat(obj[key]) });
   });

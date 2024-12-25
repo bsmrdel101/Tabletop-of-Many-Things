@@ -55,7 +55,7 @@ export const addGameToHistory = async (gameId: number) => {
 
 // === PUT routes === //
 
-export const setSelectedMap = async (payload: Board, gameId: number) => {
+export const setSelectedMap = async (payload: Board_5e, gameId: number) => {
   try {
     await axios.put(`/api/dashboard/${gameId}`, payload);
   } catch (err) {

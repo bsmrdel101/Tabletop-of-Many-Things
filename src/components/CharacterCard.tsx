@@ -3,9 +3,9 @@ import { getCharacterSubtitle } from "../scripts/tools/5e/characterUtils";
 import Button from "./Library/Button";
 
 interface Props {
-  char: Character
-  characters: Character[]
-  setCharacters: (data: Character[]) => void
+  char: Character_5e
+  characters: Character_5e[]
+  setCharacters: (data: Character_5e[]) => void
 }
 
 

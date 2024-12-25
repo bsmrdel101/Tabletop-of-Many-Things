@@ -13,9 +13,9 @@ let gridColor = '#000000';
 let gridOpacity = 1;
 let gridLineWidth = 0.4;
 let currentZoom = 1;
-let boardState: Token[] = [];
+let boardState: Token_5e[] = [];
 
-export default function setCanvasGrid(zoom: number, map: Board) {
+export default function setCanvasGrid(zoom: number, map: Board_5e) {
   canvas = document.getElementById('grid-canvas') as HTMLCanvasElement;
   ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   const bgImage = getBgImage();
@@ -57,8 +57,8 @@ export const drawCanvasGrid = (zoom: number) => {
 
 const placeTokens = () => {
   if (boardState.length === 0) return;
-  boardState.forEach((mapToken: Token) => {
-    drawToken(mapToken.x, mapToken.y, mapToken.image, mapToken.size);
+  boardState.forEach((mapToken: Token_5e) => {
+    drawToken(mapToken.x, mapToken.y, mapToken.img, mapToken.size);
   });
 };
 

@@ -1,7 +1,7 @@
-import { capitalize } from "../../../scripts/tools/stringUtils";
+import { capitalize } from "../../../../scripts/tools/stringUtils";
 
 interface Props {
-  spell: Spell
+  spell: Spell_5e
 }
 
 

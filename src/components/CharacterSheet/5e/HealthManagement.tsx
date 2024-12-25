@@ -5,8 +5,8 @@ import Button from "../../Library/Button";
 import { addPlayerTempHp, dmgPlayer, dmgPlayerMaxHp, healPlayer } from "../../../scripts/tools/5e/characterUtils";
 
 interface Props {
-  character: Character
-  setCharacter: (character: Character) => void
+  character: Character_5e
+  setCharacter: (character: Character_5e) => void
 }
 
 

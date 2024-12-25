@@ -1,4 +1,4 @@
-import { openCreatureWindow } from "../../components/Dialogs/Creatures/CreatureRow";
+import { openCreatureWindow } from "../../components/Dialogs/5e/Creatures/CreatureRow";
 import { emitServerEvent, onServerEvent } from "../config/socket-io";
 import { setSelectedMap } from "../controllers/dashboardController";
 import { deleteTokenFromMap, getMap, updateToken } from "../controllers/5e/mapsController";
@@ -10,8 +10,8 @@ import drawCanvasGrid, { getGridCellCoords, panCanvasGrid, zoomCanvasGrid } from
 const zoomMin = 0.22, zoomMax = 1;
 let gridContainer: HTMLElement;
 let scaleBtnPressed = false;
-let map: Board;
-let boardState: Token[] = [];
+let map: Board_5e;
+let boardState: Token_5e[] = [];
 let game: Game;
 let room: string;
 let currentZoom = 1;
@@ -23,12 +23,12 @@ let initialClickX = 0;
 let initialClickY = 0;
 let initialTokenTopLeftX = 0;
 let initialTokenTopLeftY = 0;
-let selectedToken: Token;
+let selectedToken: Token_5e;
 let isDraggingToken = false;
-let setMapData: (map: Board) => void;
+let setMapData: (map: Board_5e) => void;
 let setRightClickMenu: (data: RightClickMenuState) => void;
 
-export const initializeCanvas = (selectedMap: Board, _game: Game, _room: string, _setMapData: (map: Board) => void, _setContextMenu: (data: RightClickMenuState) => void) => {
+export const initializeCanvas = (selectedMap: Board_5e, _game: Game, _room: string, _setMapData: (map: Board_5e) => void, _setContextMenu: (data: RightClickMenuState) => void) => {
   gridContainer = document.querySelector('.grid-container');
   map = selectedMap;
   boardState = map.boardState;
@@ -55,8 +55,8 @@ const addEventListeners = () => {
   document.addEventListener('keyup', handleKeyUp);
 };
 
-const getTokenSelected = (clickX: number, clickY: number): Token | null => {
-  const tokens: Token[] = boardState;
+const getTokenSelected = (clickX: number, clickY: number): Token_5e | null => {
+  const tokens: Token_5e[] = boardState;
   const { x, y } = getGridCellCoords(clickX, clickY);
   
   for (const token of tokens) {
@@ -78,7 +78,7 @@ const handleTokenGhostImage = (e: MouseEvent) => {
   const newTopLeftY = initialTokenTopLeftY + offsetY;
   selectedToken = { ...selectedToken, x: newTopLeftX, y: newTopLeftY };
 
-  boardState = boardState.map((token: Token) => {
+  boardState = boardState.map((token: Token_5e) => {
     if (token.id !== selectedToken.id) return token;
     return { ...selectedToken };
   });
@@ -86,10 +86,10 @@ const handleTokenGhostImage = (e: MouseEvent) => {
   drawCanvasGrid(currentZoom, map);
 };
   
-const handleDropToken = (token: Token, mapId: number) => {
+const handleDropToken = (token: Token_5e, mapId: number) => {
   // Make sure that if this map isn't shared, this should only run for DM
   if (map.id !== mapId) return;
-  boardState = map.boardState.map((_token: Token) => {
+  boardState = map.boardState.map((_token: Token_5e) => {
     if (_token.id !== token.id) return _token;
     return { ...token, x: token.x, y: token.y };
   });
@@ -97,9 +97,9 @@ const handleDropToken = (token: Token, mapId: number) => {
   drawCanvasGrid(currentZoom, map);
 };
 
-const resizeToken = (token: Token, dir: 'up' | 'down') => {
+const resizeToken = (token: Token_5e, dir: 'up' | 'down') => {
   if (!token) return;
-  boardState = boardState.map((_token: Token) => {
+  boardState = boardState.map((_token: Token_5e) => {
     if (_token.id !== token.id) return _token;
     if (dir === 'up') {
       return { ...token, size: clamp(token.size + 1, 1, 100) };
@@ -111,9 +111,9 @@ const resizeToken = (token: Token, dir: 'up' | 'down') => {
   drawCanvasGrid(currentZoom, map);
 };
 
-const removeToken = async (token: Token) => {
+const removeToken = async (token: Token_5e) => {
   await deleteTokenFromMap(token.id);
-  boardState = boardState.filter((_token: Token) => {
+  boardState = boardState.filter((_token: Token_5e) => {
     return _token.id !== token.id;
   });
   map = { ...map, boardState };
@@ -145,7 +145,7 @@ const panGrid = (e: MouseEvent) => {
 // Network Events
 // ==============
 
-onServerEvent('SELECT_MAP', async (selectedMap: Board) => {
+onServerEvent('SELECT_MAP', async (selectedMap: Board_5e) => {
   await setSelectedMap(selectedMap, game.id);
   map = await getMap(selectedMap.id, game.id);
   boardState = map.boardState;
@@ -153,18 +153,18 @@ onServerEvent('SELECT_MAP', async (selectedMap: Board) => {
   drawEveryCanvas();
 });
 
-onServerEvent('VIEW_MAP', async (selectedMap: Board) => {
+onServerEvent('VIEW_MAP', async (selectedMap: Board_5e) => {
   map = await getMap(selectedMap.id, game.id);
   boardState = map.boardState;
   setMapData(map);
   drawEveryCanvas();
 });
 
-onServerEvent('MOVE_TOKEN', (token: Token) => {
+onServerEvent('MOVE_TOKEN', (token: Token_5e) => {
   handleDropToken(token, map.id);
 });
 
-onServerEvent('RESIZE_TOKEN', (data: { token: Token, dir: 'up' | 'down' }) => {
+onServerEvent('RESIZE_TOKEN', (data: { token: Token_5e, dir: 'up' | 'down' }) => {
   const { token, dir } = data;
   resizeToken(token, dir);
 });
@@ -175,7 +175,7 @@ onServerEvent('ADD_TOKEN_TO_BOARD', async () => {
   drawCanvasGrid(currentZoom, map);
 });
     
-onServerEvent('REMOVE_TOKEN', (token: Token) => {
+onServerEvent('REMOVE_TOKEN', (token: Token_5e) => {
   removeToken(token);
 });
 
@@ -238,7 +238,7 @@ const handleMouseUp = async () => {
 const handleRightClick = (e: MouseEvent) => {
   if (e.buttons !== 2) return;
   setRightClickMenu({ menuType: '' });
-  const token: Token = getTokenSelected(e.pageX, e.pageY);
+  const token: Token_5e = getTokenSelected(e.pageX, e.pageY);
   
   if (token) setRightClickMenu({ menuType: 'token', token });
 

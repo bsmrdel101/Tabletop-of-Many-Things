@@ -5,8 +5,8 @@ import { useAtom } from "jotai";
 import { gameAtom } from "../scripts/atoms/state";
 
 interface Props {
-  creature: Creature
-  action: Action
+  creature: Creature_5e
+  action: Action_5e
 }
 
 
@@ -37,7 +37,7 @@ export default function ActionButton({ action, creature }: Props) {
         <button className="action-btn action-btn--dc">DC {action.dc.value} {action.dc.type} <img src="/images/dc-target.svg" alt="d20" draggable={false} /></button>
       }
 
-      {action.damage && action.damage.map((dmg: Damage, i) => {
+      {action.damage && action.damage.map((dmg: Damage_5e, i) => {
         return (
           <button key={i} className={`action-btn action-btn--${dmg.type}`} onClick={() => handleDamageRole(dmg.dice, dmg.type)}>
             {dmg.dice.display} {dmg.type}

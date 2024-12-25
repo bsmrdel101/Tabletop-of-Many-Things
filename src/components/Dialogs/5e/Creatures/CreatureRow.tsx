@@ -1,15 +1,15 @@
 import { createRoot } from "react-dom/client";
 import { Provider } from 'react-redux';
-import { store } from "../../../redux/store";
-import DraggableToken from "../../DraggableToken";
+import { store } from "../../../../redux/store";
+import DraggableToken from "../../../DraggableToken";
 import CreatureStatsDialog from "./CreatureStatsDialog";
 
 interface Props {
-  creature: Creature
+  creature: Creature_5e
 }
 
 
-export const openCreatureWindow = async (creature: Creature) => {
+export const openCreatureWindow = async (creature: Creature_5e) => {
   if (!creature) return;
   const div = document.querySelector('body').appendChild(document.createElement('div'));
   const container = createRoot(div);

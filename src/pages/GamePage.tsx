@@ -16,7 +16,7 @@ import RightClickMenu from "../components/RightClickMenus/RightClickMenu";
 import { fetchUser } from "../redux/reducers/userSlice";
 import { getAllCreatures } from "../scripts/controllers/5e/creaturesController";
 import { setCreatureData } from "../redux/reducers/creaturesSlice";
-import CreaturesDialog from "../components/Dialogs/Creatures/CreaturesDialog";
+import CreaturesDialog from "../components/Dialogs/5e/Creatures/CreaturesDialog";
 import { useAtom } from "jotai";
 import { creaturesDialogAtom } from "../scripts/atoms/dialogs";
 import { gameAtom } from "../scripts/atoms/state";
@@ -33,7 +33,7 @@ export default function GamePage() {
   useEffect(() => {
     const setupGame = async () => {
       const game: Game = await getGame(room);
-      const map: Board = await getMap(game.map.id, game.id);
+      const map: Board_5e = await getMap(game.map.id, game.id);
       
       if (!game) {
         console.error('game doesn\'t exist');
@@ -56,7 +56,7 @@ export default function GamePage() {
         })
       );
 
-      const creatures: Creature[] = await getAllCreatures(game.id);
+      const creatures: Creature_5e[] = await getAllCreatures(game.id);
       dispatch(setCreatureData(creatures));
   
       emitServerEvent('JOIN_ROOM', [user.username, room, (type: 'dm' | 'player') => {

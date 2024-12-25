@@ -6,7 +6,7 @@ import CharacterSheet5e from "../components/CharacterSheet/5e/CharacterSheet";
 
 export default function CharacterSheetPage() {
   const { id } = useParams<any>();
-  const [character, setCharacter] = useState<Character>(null);
+  const [character, setCharacter] = useState<Character_5e>(null);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,9 +1,9 @@
 import { FormEvent } from "react";
-import { useAppSelector } from "../../../redux/hooks";
-import { fetchCreaturesData } from "../../../redux/reducers/creaturesSlice";
-import Button from "../../Library/Button";
-import Dialog from "../../Library/Dialog";
-import Input from "../../Library/Input";
+import { useAppSelector } from "../../../../redux/hooks";
+import { fetchCreaturesData } from "../../../../redux/reducers/creaturesSlice";
+import Button from "../../../Library/Button";
+import Dialog from "../../../Library/Dialog";
+import Input from "../../../Library/Input";
 import CreatureRow from "./CreatureRow";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 
 export default function CreaturesDialog({ open, setOpen }: Props) {
-  const creatures: Creature[] = useAppSelector(fetchCreaturesData);
+  const creatures: Creature_5e[] = useAppSelector(fetchCreaturesData);
 
   const handleCreatureSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ export default function CreaturesDialog({ open, setOpen }: Props) {
         <Button>New Creature</Button>
       </div>
       <div className="creatures-dialog__list">
-        {creatures.map((creature: Creature, i) => {
+        {creatures.map((creature: Creature_5e, i) => {
           return <CreatureRow key={i} creature={creature} />;
         })}
       </div>
