@@ -21,7 +21,7 @@ export default function DashboardPage() {
 
   const joinGame = async (roomCode: string) => {
     const game: Game = await getGame(roomCode);
-    const map: Board_5e = await getMap(game.map.id, game.id);
+    const map: Map_5e = await getMap(game.map.id, game.id);
     setGameData({
       game: game,
       room: roomCode,

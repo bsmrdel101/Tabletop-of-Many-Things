@@ -10,7 +10,7 @@ import drawCanvasGrid, { getGridCellCoords, panCanvasGrid, zoomCanvasGrid } from
 const zoomMin = 0.22, zoomMax = 1;
 let gridContainer: HTMLElement;
 let scaleBtnPressed = false;
-let map: Board_5e;
+let map: Map_5e;
 let boardState: Token_5e[] = [];
 let game: Game;
 let room: string;
@@ -25,10 +25,10 @@ let initialTokenTopLeftX = 0;
 let initialTokenTopLeftY = 0;
 let selectedToken: Token_5e;
 let isDraggingToken = false;
-let setMapData: (map: Board_5e) => void;
+let setMapData: (map: Map_5e) => void;
 let setRightClickMenu: (data: RightClickMenuState) => void;
 
-export const initializeCanvas = (selectedMap: Board_5e, _game: Game, _room: string, _setMapData: (map: Board_5e) => void, _setContextMenu: (data: RightClickMenuState) => void) => {
+export const initializeCanvas = (selectedMap: Map_5e, _game: Game, _room: string, _setMapData: (map: Map_5e) => void, _setContextMenu: (data: RightClickMenuState) => void) => {
   gridContainer = document.querySelector('.grid-container');
   map = selectedMap;
   boardState = map.boardState;
@@ -145,7 +145,7 @@ const panGrid = (e: MouseEvent) => {
 // Network Events
 // ==============
 
-onServerEvent('SELECT_MAP', async (selectedMap: Board_5e) => {
+onServerEvent('SELECT_MAP', async (selectedMap: Map_5e) => {
   await setSelectedMap(selectedMap, game.id);
   map = await getMap(selectedMap.id, game.id);
   boardState = map.boardState;
@@ -153,7 +153,7 @@ onServerEvent('SELECT_MAP', async (selectedMap: Board_5e) => {
   drawEveryCanvas();
 });
 
-onServerEvent('VIEW_MAP', async (selectedMap: Board_5e) => {
+onServerEvent('VIEW_MAP', async (selectedMap: Map_5e) => {
   map = await getMap(selectedMap.id, game.id);
   boardState = map.boardState;
   setMapData(map);

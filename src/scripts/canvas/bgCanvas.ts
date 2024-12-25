@@ -10,7 +10,7 @@ let offsetY = 0;
 let currentZoom = 1;
 let offsetInit = false;
 
-export default function setCanvasBg(zoom: number, map: Board_5e) {
+export default function setCanvasBg(zoom: number, map: Map_5e) {
   canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
   ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   bgImage.src = map.img;

@@ -12,7 +12,7 @@ export default function Canvas() {
     initializeCanvas(gameData.map, gameData.game, gameData.room, updateMapAtom, updateContextMenuAtom);
   }, [gameData.map]);
 
-  const updateMapAtom = (map: Board_5e) => {
+  const updateMapAtom = (map: Map_5e) => {
     setGameData({ ...gameData, map });
   };
 

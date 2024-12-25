@@ -76,7 +76,7 @@ export const addTokenToMap = async (gameId: number, token: Token_5e, mapId: numb
 
 // === PUT routes === //
 
-export const updateMap = async (payload: Board_5e) => {
+export const updateMap = async (payload: Map_5e) => {
   try {
     await axios.put('/api/5e/map', payload);
   } catch (err) {

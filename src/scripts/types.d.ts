@@ -36,7 +36,7 @@ type Game = {
 interface GameState {
   game: Game
   room: string
-  map: Board_5e
+  map: Map_5e
 }
 
 interface Coord {
@@ -68,7 +68,7 @@ type Token_5e = {
   size: number
 };
 
-type Board_5e = {
+type Map_5e = {
   id: number
   game: Game
   name: string

@@ -15,7 +15,7 @@ let gridLineWidth = 0.4;
 let currentZoom = 1;
 let boardState: Token_5e[] = [];
 
-export default function setCanvasGrid(zoom: number, map: Board_5e) {
+export default function setCanvasGrid(zoom: number, map: Map_5e) {
   canvas = document.getElementById('grid-canvas') as HTMLCanvasElement;
   ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   const bgImage = getBgImage();
