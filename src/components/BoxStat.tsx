@@ -5,7 +5,7 @@ interface Props {
 }
 
 
-export default function BoxStats({ title, onClick, children }: Props) {
+export default function BoxStat({ title, onClick, children }: Props) {
   return (
     <div className="box-stats">
       <p>{ title }</p>

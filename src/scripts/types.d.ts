@@ -101,6 +101,7 @@ type Character_5e = {
   hp: number
   tempHp: number
   insp: boolean
+  abilityScores: AbilityScore_5e[]
   race?: Race_5e
   classes: Class_5e[]
   background?: Background_5e
@@ -327,6 +328,9 @@ type AbilityScore_5e = {
   name: string
   value: number
   mod: number
+  scoreOverride: number
+  scoreMod: number
+  prof: boolean
 };
 
 type ProfType = 'skill' | 'save' | 'weapon' | 'armor' | 'tool' | 'vehicle';

@@ -101,16 +101,18 @@
 
       &__ac {
         position: relative;
+        align-content: center;
 
         img {
-          width: 4.3rem;
+          width: 6.3rem;
+          filter: drop-shadow(0 0 0.75rem rgba(24, 23, 23, 0.52));
         }
 
         p {
           position: absolute;
           inset: 0;
-          top: 1rem;
-          font-size: var(--font-lg);
+          top: 2.6rem;
+          font-size: var(--font-xlg);
         }
       }
     }

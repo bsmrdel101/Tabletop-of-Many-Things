@@ -1,4 +1,4 @@
-import BoxStats from "../../BoxStat";
+import BoxStat from "../../BoxStat";
 import HitDice from "./HitDice";
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 
 
 export default function MainStats({ character, editing }: Props) {
+  const init = character.abilityScores.find((score) => score.name === 'dex').mod;
+
   return (
     <div className="main-stats">
       <div className="main-stats__row">
@@ -17,16 +19,16 @@ export default function MainStats({ character, editing }: Props) {
         </div>
 
         <div className="main-stats__column">
-          <BoxStats title="Inspired">
+          <BoxStat title="Inspired">
             <img
               src={`/images/icons/${character.insp ? 'star' : 'star-empty'}.svg`}
               alt={character.insp ? 'inpsired' : 'not inpsired'}
               width={23}
             />
-          </BoxStats>
-          <BoxStats title="Initiative">
-            <p>+0</p>
-          </BoxStats>
+          </BoxStat>
+          <BoxStat title="Initiative">
+            <p>{ init >= 0 ? '+' : '' }{ init }</p>
+          </BoxStat>
         </div>
       </div>
 
