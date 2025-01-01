@@ -31,6 +31,7 @@
 @import "./components/mapToolbar/SetGridPopup";
 @import "./components/NewGameForm";
 @import "./components/Folder";
+@import "./components/BoxStats";
 @import "./components/characters-page/CharactersPage";
 @import "./components/characters-page/CharacterSheetPage";
 @import "./components/characters-page/HealthBar";
@@ -45,7 +46,7 @@
   font-family: Ubuntu, sans-serif;
   box-sizing: border-box;
   scrollbar-width: auto;
-  scrollbar-color: var(--red-3) var(--modal-color-1);
+  scrollbar-color: var(--red-2) var(--modal-color-1);
 
   &::-webkit-scrollbar {
     width: 15px;
@@ -56,7 +57,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--red-3);
+    background-color: var(--red-2);
     border-radius: 15px;
   }
 }

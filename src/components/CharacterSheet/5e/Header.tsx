@@ -8,14 +8,15 @@ import { getCharacterSubtitle, getXpFromLvl } from "../../../scripts/tools/5e/ch
 
 interface Props {
   character: Character_5e
+  editing: boolean
+  setEditing: (value: boolean) => void
 }
 
 
-export default function Header({ character }: Props) {
+export default function Header({ character, editing, setEditing }: Props) {
   const [racesData] = useAtom<Race_5e[]>(racesAtom);
   const [classesData] = useAtom<Class_5e[]>(classesAtom);
   const [backgroundsData] = useAtom<Background_5e[]>(backgroundsAtom);
-  const [editing, setEditing] = useState(false);
   const [subtitle, setSubtitle] = useState('');
   const [name, setName] = useState(character.name);
   const [race, setRace] = useState<Race_5e>(character.race);

@@ -7,14 +7,17 @@ import { getAllBackgrounds } from "../../../scripts/controllers/5e/backgroundsCo
 import { getAllClasses } from "../../../scripts/controllers/5e/classesController";
 import HealthManagement from "./HealthManagement";
 import { onServerEvent } from "../../../scripts/config/socket-io";
+import MainStats from "./MainStats";
 
 interface Props {
   character: Character_5e
   setCharacter: (character: Character_5e) => void
+  editing: boolean
+  setEditing: (value: boolean) => void
 }
 
 
-export default function CharacterSheet5e({ character, setCharacter }: Props) {
+export default function CharacterSheet5e({ character, setCharacter, editing, setEditing }: Props) {
   const [races, setRaces] = useAtom<Race_5e[]>(racesAtom);
   const [backgrounds, setBackgrounds] = useAtom<Background_5e[]>(backgroundsAtom);
   const [classes, setClasses] = useAtom<Class_5e[]>(classesAtom);
@@ -36,10 +39,11 @@ export default function CharacterSheet5e({ character, setCharacter }: Props) {
   return (
     <div className="character-sheet-page--5e">
       <div className="character-sheet__top-bar">
-        <Header character={character} />
+        <Header character={character} editing={editing} setEditing={setEditing} />
       </div>
       <div className="character-sheet__section">
         <HealthManagement character={character} setCharacter={setCharacter} />
+        <MainStats character={character} editing={editing} />
       </div>
     </div>
   );

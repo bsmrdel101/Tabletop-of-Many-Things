@@ -93,6 +93,7 @@ type Character_5e = {
   xp: number
   acOverride: number
   acMod: number
+  ac: number
   maxHpOverride: number
   maxHpMod: number
   maxHp: number

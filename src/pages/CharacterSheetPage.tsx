@@ -6,12 +6,13 @@ import CharacterSheet5e from "../components/CharacterSheet/5e/CharacterSheet";
 
 export default function CharacterSheetPage() {
   const { id } = useParams<any>();
-  const [character, setCharacter] = useState<Character_5e>(null);
+  const [character5e, setCharacter5e] = useState<Character_5e>(null);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getCharacterById(id);
-      setCharacter(res);
+      setCharacter5e(res);
     };
     fetchData();
   }, []);
@@ -19,10 +20,10 @@ export default function CharacterSheetPage() {
 
   return (
     <div className="character-sheet-page">
-      {character &&
-      <>
-        <CharacterSheet5e character={character} setCharacter={setCharacter} />
-      </>
+      {character5e &&
+        <>
+          <CharacterSheet5e character={character5e} setCharacter={setCharacter5e} editing={editing} setEditing={setEditing} />
+        </>
       }
     </div>
   );

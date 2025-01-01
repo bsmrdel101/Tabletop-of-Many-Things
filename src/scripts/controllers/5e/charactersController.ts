@@ -1,6 +1,11 @@
 import axios from "axios";
 
 
+const parseCharacter5eData = (char: any) => {
+  const ac = char.acOverride ? char.acOverride : 10 + char.acMod;
+  return { ...char, ac };
+};
+
 // === GET routes === //
 
 export const getAllCharacters = async () => {
@@ -15,7 +20,7 @@ export const getAllCharacters = async () => {
 export const getCharacterById = async (id: number) => {
   try {
     const res = await axios.get(`/api/5e/characters/${id}`);
-    return res.data;
+    return parseCharacter5eData(res.data);
   } catch (err) {
     console.log(err);
   }

@@ -1,0 +1,11 @@
+.box-stats {
+  text-align: start;
+
+  &__content {
+    border: 2px solid var(--brown-5);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    text-align: center;
+    margin-top: 0.1rem;
+  }
+}

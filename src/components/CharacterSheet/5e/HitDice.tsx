@@ -3,7 +3,7 @@ interface Props {
 }
 
 
-export default function HitDice() {
+export default function HitDice({ character }: Props) {
   return (
     <div></div>
   );
