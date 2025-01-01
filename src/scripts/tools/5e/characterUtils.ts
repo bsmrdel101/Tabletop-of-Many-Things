@@ -96,3 +96,18 @@ export const restorePlayerMaxHp = async (character: Character_5e) => {
   emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHp: character.prevMaxHp }]);
   await restoreCharacterMaxHp(character.id);
 };
+
+export const getHealthColor = (hp: number, maxHp: number) => {
+  const healthyColor = '#23a82e';
+  const woundedColor = '#f27746';
+  const criticalColor = '#f53333';
+  let color = healthyColor;
+  
+  if (hp <= maxHp * 0.5) {
+    color = woundedColor;
+  }
+  if (hp <= maxHp * 0.25) {
+    color = criticalColor;
+  }
+  return color;
+};

@@ -6,6 +6,7 @@ import { getAllRaces } from "../../../scripts/controllers/5e/racesController";
 import { getAllBackgrounds } from "../../../scripts/controllers/5e/backgroundsController";
 import { getAllClasses } from "../../../scripts/controllers/5e/classesController";
 import HealthManagement from "./HealthManagement";
+import { onServerEvent } from "../../../scripts/config/socket-io";
 
 interface Props {
   character: Character_5e
@@ -25,6 +26,10 @@ export default function CharacterSheet5e({ character, setCharacter }: Props) {
       setClasses(await getAllClasses());
     };
     fetchData();
+
+    onServerEvent('UPDATE_PLAYER', (char: Character_5e) => {
+      if (character.id === char.id) setCharacter(char);
+    });
   }, []);
 
 

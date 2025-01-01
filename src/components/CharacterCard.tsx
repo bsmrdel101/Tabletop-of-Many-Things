@@ -23,7 +23,7 @@ export default function CharacterCard({ char, characters, setCharacters }: Props
       <img src={char.img} alt={`${char.name} picture`} />
 
       <div className="characters-page-character-card__content">
-        <h3>{ char.name }</h3>
+        <h3>{ char.name } <span style={{ fontWeight: 'normal', fontSize: 'var(--font-xsm)' }}>Level { char.lvl }</span></h3>
         <p>{ subtitle }</p>
         <p className="character-card__ruleset">{ char.ruleset }</p>
         <div className="character-card__buttons">

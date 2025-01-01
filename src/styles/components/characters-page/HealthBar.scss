@@ -1,3 +1,38 @@
-.hp-bar {
-  
+:root {
+  --progress-bar-width: 200px;
+  --progress-bar-height: 200px;
+}
+
+.circular-hp-bar {
+  width: var(--progress-bar-width);
+  height: var(--progress-bar-height);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0 0.5rem;
+  box-shadow: 0 0 10px rgba(16, 16, 16, 0.5);
+
+  &__inner-circle {
+    position: absolute;
+    width: calc(var(--progress-bar-width) - 40px);
+    height: calc(var(--progress-bar-height) - 40px);
+    border-radius: 50%;
+    // background-color: var(--black-1);
+    background-color: var(--brown-0);
+  }
+
+  &__center {
+    position: relative;
+    text-align: center;
+  }
+
+  &__hp {
+    font-size: var(--font-md);
+    margin: 0;
+    // background-color: var(--black-2);
+    background-color: var(--brown-1);
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
 }
