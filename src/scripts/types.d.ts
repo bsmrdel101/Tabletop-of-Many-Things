@@ -106,7 +106,7 @@ type Character_5e = {
   classes: Class_5e[]
   background?: Background_5e
   currentHitDice: Dice[]
-  speeds: Speed[]
+  speeds: Speed_5e[]
   senses: NameValue[]
   proficiencies: Prof[]
   resistances: string[]
@@ -115,7 +115,7 @@ type Character_5e = {
   dmgImmunities: string[]
   languages: string[]
   currency: Cost[]
-  spellcasting: Spellcasting
+  spellcasting: Spellcasting_5e
   ruleset: string
   targets: Token_5e
 };

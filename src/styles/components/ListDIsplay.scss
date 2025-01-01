@@ -1,0 +1,16 @@
+.list-display {
+  ul {
+    list-style: none;
+    padding: 0;
+    background-color: var(--brown-1);
+    margin: 0.3rem 0 0 0;
+
+    li {
+      padding: 0.22rem;
+    
+      &:nth-child(odd) {
+        background-color: var(--brown-2);
+      }
+    }
+  }
+}

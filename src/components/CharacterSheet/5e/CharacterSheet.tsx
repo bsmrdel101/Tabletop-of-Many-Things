@@ -8,6 +8,8 @@ import { getAllClasses } from "../../../scripts/controllers/5e/classesController
 import HealthManagement from "./HealthManagement";
 import { onServerEvent } from "../../../scripts/config/socket-io";
 import MainStats from "./MainStats";
+import Speeds from "./Speeds";
+import Senses from "./Senses";
 
 interface Props {
   character: Character_5e
@@ -44,6 +46,11 @@ export default function CharacterSheet5e({ character, setCharacter, editing, set
       <div className="character-sheet__section">
         <HealthManagement character={character} setCharacter={setCharacter} />
         <MainStats character={character} editing={editing} />
+        <div style={{ marginLeft: '4rem' }}>
+          <Speeds character={character} />
+          <br />
+          <Senses character={character} />
+        </div>
       </div>
     </div>
   );
