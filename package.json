@@ -1,7 +1,6 @@
 {
   "name": "tabletop-of-many-things",
   "version": "1.0.0",
-  "description": "A virtual tabletop fop 5e D&D.",
   "private": true,
   "proxy": "http://localhost:8000",
   "scripts": {
@@ -9,25 +8,13 @@
     "lint:ts": "eslint ./ --ignore-path .gitignore --fix",
     "lint:scss": "stylelint '**/*.scss' --fix",
     "lint": "run-s lint:ts lint:scss",
-    "docker:setup": "rm -rf ./.postgres-data && docker-compose up",
-    "dev": "run-p docker:setup server",
-    "start": "node server/server.js",
-    "server": "nodemon server/server.js",
-    "client": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "react-scripts start",
     "build": "CI=false react-scripts build",
     "deploy": "npx railway up"
   },
   "engines": {
     "node": "16.18.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bsmrdel101/Virtual-Table.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bsmrdel101/Virtual-Table/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -86,12 +73,5 @@
       "react-app",
       "react-app/jest"
     ]
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "heroku-run-build-script": true
+  }
 }
