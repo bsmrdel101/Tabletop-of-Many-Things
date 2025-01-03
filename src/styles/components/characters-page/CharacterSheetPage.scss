@@ -116,5 +116,47 @@
         }
       }
     }
+
+    .ability-scores-list {
+      display: flex;
+      gap: 0.3rem;
+      margin-top: 2rem;
+    }
+
+    .ability-score {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      background-color: var(--black-1);
+      padding: 0.5rem;
+      border-radius: 0.8rem;
+      width: 5rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+      &__title {
+        display: flex;
+        gap: 0.2rem;
+        font-weight: bold;
+        justify-content: center;
+
+        img {
+          width: 1rem;
+          margin-bottom: 0.3rem;
+        }
+      }
+
+      &__value {
+        background-color: var(--black-2);
+        width: fit-content;
+        margin: auto;
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.8rem;
+      }
+
+      &__mod {
+        font-size: var(--font-xsm);
+      }
+    }
   }
 }

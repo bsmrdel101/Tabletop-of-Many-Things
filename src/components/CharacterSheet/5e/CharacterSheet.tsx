@@ -10,6 +10,7 @@ import { onServerEvent } from "../../../scripts/config/socket-io";
 import MainStats from "./MainStats";
 import Speeds from "./Speeds";
 import Senses from "./Senses";
+import AbilityScores from "./AbilityScores";
 
 interface Props {
   character: Character_5e
@@ -44,8 +45,14 @@ export default function CharacterSheet5e({ character, setCharacter, editing, set
         <Header character={character} editing={editing} setEditing={setEditing} />
       </div>
       <div className="character-sheet__section">
-        <HealthManagement character={character} setCharacter={setCharacter} />
-        <MainStats character={character} editing={editing} />
+        <div>
+          <div className="character-sheet__section">
+            <HealthManagement character={character} setCharacter={setCharacter} />
+            <MainStats character={character} editing={editing} />
+          </div>
+          <AbilityScores character={character} />
+        </div>
+        
         <div style={{ marginLeft: '4rem' }}>
           <Speeds character={character} />
           <br />
