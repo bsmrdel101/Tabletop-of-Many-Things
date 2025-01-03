@@ -11,6 +11,10 @@ import MainStats from "./MainStats";
 import Speeds from "./Speeds";
 import Senses from "./Senses";
 import AbilityScores from "./AbilityScores";
+import Resistances from "./Resistances";
+import Vulnerabilities from "./Vulnerabilities";
+import CondImmunities from "./CondImmunities";
+import DmgImmunities from "./DmgImmunities";
 
 interface Props {
   character: Character_5e
@@ -53,11 +57,21 @@ export default function CharacterSheet5e({ character, setCharacter, editing, set
           <AbilityScores character={character} />
         </div>
         
-        <div style={{ marginLeft: '4rem' }}>
-          <Speeds character={character} />
+        <div>
+          <div>
+            <Speeds character={character} />
+            <br />
+            <Senses character={character} />
+          </div>
           <br />
-          <Senses character={character} />
         </div>
+      </div>
+
+      <div className="attributes">
+        <Resistances character={character} />
+        <Vulnerabilities character={character} />
+        <CondImmunities character={character} />
+        <DmgImmunities character={character} />
       </div>
     </div>
   );

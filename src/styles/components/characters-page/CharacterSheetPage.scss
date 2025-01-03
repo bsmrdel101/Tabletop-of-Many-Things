@@ -158,5 +158,12 @@
         font-size: var(--font-xsm);
       }
     }
+
+    .attributes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
   }
 }

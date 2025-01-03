@@ -9,6 +9,7 @@ export default function ListDisplay({ title, data }: Props) {
     <div className="list-display">
       <p>{ title }</p>
       <ul>
+        {data.length === 0 && <li>‎</li>}
         {data.map((row, i) => {
           return <li key={i}>{ row }</li>;
         })}
