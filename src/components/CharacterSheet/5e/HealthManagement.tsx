@@ -6,17 +6,17 @@ import { addPlayerTempHp, dmgPlayer, dmgPlayerMaxHp, healPlayer } from "../../..
 
 interface Props {
   character: Character_5e
-  setCharacter: (character: Character_5e) => void
+  room: string
 }
 
 
-export default function HealthManagement({ character, setCharacter }: Props) {
+export default function HealthManagement({ character, room }: Props) {
   const [value, setValue] = useState(0);
 
 
   return (
     <div className="hp-management">
-      <HealthBar character={character} setCharacter={setCharacter} />
+      <HealthBar character={character} room={room} />
 
       <div className="hp-management__input">
         <Input
@@ -29,25 +29,25 @@ export default function HealthManagement({ character, setCharacter }: Props) {
         <div className="hp-management__buttons">
           <Button
             style={{ background: 'var(--red-2)' }}
-            onClick={() => dmgPlayerMaxHp(character, Number(value))}
+            onClick={() => dmgPlayerMaxHp(character, Number(value), room)}
           >
             Max Hp Damage
           </Button>
           <Button
             style={{ background: 'var(--blue-0)' }}
-            onClick={() => addPlayerTempHp(character, Number(value))}
+            onClick={() => addPlayerTempHp(character, Number(value), room)}
           >
             Temp Hp
           </Button>
           <Button
             style={{ background: 'var(--red-1)' }}
-            onClick={() => dmgPlayer(character, Number(value))}
+            onClick={() => dmgPlayer(character, Number(value), room)}
           >
             Damage
           </Button>
           <Button
             style={{ background: 'var(--green-0)' }}
-            onClick={() => healPlayer(character, Number(value))}
+            onClick={() => healPlayer(character, Number(value), room)}
           >
             Heal
           </Button>

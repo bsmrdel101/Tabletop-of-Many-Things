@@ -21,10 +21,11 @@ interface Props {
   setCharacter: (character: Character_5e) => void
   editing: boolean
   setEditing: (value: boolean) => void
+  room: string
 }
 
 
-export default function CharacterSheet5e({ character, setCharacter, editing, setEditing }: Props) {
+export default function CharacterSheet5e({ character, setCharacter, editing, setEditing, room }: Props) {
   const [races, setRaces] = useAtom<Race_5e[]>(racesAtom);
   const [backgrounds, setBackgrounds] = useAtom<Background_5e[]>(backgroundsAtom);
   const [classes, setClasses] = useAtom<Class_5e[]>(classesAtom);
@@ -51,8 +52,8 @@ export default function CharacterSheet5e({ character, setCharacter, editing, set
       <div className="character-sheet__section">
         <div>
           <div className="character-sheet__section">
-            <HealthManagement character={character} setCharacter={setCharacter} />
-            <MainStats character={character} editing={editing} />
+            <HealthManagement character={character} room={room} />
+            <MainStats character={character} editing={editing} room={room} />
           </div>
           <AbilityScores character={character} />
         </div>

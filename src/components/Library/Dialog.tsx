@@ -6,7 +6,7 @@ import Button from "./Button";
 interface Props {
   children: React.ReactNode
   className?: string
-  variants?: ('creature-stats')[]
+  variants?: ('basic' | 'creature-stats')[]
   title?: string
   closeOnOutsideClick?: boolean
   width?: string
@@ -48,14 +48,18 @@ export default function Dialog({ children, className, variants, title, closeOnOu
 
   return (
     <Draggable handle=".dialog__handlebar">
-      <dialog open={open} ref={ref} className={`dialog ${variants && variants.includes('creature-stats') && 'dialog--creature-stats'}`} style={{ width: width, height: height }}>
+      <dialog
+        open={open}
+        ref={ref}
+        className={'dialog'}
+        style={{ width: width, height: height }}
+        {...parseClasses(classes)}
+        {...props}
+      >
         <div className="dialog__handlebar draggable">
           <h3 className="dialog__title">{ title }</h3>
         </div>
-        <div
-          {...parseClasses(classes)}
-          {...props}
-        >
+        <div>
           <Button variants={['X']} onClick={closeDialog}>X</Button>
           <div className="dialog__content">
             { children }

@@ -1,4 +1,4 @@
-dialog {
+.dialog {
   padding: 1.8rem 1rem 1rem;
   border-radius: 0.5rem;
   background-color: var(--modal-color-0);
@@ -6,14 +6,12 @@ dialog {
   margin: 0;
   text-align: start;
   position: absolute;
-  bottom: 25%;
   color: white;
   border: none;
   z-index: 2;
   box-sizing: content-box;
-}
+  inset: 0;
 
-.dialog {
   &__title {
     text-align: center;
     user-select: none;
@@ -29,6 +27,23 @@ dialog {
     form {
       display: flex;
       flex-direction: column;
+    }
+  }
+
+  &--basic {
+    padding: 1.8rem 0.8rem;
+    border: 3px solid var(--black-0);
+
+    .dialog__title {
+      text-align: center;
+      padding: 0.3rem;
+      line-height: 1.3rem;
+    }
+
+    .dialog__content {
+      margin-top: 1.6rem;
+      max-height: 27.5rem;
+      padding-right: 0.5rem;
     }
   }
 

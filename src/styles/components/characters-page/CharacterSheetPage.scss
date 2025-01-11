@@ -126,6 +126,25 @@
       }
     }
 
+    .edit-armor-dialog {
+      &__content {
+        display: flex;
+        gap: 1rem;
+
+        button[type="submit"] {
+          margin-top: 0.3rem;
+        }
+      }
+
+      &__items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        width: 100%;
+        max-width: 12.6rem;
+      }
+    }
+
     .ability-scores-list {
       display: flex;
       gap: 0.3rem;

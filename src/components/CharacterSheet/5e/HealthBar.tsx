@@ -5,10 +5,10 @@ import { onServerEvent } from "../../../scripts/config/socket-io";
 
 interface Props {
   character: Character_5e
-  setCharacter: (character: Character_5e) => void
+  room: string
 }
 
-export default function HealthBar({ character, setCharacter }: Props) {
+export default function HealthBar({ character, room }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const barValueRef = useRef<HTMLParagraphElement>(null);
   const [hp, setHp] = useState<number>(character.hp);
@@ -93,7 +93,7 @@ export default function HealthBar({ character, setCharacter }: Props) {
         {character.maxHp < character.prevMaxHp &&
           <Button
             variants={['plain']}
-            onClick={() => restorePlayerMaxHp(character)}
+            onClick={() => restorePlayerMaxHp(character, room)}
           >
             Restore
           </Button>

@@ -3,7 +3,7 @@ import { generateClasses, parseClasses } from "../../scripts/tools/utils";
 interface Props extends ButtonHTML {
   children: any
   className?: string
-  variants?: ('hover' | 'brown' | 'small' | 'large' | 'hover-scale' | 'search' | 'X' | 'edit' | 'circle' | 'center' | 'plain' | 'link' | 'bold' | 'danger' | 'secondary' | 'fit')[]
+  variants?: ('hover' | 'brown' | 'small' | 'large' | 'hover-scale' | 'search' | 'X' | 'edit' | 'circle' | 'center' | 'plain' | 'link' | 'bold' | 'danger' | 'secondary' | 'fit' | 'save')[]
   type?: 'submit' | 'reset' | 'button'
 }
 

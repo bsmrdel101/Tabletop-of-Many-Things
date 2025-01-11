@@ -151,6 +151,18 @@
     width: fit-content;
     height: fit-content;
   }
+
+  &--save {
+    background-color: var(--green-0);
+    color: white;
+
+    &:hover {
+      color: var(--green-1);
+      background-color: transparent;
+      box-shadow: none;
+      border-color: transparent;
+    }
+  }
 }
 
 button:disabled {
