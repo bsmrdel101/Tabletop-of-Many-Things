@@ -14,7 +14,7 @@ const intialGameState = {
   map: null
 } as GameState;
 
-export const userAtom = atom<User>(null);
+export const userAtom = atom<User>(null as User);
 export const gameAtom = atom<GameState>(intialGameState);
 export const gridAtom = atom<GridState>(null);
 export const rightClickMenuAtom = atom<RightClickMenuState>({ menuType: '' });

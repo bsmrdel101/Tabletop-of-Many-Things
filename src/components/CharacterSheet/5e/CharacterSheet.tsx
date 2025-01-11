@@ -52,7 +52,7 @@ export default function CharacterSheet5e({ character, setCharacter, editing, set
         <div>
           <div className="character-sheet__section">
             <HealthManagement character={character} setCharacter={setCharacter} />
-            <MainStats character={character} setCharacter={setCharacter} editing={editing} />
+            <MainStats character={character} editing={editing} />
           </div>
           <AbilityScores character={character} />
         </div>

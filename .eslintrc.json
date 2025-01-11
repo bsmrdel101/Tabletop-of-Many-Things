@@ -27,7 +27,9 @@
         "no-case-declarations": "off",
         "no-useless-escape": "off",
         "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/no-unused-vars": "off"
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "no-empty-function": "off"
     },
     "ignorePatterns": ["**/*.js"]
 }

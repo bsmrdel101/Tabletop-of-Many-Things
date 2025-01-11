@@ -223,3 +223,12 @@ export const generateClasses = (className: string, variantsList: string[], elmt:
 export const parseClasses = (classes: string): object => {
   return classes ? { className: classes } : {};
 };
+
+export const makeID = () => {
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let text = '';
+  for (let i = 0; i < 6; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
