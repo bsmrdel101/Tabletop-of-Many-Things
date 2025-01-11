@@ -46,6 +46,7 @@
         display: flex;
         gap: 1rem;
         width: 100%;
+        flex-wrap: wrap;
       }
     }
 
@@ -114,6 +115,14 @@
           top: 2.6rem;
           font-size: var(--font-xlg);
         }
+
+        button {
+          position: absolute;
+          top: 2.6rem;
+          left: 1.7rem;
+          background-color: var(--grey-3);
+          font-size: var(--font-sm);
+        }
       }
     }
 
@@ -128,7 +137,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
-      background-color: var(--black-1);
+      background-color: #484443;
       padding: 0.5rem;
       border-radius: 0.8rem;
       width: 5rem;
@@ -147,7 +156,7 @@
       }
 
       &__value {
-        background-color: var(--black-2);
+        background-color: var(--grey-1);
         width: fit-content;
         margin: auto;
         padding: 0.3rem 0.5rem;

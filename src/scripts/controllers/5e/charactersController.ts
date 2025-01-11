@@ -54,6 +54,14 @@ export const restoreCharacterMaxHp = async (id: number) => {
   }
 };
 
+export const setCharacterInspiration = async (id: number, insp: boolean) => {
+  try {
+    await axios.patch(`/api/5e/characters/insp`, { id, insp });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // === PUT routes === //
 
 export const editCharacter = async (character: Character_5e) => {
