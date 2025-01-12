@@ -52,8 +52,8 @@ export default function EditArmorDialog({ open, setOpen, character }: Props) {
           </div>
 
           <div className="edit-armor-dialog__items">
-            <ListDisplay title="Armor" data={[]} />
-            <ListDisplay title="Shields" data={[]} />
+            <ListDisplay title="Armor" data={[]} placeholder="Add armor to inventory" />
+            <ListDisplay title="Shields" data={[]} placeholder="Add shield to inventory" />
           </div>
         </div>
       </form>

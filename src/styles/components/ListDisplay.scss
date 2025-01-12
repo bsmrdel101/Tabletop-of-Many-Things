@@ -14,4 +14,9 @@
       }
     }
   }
+
+  &__placeholder {
+    font-style: italic;
+    color: var(--grey-4);
+  }
 }
