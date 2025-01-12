@@ -25,7 +25,7 @@ export default function MainStats({ character, editing, room }: Props) {
 
   return (
     <div className="main-stats">
-      <EditArmorDialog open={editAcOpen} setOpen={setEditAcOpen} character={character} />
+      <EditArmorDialog open={editAcOpen} setOpen={setEditAcOpen} character={character} room={room} />
 
       <div className="main-stats__row">
         <div className="main-stats__ac">

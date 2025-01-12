@@ -3,20 +3,27 @@ import Dialog from "../../../Library/Dialog";
 import Input from "../../../Library/Input";
 import Button from "../../../Library/Button";
 import ListDisplay from "../../../ListDisplay";
+import { editCharacter } from "../../../../scripts/controllers/5e/charactersController";
+import { emitServerEvent } from "../../../../scripts/config/socket-io";
 
 interface Props {
   open: boolean
   setOpen: (value: boolean) => void
   character: Character_5e
+  room: string
 }
 
 
-export default function EditArmorDialog({ open, setOpen, character }: Props) {
+export default function EditArmorDialog({ open, setOpen, character, room }: Props) {
   const [acMod, setAcMod] = useState<number>(character.acMod);
   const [acOverride, setAcOverride] = useState<number>(character.acOverride);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const ac = Number(acOverride) > 0 ? Number(acOverride) : 10 + Number(acMod);
+    const char = { ...character, ac, acMod: Number(acMod), acOverride: Number(acOverride) };
+    emitServerEvent('UPDATE_PLAYER', [char, room]);
+    await editCharacter(char);
   };
 
 
