@@ -1,17 +1,69 @@
 .character-sheet-page {
   background-color: var(--modal-color-0);
   color: white;
-  padding: 0.8rem;
+  padding: 0 0.8rem 0.8rem 0.8rem;
   height: 100%;
 
+  &__menu-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.8rem;
+    padding: 0.25rem 0.3rem 0.05rem;
+
+    img {
+      width: fit-content;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2rem;
+    background-color: var(--brown-2);
+    z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-bottom-left-radius: 1rem;
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+  }
+
   &--5e {
+    .quick-access-navbar {
+      display: flex;
+      gap: 0.2rem;
+
+      &__tab {
+        border: none;
+        padding: 0.1rem 1rem;
+        width: fit-content;
+        background-color: var(--grey-1);
+        color: white;
+        cursor: pointer;
+        transition: color ease-in-out 0.3s;
+
+        &--selected {
+          border-top: 4px solid var(--red-1);
+        }
+
+        &:hover {
+          color: var(--red-6);
+        }
+      }
+    }
+
     .character-sheet {
       &__header {
         display: flex;
         gap: 1rem;
         position: relative;
         width: 100%;
-        margin-bottom: 1.5rem;
+        margin: 1.2rem 0 1.5rem 0;
 
         h1 {
           margin: 0;
@@ -158,7 +210,7 @@
       gap: 0.2rem;
       background-color: #484443;
       padding: 0.5rem;
-      border-radius: 0.8rem;
+      border-radius: 1.2rem;
       width: 5rem;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 

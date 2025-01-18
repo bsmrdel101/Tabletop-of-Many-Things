@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Input from "../../Library/Input";
 import Select from "../../Library/Select";
 import { useAtom } from "jotai";
-import { backgroundsAtom, classesAtom, racesAtom } from "../../../scripts/atoms/state";
+import { backgroundsAtom5e, classesAtom5e, racesAtom5e } from "../../../scripts/atoms/state";
 import Button from "../../Library/Button";
 import { getCharacterSubtitle, getXpFromLvl } from "../../../scripts/tools/5e/characterUtils";
 
@@ -14,9 +14,9 @@ interface Props {
 
 
 export default function Header({ character, editing, setEditing }: Props) {
-  const [racesData] = useAtom<Race_5e[]>(racesAtom);
-  const [classesData] = useAtom<Class_5e[]>(classesAtom);
-  const [backgroundsData] = useAtom<Background_5e[]>(backgroundsAtom);
+  const [racesData] = useAtom<Race_5e[]>(racesAtom5e);
+  const [classesData] = useAtom<Class_5e[]>(classesAtom5e);
+  const [backgroundsData] = useAtom<Background_5e[]>(backgroundsAtom5e);
   const [subtitle, setSubtitle] = useState('');
   const [name, setName] = useState(character.name);
   const [race, setRace] = useState<Race_5e>(character.race);

@@ -1,6 +1,5 @@
 import BoxStat from "../../BoxStat";
 import HitDice from "./HitDice";
-import Button from "../../Library/Button";
 import { setCharacterInspiration } from "../../../scripts/controllers/5e/charactersController";
 import { emitServerEvent } from "../../../scripts/config/socket-io";
 import { useState } from "react";
@@ -8,12 +7,11 @@ import EditArmorDialog from "../../Dialogs/5e/CharacterSheet/EditArmorDialog";
 
 interface Props {
   character: Character_5e
-  editing: boolean
   room: string
 }
 
 
-export default function MainStats({ character, editing, room }: Props) {
+export default function MainStats({ character, room }: Props) {
   const [editAcOpen, setEditAcOpen] = useState(false);
   const init = character.abilityScores.find((score) => score.name === 'dex').mod;
 
@@ -28,18 +26,9 @@ export default function MainStats({ character, editing, room }: Props) {
       <EditArmorDialog open={editAcOpen} setOpen={setEditAcOpen} character={character} room={room} />
 
       <div className="main-stats__row">
-        <div className="main-stats__ac">
+        <div style={{ cursor: 'pointer' }} className="main-stats__ac" onClick={() => setEditAcOpen(true)}>
           <img src="/images/icons/shield.svg" alt="" />
-          {!editing ?
-            <p>{ character.ac }</p>
-            :
-            <Button
-              variants={['hover-scale', 'bold']}
-              onClick={() => setEditAcOpen(true)}
-            >
-              Edit
-            </Button>
-          }
+          <p>{ character.ac }</p>
         </div>
 
         <div className="main-stats__column">
