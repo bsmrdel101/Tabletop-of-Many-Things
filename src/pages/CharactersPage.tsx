@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { addCharacter, getAllCharacters } from "../scripts/controllers/5e/charactersController";
 import CharacterCard from "../components/CharacterCard";
 
+
 export default function CharactersPage() {
   const [characters, setCharacters] = useState<Character_5e[]>([]);
 

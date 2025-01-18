@@ -1,5 +1,5 @@
 import { emitServerEvent } from "../../config/socket-io";
-import { editCharacterHealth, restoreCharacterMaxHp } from "../../controllers/5e/charactersController";
+import { editCharacter, editCharacterHealth, restoreCharacterMaxHp } from "../../controllers/5e/charactersController";
 
 
 export const getCharacterSubtitle = (character: Character_5e): string => {
@@ -56,11 +56,10 @@ export const getXpFromLvl = (lvl: number): number => {
 };
 
 export const dmgPlayerMaxHp = async (character: Character_5e, dmg: number, room: string) => {
-  const { tempHp } = character;
   const newMaxHp = Math.max(character.maxHp - dmg, 0);
   const newHp = Math.min(character.hp, newMaxHp);
   emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHp: newMaxHp, hp: newHp }, room]);
-  await editCharacterHealth(character.id, newMaxHp, newHp, tempHp);
+  await editCharacter({ ...character, maxHp: newMaxHp, hp: newHp });
 };
 
 export const dmgPlayer = async (character: Character_5e, dmg: number, room: string) => {
@@ -77,19 +76,19 @@ export const dmgPlayer = async (character: Character_5e, dmg: number, room: stri
   }
 
   emitServerEvent('UPDATE_PLAYER', [{ ...character, hp, tempHp }, room]);
-  await editCharacterHealth(character.id, character.maxHp, hp, tempHp);
+  await editCharacter({ ...character, hp, tempHp });
 };
 
 export const addPlayerTempHp = async (character: Character_5e, tempHp: number, room: string) => {
   const updatedTempHp = character.tempHp + tempHp;
   emitServerEvent('UPDATE_PLAYER', [{ ...character, tempHp: updatedTempHp }, room]);
-  await editCharacterHealth(character.id, character.maxHp, character.hp, updatedTempHp);
+  await editCharacter({ ...character, tempHp: updatedTempHp });
 };
 
 export const healPlayer = async (character: Character_5e, value: number, room: string) => {
   const newHp = Math.min(character.hp + value, character.maxHp);
   emitServerEvent('UPDATE_PLAYER', [{ ...character, hp: newHp }, room]);
-  await editCharacterHealth(character.id, character.maxHp, newHp, character.tempHp);
+  await editCharacterHealth(character.id, newHp);
 };
 
 export const restorePlayerMaxHp = async (character: Character_5e, room: string) => {

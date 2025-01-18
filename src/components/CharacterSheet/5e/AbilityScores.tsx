@@ -10,7 +10,7 @@ export default function AbilityScores({ character }: Props) {
         return (
           <div key={i} className="ability-score">
             <div className="ability-score__title">
-              {score.prof && <img src="/images/icons/star.svg" alt="proficient" /> }
+              {score.prof && <img src="/images/icons/star.svg" alt="proficient" draggable={false} /> }
               <p>{ score.name.toUpperCase() }</p>
             </div>
             <p className="ability-score__value">{ score.value }</p>

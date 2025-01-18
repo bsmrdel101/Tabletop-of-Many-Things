@@ -32,14 +32,13 @@ export default function CharacterSheetPage() {
   return (
     <div className="character-sheet-page">
       <Button className="character-sheet-page__menu-btn" onClick={() => setMenuOpen(true)}>
-        <img src="/images/icons/hamburger-btn.svg" alt="character sheet menu" />
+        <img src="/images/icons/hamburger-btn.svg" alt="character sheet menu" draggable={false} />
       </Button>
       {menuOpen &&
         <div className="character-sheet-page__menu">
           <Button variants={['X']} onClick={() => setMenuOpen(false)}>X</Button>
           <div className="character-sheet-page__menu-content">
             <h3>Menu</h3>
-            <Button variants={['hover-white']}>Import Game Data</Button>
             <Button variants={['link', 'hover-white']}>
               <a href="/characters">Exit</a>
             </Button>

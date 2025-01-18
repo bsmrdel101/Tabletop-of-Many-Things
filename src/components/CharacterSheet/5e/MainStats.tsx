@@ -26,8 +26,8 @@ export default function MainStats({ character, room }: Props) {
       <EditArmorDialog open={editAcOpen} setOpen={setEditAcOpen} character={character} room={room} />
 
       <div className="main-stats__row">
-        <div style={{ cursor: 'pointer' }} className="main-stats__ac" onClick={() => setEditAcOpen(true)}>
-          <img src="/images/icons/shield.svg" alt="" />
+        <div className="main-stats__ac" onClick={() => setEditAcOpen(true)}>
+          <img src="/images/icons/shield.svg" alt="" draggable={false} />
           <p>{ character.ac }</p>
         </div>
 
@@ -37,6 +37,7 @@ export default function MainStats({ character, room }: Props) {
               src={`/images/icons/${character.insp ? 'star' : 'star-empty'}.svg`}
               alt={character.insp ? 'inpsired' : 'not inpsired'}
               width={23}
+              draggable={false}
             />
           </BoxStat>
           <BoxStat title="Initiative">
