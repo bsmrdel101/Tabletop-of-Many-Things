@@ -43,7 +43,7 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
-    "axios": "^0.27.2",
+    "axios": "^0.30.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cookie-session": "^2.0.0",
