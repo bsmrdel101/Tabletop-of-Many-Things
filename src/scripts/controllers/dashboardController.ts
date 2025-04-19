@@ -1,64 +1,85 @@
 import axios from "axios";
 
-
-interface newGame {
+interface NewGamePayload {
   name: string
   ruleset: string
+  password?: string
 }
+
+interface EditGamePayload {
+  id: number
+  name: string
+  ruleset: string
+  password?: string
+}
+
 
 // === GET routes === //
 
-export const getGames = async () => {
+export const getGamesByUser = async (): Promise<Game[]> => {
   try {
     const res = await axios.get('/api/dashboard');
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 };
 
-export const getGame = async (code: string) => {
+export const getGame = async (id: number): Promise<Game | null> => {
   try {
-    const res = await axios.get(`/api/dashboard/game/${code}`);
+    const res = await axios.get(`/api/dashboard/${id}`);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };
 
-export const getGamesHistory = async () => {
+export const getGamesHistory = async (): Promise<Game[]> => {
   try {
     const res = await axios.get('/api/dashboard/history');
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 };
 
 // === POST routes === //
 
-export const addGame = async (payload: newGame) => {
+export const addGame = async (payload: NewGamePayload) => {
   try {
     await axios.post('/api/dashboard', payload);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const addGameToHistory = async (gameId: number) => {
   try {
     await axios.post('/api/dashboard/history', { gameId });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 // === PUT routes === //
 
-export const setSelectedMap = async (payload: Map_5e, gameId: number) => {
+export const editGame = async (payload: EditGamePayload) => {
   try {
-    await axios.put(`/api/dashboard/${gameId}`, payload);
-  } catch (err) {
-    console.log(err);
+    await axios.patch(`/api/dashboard`, payload);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// === DELETE routes === //
+
+export const deleteGame = async (id: number) => {
+  try {
+    await axios.patch(`/api/dashboard/${id}`);
+  } catch (error) {
+    console.log(error);
   }
 };

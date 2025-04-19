@@ -66,7 +66,7 @@ export default function CharacterSheet5e({ character, setCharacter, editing, set
                 <HealthManagement character={character} room={room} />
                 <MainStats character={character} room={room} />
               </div>
-              <AbilityScores character={character} />
+              <AbilityScores character={character} editing={editing} room={room} />
             </div>
             
             <div>
