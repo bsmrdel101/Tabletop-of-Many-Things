@@ -1,0 +1,17 @@
+.home {
+  padding: 0 1.4rem;
+
+  h1 {
+    margin-bottom: 6rem;
+  }
+
+  &__button-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    button {
+      font-size: calc(var(--font-md) * 1.1);
+    }
+  }
+}

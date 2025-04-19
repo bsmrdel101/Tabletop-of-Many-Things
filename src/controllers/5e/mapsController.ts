@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../config/firebase";
+import { storage } from "@/config/firebase";
 
 
 interface NewMap {

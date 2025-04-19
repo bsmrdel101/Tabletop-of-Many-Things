@@ -1,8 +1,14 @@
+import HomeButtonList from "@/components/Home/HomeButtonList";
+import UserBox from "@/components/Home/UserBox";
+
+
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <p>This is a test</p>
+    <div className="home">
+      <h1>Tabletop of<br/>Many Things</h1>
+
+      <UserBox />
+      <HomeButtonList />
     </div>
   );
 }

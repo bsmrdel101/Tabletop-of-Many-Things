@@ -1,4 +1,4 @@
-import { clamp } from "../tools/utils";
+import { clamp } from "@/tools/utils";
 import { getBgImage } from "./bgCanvas";
 
 

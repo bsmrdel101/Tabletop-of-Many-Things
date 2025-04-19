@@ -1,0 +1,16 @@
+.user-box {
+  display: flex;
+  padding: 1rem;
+  border-bottom-left-radius: 1rem;
+  gap: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-items: baseline;
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
