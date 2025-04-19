@@ -1,13 +1,22 @@
 {
-    "extends": "stylelint-config-standard",
-    "customSyntax": "postcss-less",
-    "rules": {
-        "alpha-value-notation": null,
-        "selector-class-pattern": null,
-        "color-function-notation": null,
-        "at-rule-no-unknown": null,
-        "property-no-vendor-prefix": null,
-        "no-empty-source": null,
-        "declaration-block-no-redundant-longhand-properties": null
-    }
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "alpha-value-notation": null,
+    "selector-class-pattern": null,
+    "color-function-notation": null,
+    "at-rule-no-unknown": null,
+    "property-no-vendor-prefix": null,
+    "no-empty-source": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "length-zero-no-unit": null,
+    "custom-property-pattern": null,
+    "media-feature-range-notation": null,
+    "no-descending-specificity": null,
+    "at-rule-no-vendor-prefix": null,
+    "custom-property-empty-line-before": null,
+    "color-hex-length": null,
+    "selector-id-pattern": null,
+    "import-notation": null,
+    "color-function-alias-notation": null
+  }
 }

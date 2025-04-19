@@ -1,0 +1,12 @@
+export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
+
+export const generateClasses = (className: string, variantsList: string[], elmt: string): string => {
+  const variantss = variantsList ? variantsList.map((i) => `${elmt}--${i}`).join(' ') : '';
+  return [className, variantss && variantss, elmt].filter(Boolean).join(' ');
+};
+
+export const parseClasses = (classes: string): object => {
+  return classes ? { className: classes } : {};
+};
+
+export const removeNullObjProps = (obj: any) => Object.entries(obj).reduce((a: any, [k, v]) => (v == null ? a : (a[k] = v, a)), {});
