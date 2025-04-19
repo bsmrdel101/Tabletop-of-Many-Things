@@ -1,116 +1,21 @@
-@import "./settings/colors";
-@import "./settings/fonts";
-@import "./mixins/mixins";
-@import "./components/library/button";
-@import "./components/library/dialog";
-@import "./components/library/draggable";
-@import "./components/library/grid";
-@import "./components/library/input";
-@import "./components/library/pagination";
-@import "./components/library/select";
-@import "./components/dashboard/DashboardPage.scss";
-@import "./components/GamePage";
-@import "./components/RegisterPage";
-@import "./components/ActionButton";
-@import "./components/Canvas";
-@import "./components/dashboard/GameList";
-@import "./components/mapToolbar/MapToolbar";
-@import "./components/RightClickMenus";
-@import "./components/Sidebar";
-@import "./components/Toolbar";
-@import "./components/Token";
-@import "./components/TextWarning";
-@import "./components/dialogs/CreaturesDialog";
-@import "./components/dialogs/CreatureStatsDialog";
-@import "./components/dialogs/Modal";
-@import "./components/menus/MapsMenu";
-@import "./components/menus/Menus";
-@import "./components/RightSideContent";
-@import "./components/DiceBox";
-@import "./components/Chat";
-@import "./components/mapToolbar/SetGridPopup";
-@import "./components/NewGameForm";
-@import "./components/Folder";
-@import "./components/BoxStats";
-@import "./components/ListDisplay";
-@import "./components/DiceIcon";
-@import "./components/characters-page/CharactersPage";
-@import "./components/characters-page/CharacterSheetPage";
-@import "./components/characters-page/HealthBar";
-
-:root {
-  --zoom: 1rem;
-  --background-image: "";
-  --token-radius: 50%;
-}
+@use './colors.scss';
+@use './fonts.scss';
 
 * {
-  font-family: Ubuntu, sans-serif;
   box-sizing: border-box;
-  scrollbar-width: auto;
-  scrollbar-color: var(--red-2) var(--modal-color-1);
-
-  &::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--grey-dark-2);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--red-2);
-    border-radius: 15px;
-  }
 }
 
 body {
   margin: 0;
-  background: url("../../public/images/tabletop-bg-3.jpg") no-repeat;
-  background-size: cover;
-  font-size: 100%;
-  height: 100vh;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 }
 
-#root {
-  height: 100%;
-}
-
-h2,
-h3,
-h4 {
-  margin: 0;
-}
-
-.form__btn--remove {
-  background-color: rgb(212 62 62);
-  color: white;
-  max-height: 1.5rem;
-  margin-top: 0.34rem;
-}
-
-.bold {
-  font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5rem;
 }
 
 p {
-  // margin: 0.4rem;
-  margin: 0;
-}
-
-.hidden {
-  display: none;
-}
-
-.no-select {
-  user-select: none;
-}
-
-.draggable-area {
-  position: absolute;
-  left: 0;
-  top: 0;
-  cursor: move;
-  width: 100%;
-  height: 100%;
+  margin: 0.1rem 0;
 }

@@ -12,7 +12,7 @@ A virtual tabletop for TTRPG's, that allows users prepare and play their games o
 ## Installation
 - Clone the repo, and run `npm i`.
 - Run `npm run dev`.
-- Go to `http://localhost:3000` and login with the following credentials.
+- Login with the following credentials.
 ```
     username: dev
     password: 123
