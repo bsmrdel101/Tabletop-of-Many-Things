@@ -1,21 +1,45 @@
-@use './colors.scss';
-@use './fonts.scss';
+@use './settings/colors.scss';
+@use './settings/fonts.scss';
+@use './components/library/button.scss';
+@use './components/home/home.scss';
+@use './components/home/user-box.scss';
 
 * {
   box-sizing: border-box;
+  font-family: Petrona, Avenir, Helvetica, Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--white-0);
+  background: url('/images/bg.jpg') no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-position-y: 75%;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.5rem;
 }
 
+h1 {
+  font-size: var(--font-title);
+  text-shadow: 2px 3px 5px var(--black-0);
+  font-family: Metamorphous, Avenir, Helvetica, Arial, sans-serif;
+  margin-top: 2rem;
+
+  @media (max-width: 950px) {
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 603px) {
+    font-size: calc(var(--font-title) * 0.5);
+  }
+}
+
 p {
   margin: 0.1rem 0;
+  font-size: var(--font-md);
 }

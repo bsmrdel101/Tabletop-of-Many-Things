@@ -1,8 +1,8 @@
-import { openCreatureWindow } from "../../components/Dialogs/5e/Creatures/CreatureRow";
-import { emitServerEvent, onServerEvent } from "../config/socket-io";
-import { setSelectedMap } from "../controllers/dashboardController";
-import { deleteTokenFromMap, getMap, updateToken } from "../controllers/5e/mapsController";
-import { clamp } from "../tools/utils";
+import { openCreatureWindow } from "@/components/Dialogs/5e/Creatures/CreatureRow";
+import { emitServerEvent, onServerEvent } from "@/config/socket-io";
+import { setSelectedMap } from "@/controllers/dashboardController";
+import { deleteTokenFromMap, getMap, updateToken } from "@/controllers/5e/mapsController";
+import { clamp } from "@/tools/utils";
 import setCanvasBg, { panCanvasBg, zoomCanvasBg } from "./bgCanvas";
 import drawCanvasGrid, { getGridCellCoords, panCanvasGrid, zoomCanvasGrid } from "./gridCanvas";
 

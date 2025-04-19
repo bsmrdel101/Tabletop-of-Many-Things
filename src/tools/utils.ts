@@ -1,8 +1,8 @@
 export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
 export const generateClasses = (className: string, variantsList: string[], elmt: string): string => {
-  const variantss = variantsList ? variantsList.map((i) => `${elmt}--${i}`).join(' ') : '';
-  return [className, variantss && variantss, elmt].filter(Boolean).join(' ');
+  const variants = variantsList ? variantsList.map((i) => `${elmt}--${i}`).join(' ') : '';
+  return [className, variants && variants, elmt].filter(Boolean).join(' ');
 };
 
 export const parseClasses = (classes: string): object => {
