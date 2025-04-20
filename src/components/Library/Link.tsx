@@ -10,7 +10,7 @@ interface Props extends LinkHTML {
 
 
 export default function Link({ to, children, className = '', variants = [], type, ...props }: Props) {
-  const classes = generateClasses(className, variants, 'button');
+  const classes = generateClasses(className, variants, 'link');
 
   
   return (

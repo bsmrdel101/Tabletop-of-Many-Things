@@ -1,0 +1,30 @@
+label {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  font-weight: 600;
+  margin-top: 0.6rem;
+}
+
+.input {
+  input, textarea {
+    resize: none;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    margin: 0.2rem 0;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+
+  &--label-inline {
+    display: block;
+
+    input, textarea {
+      margin-left: 0.4rem;
+    }
+  }
+
+  &--label-no-bold {
+    font-weight: 400;
+  }
+}

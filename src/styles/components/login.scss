@@ -1,0 +1,12 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 15rem auto;
+  text-align: center;
+  border: 3px solid var(--white-0);
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: var(--purple-clear-0);
+}

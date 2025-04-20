@@ -11,6 +11,7 @@ export default function UserBox() {
 
   const handleLogout = async () => {
     await logout();
+    location.reload();
   };
 
 

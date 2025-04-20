@@ -1,7 +1,7 @@
-type ButtonHTML = React.HTMLProps<HTMLButtonElement>
-type InputHTML = React.HTMLProps<HTMLInputElement>
-type LinkHTML = React.HTMLProps<HTMLAnchorElement>
-type SelectHTML = React.HTMLProps<HTMLSelectElement>
+type ButtonHTML = React.ButtonHTMLAttributes<HTMLButtonElement>
+type InputHTML = React.InputHTMLAttributes<HTMLInputElement>
+type LinkHTML = React.AnchorHTMLAttributes<HTMLAnchorElement>
+type SelectHTML = React.SelectHTMLAttributes<HTMLSelectElement>
 
 type User = {
   id: number
