@@ -13,7 +13,7 @@
   }
 
   &__column {
-    background-color: var(--purple-dark-0);
+    background-color: var(--bg-0);
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -37,11 +37,11 @@
   display: flex;
   padding: 1rem;
   gap: 0.6rem;
-  background-color: var(--purple-dark-1);
+  background-color: var(--bg-1);
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   cursor: pointer;
-  align-items: baseline;
+  // align-items: baseline;
   max-width: 15rem;
   transition: all ease-out 0.2s;
 

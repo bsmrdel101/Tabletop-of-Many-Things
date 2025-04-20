@@ -3,7 +3,7 @@ import { generateClasses, parseClasses } from "@/tools/utils";
 interface Props extends ButtonHTML {
   children?: any
   className?: string
-  variants?: ('secondary' | 'empty' | 'danger' | 'dark' | 'link')[]
+  variants?: ('secondary' | 'border' | 'empty' | 'danger' | 'dark' | 'link' | 'thin' | 'small')[]
   type?: 'submit' | 'reset' | 'button'
 }
 
@@ -18,7 +18,7 @@ export default function Button({ children, className = '', variants = [], type =
       {...parseClasses(classes)}
       {...props}
     >
-      <span>{ children }</span>
+      { children }
     </button>
   );
 }

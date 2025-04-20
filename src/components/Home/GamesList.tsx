@@ -32,7 +32,7 @@ export default function GamesList({ setMenu }: Props) {
   return (
     <div className="games-list">
       <div>
-        <Button variants={['secondary']} onClick={() => setMenu('')}>Back</Button>
+        <Button variants={['border']} onClick={() => setMenu('')}>Back</Button>
         <form className="games-list__join-game" onSubmit={handleJoinGame}>
           <Input
             variants={['fit']}
