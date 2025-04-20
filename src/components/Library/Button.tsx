@@ -3,12 +3,12 @@ import { generateClasses, parseClasses } from "@/tools/utils";
 interface Props extends ButtonHTML {
   children?: any
   className?: string
-  variants?: ('secondary' | 'empty' | 'danger')[]
+  variants?: ('secondary' | 'empty' | 'danger' | 'dark')[]
   type?: 'submit' | 'reset' | 'button'
 }
 
 
-export default function Button({ children, className = '', variants = [], type, ...props }: Props) {
+export default function Button({ children, className = '', variants = [], type = 'button', ...props }: Props) {
   const classes = generateClasses(className, variants, 'button');
 
   

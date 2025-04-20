@@ -1,0 +1,14 @@
+.link {
+  color: var(--pink-1);
+  align-self: center;
+  text-decoration: none;
+  transition: all ease-out 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &--button {
+    
+  }
+}
