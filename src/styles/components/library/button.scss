@@ -1,5 +1,4 @@
 .button {
-  font-size: var(--font-md);
   padding: 0.5rem;
   border: none;
   border-radius: 0.3rem;
@@ -17,6 +16,11 @@
   }
 
   &--secondary {
+    background-color: var(--purple-dark-4);
+    box-shadow: none;
+  }  
+
+  &--border {
     background-color: transparent;
     border: 2px solid var(--purple-dark-2);
   }
@@ -28,5 +32,39 @@
 
   &--dark {
     background-color: var(--purple-dark-0);
+  }
+
+  &--link {
+    padding: 0;
+    display: flex;
+    
+    a {
+      color: var(--white-0);
+      padding: 0.5rem;
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &--thin {
+    max-height: 2rem;
+  }
+
+  &--danger {
+    background-color: var(--red-2);
+    display: flex;
+    align-self: center;
+
+    img {
+      width: 1.5rem;
+    }
+  }
+
+  &--small {
+    max-height: 2rem;
+    align-self: center;
+    font-size: var(--font-sm) !important;
   }
 }

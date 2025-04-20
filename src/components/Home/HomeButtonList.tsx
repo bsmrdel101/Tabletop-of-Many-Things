@@ -13,7 +13,7 @@ export default function HomeButtonList() {
       {!menu &&
         <>
           <Button onClick={() => setMenu('play')}>Play</Button>
-          <Button variants={['secondary', 'link']}>
+          <Button variants={['dark', 'link']}>
             <Link to="/characters">Characters</Link>
           </Button>
         </>
