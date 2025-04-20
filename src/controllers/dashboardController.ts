@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/config/axios"
 
 interface NewGamePayload {
   name: string
@@ -16,9 +16,10 @@ interface EditGamePayload {
 
 // === GET routes === //
 
-export const getGamesByUser = async (): Promise<Game[]> => {
+export const getGamesByUser = async (): Promise<GameMin[]> => {
   try {
-    const res = await axios.get('/api/dashboard');
+    const auth = { withCredentials: true };
+    const res = await api.get('/api/dashboard', auth);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -28,7 +29,8 @@ export const getGamesByUser = async (): Promise<Game[]> => {
 
 export const getGame = async (id: number): Promise<Game | null> => {
   try {
-    const res = await axios.get(`/api/dashboard/${id}`);
+    const auth = { withCredentials: true };
+    const res = await api.get(`/api/dashboard/${id}`, auth);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -36,9 +38,10 @@ export const getGame = async (id: number): Promise<Game | null> => {
   }
 };
 
-export const getGamesHistory = async (): Promise<Game[]> => {
+export const getGamesHistory = async (): Promise<GameMin[]> => {
   try {
-    const res = await axios.get('/api/dashboard/history');
+    const auth = { withCredentials: true };
+    const res = await api.get('/api/dashboard/history', auth);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -50,7 +53,8 @@ export const getGamesHistory = async (): Promise<Game[]> => {
 
 export const addGame = async (payload: NewGamePayload) => {
   try {
-    await axios.post('/api/dashboard', payload);
+    const auth = { withCredentials: true };
+    await api.post('/api/dashboard', payload, auth);
   } catch (error) {
     console.log(error);
   }
@@ -58,7 +62,8 @@ export const addGame = async (payload: NewGamePayload) => {
 
 export const addGameToHistory = async (gameId: number) => {
   try {
-    await axios.post('/api/dashboard/history', { gameId });
+    const auth = { withCredentials: true };
+    await api.post('/api/dashboard/history', { gameId }, auth);
   } catch (error) {
     console.log(error);
   }
@@ -68,7 +73,8 @@ export const addGameToHistory = async (gameId: number) => {
 
 export const editGame = async (payload: EditGamePayload) => {
   try {
-    await axios.patch(`/api/dashboard`, payload);
+    const auth = { withCredentials: true };
+    await api.patch(`/api/dashboard`, payload, auth);
   } catch (error) {
     console.log(error);
   }
@@ -78,7 +84,8 @@ export const editGame = async (payload: EditGamePayload) => {
 
 export const deleteGame = async (id: number) => {
   try {
-    await axios.patch(`/api/dashboard/${id}`);
+    const auth = { withCredentials: true };
+    await api.patch(`/api/dashboard/${id}`, auth);
   } catch (error) {
     console.log(error);
   }

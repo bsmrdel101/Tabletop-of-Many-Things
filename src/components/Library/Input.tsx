@@ -3,7 +3,7 @@ import { generateClasses, parseClasses } from "@/tools/utils";
 interface Props extends InputHTML {
   className?: string
   labelClass?: string
-  variants?: ('label-inline' | 'text-area' | 'label-no-bold')[]
+  variants?: ('label-inline' | 'text-area' | 'label-no-bold' | 'fit')[]
   label?: string
   cols?: number
   rows?: number

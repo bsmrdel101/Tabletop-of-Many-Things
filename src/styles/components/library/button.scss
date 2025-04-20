@@ -10,6 +10,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: all ease-out 0.2s;
+  height: fit-content;
 
   &:hover {
     text-shadow: var(--pink-1) 1px 0 10px;

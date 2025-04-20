@@ -5,7 +5,7 @@ interface Props extends LinkHTML {
   to: string
   children?: any
   className?: string
-  variants?: ('button')[]
+  variants?: ('')[]
 }
 
 

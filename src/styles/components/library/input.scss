@@ -27,4 +27,8 @@ label {
   &--label-no-bold {
     font-weight: 400;
   }
+
+  &--fit {
+    width: fit-content;
+  }
 }

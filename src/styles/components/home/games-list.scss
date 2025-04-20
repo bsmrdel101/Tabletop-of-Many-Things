@@ -1,0 +1,60 @@
+.games-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  &__join-game {
+    display: flex;
+    gap: 0.3rem;
+
+    button {
+      align-self: end;
+    }
+  }
+
+  &__column {
+    background-color: var(--purple-dark-0);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-height: 25rem;
+    overflow-y: auto;
+
+    @media (max-width: 396px) {
+      max-height: 10.3rem;
+    }
+  }
+
+  @media (max-width: 396px) {
+    gap: 0.4rem;
+  }
+}
+
+.game-card {
+  display: flex;
+  padding: 1rem;
+  gap: 0.6rem;
+  background-color: var(--purple-dark-1);
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+  align-items: baseline;
+  max-width: 15rem;
+  transition: all ease-out 0.2s;
+
+  &__name {
+    margin: 0;
+  }
+
+  &__ruleset {
+    text-align: end;
+    font-size: var(--font-sm);
+  }
+  
+  &:hover {
+    text-shadow: var(--pink-1) 1px 0 10px;
+  }
+}
