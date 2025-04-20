@@ -6,11 +6,27 @@
 @use './components/library/error.scss';
 @use './components/home/home.scss';
 @use './components/home/user-box.scss';
+@use './components/home/games-list.scss';
 @use './components/login.scss';
 
 * {
   box-sizing: border-box;
   font-family: Petrona, Avenir, Helvetica, Arial, sans-serif;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    border-radius: 1rem;
+    padding-top: 0.3rem;
+  }
+  
+  &::-webkit-scrollbar-track {
+    border-radius: 1rem;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--purple-dark-2);
+    border-radius: 1rem;
+  }
 }
 
 body {
@@ -37,9 +53,11 @@ h1 {
   @media (max-width: 950px) {
     margin-top: 4rem;
   }
-
   @media (max-width: 603px) {
     font-size: calc(var(--font-title) * 0.5);
+  }
+  @media (max-width: 396px) {
+    font-size: calc(var(--font-title) * 0.3);
   }
 }
 
@@ -49,7 +67,8 @@ h2 {
 }
 
 p {
-  margin: 0.1rem 0;
+  // margin: 0.1rem 0;
+  margin: 0;
   font-size: var(--font-md);
 }
 

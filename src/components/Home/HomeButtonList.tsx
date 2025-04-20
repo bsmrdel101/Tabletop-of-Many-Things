@@ -1,11 +1,26 @@
+import { useState } from "react";
 import Button from "../Library/Button";
+import GamesList from "./GamesList";
+import Link from "../Library/Link";
 
 
 export default function HomeButtonList() {
+  const [menu, setMenu] = useState('');
+
+
   return (
     <div className="home__button-list">
-      <Button>Play</Button>
-      <Button variants={['secondary']}>Characters</Button>
+      {!menu &&
+        <>
+          <Button onClick={() => setMenu('play')}>Play</Button>
+          <Button variants={['secondary', 'link']}>
+            <Link to="/characters">Characters</Link>
+          </Button>
+        </>
+      }
+      {menu === 'play' &&
+        <GamesList setMenu={setMenu} />
+      }
     </div>
   );
 }

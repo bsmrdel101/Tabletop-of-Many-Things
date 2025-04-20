@@ -7,3 +7,18 @@ type User = {
   id: number
   username: string
 };
+
+type Game = {
+  id: number
+  name: string
+  dm: User
+  playerList: User[]
+  ruleset: string
+};
+
+type GameMin = {
+  id: number
+  gameId?: number
+  name: string
+  ruleset: string
+};
