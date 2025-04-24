@@ -62,7 +62,7 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^5.3.4",
+    "react-router-dom": "^7.5.2",
     "react-scripts": "5.0.1",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
