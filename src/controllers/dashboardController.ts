@@ -27,10 +27,10 @@ export const getGamesByUser = async (): Promise<GameMin[]> => {
   }
 };
 
-export const getGame = async (id: number): Promise<Game | null> => {
+export const getGameById = async (id: number): Promise<Game | null> => {
   try {
     const auth = { withCredentials: true };
-    const res = await api.get(`/api/dashboard/${id}`, auth);
+    const res = await api.get(`/api/dashboard/id/${id}`, auth);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -51,12 +51,14 @@ export const getGamesHistory = async (): Promise<GameMin[]> => {
 
 // === POST routes === //
 
-export const addGame = async (payload: NewGamePayload) => {
+export const addGame = async (payload: NewGamePayload): Promise<number | null> => {
   try {
     const auth = { withCredentials: true };
-    await api.post('/api/dashboard', payload, auth);
+    const res = await api.post('/api/dashboard', payload, auth);
+    return res.data.id;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
 
