@@ -17,11 +17,11 @@ export default function GameCard({ game, selected, setSelected }: Props) {
         </div>
         :
         <div className="game-card">
-          <Button variants={['small']}>Launch</Button>
-          <Button variants={['small']}>
+          <Button variants={['small', 'dark']}>Launch</Button>
+          <Button variants={['small', 'image', 'empty']}>
             <img src="/images/icons/pen.svg" alt="Edit button" />
           </Button>
-          <Button variants={['danger']}>
+          <Button variants={['small', 'image', 'empty']}>
             <img src="/images/icons/trash.svg" alt="Delete button" />
           </Button>
         </div>

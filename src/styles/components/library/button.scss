@@ -54,6 +54,24 @@
 
   &--danger {
     background-color: var(--red-2);
+  }
+
+  &--small {
+    max-height: 2rem;
+    align-self: center;
+    font-size: var(--font-sm) !important;
+  }
+
+  &--pink {
+    background-color: var(--pink-0);
+    color: var(--purple-dark-2);
+  }
+
+  &--blue {
+    background-color: var(--blue-dark-1);
+  }
+
+  &--image {
     display: flex;
     align-self: center;
 
@@ -62,9 +80,7 @@
     }
   }
 
-  &--small {
-    max-height: 2rem;
-    align-self: center;
-    font-size: var(--font-sm) !important;
+  &--flat {
+    box-shadow: none;
   }
 }
