@@ -14,6 +14,7 @@ type Game = {
   dm: User
   playerList: User[]
   ruleset: string
+  password?: string
 };
 
 type GameMin = {

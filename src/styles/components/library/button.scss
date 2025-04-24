@@ -60,6 +60,7 @@
     max-height: 2rem;
     align-self: center;
     font-size: var(--font-sm) !important;
+    padding: 0.1rem 0.3rem;
   }
 
   &--pink {
@@ -82,5 +83,20 @@
 
   &--flat {
     box-shadow: none;
+  }
+
+  &--X {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: var(--font-xxsm) !important;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+
+    &:hover {
+      text-shadow: none;
+      color: var(--red-5);
+    }
   }
 }

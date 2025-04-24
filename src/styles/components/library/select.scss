@@ -1,0 +1,10 @@
+.select {
+  &--label-thin {
+    margin-top: 0.2rem;
+    font-size: var(--font-xsm);
+  }
+
+  &--fit {
+    width: fit-content;
+  }
+}
