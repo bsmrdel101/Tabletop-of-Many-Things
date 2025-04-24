@@ -12,6 +12,7 @@
 * {
   box-sizing: border-box;
   font-family: Petrona, Avenir, Helvetica, Arial, sans-serif;
+  font-size: var(--font-sm);
 
   &::-webkit-scrollbar {
     width: 0.5rem;
