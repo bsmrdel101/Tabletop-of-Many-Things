@@ -27,7 +27,7 @@ export default function NewGameCard({ setOpen, refreshGames }: Props) {
 
 
   return (
-    <form onSubmit={handleNewGame} className="game-card game-card--new-card">
+    <form onSubmit={handleNewGame} className="game-card game-card--form-card">
       <Button variants={['X']} onClick={() => setOpen(false)}>X</Button>
       <Input
         variants={['label-thin']}
