@@ -49,18 +49,45 @@
   }
 
   &--thin {
-    max-height: 2rem;
+    max-height: 1.5rem;
+    display: flex;
+    align-items: center;
   }
 
   &--danger {
     background-color: var(--red-2);
   }
 
+  &--image {
+    display: flex;
+
+    img {
+      width: 1rem;
+    }
+  }
+
   &--small {
     max-height: 2rem;
-    align-self: center;
     font-size: var(--font-sm) !important;
     padding: 0.1rem 0.3rem;
+
+    img {
+      width: 0.8rem;
+    }
+    a {
+      font-size: var(--font-sm);
+    }
+  }
+
+  &--large {
+    font-size: var(--font-lg) !important;
+
+    img {
+      width: 1.5rem;
+    }
+    a {
+      font-size: var(--font-lg);
+    }
   }
 
   &--pink {
@@ -72,15 +99,6 @@
     background-color: var(--blue-dark-1);
   }
 
-  &--image {
-    display: flex;
-    align-self: center;
-
-    img {
-      width: 1.5rem;
-    }
-  }
-
   &--flat {
     box-shadow: none;
   }
@@ -89,7 +107,7 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    font-size: var(--font-xxsm) !important;
+    font-size: var(--font-sm) !important;
     background-color: transparent;
     box-shadow: none;
     padding: 0;
@@ -98,5 +116,9 @@
       text-shadow: none;
       color: var(--red-5);
     }
+  }
+
+  &--bold {
+    font-weight: bold;
   }
 }

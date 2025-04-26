@@ -12,9 +12,15 @@ export default function HomeButtonList() {
     <div className="home__button-list">
       {!menu &&
         <>
-          <Button onClick={() => setMenu('play')}>Play</Button>
-          <Button variants={['dark', 'link']}>
+          <Button variants={['large']} onClick={() => setMenu('play')}>Play</Button>
+          <Button variants={['dark', 'link', 'large']}>
             <Link to="/characters">Characters</Link>
+          </Button>
+          <Button variants={['dark', 'link', 'large']}>
+            <Link to="/homebrew">Homebrew</Link>
+          </Button>
+          <Button variants={['dark', 'link', 'large']}>
+            <Link to="/settings">Settings</Link>
           </Button>
         </>
       }
