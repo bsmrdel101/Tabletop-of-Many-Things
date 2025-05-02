@@ -2,7 +2,7 @@ import { userAtom } from "@/atoms/state";
 import { useAtom } from "jotai";
 import Button from "../Library/Button";
 import { useState } from "react";
-import { logout } from "@/controllers/userController";
+import { logout } from "@/services/userService";
 
 
 export default function UserBox() {

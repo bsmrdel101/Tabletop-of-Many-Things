@@ -8,21 +8,23 @@ const parseCharacter5eData = (char: any) => {
 
 // === GET routes === //
 
-export const getAllCharacters = async () => {
+export const getCharactersByUser = async (): Promise<Character_5e[]> => {
   try {
     const res = await axios.get(`/api/5e/characters`);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 };
 
-export const getCharacterById = async (id: number) => {
+export const getCharacterById = async (id: number): Promise<Character_5e | null> => {
   try {
     const res = await axios.get(`/api/5e/characters/${id}`);
     return parseCharacter5eData(res.data);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };
 
@@ -31,8 +33,8 @@ export const getCharacterById = async (id: number) => {
 export const addCharacter = async () => {
   try {
     await axios.post(`/api/5e/characters`);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -41,24 +43,24 @@ export const addCharacter = async () => {
 export const editCharacterHealth = async (id: number, hp: number) => {
   try {
     await axios.patch(`/api/5e/characters/health`, { id, hp });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const restoreCharacterMaxHp = async (id: number) => {
   try {
     await axios.patch(`/api/5e/characters/restore-max-hp`, { id });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const setCharacterInspiration = async (id: number, insp: boolean) => {
   try {
     await axios.patch(`/api/5e/characters/insp`, { id, insp });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -67,8 +69,8 @@ export const setCharacterInspiration = async (id: number, insp: boolean) => {
 export const editCharacter = async (character: Character_5e) => {
   try {
     await axios.put(`/api/5e/characters`, character);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -77,7 +79,7 @@ export const editCharacter = async (character: Character_5e) => {
 export const deleteCharacter = async (id: number) => {
   try {
     await axios.delete(`/api/5e/characters/${id}`);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };

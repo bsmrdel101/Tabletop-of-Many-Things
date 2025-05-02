@@ -1,4 +1,4 @@
-import api from "@/config/axios"
+import api from "@/scripts/config/axios";
 
 interface NewGamePayload {
   name: string

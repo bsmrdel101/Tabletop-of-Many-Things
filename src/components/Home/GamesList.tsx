@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import Button from "../Library/Button";
 import Input from "../Library/Input";
-import { getGamesByUser, getGamesHistory } from "@/controllers/dashboardController";
+import { getGamesByUser, getGamesHistory } from "@/services/dashboardService";
 import GameCard from "./GameCard";
 import NewGameCard from "./NewGameCard";
 

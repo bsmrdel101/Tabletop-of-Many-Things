@@ -2,7 +2,7 @@ import Button from "@/components/Library/Button";
 import Error from "@/components/Library/Error";
 import Input from "@/components/Library/Input";
 import Link from "@/components/Library/Link";
-import { registerUser } from "@/controllers/userController";
+import { registerUser } from "@/services/userService";
 import { FormEvent, useState } from "react";
 
 
@@ -45,5 +45,5 @@ export default function Register() {
         <Link to="/login">Login</Link>
       </div>
     </form>
-  )
+  );
 }
