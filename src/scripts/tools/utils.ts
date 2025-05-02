@@ -9,4 +9,4 @@ export const parseClasses = (classes: string): object => {
   return classes ? { className: classes } : {};
 };
 
-export const removeNullObjProps = (obj: any) => Object.entries(obj).reduce((a: any, [k, v]) => (v == null ? a : (a[k] = v, a)), {});
+export const removeNullObjProps = (obj: any): object => Object.entries(obj).reduce((a: any, [k, v]) => (v == null ? a : (a[k] = v, a)), {});
