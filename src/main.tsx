@@ -2,16 +2,15 @@ import { Suspense, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, useNavigate, useRoutes } from 'react-router-dom';
 import routes from '~react-pages';
-import Layout from './components/Layout';
 import { useAtom } from 'jotai';
 import { userAtom } from './atoms/state';
-import { getUser } from './controllers/userController';
+import { getUser } from './services/userService';
 import './styles/index.scss';
 
 
 export function App() {
   const navigate = useNavigate();
-  const [user, setUser] = useAtom<User>(userAtom);
+  const [, setUser] = useAtom<User>(userAtom);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +27,7 @@ export function App() {
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
-      <Layout>
-        { useRoutes(routes) }
-      </Layout>
+      { useRoutes(routes) }
     </Suspense>
   );
 }

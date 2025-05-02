@@ -1,4 +1,4 @@
-import { clamp } from "@/tools/utils";
+import { clamp } from "@/scripts/tools/utils";
 import setCanvasGrid from "./gridCanvas";
 
 

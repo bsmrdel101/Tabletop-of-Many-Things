@@ -1,4 +1,4 @@
-import { generateClasses, parseClasses } from "@/tools/utils";
+import { generateClasses, parseClasses } from "@/scripts/tools/utils";
 
 interface Props extends SelectHTML {
   children: any

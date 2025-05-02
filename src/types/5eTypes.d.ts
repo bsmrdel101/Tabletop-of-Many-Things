@@ -1,3 +1,10 @@
+type Dice_5e = {
+  amount: number
+  type: number
+  mod: number
+  display: string
+};
+
 type Token_5e = {
   id: number
   assetId: number
@@ -53,16 +60,16 @@ type Character_5e = {
   currentHitDice: Dice[]
   speeds: Speed_5e[]
   senses: NameValue[]
-  proficiencies: Prof[]
+  proficiencies: Prof_5e[]
   resistances: string[]
   vulnerabilities: string[]
   condImmunities: string[]
   dmgImmunities: string[]
   languages: string[]
-  currency: Cost[]
+  currency: Cost_5e[]
   spellcasting: Spellcasting_5e | null
   ruleset: string
-  targets: Token_5e
+  targets: Token_5e[]
 };
 
 type Race_5e = {
@@ -75,12 +82,12 @@ type Race_5e = {
   size: string | null
   sizeDesc: string | null
   alignment: string | null
-  startingProficiencies: Prof[]
+  startingProficiencies: Prof_5e[]
   languages: string[]
   languageDesc: string | null
-  speeds: Speed[]
+  speeds: Speed_5e[]
   traits: NameDesc[]
-  subraces: Subrace[]
+  subraces: Subrace_5e[]
 };
 
 type Subrace_5e = {
@@ -88,7 +95,7 @@ type Subrace_5e = {
   name: string
   desc: string | null
   abilityBonuses: NameValue[]
-  startingProficiencies: Prof[]
+  startingProficiencies: Prof_5e[]
   languages: string[]
   languageDesc: string | null
   traits: NameDesc[]
@@ -100,12 +107,12 @@ type Class_5e = {
   name: string
   lvl: number
   hitDice: number
-  proficiencies: Prof[]
-  skillChoices: Skill[]
-  saves: Skill[]
-  startingItems: Item[]
-  startingItemChoices: Item[]
-  levels: Level[]
+  proficiencies: Prof_5e[]
+  skillChoices: Skill_5e[]
+  saves: Skill_5e[]
+  startingItems: Item_5e[]
+  startingItemChoices: Item_5e[]
+  levels: Level_5e[]
   multiClassing: any[]
   subclasses: Subclass_5e[]
 };
@@ -115,8 +122,8 @@ type Subclass_5e = {
   name: string
   subclassFlavor: string | null
   desc: string | null
-  levels: Level[]
-  spells: Spell[]
+  levels: Level_5e[]
+  spells: Spell_5e[]
 };
 
 type Background_5e = {
@@ -126,7 +133,7 @@ type Background_5e = {
   desc: string | null
   proficiencies: string | null
   languages: string[]
-  equipment: Item[]
+  equipment: Item_5e[]
   features: NameDesc[]
   personalityTraits: string | null
   ideals: string | null
@@ -153,17 +160,17 @@ type Creature_5e = {
   xp: number
   languages: string[]
   speeds: NameValue[]
-  proficiencies: Prof[]
+  proficiencies: Prof_5e[]
   vulnerabilities: string[]
   resistances: string[]
   damageImmunities: string[]
   conditionImmunities: string[]
   senses: NameValue[]
-  abilities: SpecialAbility[]
+  abilities: SpecialAbility_5e[]
   actions: NameDesc[]
   legActions: NameDesc[]
-  targets: (Creature | Character)[]
-  spellcasting?: Spellcasting
+  targets: (Creature_5e | Character_5e)[]
+  spellcasting?: Spellcasting_5e
 };
 
 type Skill_5e = {
@@ -174,8 +181,146 @@ type Skill_5e = {
   proficient: boolean
 };
 
+type ProfType_5e = 'skill' | 'save' | 'weapon' | 'armor' | 'tool' | 'vehicle';
+type Prof_5e = {
+  type: ProfType_5e
+  name: string
+  value: number
+};
+
 type Speed_5e = {
   name: string
   value: number
   hover: boolean
+};
+
+type AbilityScore_5e = {
+  name: string
+  value: number
+  mod: number
+  scoreOverride: number
+  scoreMod: number
+  prof: boolean
+};
+
+type EquipmentCategory_5e = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Instrument' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Ring' | 'Rod' | 'Staff' | 'Scroll' | 'Wand' | 'Gaming Set' | 'Potion';
+type Rarity_5e = 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact';
+type Item_5e = {
+  id: number
+  name: string
+  desc: string | null
+  type: EquipmentCategory
+  rarity: Rarity_5e
+  cost: Cost_5e | null
+  lbs: number
+  properties: string[]
+  armorType?: 'Light' | 'Medium' | 'Heavy' | 'Shield'
+  weaponType?: 'Simple' | 'Martial' | 'Firearm'
+  damage?: Damage_5e
+  range?: Range_5e
+};
+
+type Cost_5e = {
+  amount: number
+  type: string
+};
+
+type Range_5e = {
+  normal: number
+  long: number | null
+  display: string
+};
+
+type Damage_5e = {
+  dice: Dice_5e
+  type: string
+};
+
+type SpellDamage_5e = {
+  type: string
+  damageAtSpellLevel: AtSpecificLevel_5e[]
+  damageAtCharacterLevel: AtSpecificLevel_5e[]
+};
+
+type AtSpecificLevel_5e = {
+  level: number
+  dice: Dice_5e
+};
+
+type DC_5e = {
+  type: string
+  value?: number
+  successType: 'none' | 'half' | 'other'
+};
+
+type AOE_5e = {
+  type: 'radius' | 'line' | 'cone' | 'cube' | 'sphere' | 'hemisphere' | 'cylinder'
+  size: number
+};
+
+type Usage_5e = {
+  type: 'at will' | 'per day' | 'recharge after rest' | 'recharge on roll'
+  times?: number
+  dice?: Dice_5e
+  minValue?: number
+};
+
+type AtSpecificLevel_5e = {
+  level: number
+  dice: Dice_5e
+};
+
+type SpellSlots_5e = {
+  1: number
+  2: number
+  3: number
+  4: number
+  5: number
+  6: number
+  7: number
+  8: number
+  9: number
+};
+
+type PactSlots_5e = {
+  amount: number
+  level: number
+};
+
+type SpellRange_5e = {
+  type: 'feet' | 'mile' | 'touch' | 'self' | 'unlimited' | 'sight' | 'special'
+  amount?: number
+};
+
+type Spell_5e = {
+  id: number
+  name: string
+  desc: string | null
+  level: number
+  range: string
+  target: string
+  components: string[]
+  ritual: boolean
+  duration: string
+  concentration: boolean
+  castingTime: string
+  higherLevel: string | null
+  aoe: AOE_5e | null
+  damage: SpellDamage_5e | null
+  dc: DC_5e | null
+  healAtSlotLevel: AtSpecificLevel_5e | null
+  school: string
+  classes: string[]
+  subclasses: string[]
+  material: string | null
+};
+
+type Spellcasting_5e = {
+  ability: string
+  dc: number
+  mod: number
+  class: string
+  slots: SpellSlots_5e
+  pactSlots: PactSlots_5e
+  spells: Spell_5e[]
 };

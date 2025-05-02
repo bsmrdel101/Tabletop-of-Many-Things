@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import Input from "../Library/Input";
 import Select from "../Library/Select";
 import Button from "../Library/Button";
-import { addGame, getGameById } from "@/controllers/dashboardController";
+import { addGame, getGameById } from "@/services/dashboardService";
 
 interface Props {
   setOpen: (value: boolean) => void

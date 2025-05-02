@@ -2,7 +2,7 @@ import Button from "@/components/Library/Button";
 import Error from "@/components/Library/Error";
 import Input from "@/components/Library/Input";
 import Link from "@/components/Library/Link";
-import { loginUser } from "@/controllers/userController";
+import { loginUser } from "@/services/userService";
 import { FormEvent, useState } from "react";
 
 
@@ -45,5 +45,5 @@ export default function Login() {
         <Link to="/register">Create Account</Link>
       </div>
     </form>
-  )
+  );
 }
