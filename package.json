@@ -7,9 +7,10 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "dev": "vite",
-    "test:e2e": "playwright test && rm -rf playwright-report ./test-results",
+    "test:e2e": "playwright test --workers 1 && rm -rf playwright-report ./test-results",
     "test:e2e:ui": "playwright test --ui && rm -rf playwright-report ./test-results",
-    "test": "run-s test:e2e",
+    "test:unit": "vitest run --config ./vitest.config.ts",
+    "test": "run-s test:e2e test:unit",
     "lint:ts": "eslint .",
     "lint:scss": "stylelint **/*.scss",
     "lint": "run-s lint:ts lint:scss"
@@ -42,7 +43,9 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1",
-    "vite-plugin-pages": "^0.33.0"
+    "vite-plugin-pages": "^0.33.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.2"
   },
   "engines": {
     "node": ">=23.11.0",
