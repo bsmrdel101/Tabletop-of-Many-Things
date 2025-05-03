@@ -30,6 +30,7 @@ export default function Login() {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
+        data-testid="username"
       />
       <Input
         label="Password"
@@ -37,11 +38,12 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
         type="password"
         required
+        data-testid="password"
       />
 
       <Error msg={error} />
       <div className="form__footer">
-        <Button variants={['dark']} type="submit">Submit</Button>
+        <Button variants={['dark']} type="submit" data-testid="submit-btn">Submit</Button>
         <Link to="/register">Create Account</Link>
       </div>
     </form>
