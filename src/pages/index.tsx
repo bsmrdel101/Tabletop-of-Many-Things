@@ -1,5 +1,5 @@
 import HomeButtonList from "@/containers/Home/HomeButtonList";
-import UserBox from "@/components/Home/UserBox";
+import UserBox from "@/components/UserBox";
 
 
 export default function Home() {

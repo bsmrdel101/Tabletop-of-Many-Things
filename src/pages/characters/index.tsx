@@ -1,5 +1,5 @@
 import CharactersList from "@/containers/Characters/CharactersList";
-import UserBox from "@/components/Home/UserBox";
+import UserBox from "@/components/UserBox";
 
 
 export default function Characters() {

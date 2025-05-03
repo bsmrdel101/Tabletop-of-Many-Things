@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  test-db:
+    container_name: tabletop-of-many-things-tests
+    image: postgres:15
+    ports:
+      - "54329:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tabletop_of_many_things_testing
+    volumes:
+      - pg-e2e-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pg-e2e-data:

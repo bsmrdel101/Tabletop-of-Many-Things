@@ -105,3 +105,9 @@ typings/
 coverage
 .postgres-data
 .vscode
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
