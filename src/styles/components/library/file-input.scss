@@ -1,0 +1,40 @@
+.file-input {
+  box-shadow: none;
+  height: fit-content;
+  padding: 0.05rem 0 0;
+  font-size: var(--font-md);
+  text-align: center;
+  width: fit-content;
+  margin: 0;
+  cursor: pointer;
+
+  img {
+    margin-top: 0.3rem;
+  }
+
+  input {
+    display: none;
+  }
+
+  &__add-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    min-height: 4rem;
+  }
+
+  &__add {
+    position: absolute;
+    background-color: rgba(48, 48, 48, 0.613);
+    font-size: var(--font-lg);
+    padding: 0.5rem;
+    border-radius: 50%;
+    height: 1.8rem;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+  }
+}

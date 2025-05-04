@@ -5,7 +5,6 @@ import UserBox from "@/components/UserBox";
 export default function Characters() {
   return (
     <div className="characters-page">
-      <h2>Characters</h2>
       <UserBox />
       <CharactersList />
     </div>

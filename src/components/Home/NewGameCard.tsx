@@ -1,8 +1,8 @@
 import { FormEvent, useState } from "react";
 import Input from "../Library/Input";
-import Select from "../Library/Select";
 import Button from "../Library/Button";
 import { addGame, getGameById } from "@/services/dashboardService";
+import RulesetSelect5e from "../Library/Select/RulesetSelect5e";
 
 interface Props {
   setOpen: (value: boolean) => void
@@ -30,28 +30,21 @@ export default function NewGameCard({ setOpen, refreshGames }: Props) {
     <form onSubmit={handleNewGame} className="game-card game-card--form-card">
       <Button variants={['X']} onClick={() => setOpen(false)}>X</Button>
       <Input
-        variants={['label-thin']}
         label="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
       />
       <Input
-        variants={['label-thin']}
         label="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Select
-        variants={['label-thin']}
-        label="Ruleset"
+      <RulesetSelect5e
         value={ruleset}
         onChange={(e) => setRuleset(e.target.value)}
-      >
-        <option value="5e">D&D 5E</option>
-        <option value="2024" disabled>D&D 2024</option>
-        <option value="sw" disabled>Star Wars (Fantasy Flight)</option>
-      </Select>
+      />
+
       <Button variants={['small', 'dark']} type="submit">Create</Button>
     </form>
   );

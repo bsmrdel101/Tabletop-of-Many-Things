@@ -1,9 +1,9 @@
 import { FormEvent, useEffect, useState } from "react";
-import Button from "../Library/Button";
-import Input from "../Library/Input";
+import Button from "../../components/Library/Button";
+import Input from "../../components/Library/Input";
 import { getGamesByUser, getGamesHistory } from "@/services/dashboardService";
-import GameCard from "./GameCard";
-import NewGameCard from "./NewGameCard";
+import GameCard from "../../components/Home/GameCard";
+import NewGameCard from "../../components/Home/NewGameCard";
 
 interface Props {
   setMenu: (menu: string) => void
@@ -41,7 +41,7 @@ export default function GamesList({ setMenu }: Props) {
         <Button variants={['border']} onClick={() => setMenu('')}>Back</Button>
         <form className="games-list__join-game" onSubmit={handleJoinGame}>
           <Input
-            variants={['fit']}
+            variants={['fit', 'label-large']}
             label="Join Game"
             placeholder="Room code"
             required

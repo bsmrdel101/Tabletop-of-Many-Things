@@ -3,7 +3,8 @@ label {
   flex-direction: column;
   text-align: start;
   font-weight: 600;
-  margin-top: 0.6rem;
+  margin-top: 0.2rem;
+  font-size: var(--font-xsm);
 }
 
 .input {
@@ -14,6 +15,8 @@ label {
     border-radius: 0.3rem;
     margin: 0.2rem 0 0;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    height: 1.5rem;
+    font-size: var(--font-xsm);
   }
 
   &--label-inline {
@@ -24,21 +27,21 @@ label {
     }
   }
 
+  &--label-large {
+    margin-top: 0.6rem;
+    font-size: var(--font-md);
+
+    input {
+      height: 100%;
+      font-size: var(--font-md);
+    }
+  }
+
   &--label-no-bold {
     font-weight: 400;
   }
 
   &--fit {
     width: fit-content;
-  }
-
-  &--label-thin {
-    margin-top: 0.2rem;
-    font-size: var(--font-xsm);
-
-    input {
-      height: 1.5rem;
-      font-size: var(--font-xsm);
-    }
   }
 }

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Input from "../Library/Input";
-import Select from "../Library/Select";
+import Select from "../Library/Select/Select";
 import Button from "../Library/Button";
 import { editGame } from "@/services/dashboardService";
 
