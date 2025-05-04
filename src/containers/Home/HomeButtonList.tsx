@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../../components/Library/Button";
-import GamesList from "../../components/Home/GamesList";
+import GamesList from "./GamesList";
 import Link from "../../components/Library/Link";
 
 

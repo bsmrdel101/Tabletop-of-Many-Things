@@ -72,6 +72,18 @@ type Character_5e = {
   targets: Token_5e[]
 };
 
+type CharacterMin_5e = {
+  id: number
+  name: string
+  img: string
+  lvl: number
+  race: string | null
+  subrace: string | null
+  classes: { name: string, lvl: number, subclass: string | null }[]
+  background: string
+  ruleset: string
+};
+
 type Race_5e = {
   id: number
   gameId: number | null
@@ -86,7 +98,7 @@ type Race_5e = {
   languages: string[]
   languageDesc: string | null
   speeds: Speed_5e[]
-  traits: NameDesc[]
+  traits: Trait_5e[]
   subraces: Subrace_5e[]
 };
 
@@ -98,7 +110,18 @@ type Subrace_5e = {
   startingProficiencies: Prof_5e[]
   languages: string[]
   languageDesc: string | null
-  traits: NameDesc[]
+  traits: Trait_5e[]
+  spells: Spell_5e[]
+};
+
+type Trait_5e = {
+  id: number
+  name: string
+  desc: string | null
+  races: string | null
+  subraces: string | null
+  profChoices: ProfChoice_5e[]
+  languageChoices: LangChoice_5e[]
 };
 
 type Class_5e = {
@@ -108,7 +131,7 @@ type Class_5e = {
   lvl: number
   hitDice: number
   proficiencies: Prof_5e[]
-  skillChoices: Skill_5e[]
+  profChoices: ProfChoice_5e[]
   saves: Skill_5e[]
   startingItems: Item_5e[]
   startingItemChoices: Item_5e[]
@@ -124,6 +147,7 @@ type Subclass_5e = {
   desc: string | null
   levels: Level_5e[]
   spells: Spell_5e[]
+  class: { id: number, name: string }
 };
 
 type Background_5e = {
@@ -186,6 +210,19 @@ type Prof_5e = {
   type: ProfType_5e
   name: string
   value: number
+};
+
+type ProfChoice_5e = {
+  desc: string | null
+  choose: number
+  type: ProfType_5e
+  proficiencies: Prof_5e[]
+};
+
+type LangChoice_5e = {
+  desc: string | null
+  choose: number
+  languages: string[]
 };
 
 type Speed_5e = {

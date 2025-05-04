@@ -5,3 +5,69 @@
     font-size: var(--font-xl);
   }
 }
+
+.characters-list {
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 0.5rem;
+
+    h2 {
+      margin: 0;
+    }
+  }
+}
+
+.character-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-1);
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 40rem;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  h3 {
+    font-size: var(--font-lg);
+
+    span {
+      font-weight: 300;
+    }
+  }
+
+  img {
+    width: 5.5rem;
+  }
+
+  &__ruleset {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.4rem;
+    font-size: var(--font-lg);
+    font-weight: bold;
+  }
+
+  &__delete-btn {
+    img {
+      width: 1.2rem;
+    }
+  }
+}
+
+.new-character-card {
+  flex-wrap: wrap;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+
+    label {
+      margin-top: 0;
+    }
+  }
+}

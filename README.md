@@ -12,6 +12,7 @@ A virtual tabletop for TTRPG's, that allows users prepare and play their games o
 ## Installation
 - Clone the repo, and run `npm i`.
 - Run `npm run dev`.
+- Run `npm run dev:test` in a different terminal.
 - Login with the following credentials.
 ```
     username: dev

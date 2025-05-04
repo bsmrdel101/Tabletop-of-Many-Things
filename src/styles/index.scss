@@ -2,6 +2,7 @@
 @use './settings/fonts.scss';
 @use './components/library/button.scss';
 @use './components/library/input.scss';
+@use './components/library/file-input.scss';
 @use './components/library/select.scss';
 @use './components/library/link.scss';
 @use './components/library/error.scss';
@@ -78,7 +79,7 @@ p {
 
 .form__footer {
   display: flex;
-  gap: 0.6rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  gap: 0.3rem;
+  margin-top: 1rem;
 }

@@ -1,4 +1,5 @@
-import axios from "axios";
+import api from "@/scripts/config/axios";
+
 
 
 const parseCharacter5eData = (char: any) => {
@@ -8,9 +9,10 @@ const parseCharacter5eData = (char: any) => {
 
 // === GET routes === //
 
-export const getCharactersByUser = async (): Promise<Character_5e[]> => {
+export const getCharactersByUser = async (): Promise<CharacterMin_5e[]> => {
   try {
-    const res = await axios.get(`/api/5e/characters`);
+    const auth = { withCredentials: true };
+    const res = await api.get(`/api/5e/characters`, auth);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -20,7 +22,8 @@ export const getCharactersByUser = async (): Promise<Character_5e[]> => {
 
 export const getCharacterById = async (id: number): Promise<Character_5e | null> => {
   try {
-    const res = await axios.get(`/api/5e/characters/${id}`);
+    const auth = { withCredentials: true };
+    const res = await api.get(`/api/5e/characters/${id}`, auth);
     return parseCharacter5eData(res.data);
   } catch (error) {
     console.log(error);
@@ -30,9 +33,10 @@ export const getCharacterById = async (id: number): Promise<Character_5e | null>
 
 // === POST routes === //
 
-export const addCharacter = async () => {
+export const addCharacter = async (name: string, img: string, ruleset: string) => {
   try {
-    await axios.post(`/api/5e/characters`);
+    const auth = { withCredentials: true };
+    await api.post(`/api/5e/characters`, { name, img, ruleset }, auth);
   } catch (error) {
     console.log(error);
   }
@@ -42,7 +46,8 @@ export const addCharacter = async () => {
 
 export const editCharacterHealth = async (id: number, hp: number) => {
   try {
-    await axios.patch(`/api/5e/characters/health`, { id, hp });
+    const auth = { withCredentials: true };
+    await api.patch(`/api/5e/characters/health`, { id, hp }, auth);
   } catch (error) {
     console.log(error);
   }
@@ -50,7 +55,8 @@ export const editCharacterHealth = async (id: number, hp: number) => {
 
 export const restoreCharacterMaxHp = async (id: number) => {
   try {
-    await axios.patch(`/api/5e/characters/restore-max-hp`, { id });
+    const auth = { withCredentials: true };
+    await api.patch(`/api/5e/characters/restore-max-hp`, { id }, auth);
   } catch (error) {
     console.log(error);
   }
@@ -58,7 +64,8 @@ export const restoreCharacterMaxHp = async (id: number) => {
 
 export const setCharacterInspiration = async (id: number, insp: boolean) => {
   try {
-    await axios.patch(`/api/5e/characters/insp`, { id, insp });
+    const auth = { withCredentials: true };
+    await api.patch(`/api/5e/characters/insp`, { id, insp }, auth);
   } catch (error) {
     console.log(error);
   }
@@ -68,7 +75,8 @@ export const setCharacterInspiration = async (id: number, insp: boolean) => {
 
 export const editCharacter = async (character: Character_5e) => {
   try {
-    await axios.put(`/api/5e/characters`, character);
+    const auth = { withCredentials: true };
+    await api.put(`/api/5e/characters`, character, auth);
   } catch (error) {
     console.log(error);
   }
@@ -78,7 +86,8 @@ export const editCharacter = async (character: Character_5e) => {
 
 export const deleteCharacter = async (id: number) => {
   try {
-    await axios.delete(`/api/5e/characters/${id}`);
+    const auth = { withCredentials: true };
+    await api.delete(`/api/5e/characters/${id}`, auth);
   } catch (error) {
     console.log(error);
   }
