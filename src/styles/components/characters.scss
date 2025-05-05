@@ -7,6 +7,13 @@
 }
 
 .characters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow-y: auto;
+  max-height: 87vh;
+  width: fit-content;
+
   &__title {
     display: flex;
     align-items: center;
@@ -25,8 +32,7 @@
   padding: 1rem;
   background-color: var(--bg-1);
   border-radius: 1rem;
-  width: 100%;
-  max-width: 40rem;
+  width: 40rem;
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
@@ -48,6 +54,10 @@
     bottom: 0.4rem;
     font-size: var(--font-lg);
     font-weight: bold;
+  }
+
+  &__open-btn {
+    margin-top: 0.3rem;
   }
 
   &__delete-btn {

@@ -1,26 +1,28 @@
-import axios from "axios";
+import api from "@/scripts/config/axios";
 
 
 // === GET routes === //
 
-export const getAssets = async () => {
+export const getAssetsByGame = async (gameId: number): Promise<Game[]> => {
   try {
-    const res: any = await axios.get('/api/asset');
-    const newTokenRes = res.data.map((asset: Asset) => {
-      return { id: asset.id, image: asset.img };
-    });
-    return newTokenRes;
-  } catch (err) {
-    console.log(err);
+    const auth = { withCredentials: true };
+    const res = await api.get(`/api/assets/game/${gameId}`, auth);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 };
 
 // === POST routes === //
 
-export const addAsset = async (payload: Asset) => {
+export const addAsset = async (gameId: number | null, name: string, filepath: string, img: string): Promise<number | null> => {
   try {
-    await axios.post('/api/asset', payload);
-  } catch (err) {
-    console.log(err);
+    const auth = { withCredentials: true };
+    const res = await api.post('/api/assets', { gameId, name, filepath, img }, auth);
+    return res.data.id;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };

@@ -3,23 +3,22 @@ import Button from "../Library/Button";
 import Input from "../Library/Input";
 import RulesetSelect5e from "../Library/Select/RulesetSelect5e";
 import FileInput from "../Library/FileInput";
-import { addCharacter } from "@/services/5e/charactersService";
 
 interface Props {
   setOpen: (value: boolean) => void
+  onCreateCharacter: (name: string, img: File | null, ruleset: string) => void
 }
 
 
-export default function NewCharacterCard({ setOpen }: Props) {
+export default function NewCharacterCard({ setOpen, onCreateCharacter }: Props) {
   const [img, setImg] = useState<File | null>(null);
   const [name, setName] = useState('Unnamed Character');
-  const [ruleset, setRuleset] = useState('');
+  const [ruleset, setRuleset] = useState('5e');
   const DEFAULT_IMG = '/images/defaults/character.png';
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const url = img ? URL.createObjectURL(img) : DEFAULT_IMG;
-    await addCharacter(name, url, ruleset);
+    onCreateCharacter(name, img, ruleset);
   };
 
 
@@ -28,6 +27,7 @@ export default function NewCharacterCard({ setOpen }: Props) {
       <Button
         variants={['X']}
         onClick={() => setOpen(false)}
+        data-testid="delete-btn"
       >
         X
       </Button>
@@ -44,6 +44,7 @@ export default function NewCharacterCard({ setOpen }: Props) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          data-testid="name"
         />
         <RulesetSelect5e
           variants={['fit']}
@@ -52,7 +53,7 @@ export default function NewCharacterCard({ setOpen }: Props) {
         />
       </div>
 
-      <Button variants={['dark']} type="submit">Submit</Button>
+      <Button variants={['dark']} type="submit" data-testid="submit-btn">Submit</Button>
     </form>
   );
 }
