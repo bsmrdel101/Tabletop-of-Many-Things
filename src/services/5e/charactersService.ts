@@ -3,7 +3,6 @@ import { addAsset } from "../assetsService";
 import { uploadFile } from "../mediaService";
 
 
-
 const parseCharacter5eData = (char: any) => {
   const ac = char.acOverride ? char.acOverride : 10 + char.acMod;
   return { ...char, ac };
@@ -40,7 +39,6 @@ export const addCharacter = async (user: User, name: string, img: File | null, r
     const auth = { withCredentials: true };
     const url = img && await uploadFile('tokens', img, `${user.id}_${user.username}/${img.name}`, { upsert: true });
     const assetId = (url && img) ? await addAsset(null, img.name, 'assets', url) : 1;
-    console.log(assetId);
     await api.post(`/api/5e/characters`, { name, assetId, ruleset }, auth);
   } catch (error) {
     console.log(error);

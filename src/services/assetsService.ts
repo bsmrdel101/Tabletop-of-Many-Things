@@ -26,3 +26,34 @@ export const addAsset = async (gameId: number | null, name: string, filepath: st
     return null;
   }
 };
+
+// === PATCH routes === //
+
+export const editAssetFilepath = async (id: number, filepath: string) => {
+  try {
+    const auth = { withCredentials: true };
+    await api.patch('/api/assets/filepath', { id, filepath }, auth);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const editAssetName = async (id: number, name: string) => {
+  try {
+    const auth = { withCredentials: true };
+    await api.patch('/api/assets/name', { id, name }, auth);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// === DELETE routes === //
+
+export const deleteAsset = async (id: number) => {
+  try {
+    const auth = { withCredentials: true };
+    await api.patch(`/api/assets/${id}`, auth);
+  } catch (error) {
+    console.log(error);
+  }
+};
