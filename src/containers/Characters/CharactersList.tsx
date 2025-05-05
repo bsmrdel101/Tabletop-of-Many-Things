@@ -57,7 +57,7 @@ export default function CharactersList() {
             onCreateCharacter={onCreateCharacter}
           />
         }
-        </div>
+      </div>
     </>
   );
 }

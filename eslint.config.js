@@ -24,6 +24,7 @@ export default tseslint.config(
       'indent': ['error', 2],
       '@typescript-eslint/no-explicit-any': 'off',
       'react-hooks/exhaustive-deps': 'off',
+      '@typescript-eslint/triple-slash-reference': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
