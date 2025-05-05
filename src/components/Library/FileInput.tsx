@@ -37,6 +37,7 @@ export default function FileInput({ className = '', labelClass = '', variants = 
           if (onChange && e.target.files) onChange(e.target.files);
         }}
         type="file"
+        accept={accept}
         multiple={multiple}
       />
     </label>
