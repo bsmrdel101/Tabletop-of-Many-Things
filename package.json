@@ -17,6 +17,7 @@
     "lint": "run-s lint:ts lint:scss"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "axios": "^1.8.4",
     "jotai": "^2.12.3",
     "path": "^0.12.7",

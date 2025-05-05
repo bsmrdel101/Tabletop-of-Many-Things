@@ -1,4 +1,5 @@
 import Button from "../Library/Button";
+import Link from "../Library/Link";
 
 interface Props {
   character: CharacterMin_5e
@@ -18,12 +19,19 @@ export default function CharacterCard({ character, deleteFn }: Props) {
     <div className="character-card">
       <img src={character.img} alt="Character image" />
       <div>
-        <h3 data-testid="character-name">{ character.name } <span><em>Lvl { character.lvl }</em></span></h3>
+        <h3 data-testid="name">{ character.name } <span><em>Lvl { character.lvl }</em></span></h3>
         <p>{ characterClasses(character.classes) }</p>
-        <p>{ character.subrace } { character.race }</p>
+        <p>{ character.race }{ character.subrace ? ` (${character.subrace})` : '' }</p>
         <p>{ character.background }</p>
-        <p className="character-card__ruleset">{ character.ruleset }</p>
+        <Button
+          variants={['dark', 'thin', 'link']}
+          className="character-card__open-btn"
+        >
+          <Link to={`/characters/${character.id}`}>Open</Link>
+        </Button>
+        <p className="character-card__ruleset" data-testid="ruleset">{ character.ruleset }</p>
       </div>
+
       <Button
         variants={['X']}
         className="character-card__delete-btn"
