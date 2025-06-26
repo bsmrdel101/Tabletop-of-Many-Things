@@ -54,8 +54,8 @@ type Character_5e = {
   abilityScores: AbilityScore_5e[]
   race: Race_5e | null
   subrace: Subrace_5e | null
-  classes: Class_5e[]
-  subclass: Subclass_5e | null
+  classes: PlayerClass_5e[]
+  subclass: PlayerSubclass_5e | null
   background: Background_5e | null
   currentHitDice: Dice[]
   speeds: Speed_5e[]
@@ -72,7 +72,7 @@ type Character_5e = {
   targets: Token_5e[]
 };
 
-type CharacterMin_5e = {
+type CharacterCard_5e = {
   id: number
   name: string
   img: string
@@ -140,6 +140,14 @@ type Class_5e = {
   subclasses: Subclass_5e[]
 };
 
+type PlayerClass_5e = {
+  id: number
+  name: string
+  lvl: number
+  hitDice: number
+  subclass: Subclass_5e | null
+};
+
 type Subclass_5e = {
   id: number
   name: string
@@ -148,6 +156,11 @@ type Subclass_5e = {
   levels: Level_5e[]
   spells: Spell_5e[]
   class: { id: number, name: string }
+};
+
+type PlayerSubclass_5e = {
+  id: number
+  name: string
 };
 
 type Background_5e = {

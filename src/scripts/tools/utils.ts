@@ -10,3 +10,15 @@ export const parseClasses = (classes: string): object => {
 };
 
 export const removeNullObjProps = (obj: any): object => Object.entries(obj).reduce((a: any, [k, v]) => (v == null ? a : (a[k] = v, a)), {});
+
+export const formatCharacterCardClasses = (classes: { name: string, lvl: number, subclass: string | null }[]): string => {
+  return classes.map((c) => {
+    return `${c.subclass ?? ''} ${c.name} ${c.lvl}`.trim();
+  }).join(' / ');
+};
+
+export const formatCharacterClasses = (classes: PlayerClass_5e[]): string => {
+  return classes.map((c) => {
+    return `${c.subclass?.name ?? ''} ${c.name} ${c.lvl}`.trim();
+  }).join(' / ');
+};
