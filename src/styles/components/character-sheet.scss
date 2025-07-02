@@ -1,3 +1,42 @@
 .character-sheet {
-  
+  background-color: var(--blue-dark-0);
+  height: 100%;
+}
+
+.character-navbar {
+  display: flex;
+  gap: 0.1rem;
+  background-color: var(--blue-dark-2);
+
+  &__tab {
+    padding: 0.2rem 0.3rem;
+    background-color: var(--blue-dark-0);
+    border-radius: 0;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+
+    &--selected {
+      border-bottom: 2px solid var(--blue-light-0);
+    }
+  }
+}
+
+.character-sheet-main {
+  padding: 0.8rem;
+
+  .character-sheet-main-header {
+    display: flex;
+    gap: 0.8rem;
+
+    &__character-pic {
+      object-fit: cover;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+    }
+
+    &__name {
+      font-size: var(--font-xl);
+    }
+  }
 }

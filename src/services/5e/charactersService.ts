@@ -10,7 +10,7 @@ const parseCharacter5eData = (char: any) => {
 
 // === GET routes === //
 
-export const getCharactersByUser = async (): Promise<CharacterMin_5e[]> => {
+export const getCharactersByUser = async (): Promise<CharacterCard_5e[]> => {
   try {
     const auth = { withCredentials: true };
     const res = await api.get(`/api/5e/characters`, auth);

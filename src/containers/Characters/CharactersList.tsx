@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function CharactersList() {
   const [user] = useAtom(userAtom);
-  const [characters, setCharacters] = useState<CharacterMin_5e[]>([]);
+  const [characters, setCharacters] = useState<CharacterCard_5e[]>([]);
   const [showNewCharacterForm, setShowNewCharacterForm] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function CharactersList() {
     setCharacters(res);
   };
 
-  const handleDelete = async (character: CharacterMin_5e) => {
+  const handleDelete = async (character: CharacterCard_5e) => {
     if (!confirm(`Do you want to delete ${character.name}?`)) return;
     await deleteCharacter(character.id);
     setCharacters(characters.filter((c) => c.id !== character.id));
