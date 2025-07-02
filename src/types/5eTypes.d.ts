@@ -52,11 +52,11 @@ type Character_5e = {
   tempHp: number
   insp: boolean
   abilityScores: AbilityScore_5e[]
-  race: Race_5e | null
-  subrace: Subrace_5e | null
+  race: PlayerRace_5e | null
+  subrace: PlayerSubrace_5e | null
   classes: PlayerClass_5e[]
   subclass: PlayerSubclass_5e | null
-  background: Background_5e | null
+  background: PlayerBackground_5e | null
   currentHitDice: Dice[]
   speeds: Speed_5e[]
   senses: NameValue[]
@@ -102,6 +102,12 @@ type Race_5e = {
   subraces: Subrace_5e[]
 };
 
+type PlayerRace_5e = {
+  id: number
+  name: string
+  subraces: Subrace_5e | null
+};
+
 type Subrace_5e = {
   id: number
   name: string
@@ -112,6 +118,11 @@ type Subrace_5e = {
   languageDesc: string | null
   traits: Trait_5e[]
   spells: Spell_5e[]
+};
+
+type PlayerSubrace_5e = {
+  id: number
+  name: string
 };
 
 type Trait_5e = {
@@ -176,6 +187,11 @@ type Background_5e = {
   ideals: string | null
   bonds: string | null
   flaws: string | null
+};
+
+type PlayerBackground_5e = {
+  id: number
+  name: string
 };
 
 type Level_5e = {
