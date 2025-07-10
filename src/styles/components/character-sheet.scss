@@ -26,7 +26,12 @@
 
   .character-sheet-main-header {
     display: flex;
-    gap: 0.8rem;
+    justify-content: space-between;
+
+    &__character-info {
+      display: flex;
+      gap: 0.8rem;
+    }
 
     &__character-pic {
       object-fit: cover;
@@ -37,6 +42,20 @@
 
     &__name {
       font-size: var(--font-xl);
+    }
+    
+    &__lvl-manager {
+      display: flex;
+      flex-direction: column;
+
+      &--lvl {
+        font-size: var(--font-lg);
+        font-weight: bold;
+      }
+
+      button {
+        margin-top: 0.3rem;
+      }
     }
   }
 }

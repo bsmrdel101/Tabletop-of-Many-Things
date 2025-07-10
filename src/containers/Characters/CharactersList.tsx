@@ -27,12 +27,12 @@ export default function CharactersList() {
     setCharacters(characters.filter((c) => c.id !== character.id));
   };
 
-  const onCreateCharacter = async (name: string, img: File | null, ruleset: string) => {
+  const handleCreateCharacter = async (name: string, img: File | null, ruleset: string) => {
     setShowNewCharacterForm(false);
     await addCharacter(user, name, img, ruleset);
     await fetchData();
   };
-
+  
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function CharactersList() {
         {showNewCharacterForm &&
           <NewCharacterCard
             setOpen={setShowNewCharacterForm}
-            onCreateCharacter={onCreateCharacter}
+            onCreateCharacter={handleCreateCharacter}
           />
         }
       </div>

@@ -47,7 +47,7 @@ type Character_5e = {
   maxHpOverride: number
   maxHpMod: number
   maxHp: number
-  prevMaxHp: number
+  maxHpDmg: number
   hp: number
   tempHp: number
   insp: boolean
@@ -275,7 +275,7 @@ type Item_5e = {
   id: number
   name: string
   desc: string | null
-  type: EquipmentCategory
+  type: EquipmentCategory_5e
   rarity: Rarity_5e
   cost: Cost_5e | null
   lbs: number

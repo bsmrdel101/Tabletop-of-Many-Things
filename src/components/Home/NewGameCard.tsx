@@ -3,6 +3,7 @@ import Input from "../Library/Input";
 import Button from "../Library/Button";
 import { addGame, getGameById } from "@/services/dashboardService";
 import RulesetSelect5e from "../Library/Select/RulesetSelect5e";
+import { getDefaultGameSettings } from "@/logic/gameSettings";
 
 interface Props {
   setOpen: (value: boolean) => void
@@ -17,7 +18,7 @@ export default function NewGameCard({ setOpen, refreshGames }: Props) {
 
   const handleNewGame = async (e: FormEvent) => {
     e.preventDefault();
-    const id = await addGame({ name, password, ruleset });
+    const id = await addGame({ name, password, ruleset, gameSettings: getDefaultGameSettings(ruleset) });
     if (id) {
       const game = await getGameById(id);
       if (game) refreshGames({ ...game, password });

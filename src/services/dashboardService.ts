@@ -4,6 +4,7 @@ interface NewGamePayload {
   name: string
   ruleset: string
   password?: string
+  gameSettings: GameSettings
 }
 
 interface EditGamePayload {

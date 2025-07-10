@@ -23,6 +23,7 @@ type Asset = {
 type User = {
   id: number
   username: string
+  settings: ClientSettings
 };
 
 type Game = {
@@ -32,6 +33,18 @@ type Game = {
   playerList: User[]
   ruleset: string
   password?: string
+  settings: GameSettings
+};
+
+type GameSettings = {
+  dnd?: {
+    ignoreCoinWeight: boolean
+    usingXp: boolean
+  }
+};
+
+type ClientSettings = {
+  dnd?: {}
 };
 
 type GameMin = {
