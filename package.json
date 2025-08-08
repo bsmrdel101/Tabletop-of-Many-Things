@@ -27,6 +27,7 @@
     "react-draggable": "^4.4.6",
     "react-router": "^7.5.3",
     "react-router-dom": "^7.5.3",
+    "socket.io-client": "^4.8.1",
     "url": "^0.11.4"
   },
   "devDependencies": {

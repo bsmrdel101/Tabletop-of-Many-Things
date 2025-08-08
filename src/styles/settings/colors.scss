@@ -4,12 +4,19 @@
   --bg-2: var(--purple-1);
   --bg-3: var(--pink-1);
 
+  --temp-hp: var(--blue-0);
+  --healing: var(--green-light-0);
+  --dmg: var(--red-2);
+  --severe-dmg: var(--red-1);
+
   --white-0: rgb(242, 242, 242);
   --black-0: rgb(15, 15, 15);
   --blue-dark-0: #1F2544;
   --blue-dark-1: #262d55;
   --blue-dark-2: #474F7A;
   --blue-dark-3: #596192;
+  --blue-0: #2e4cb6;
+  --blue-1: rgb(30, 30, 177);
   --blue-light-0: #396d78;
   --purple-dark-0: #372945;
   --purple-dark-1: #443553;
@@ -27,4 +34,9 @@
   --red-3: rgb(227, 46, 46);
   --red-4: rgb(241, 48, 48);
   --red-5: rgb(254, 65, 65);
+  --orange-0: #f27746;
+  --green-light-0: rgb(6, 145, 6);
+  --green-light-1: rgb(7, 162, 7);
+  --green-light-2: #23a82e;
+  --green-light-3: #23c230;
 }

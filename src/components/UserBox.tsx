@@ -1,4 +1,4 @@
-import { userAtom } from "@/atoms/state";
+import { userAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import Button from "./Library/Button";
 import { useState } from "react";

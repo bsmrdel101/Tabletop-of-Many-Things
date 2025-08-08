@@ -27,6 +27,7 @@
   .character-sheet-main-header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 
     &__character-info {
       display: flex;
@@ -35,8 +36,8 @@
 
     &__character-pic {
       object-fit: cover;
-      width: 6rem;
-      height: 6rem;
+      width: 6.5rem;
+      height: 6.5rem;
       border-radius: 50%;
     }
 
@@ -51,6 +52,7 @@
       &--lvl {
         font-size: var(--font-lg);
         font-weight: bold;
+        text-align: center;
       }
 
       button {

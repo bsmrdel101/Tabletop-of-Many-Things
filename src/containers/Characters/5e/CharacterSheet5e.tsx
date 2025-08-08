@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CharacterSheetMain from "./CharacterSheetMain";
 import { getCharacterById } from "@/services/5e/charactersService";
 import { useParams } from "react-router";
+import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
 
 
 export default function CharacterSheet5e() {
@@ -28,7 +29,16 @@ export default function CharacterSheet5e() {
       setCharacter(res);
     };
     fetchData();
+    onServerEvent('UPDATE_PLAYER', handlePlayerUpdate);
+
+    return () => {
+      offServerEvent('UPDATE_PLAYER', handlePlayerUpdate);
+    };
   }, []);
+
+  const handlePlayerUpdate = (character: Character_5e) => {
+    setCharacter(character);
+  };
 
   const onChangeTab = (tab: string) => {
     setTab(tab);

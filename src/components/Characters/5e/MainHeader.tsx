@@ -1,4 +1,4 @@
-import { gameAtom } from "@/atoms/state";
+import { gameAtom } from "@/scripts/atoms/state";
 import Button from "@/components/Library/Button";
 import { xpForNextLevel } from "@/logic/dnd/gameSystemsInfo";
 import { formatCharacterClasses } from "@/scripts/tools/utils";
@@ -10,7 +10,7 @@ interface Props {
 
 
 export default function MainHeader({ character }: Props) {
-  const [game] = useAtom<Game | null>(gameAtom);
+  const [game] = useAtom<Game | null>(gameAtom); // TODO: game is currently not being set anywhere
 
 
   return (
@@ -19,16 +19,16 @@ export default function MainHeader({ character }: Props) {
         <img className="character-sheet-main-header__character-pic" src={character.img} alt="Character image" />
         <div>
           <h2 className="character-sheet-main-header__name">{ character.name }</h2>
-          <p>{ formatCharacterClasses(character.classes) }</p>
-          <p>{ character.race?.name }{ character.subrace && ` (${character.subrace})` }</p>
-          <p>{ character.background?.name }</p>
+          <p><strong>CLASSES</strong>: { formatCharacterClasses(character.classes) }</p>
+          <p><strong>RACE</strong>: { character.race?.name }{ character.subrace && ` (${character.subrace})` }</p>
+          <p><strong>BACKGROUND</strong>: { character.background?.name }</p>
         </div>
       </div>
 
       <div className="character-sheet-main-header__lvl-manager">
         <p className="character-sheet-main-header__lvl-manager--lvl">Lvl { character.lvl }</p>
         { game?.settings.dnd?.usingXp && <p>Xp: { character.xp } / { xpForNextLevel(character.lvl) }</p> }
-        <Button>Level Up</Button>
+        <Button variants={['thin']}>Level Up</Button>
       </div>
     </header>
   );

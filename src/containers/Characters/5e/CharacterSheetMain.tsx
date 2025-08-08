@@ -1,4 +1,5 @@
-import MainHeader from "@/components/Characters/5e/MainHeader"
+import MainHeader from "@/components/Characters/5e/MainHeader";
+import HealthManagement from "./HealthManagement";
 
 interface Props {
   character: Character_5e
@@ -9,6 +10,7 @@ export default function CharacterSheetMain({ character }: Props) {
   return (
     <section className="character-sheet-main">
       <MainHeader character={character} />
+      <HealthManagement character={character} />
     </section>
-  )
+  );
 };

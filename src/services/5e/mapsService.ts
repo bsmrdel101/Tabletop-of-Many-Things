@@ -15,8 +15,8 @@ export const getMaps = async (id: number) => {
   try {    
     const res = await axios.get(`/api/5e/map/all/${id}`);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -29,8 +29,8 @@ export const getMap = async (mapId: number, gameId: number) => {
     res.data.offsetX = Number(res.data.offsetX);
     res.data.offsetY = Number(res.data.offsetY);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -53,8 +53,8 @@ export const addMap = async (payload: NewMap, gameId: number) => {
     };
 
     await axios.post('/api/5e/map', mapData);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -69,8 +69,8 @@ export const addTokenToMap = async (gameId: number, token: Token_5e, mapId: numb
       size: token.size || 1,
       creature: token.creature || null
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -79,8 +79,8 @@ export const addTokenToMap = async (gameId: number, token: Token_5e, mapId: numb
 export const updateMap = async (payload: Map_5e) => {
   try {
     await axios.put('/api/5e/map', payload);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -93,8 +93,8 @@ export const updateToken = async (id: number, size: number, x: number, y: number
       y: y,
       size: size
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -103,7 +103,7 @@ export const updateToken = async (id: number, size: number, x: number, y: number
 export const deleteTokenFromMap = async (id: number) => {
   try {
     await axios.delete(`/api/5e/map/token/${id}`);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };

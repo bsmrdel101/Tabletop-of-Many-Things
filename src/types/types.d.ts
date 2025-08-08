@@ -44,7 +44,7 @@ type GameSettings = {
 };
 
 type ClientSettings = {
-  dnd?: {}
+  dnd?: any
 };
 
 type GameMin = {

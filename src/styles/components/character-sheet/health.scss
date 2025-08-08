@@ -1,0 +1,89 @@
+:root {
+  --progress-bar-width: 200px;
+  --progress-bar-height: 200px;
+}
+
+.hp-management {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__input {
+    display: flex;
+    gap: 0.3rem;
+
+    input {
+      height: 100%;
+      margin: 0;
+      font-size: var(--font-lg);
+      max-width: 4rem;
+      text-align: center;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    max-width: 16rem;
+    width: 100%;
+    margin-top: 0.18rem;
+
+    button {
+      max-width: 5rem;
+      width: 100%;
+      height: 2rem;
+      padding: 0;
+
+      img {
+        width: 1.2rem;
+      }
+    }
+  }
+}
+
+.circular-hp-bar {
+  width: var(--progress-bar-width);
+  height: var(--progress-bar-height);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 10px rgba(16, 16, 16, 0.5);
+
+  &__inner-circle {
+    position: absolute;
+    width: calc(var(--progress-bar-width) - 40px);
+    height: calc(var(--progress-bar-height) - 40px);
+    border-radius: 50%;
+    background-color: var(--blue-dark-0);
+
+    &--middle {
+      background-color: var(--blue-dark-2);
+      border-radius: 0.5rem;
+    }
+  }
+
+  &__center {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--blue-dark-2);
+    border-radius: 0.5rem;
+  }
+
+  &__hp {
+    font-size: var(--font-md);
+    margin: 0;
+    background-color: var(--brown-1);
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  &__temp-hp {
+    background-color: var(--temp-hp);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+}

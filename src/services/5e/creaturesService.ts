@@ -31,8 +31,8 @@ export const getAllCreatures = async (gameId: number) => {
     });
     console.log(res.data);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -40,7 +40,7 @@ export const getCreature = async (id: number) => {
   try {
     const res = await axios.get(`/api/5e/creature/${id}`);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };

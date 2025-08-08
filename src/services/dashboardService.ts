@@ -23,7 +23,7 @@ export const getGamesByUser = async (): Promise<GameMin[]> => {
     const res = await api.get('/api/dashboard', auth);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 };
@@ -34,7 +34,7 @@ export const getGameById = async (id: number): Promise<Game | null> => {
     const res = await api.get(`/api/dashboard/id/${id}`, auth);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -45,7 +45,7 @@ export const getGamesHistory = async (): Promise<GameMin[]> => {
     const res = await api.get('/api/dashboard/history', auth);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 };
@@ -58,7 +58,7 @@ export const addGame = async (payload: NewGamePayload): Promise<number | null> =
     const res = await api.post('/api/dashboard', payload, auth);
     return res.data.id;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -68,7 +68,7 @@ export const addGameToHistory = async (gameId: number) => {
     const auth = { withCredentials: true };
     await api.post('/api/dashboard/history', { gameId }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -79,7 +79,7 @@ export const editGame = async (payload: EditGamePayload) => {
     const auth = { withCredentials: true };
     await api.patch(`/api/dashboard`, payload, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -90,6 +90,6 @@ export const deleteGame = async (id: number) => {
     const auth = { withCredentials: true };
     await api.patch(`/api/dashboard/${id}`, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

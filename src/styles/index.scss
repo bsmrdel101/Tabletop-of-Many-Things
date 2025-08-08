@@ -9,9 +9,10 @@
 @use './components/home/home.scss';
 @use './components/home/user-box.scss';
 @use './components/home/games-list.scss';
+@use './components/character-sheet/character-sheet.scss';
+@use './components/character-sheet/health.scss';
 @use './components/login.scss';
 @use './components/characters.scss';
-@use './components/character-sheet.scss';
 
 * {
   box-sizing: border-box;

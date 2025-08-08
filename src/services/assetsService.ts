@@ -9,7 +9,7 @@ export const getAssetsByGame = async (gameId: number): Promise<Game[]> => {
     const res = await api.get(`/api/assets/game/${gameId}`, auth);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 };
@@ -22,7 +22,7 @@ export const addAsset = async (gameId: number | null, name: string, filepath: st
     const res = await api.post('/api/assets', { gameId, name, filepath, img }, auth);
     return res.data.id;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -34,7 +34,7 @@ export const editAssetFilepath = async (id: number, filepath: string) => {
     const auth = { withCredentials: true };
     await api.patch('/api/assets/filepath', { id, filepath }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -43,7 +43,7 @@ export const editAssetName = async (id: number, name: string) => {
     const auth = { withCredentials: true };
     await api.patch('/api/assets/name', { id, name }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -54,6 +54,6 @@ export const deleteAsset = async (id: number) => {
     const auth = { withCredentials: true };
     await api.patch(`/api/assets/${id}`, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

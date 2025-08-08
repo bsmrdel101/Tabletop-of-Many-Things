@@ -8,7 +8,7 @@ export const getFile = async (bucket: string, path: string): Promise<string | nu
     const publicUrl = supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
     return publicUrl;
   } catch(error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -26,7 +26,7 @@ export const uploadFile = async (bucket: string, file: File | null, name: string
     if (!data) return null;
     return `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/${data.fullPath}`;
   } catch(error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -37,6 +37,6 @@ export const deleteFile = async (bucket: string, path: string) => {
   try {
     await supabase.storage.from(bucket).remove(path.split('/'));
   } catch(error) {
-    console.log(error);
+    console.error(error);
   }
 };

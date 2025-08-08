@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, useNavigate, useRoutes } from 'react-router-dom';
 import routes from '~react-pages';
 import { useAtom } from 'jotai';
-import { userAtom } from './atoms/state';
+import { userAtom } from './scripts/atoms/state';
 import { getUser } from './services/userService';
 import './styles/index.scss';
 

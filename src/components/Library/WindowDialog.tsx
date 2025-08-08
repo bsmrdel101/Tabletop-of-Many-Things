@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import Draggable from "./Draggable";
 import Button from "./Button";
 import { useAtom } from "jotai";
-import { dialogsAtom } from "@/scripts/atoms/components";
+import { dialogsAtom } from "@/scripts/atoms/state";
 
 interface Props {
   children: React.ReactNode
@@ -22,7 +22,8 @@ interface Props {
   y?: number
 }
 
-export default function Dialog({ children, className = '', variants = [], title, closeOnOutsideClick, exitWithEsc = true, hasCloseBtn = true, width, height, maxHeight, open, setOpen, x, y, ...props }: Props) {
+
+export default function WindowDialog({ children, className = '', variants = [], title, closeOnOutsideClick, exitWithEsc = true, hasCloseBtn = true, width, height, maxHeight, open, setOpen, x, y, ...props }: Props) {
   const [dialogs, setDialogs] = useAtom<{ order: number, div: HTMLDivElement }[]>(dialogsAtom);
   const container = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDialogElement>(null);
@@ -86,6 +87,7 @@ export default function Dialog({ children, className = '', variants = [], title,
     setDialogs(updatedDialogs);
     ref.current?.focus();
   };
+
 
   return (
     <div ref={container} style={{ zIndex: 2, position: 'absolute', top: 0, left: 0, height: '100%' }} className="dialog__container">

@@ -13,7 +13,7 @@ describe('formatCharacterClasses', () => {
     const classes = [
       { id: 1, name: 'Rouge', lvl: 3, subclass: { name: 'Thief' }}
     ] as any;
-    expect(formatCharacterClasses(classes)).toEqual('Thief Rouge 3');
+    expect(formatCharacterClasses(classes)).toEqual('Thief Rouge lvl 3');
   });
 
   test('Multiple classes', () => {
@@ -21,7 +21,7 @@ describe('formatCharacterClasses', () => {
       { id: 1, name: 'Rouge', lvl: 3, subclass: { name: 'Thief' }},
       { id: 2, name: 'Barbarian', lvl: 1, subclass: null },
     ] as any;
-    expect(formatCharacterClasses(classes)).toEqual('Thief Rouge 3 / Barbarian 1');
+    expect(formatCharacterClasses(classes)).toEqual('Thief Rouge lvl 3 / Barbarian lvl 1');
   });
 
   test('No classes', () => {

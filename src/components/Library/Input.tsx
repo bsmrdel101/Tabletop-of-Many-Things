@@ -3,14 +3,15 @@ import { generateClasses, parseClasses } from "@/scripts/tools/utils";
 interface Props extends InputHTML {
   className?: string
   labelClass?: string
-  variants?: ('label-inline' | 'text-area' | 'label-no-bold' | 'fit' | 'label-large')[]
+  variants?: ('label-inline' | 'text-area' | 'label-no-bold' | 'fit' | 'label-large' | 'no-arrows')[]
   label?: string
   cols?: number
   rows?: number
+  step?: 'any' | number
 }
 
 
-export default function Input({ className = '', labelClass = '', variants = [], label, cols, rows, ...props }: Props) {
+export default function Input({ className = '', labelClass = '', variants = [], label, cols, rows, step = 'any', ...props }: Props) {
   const labelClassList = variants.filter((v) => v.includes('label'));
   const classes = generateClasses(className, variants ? variants.filter((v) => !labelClassList.includes(v)) : [], 'input');
   const labelClasses = generateClasses(labelClass, labelClassList, 'input');
@@ -26,11 +27,12 @@ export default function Input({ className = '', labelClass = '', variants = [], 
           {...props as any}
           cols={cols}
           rows={rows}
-          autoComplete="off"
+          autoComplete="new-password"
         />
         :
         <input
-          autoComplete="off"
+          autoComplete="new-password"
+          step={step}
           {...parseClasses(classes)}
           {...props}
         />

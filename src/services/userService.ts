@@ -17,7 +17,7 @@ export const getUser = async (): Promise<User | null> => {
     const res = await api.get('/api/user', config);
     return res.data.user;
   } catch(error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -32,7 +32,7 @@ export const registerUser = async (payload: NewUser): Promise<void | string> => 
     };
     await api.post('/api/user/register', payload, config);
   } catch(error: any) {
-    console.log(error);
+    console.error(error);
     return `${error.response.data.message}`;
   }
 };
@@ -45,7 +45,7 @@ export const loginUser = async (payload: NewUser): Promise<void | string> => {
     };
     await api.post('/api/user/login', payload, config);
   } catch(error: any) {
-    console.log(error);
+    console.error(error);
     return `${error.response.data.message}`;
   }
 };
@@ -55,7 +55,7 @@ export const logout = async () => {
     const auth = { withCredentials: true };
     await api.delete('/api/user/logout', auth);
   } catch(error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -66,6 +66,6 @@ export const changeNewUser = async (payload: boolean) => {
     const auth = { withCredentials: true };
     await api.put('/api/user', { newStatus: payload }, auth);
   } catch(error) {
-    console.log(error);
+    console.error(error);
   }
 };

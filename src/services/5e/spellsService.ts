@@ -5,7 +5,7 @@ export const getSpell = async (id: number) => {
   try {
     const res = await axios.get(`/api/5e/spells/${id}`);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };

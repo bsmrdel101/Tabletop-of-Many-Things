@@ -1,4 +1,4 @@
-import { userAtom } from "@/atoms/state";
+import { userAtom } from "@/scripts/atoms/state";
 import CharacterCard from "@/components/Characters/CharacterCard";
 import NewCharacterCard from "@/components/Characters/NewCharacterCard";
 import Button from "@/components/Library/Button";

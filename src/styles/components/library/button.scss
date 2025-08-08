@@ -56,6 +56,14 @@
 
   &--danger {
     background-color: var(--red-2);
+
+    &:hover {
+      color: var(--red-5);
+      background-color: transparent;
+      box-shadow: none;
+      border-color: transparent;
+      text-shadow: none;
+    }
   }
 
   &--image {
@@ -122,5 +130,24 @@
 
   &--bold {
     font-weight: bold;
+  }
+
+  &--plain {
+    background-color: buttonface;
+    box-shadow: none;
+    color: var(--black-0);
+  }
+
+  &--save {
+    background-color: var(--green-light-1);
+    color: white;
+
+    &:hover {
+      color: var(--green-light-3);
+      background-color: transparent;
+      box-shadow: none;
+      border-color: transparent;
+      text-shadow: none;
+    }
   }
 }

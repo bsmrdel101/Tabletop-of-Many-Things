@@ -16,7 +16,7 @@ export const getCharactersByUser = async (): Promise<CharacterCard_5e[]> => {
     const res = await api.get(`/api/5e/characters`, auth);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 };
@@ -27,7 +27,7 @@ export const getCharacterById = async (id: number): Promise<Character_5e | null>
     const res = await api.get(`/api/5e/characters/${id}`, auth);
     return parseCharacter5eData(res.data);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };
@@ -41,36 +41,36 @@ export const addCharacter = async (user: User, name: string, img: File | null, r
     const assetId = (url && img) ? await addAsset(null, img.name, 'assets', url) : 1;
     await api.post(`/api/5e/characters`, { name, assetId, ruleset }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
 // === PATCH routes === //
 
-export const editCharacterHealth = async (id: number, hp: number) => {
+export const editCharacterHealth = async (id: number, hp: number, tempHp: number) => {
   try {
     const auth = { withCredentials: true };
-    await api.patch(`/api/5e/characters/health`, { id, hp }, auth);
+    await api.patch(`/api/5e/characters/health`, { id, hp, tempHp }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
-export const restoreCharacterMaxHp = async (id: number) => {
+export const editCharacterMaxHp = async (id: number, maxHpMod: number, maxHpOverride: number, maxHpDmg: number, maxHp: number) => {
   try {
     const auth = { withCredentials: true };
-    await api.patch(`/api/5e/characters/restore-max-hp`, { id }, auth);
+    await api.patch(`/api/5e/characters/max-hp`, { id, maxHpMod, maxHpOverride, maxHpDmg, maxHp }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
-export const setCharacterInspiration = async (id: number, insp: boolean) => {
+export const editCharacterInspiration = async (id: number, insp: boolean) => {
   try {
     const auth = { withCredentials: true };
     await api.patch(`/api/5e/characters/insp`, { id, insp }, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -81,7 +81,7 @@ export const editCharacter = async (character: Character_5e) => {
     const auth = { withCredentials: true };
     await api.put(`/api/5e/characters`, character, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -92,6 +92,6 @@ export const deleteCharacter = async (id: number) => {
     const auth = { withCredentials: true };
     await api.delete(`/api/5e/characters/${id}`, auth);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

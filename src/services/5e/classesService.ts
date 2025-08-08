@@ -7,7 +7,7 @@ export const getAllClasses = async () => {
   try {
     const res = await axios.get(`/api/5e/classes`);
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };

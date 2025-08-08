@@ -16,9 +16,25 @@ test.describe('5e Main Page', () => {
     await page.goto('http://localhost:5174/characters/1?ruleset=5e');
   });
 
-  test.describe('Header', () => {
-    test('TODO', async () => {
-      
+  test.describe('Health management', () => {
+    test('Damage player', async () => {
+      await page.getByTestId('hp-management-input').fill('5');
+      await page.getByTestId('dmg-btn').click();
+      await expect(page.getByTestId('hp')).toHaveText('19 / 20');
+      await page.getByTestId('dmg-btn').click();
+      await expect(page.getByTestId('hp')).toHaveText('14 / 20');
+    });
+
+    test('Heal player', async () => {
+      await page.getByTestId('hp-management-input').fill('50');
+      await page.getByTestId('heal-btn').click();
+      await expect(page.getByTestId('hp')).toHaveText('20 / 20');
+    });
+
+    test('Add temp hp', async () => {
+      await page.getByTestId('hp-management-input').fill('5');
+      await page.getByTestId('temp-hp-btn').click();
+      await expect(page.getByTestId('temp-hp')).toHaveText('+5');
     });
   });
 });
