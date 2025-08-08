@@ -2,6 +2,8 @@ import { emitServerEvent } from "@/scripts/config/socket-io";
 import { editCharacterHealth, editCharacterMaxHp } from "@/services/5e/charactersService";
 
 
+// HEALTH
+
 export const healPlayer = async (character: Character_5e, amount: number, room: string) => {
   const newHp = Math.min(character.hp + amount, character.maxHp);
   await editCharacterHealth(character.id, newHp, character.tempHp);

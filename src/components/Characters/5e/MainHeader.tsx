@@ -1,6 +1,6 @@
 import { gameAtom } from "@/scripts/atoms/state";
 import Button from "@/components/Library/Button";
-import { xpForNextLevel } from "@/logic/dnd/gameSystemsInfo";
+import { xpForNextLevel } from "@/scripts/logic/dnd/gameSystemsInfo";
 import { formatCharacterClasses } from "@/scripts/tools/utils";
 import { useAtom } from "jotai";
 

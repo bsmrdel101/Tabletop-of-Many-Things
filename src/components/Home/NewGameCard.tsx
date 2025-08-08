@@ -3,7 +3,7 @@ import Input from "../Library/Input";
 import Button from "../Library/Button";
 import { addGame, getGameById } from "@/services/dashboardService";
 import RulesetSelect5e from "../Library/Select/RulesetSelect5e";
-import { getDefaultGameSettings } from "@/logic/gameSettings";
+import { getDefaultGameSettings } from "@/scripts/logic/gameSettings";
 
 interface Props {
   setOpen: (value: boolean) => void
