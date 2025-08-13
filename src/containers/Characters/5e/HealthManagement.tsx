@@ -51,7 +51,7 @@ export default function HealthManagement({ character }: Props) {
             // onClick={() => dmgPlayerAbility(character, Number(value), room)}
             data-testid="dmg-ability-btn"
           >
-            <img src="/images/game/dmg.svg" alt="Damage ability" />
+            <img src="/images/game/dmg-ability.svg" alt="Damage ability" />
           </Button>
 
           <Button
@@ -75,7 +75,7 @@ export default function HealthManagement({ character }: Props) {
             onClick={() => dmgPlayerMaxHp(character, -character.maxHpDmg, room)}
             data-testid="restore-max-hp-btn"
           >
-            <img src="/images/game/heart.svg" alt="Restore max hp" />
+            <img src="/images/game/restore.svg" alt="Restore max hp" />
           </Button>
         </div>
       </div>
