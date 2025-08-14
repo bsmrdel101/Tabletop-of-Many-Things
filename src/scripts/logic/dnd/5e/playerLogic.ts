@@ -20,6 +20,7 @@ export const dmgPlayer = async (character: Character_5e, dmg: number, room: stri
 };
 
 export const addPlayerTempHp = async (character: Character_5e, amount: number, room: string) => {
+  if (amount <= 0) return;
   await editCharacterHealth(character.id, character.hp, amount);
   emitServerEvent('UPDATE_PLAYER', [{ ...character, tempHp: amount }, room]);
 };

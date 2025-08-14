@@ -1,0 +1,13 @@
+.box-stat {
+  text-align: center;
+
+  &__content {
+    border: 2px solid var(--blue-dark-2);
+    background-color: var(--blue-dark-1);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    text-align: center;
+    margin-top: 0.1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}

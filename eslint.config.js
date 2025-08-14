@@ -21,7 +21,7 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'semi': [2, 'always'],
-      'indent': ['error', 2],
+      'indent': ['error', 2, { 'SwitchCase': 1 }],
       '@typescript-eslint/no-explicit-any': 'off',
       'react-hooks/exhaustive-deps': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
@@ -29,9 +29,9 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { "argsIgnorePattern": "^_" }
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { 'argsIgnorePattern': '^_' }
       ],
       'no-prototype-builtins': 'off'
     },

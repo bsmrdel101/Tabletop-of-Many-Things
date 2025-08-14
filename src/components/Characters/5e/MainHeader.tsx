@@ -26,7 +26,6 @@ export default function MainHeader({ character }: Props) {
       </div>
 
       <div className="character-sheet-main-header__lvl-manager">
-        <p className="character-sheet-main-header__lvl-manager--lvl">Lvl { character.lvl }</p>
         { game?.settings.dnd?.usingXp && <p>Xp: { character.xp } / { xpForNextLevel(character.lvl) }</p> }
         <Button variants={['thin']}>Level Up</Button>
       </div>

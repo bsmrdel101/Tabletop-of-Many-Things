@@ -1,0 +1,62 @@
+.main-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+
+  &__row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  &__ac {
+    position: relative;
+    align-content: center;
+    cursor: pointer;
+
+    img {
+      width: 6.3rem;
+      filter: drop-shadow(0 0 0.75rem rgba(24, 23, 23, 0.52));
+    }
+
+    p {
+      position: absolute;
+      inset: 0;
+      top: 2.3rem;
+      font-size: var(--font-xl);
+    }
+
+    button {
+      position: absolute;
+      top: 2.6rem;
+      left: 1.7rem;
+      background-color: var(--grey-3);
+      font-size: var(--font-sm);
+    }
+  }
+}
+
+.edit-armor-dialog {
+  &__content {
+    display: flex;
+    gap: 1rem;
+
+    button[type="submit"] {
+      margin-top: 0.3rem;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+    max-width: 12.6rem;
+  }
+}

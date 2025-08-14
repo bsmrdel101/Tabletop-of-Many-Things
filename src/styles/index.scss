@@ -1,18 +1,4 @@
-@use './settings/colors.scss';
-@use './settings/fonts.scss';
-@use './components/library/button.scss';
-@use './components/library/input.scss';
-@use './components/library/file-input.scss';
-@use './components/library/select.scss';
-@use './components/library/link.scss';
-@use './components/library/error.scss';
-@use './components/home/home.scss';
-@use './components/home/user-box.scss';
-@use './components/home/games-list.scss';
-@use './components/character-sheet/character-sheet.scss';
-@use './components/character-sheet/health.scss';
-@use './components/login.scss';
-@use './components/characters.scss';
+@use 'bundle.scss';
 
 * {
   box-sizing: border-box;

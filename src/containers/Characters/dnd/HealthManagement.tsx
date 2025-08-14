@@ -31,30 +31,6 @@ export default function HealthManagement({ character }: Props) {
 
         <div className="hp-management__buttons">
           <Button
-            style={{ background: 'var(--severe-dmg)' }}
-            onClick={() => dmgPlayerMaxHp(character, Number(value), room)}
-            data-testid="max-hp-dmg-btn"
-          >
-            <img src="/images/game/dmg-max-hp.svg" alt="Damage max hp" />
-          </Button>
-
-          <Button
-            style={{ background: 'var(--temp-hp)' }}
-            onClick={() => addPlayerTempHp(character, Number(value), room)}
-            data-testid="temp-hp-btn"
-          >
-            <img src="/images/game/temp-hp.svg" alt="Temp hp" />
-          </Button>
-
-          <Button
-            style={{ background: 'var(--dmg-ability)' }}
-            // onClick={() => dmgPlayerAbility(character, Number(value), room)}
-            data-testid="dmg-ability-btn"
-          >
-            <img src="/images/game/dmg-ability.svg" alt="Damage ability" />
-          </Button>
-
-          <Button
             style={{ background: 'var(--healing)' }}
             onClick={() => healPlayer(character, Number(value), room)}
             data-testid="heal-btn"
@@ -68,6 +44,30 @@ export default function HealthManagement({ character }: Props) {
             data-testid="dmg-btn"
           >
             <img src="/images/game/dmg.svg" alt="Damage" />
+          </Button>
+
+          <Button
+            style={{ background: 'var(--temp-hp)' }}
+            onClick={() => addPlayerTempHp(character, Number(value), room)}
+            data-testid="temp-hp-btn"
+          >
+            <img src="/images/game/temp-hp.svg" alt="Temp hp" />
+          </Button>
+
+          <Button
+            style={{ background: 'var(--severe-dmg)' }}
+            onClick={() => dmgPlayerMaxHp(character, Number(value), room)}
+            data-testid="max-hp-dmg-btn"
+          >
+            <img src="/images/game/dmg-max-hp.svg" alt="Damage max hp" />
+          </Button>
+
+          <Button
+            style={{ background: 'var(--dmg-ability)' }}
+            // onClick={() => dmgPlayerAbility(character, Number(value), room)}
+            data-testid="dmg-ability-btn"
+          >
+            <img src="/images/game/dmg-ability.svg" alt="Damage ability" />
           </Button>
 
           <Button
