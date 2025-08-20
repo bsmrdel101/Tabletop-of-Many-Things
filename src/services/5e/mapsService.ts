@@ -1,6 +1,4 @@
 import axios from "axios";
-import { ref, uploadBytes } from "firebase/storage";
-import { storage } from "@/config/firebase";
 
 
 interface NewMap {
@@ -40,8 +38,8 @@ export const addMap = async (payload: NewMap, gameId: number) => {
   try {
     // Upload map image to firebase
     if (!payload.isBlank) {
-      const mapRef = ref(storage, payload.name);
-      uploadBytes(mapRef, payload.image);
+      // const mapRef = ref(storage, payload.name);
+      // uploadBytes(mapRef, payload.image);
     }
     
     // Build map data object
