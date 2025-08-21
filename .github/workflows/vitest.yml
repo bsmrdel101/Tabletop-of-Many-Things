@@ -12,4 +12,4 @@ jobs:
     - name: Install modules
       run: npm ci
     - name: Run Vitest
-      run: npm run test
+      run: npm run test:unit

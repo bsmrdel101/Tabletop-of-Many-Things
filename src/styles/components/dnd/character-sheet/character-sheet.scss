@@ -57,6 +57,21 @@
       font-size: var(--font-xl);
     }
     
+    &__right {
+      display: flex;
+      gap: 1rem;
+    }
+
+    &__rest-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+
+      button {
+        width: 100%;
+      }
+    }
+
     &__lvl-manager {
       display: flex;
       flex-direction: column;
