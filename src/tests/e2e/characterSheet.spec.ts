@@ -1,11 +1,10 @@
 import { test, expect, Page } from '@playwright/test';
 
 test.describe.configure({ mode: 'serial' });
+let page: Page;
 
 
-test.describe('5e Main Page', () => {
-  let page: Page;
-
+test.describe('5e', () => {
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
     await page.goto('http://localhost:5174/login');

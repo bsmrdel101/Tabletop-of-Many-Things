@@ -5,6 +5,7 @@ import routes from '~react-pages';
 import { useAtom } from 'jotai';
 import { userAtom } from './scripts/atoms/state';
 import { getUser } from './services/userService';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './styles/index.scss';
 
 
@@ -34,9 +35,17 @@ export function App() {
 
 
 const app = createRoot(document.getElementById('root')!);
+const queryClient = new QueryClient();
+const queryOptions = {
+  refetchOnWindowFocus: false,
+  keepPreviousData: true
+};
+queryClient.setDefaultOptions({ queries: queryOptions });
 
 app.render(
   <BrowserRouter>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </BrowserRouter>
 );

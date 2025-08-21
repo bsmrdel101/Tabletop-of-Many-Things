@@ -1,6 +1,6 @@
 import { formatCharacterCardClasses } from "@/scripts/tools/utils";
-import Button from "../Library/Button";
-import Link from "../Library/Link";
+import Button from "@/components/Library/Button";
+import Link from "@/components/Library/Link";
 
 interface Props {
   character: CharacterCard_5e

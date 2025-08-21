@@ -1,7 +1,7 @@
-import HealthBar from "@/components/Characters/5e/HealthBar";
+import HealthBar from "@/rulesets/5e/components/CharacterSheet/HealthBar";
 import Button from "@/components/Library/Button";
 import Input from "@/components/Library/Input";
-import { addPlayerTempHp, dmgPlayer, dmgPlayerMaxHp, healPlayer } from "@/scripts/logic/dnd/5e/playerLogic";
+import { addPlayerTempHp, dmgPlayer, dmgPlayerMaxHp, healPlayer } from "@/rulesets/5e/scripts/playerManager";
 import { roomAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import { useState } from "react";

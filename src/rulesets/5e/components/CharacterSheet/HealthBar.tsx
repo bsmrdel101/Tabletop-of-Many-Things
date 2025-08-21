@@ -1,11 +1,11 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
-import Button from "../../Library/Button";
-import { emitServerEvent } from "../../../scripts/config/socket-io";
-import Input from "../../Library/Input";
+import Button from "../../../../components/Library/Button";
+import { emitServerEvent } from "../../../../scripts/config/socket-io";
+import Input from "../../../../components/Library/Input";
 import { useAtom } from "jotai";
 import { roomAtom } from "@/scripts/atoms/state";
 import { getHealthColor } from "@/scripts/tools/utils";
-import { editCharacter } from "@/services/5e/charactersService";
+import { editCharacter } from "@/rulesets/5e/services/charactersService";
 
 interface Props {
   character: Character_5e

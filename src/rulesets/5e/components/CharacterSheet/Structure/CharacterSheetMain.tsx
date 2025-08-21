@@ -1,4 +1,4 @@
-import MainHeader from "@/components/Characters/5e/MainHeader";
+import MainHeader from "@/rulesets/5e/components/CharacterSheet/MainHeader";
 import HealthManagement from "../HealthManagement";
 import MainStats from "../MainStats";
 

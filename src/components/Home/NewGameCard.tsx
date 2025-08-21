@@ -1,28 +1,25 @@
 import { FormEvent, useState } from "react";
 import Input from "../Library/Input";
 import Button from "../Library/Button";
-import { addGame, getGameById } from "@/services/dashboardService";
+import { addGame } from "@/services/dashboardService";
 import RulesetSelect5e from "../Library/Select/RulesetSelect5e";
-import { getDefaultGameSettings } from "@/scripts/logic/gameSettings";
+import { getDefaultGameSettings } from "@/scripts/gameSettings";
 
 interface Props {
   setOpen: (value: boolean) => void
-  refreshGames: (game: Game) => void
+  refetch: () => void
 }
 
 
-export default function NewGameCard({ setOpen, refreshGames }: Props) {
+export default function NewGameCard({ setOpen, refetch }: Props) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [ruleset, setRuleset] = useState('');
 
   const handleNewGame = async (e: FormEvent) => {
     e.preventDefault();
-    const id = await addGame({ name, password, ruleset, gameSettings: getDefaultGameSettings(ruleset) });
-    if (id) {
-      const game = await getGameById(id);
-      if (game) refreshGames({ ...game, password });
-    }
+    await addGame({ name, password, ruleset, gameSettings: getDefaultGameSettings(ruleset) });
+    refetch();
     setOpen(false);
   };
 

@@ -1,8 +1,8 @@
 import { FormEvent, useState } from "react";
-import Button from "../Library/Button";
-import Input from "../Library/Input";
-import RulesetSelect5e from "../Library/Select/RulesetSelect5e";
-import FileInput from "../Library/FileInput";
+import Button from "@/components/Library/Button";
+import Input from "@/components/Library/Input";
+import RulesetSelect5e from "@/components/Library/Select/RulesetSelect5e";
+import FileInput from "@/components/Library/FileInput";
 
 interface Props {
   setOpen: (value: boolean) => void

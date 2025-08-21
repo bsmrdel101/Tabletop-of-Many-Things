@@ -1,9 +1,9 @@
 import BoxStat from "@/components/BoxStat";
 import { roomAtom } from "@/scripts/atoms/state";
-import { profFromLvl } from "@/scripts/logic/dnd/gameSystemsInfo";
+import { profFromLvl } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { numPrefix } from "@/scripts/tools/utils";
 import { useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 interface Props {
   character: Character_5e
@@ -15,11 +15,9 @@ export default function MainStats({ character }: Props) {
   const [room] = useAtom(roomAtom);
   const [editAcOpen, setEditAcOpen] = useState(false);
   /* eslint-enable */
-  const [init, setInit] = useState(0);
 
-  useEffect(() => {
-    if (!character) return;
-    setInit(character.abilityScores.find((score) => score.name === 'dex')?.mod ?? 0);
+  const init = useMemo(() => {
+    return character.abilityScores.find((score) => score.name === 'dex')?.mod ?? 0;
   }, [character]);
 
 

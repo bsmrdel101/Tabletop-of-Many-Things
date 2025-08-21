@@ -1,5 +1,5 @@
 import { emitServerEvent } from "@/scripts/config/socket-io";
-import { editCharacterHealth, editCharacterMaxHp } from "@/services/5e/charactersService";
+import { editCharacterHealth, editCharacterMaxHp } from "@/rulesets/5e/services/charactersService";
 
 
 // HEALTH

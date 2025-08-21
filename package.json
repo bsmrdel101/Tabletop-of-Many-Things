@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+    "@tanstack/react-query": "^5.85.5",
     "axios": "^1.8.4",
     "jotai": "^2.12.3",
     "path": "^0.12.7",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@playwright/test": "^1.52.0",
+    "@tanstack/eslint-plugin-query": "^5.83.1",
     "@types/node": "^22.15.3",
     "@types/pg": "^8.11.14",
     "@types/react": "^19.0.10",

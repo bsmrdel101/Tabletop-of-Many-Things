@@ -2,14 +2,14 @@ name: Stylelint
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
   
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install modules
-      run: npm i
+      run: npm ci
     - name: Run Stylelint
       run: npm run lint:scss

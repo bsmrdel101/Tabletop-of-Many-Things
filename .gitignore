@@ -105,7 +105,6 @@ typings/
 coverage
 .postgres-data
 .vscode
-bundle.scss
 
 # Playwright
 /test-results/

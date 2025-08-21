@@ -1,6 +1,6 @@
 import api from "@/scripts/config/axios";
-import { addAsset } from "../assetsService";
-import { uploadFile } from "../mediaService";
+import { addAsset } from "@/services/assetsService";
+import { uploadFile } from "@/services/mediaService";
 
 
 const parseCharacter5eData = (char: any) => {

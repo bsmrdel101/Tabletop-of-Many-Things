@@ -1,7 +1,7 @@
-import CharacterNavbar from "@/components/Characters/CharacterNavbar";
+import CharacterNavbar from "../CharacterNavbar";
 import { useEffect, useState } from "react";
 import CharacterSheetMain from "./CharacterSheetMain";
-import { getCharacterById } from "@/services/5e/charactersService";
+import { getCharacterById } from "@/rulesets/5e/services/charactersService";
 import { useParams } from "react-router";
 import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
 

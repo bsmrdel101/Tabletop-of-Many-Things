@@ -1,4 +1,5 @@
-import Button from "../Library/Button";
+import Button from "@/components/Library/Button";
+
 
 interface Props {
   selectedTab: string

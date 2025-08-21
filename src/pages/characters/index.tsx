@@ -1,4 +1,4 @@
-import CharactersList from "@/containers/Characters/CharactersList";
+import CharactersList from "@/rulesets/5e/components/Characters/CharactersList";
 import UserBox from "@/components/UserBox";
 
 

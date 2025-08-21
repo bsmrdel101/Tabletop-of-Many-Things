@@ -1,4 +1,4 @@
-import HomeButtonList from "@/containers/Home/HomeButtonList";
+import HomeButtonList from "@/components/Home/HomeButtonList";
 import UserBox from "@/components/UserBox";
 
 

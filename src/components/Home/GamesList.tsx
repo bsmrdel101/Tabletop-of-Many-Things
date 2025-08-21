@@ -1,9 +1,10 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import Button from "../../components/Library/Button";
 import Input from "../../components/Library/Input";
 import { getGamesByUser, getGamesHistory } from "@/services/dashboardService";
 import GameCard from "../../components/Home/GameCard";
 import NewGameCard from "../../components/Home/NewGameCard";
+import { useQuery } from "@tanstack/react-query";
 
 interface Props {
   setMenu: (menu: string) => void
@@ -11,27 +12,21 @@ interface Props {
 
 
 export default function GamesList({ setMenu }: Props) {
-  const [games, setGames] = useState<GameMin[]>([]);
-  const [gameHistory, setGameHistory] = useState<GameMin[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameMin | null>(null);
   const [showNewGame, setShowNewGame] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const gamesRes = await getGamesByUser();
-      setGames(gamesRes);
-      const historyRes = await getGamesHistory();
-      setGameHistory(historyRes);
-    };
-    fetchData();
-  }, []);
+  const { data: games = [], refetch } = useQuery<GameMin[]>({
+    queryKey: ['games'],
+    queryFn: getGamesByUser
+  });
+
+  const { data: gameHistory = [] } = useQuery<GameMin[]>({
+    queryKey: ['gameHistory'],
+    queryFn: getGamesHistory
+  });
 
   const handleJoinGame = async (e: FormEvent) => {
     e.preventDefault();
-  };
-
-  const refreshGames = (game: Game) => {
-    setGames([...games, game]);
   };
 
 
@@ -55,7 +50,7 @@ export default function GamesList({ setMenu }: Props) {
           Your Campaigns&nbsp;&nbsp;
           <Button variants={['small', 'flat']} onClick={() => setShowNewGame(true)}>+</Button>
         </h3>
-        { showNewGame && <NewGameCard setOpen={setShowNewGame} refreshGames={refreshGames} /> }
+        { showNewGame && <NewGameCard setOpen={setShowNewGame} refetch={refetch} /> }
         {!showNewGame && games.map((game: GameMin) => {
           return (
             <GameCard
