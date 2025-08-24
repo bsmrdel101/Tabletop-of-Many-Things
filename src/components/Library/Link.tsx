@@ -1,4 +1,5 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
+import { useMemo } from "react";
 import { Link as LinkElement } from "react-router";
 
 interface Props extends LinkHTML {
@@ -10,7 +11,7 @@ interface Props extends LinkHTML {
 
 
 export default function Link({ to, children, className = '', variants = [], ...props }: Props) {
-  const classes = generateClasses(className, variants, 'link');
+  const classes = useMemo(() => generateClasses(className, variants, 'link'), []);
 
   
   return (

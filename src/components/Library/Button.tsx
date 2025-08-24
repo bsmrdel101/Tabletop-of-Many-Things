@@ -1,4 +1,5 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
+import { useMemo } from "react";
 
 interface Props extends ButtonHTML {
   children?: any
@@ -9,7 +10,7 @@ interface Props extends ButtonHTML {
 
 
 export default function Button({ children, className = '', variants = [], type = 'button', ...props }: Props) {
-  const classes = generateClasses(className, variants, 'button');
+  const classes = useMemo(() => generateClasses(className, variants, 'button'), []);
 
   
   return (

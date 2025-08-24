@@ -1,5 +1,5 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Draggable from "../Draggable";
 import Button from "../Button";
 import { useAtom } from "jotai";
@@ -27,7 +27,7 @@ export default function WindowDialog({ children, className = '', variants = [], 
   const [dialogs, setDialogs] = useAtom<{ order: number, div: HTMLDivElement }[]>(dialogsAtom);
   const container = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDialogElement>(null);
-  const classes = generateClasses(className, variants, 'dialog');
+  const classes = useMemo(() => generateClasses(className, variants, 'dialog'), []);
 
   useEffect(() => {
     bindEventListeners();

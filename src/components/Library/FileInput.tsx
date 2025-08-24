@@ -1,5 +1,5 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 interface Props {
   className?: string
@@ -15,9 +15,9 @@ interface Props {
 
 export default function FileInput({ className = '', labelClass = '', variants = [], label, defaultImg, accept, onChange, multiple = false, ...props }: Props) {
   const [previewImg, setPreviewImg] = useState(defaultImg ?? '');
-  const labelClassList = variants.filter((v) => v.includes('label'));
-  const classes = generateClasses(className, variants ? variants.filter((v) => !labelClassList.includes(v)) : [], 'file-input');
-  const labelClasses = generateClasses(labelClass, labelClassList, 'file-input');
+  const labelClassList = useMemo(() => variants.filter((v) => v.includes('label')), []);
+  const classes = useMemo(() => generateClasses(className, variants ? variants.filter((v) => !labelClassList.includes(v)) : [], 'file-input'), []);
+  const labelClasses = useMemo(() => generateClasses(labelClass, labelClassList, 'file-input'), []);
 
   
   return (

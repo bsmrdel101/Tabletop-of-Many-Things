@@ -1,4 +1,5 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
+import { useMemo } from "react";
 
 interface Props extends InputHTML {
   className?: string
@@ -12,9 +13,9 @@ interface Props extends InputHTML {
 
 
 export default function Input({ className = '', labelClass = '', variants = [], label, cols, rows, step = 'any', ...props }: Props) {
-  const labelClassList = variants.filter((v) => v.includes('label'));
-  const classes = generateClasses(className, variants ? variants.filter((v) => !labelClassList.includes(v)) : [], 'input');
-  const labelClasses = generateClasses(labelClass, labelClassList, 'input');
+  const labelClassList = useMemo(() => variants.filter((v) => v.includes('label')), []);
+  const classes = useMemo(() => generateClasses(className, variants ? variants.filter((v) => !labelClassList.includes(v)) : [], 'input'), []);
+  const labelClasses = useMemo(() => generateClasses(labelClass, labelClassList, 'input'), []);
 
   
   return (
