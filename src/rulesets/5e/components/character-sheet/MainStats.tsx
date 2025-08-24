@@ -1,9 +1,8 @@
 import BoxStat from "@/components/BoxStat";
-import { roomAtom } from "@/scripts/atoms/state";
 import { profFromLvl } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { numPrefix } from "@/scripts/tools/utils";
-import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
+import EditArmorDialog from "./dialogs/EditArmorDialog";
 
 interface Props {
   character: Character_5e
@@ -11,10 +10,7 @@ interface Props {
 
 
 export default function MainStats({ character }: Props) {
-  /* eslint-disable */
-  const [room] = useAtom(roomAtom);
   const [editAcOpen, setEditAcOpen] = useState(false);
-  /* eslint-enable */
 
   const init = useMemo(() => {
     return character.abilityScores.find((score) => score.name === 'dex')?.mod ?? 0;
@@ -23,7 +19,7 @@ export default function MainStats({ character }: Props) {
 
   return (
     <div className="main-stats">
-      {/* <EditArmorDialog open={editAcOpen} setOpen={setEditAcOpen} character={character} room={room} /> */}
+      <EditArmorDialog open={editAcOpen} setOpen={setEditAcOpen} character={character} />
 
       <div className="main-stats__row">
         <div className="main-stats__ac" onClick={() => setEditAcOpen(true)}>

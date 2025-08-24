@@ -13,7 +13,7 @@ interface Props {
   closeOnOutsideClick?: boolean
   exitWithEsc?: boolean
   hasCloseBtn?: boolean
-  width?: number
+  width?: string
   height?: number
   maxHeight?: string
   open?: boolean
