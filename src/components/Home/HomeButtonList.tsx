@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "../../components/Library/Button";
+import Button from "../library/Button";
 import GamesList from "./GamesList";
-import Link from "../../components/Library/Link";
+import Link from "../library/Link";
 
 
 export default function HomeButtonList() {

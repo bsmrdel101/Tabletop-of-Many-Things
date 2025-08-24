@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
-import Input from "../Library/Input";
-import Select from "../Library/Select/Select";
-import Button from "../Library/Button";
+import Input from "../library/Input";
+import Select from "../library/select/Select";
+import Button from "../library/Button";
 import { editGame } from "@/services/dashboardService";
 
 interface Props {

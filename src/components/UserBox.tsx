@@ -1,6 +1,6 @@
 import { userAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
-import Button from "./Library/Button";
+import Button from "./library/Button";
 import { useState } from "react";
 import { logout } from "@/services/userService";
 

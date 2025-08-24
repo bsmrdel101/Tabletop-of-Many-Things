@@ -1,4 +1,4 @@
-import CharacterSheet5e from "@/rulesets/5e/components/CharacterSheet/Structure/CharacterSheet5e";
+import CharacterSheet5e from "@/rulesets/5e/components/character-sheet/structure/CharacterSheet5e";
 import { roomAtom } from "@/scripts/atoms/state";
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import { generateCode } from "@/scripts/tools/utils";

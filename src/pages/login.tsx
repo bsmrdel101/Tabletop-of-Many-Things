@@ -1,7 +1,7 @@
-import Button from "@/components/Library/Button";
-import Error from "@/components/Library/Error";
-import Input from "@/components/Library/Input";
-import Link from "@/components/Library/Link";
+import Button from "@/components/library/Button";
+import Error from "@/components/library/Error";
+import Input from "@/components/library/Input";
+import Link from "@/components/library/Link";
 import { loginUser } from "@/services/userService";
 import { FormEvent, useState } from "react";
 

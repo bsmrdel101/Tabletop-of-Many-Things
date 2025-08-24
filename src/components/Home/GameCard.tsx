@@ -1,4 +1,4 @@
-import Button from "../Library/Button";
+import Button from "../library/Button";
 
 interface Props {
   game: GameMin

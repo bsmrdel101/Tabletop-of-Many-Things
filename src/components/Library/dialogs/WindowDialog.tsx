@@ -1,7 +1,7 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
 import React, { useEffect, useRef } from "react";
-import Draggable from "./Draggable";
-import Button from "./Button";
+import Draggable from "../Draggable";
+import Button from "../Button";
 import { useAtom } from "jotai";
 import { dialogsAtom } from "@/scripts/atoms/state";
 

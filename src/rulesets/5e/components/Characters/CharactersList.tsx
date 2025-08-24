@@ -1,7 +1,7 @@
 import { userAtom } from "@/scripts/atoms/state";
 import CharacterCard from "./CharacterCard";
 import NewCharacterCard from "./NewCharacterCard";
-import Button from "@/components/Library/Button";
+import Button from "@/components/library/Button";
 import { addCharacter, deleteCharacter, getCharactersByUser } from "@/rulesets/5e/services/charactersService";
 import { useAtom } from "jotai";
 import { useState } from "react";

@@ -1,9 +1,9 @@
 import { FormEvent, useState } from "react";
-import Button from "../../components/Library/Button";
-import Input from "../../components/Library/Input";
+import Button from "../library/Button";
+import Input from "../library/Input";
 import { getGamesByUser, getGamesHistory } from "@/services/dashboardService";
-import GameCard from "../../components/Home/GameCard";
-import NewGameCard from "../../components/Home/NewGameCard";
+import GameCard from "./GameCard";
+import NewGameCard from "./NewGameCard";
 import { useQuery } from "@tanstack/react-query";
 
 interface Props {
