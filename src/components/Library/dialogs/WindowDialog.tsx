@@ -1,12 +1,12 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
-import React, { useEffect, useMemo, useRef } from "react";
+import { ReactNode, useEffect, useMemo, useRef } from "react";
 import Draggable from "../Draggable";
 import Button from "../Button";
 import { useAtom } from "jotai";
 import { dialogsAtom } from "@/scripts/atoms/state";
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
   variants?: ('default')[]
   title?: string
@@ -27,7 +27,7 @@ export default function WindowDialog({ children, className = '', variants = [], 
   const [dialogs, setDialogs] = useAtom<{ order: number, div: HTMLDivElement }[]>(dialogsAtom);
   const container = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDialogElement>(null);
-  const classes = useMemo(() => generateClasses(className, variants, 'dialog'), []);
+  const classes = useMemo(() => generateClasses(className, variants, 'window-dialog'), []);
 
   useEffect(() => {
     bindEventListeners();
@@ -90,8 +90,13 @@ export default function WindowDialog({ children, className = '', variants = [], 
 
 
   return (
-    <div ref={container} style={{ zIndex: 2, position: 'absolute', top: 0, left: 0, height: '100%' }} className="dialog__container">
-      <Draggable handle=".dialog__handlebar" y={y} x={x}>
+    <div ref={container} style={{ zIndex: 2, position: 'absolute', top: 0, left: 0, height: '100%' }} className="window-dialog__container">
+      <Draggable
+        x={x}
+        y={y}
+        handle="dialog"
+        cancel="input,textarea,button,select"
+      >
         <dialog
           open={open}
           ref={ref}
@@ -99,13 +104,14 @@ export default function WindowDialog({ children, className = '', variants = [], 
           style={{ width: width, height: height }}
           onPointerDown={bringToFront}
           onKeyDown={(e) => (exitWithEsc && e.key === 'Escape') && closeDialog()}
+          tabIndex={-1}
         >
-          <div className="dialog__handlebar draggable"></div>
+          <div className="window-dialog__handlebar draggable"></div>
           <div {...props}>
-            <h3 className="dialog__title">{title}</h3>
+            <h3 className="window-dialog__title">{title}</h3>
             { hasCloseBtn && <Button variants={["X"]} onClick={closeDialog}>X</Button> }
-            <div className="dialog__content" style={{ maxHeight: maxHeight }}>
-              {children}
+            <div className="window-dialog__content" style={{ maxHeight: maxHeight }}>
+              { children }
             </div>
           </div>
         </dialog>

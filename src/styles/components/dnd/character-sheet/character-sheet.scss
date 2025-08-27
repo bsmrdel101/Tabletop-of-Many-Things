@@ -76,14 +76,8 @@
       display: flex;
       flex-direction: column;
 
-      &--lvl {
-        font-size: var(--font-lg);
-        font-weight: bold;
-        text-align: center;
-      }
-
-      button {
-        margin-top: 0.3rem;
+      p {
+        margin-bottom: 0.3rem;
       }
     }
   }

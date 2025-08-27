@@ -13,6 +13,11 @@ interface NameDesc {
   desc: string
 }
 
+type Coord = {
+  x: number
+  y: number
+};
+
 type Asset = {
   id: number
   filepath: string

@@ -21,6 +21,10 @@
   }
 }
 
+html {
+  max-width: fit-content;
+}
+
 body {
   margin: 0;
   color: var(--white-0);

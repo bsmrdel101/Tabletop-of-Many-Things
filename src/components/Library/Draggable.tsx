@@ -6,10 +6,11 @@ interface Props {
   handle?: string
   x?: number
   y?: number
+  cancel?: string
 }
 
 
-export default function Draggable({ children, handle, y = 50, x = 50 }: Props) {
+export default function Draggable({ children, handle, x = 50, y = 50, cancel }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
 
   return (
@@ -18,6 +19,7 @@ export default function Draggable({ children, handle, y = 50, x = 50 }: Props) {
       bounds="body"
       defaultPosition={{ x, y }}
       nodeRef={nodeRef}
+      cancel={cancel}
     >
       { cloneElement(children, { ref: nodeRef }) }
     </ReactDraggable>

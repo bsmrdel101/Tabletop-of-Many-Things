@@ -1,0 +1,29 @@
+.window-dialog {
+  padding: 0;
+  padding: 0.43rem 1rem 1rem;
+  border-radius: 0.3rem;
+  background-color: var(--bg-1);
+  color: var(--white-0);
+  box-shadow: rgba(26, 25, 25, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  margin: 0;
+  text-align: start;
+  position: absolute;
+  bottom: 25%;
+  z-index: 1;
+
+  &__title {
+    margin-bottom: 0.3rem;
+    text-align: center;
+    user-select: none;
+  }
+
+  &__content {
+    overflow-y: auto;
+    height: 100%;
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

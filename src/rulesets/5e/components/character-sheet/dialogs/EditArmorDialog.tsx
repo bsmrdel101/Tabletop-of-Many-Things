@@ -33,13 +33,15 @@ export default function EditArmorDialog({ open, setOpen, character }: Props) {
       open={open}
       setOpen={setOpen}
       title="Edit Armor Class"
-      width="20rem"
       className="edit-armor-dialog"
+      x={200}
+      y={100}
     >
       <form onSubmit={handleSubmit}>
         <div className="edit-armor-dialog__content">
           <div>
             <Input
+              variants={['small']}
               label="AC Mod"
               value={acMod}
               onChange={(e: any) => setAcMod(e.target.value)}
@@ -47,13 +49,14 @@ export default function EditArmorDialog({ open, setOpen, character }: Props) {
               required
             />
             <Input
+              variants={['small']}
               label="AC Override"
               value={acOverride}
               onChange={(e: any) => setAcOverride(e.target.value)}
               type="number"
               required
             />
-            <Button type="submit" variants={['save', 'bold']}>Save</Button>
+            <Button variants={['save', 'bold', 'thin']} type="submit">Save</Button>
           </div>
 
           <div className="edit-armor-dialog__items">

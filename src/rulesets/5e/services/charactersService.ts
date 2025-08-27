@@ -3,9 +3,9 @@ import { addAsset } from "@/services/assetsService";
 import { uploadFile } from "@/services/mediaService";
 
 
-const parseCharacter5eData = (char: any) => {
-  const ac = char.acOverride ? char.acOverride : 10 + char.acMod;
-  return { ...char, ac };
+const parseCharacter5eData = (character: any) => {
+  const ac = character.acOverride ? character.acOverride : 10 + character.acMod;
+  return { ...character, ac };
 };
 
 // === GET routes === //
