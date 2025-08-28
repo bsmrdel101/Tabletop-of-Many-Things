@@ -14,7 +14,7 @@ export default function RulesetSelect5e({ className = '', labelClass = '', varia
       variants={variants}
       className={className}
       labelClass={labelClass}
-      {...props}
+      {...props as SelectHTML}
     >
       <option value="5e">D&D 5E</option>
       <option value="2024" disabled>D&D 2024</option>

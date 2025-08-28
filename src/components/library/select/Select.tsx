@@ -22,7 +22,7 @@ export default function Select({ children, className = '', labelClass = '', vari
 
       <select
         {...parseClasses(classes)}
-        {...props}
+        {...props as SelectHTML}
       >
         { children }
       </select>
