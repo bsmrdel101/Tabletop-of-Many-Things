@@ -25,7 +25,7 @@ export default function Input({ className = '', labelClass = '', variants = [], 
       {variants && variants.includes('text-area') ?
         <textarea
           {...parseClasses(classes)}
-          {...props as any}
+          {...props as TextAreaHTML}
           cols={cols}
           rows={rows}
           autoComplete="new-password"
@@ -35,7 +35,7 @@ export default function Input({ className = '', labelClass = '', variants = [], 
           autoComplete="new-password"
           step={step}
           {...parseClasses(classes)}
-          {...props}
+          {...props as InputHTML}
         />
       }
     </label>
