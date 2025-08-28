@@ -1,11 +1,11 @@
-import Button from "@/components/library/Button";
 import WindowDialog from "@/components/library/dialogs/WindowDialog";
 import Input from "@/components/library/Input";
+import useAutoSave from "@/hooks/useAutoSave";
 import { editCharacter } from "@/rulesets/5e/services/charactersService";
 import { roomAtom } from "@/scripts/atoms/state";
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import { useAtom } from "jotai";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   open: boolean
@@ -16,16 +16,20 @@ interface Props {
 
 export default function EditArmorDialog({ open, setOpen, character }: Props) {
   const [room] = useAtom(roomAtom);
-  const [acMod, setAcMod] = useState<number>(character.acMod);
-  const [acOverride, setAcOverride] = useState<number>(character.acOverride);
+  const [form, setForm] = useState({
+    acMod: character.acMod,
+    acOverride: character.acOverride,
+  });
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSave = async () => {
+    const { acMod, acOverride } = form;
     const ac = Number(acOverride) > 0 ? Number(acOverride) : 10 + Number(acMod);
     const char = { ...character, ac, acMod: Number(acMod), acOverride: Number(acOverride) };
     emitServerEvent('UPDATE_PLAYER', [char, room]);
     await editCharacter(char);
   };
+
+  useAutoSave(form, handleSave);
 
 
   return (
@@ -37,26 +41,27 @@ export default function EditArmorDialog({ open, setOpen, character }: Props) {
       x={200}
       y={100}
     >
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="edit-armor-dialog__content">
           <div>
             <Input
-              variants={['small']}
+              variants={['x-small', 'no-arrows']}
               label="AC Mod"
-              value={acMod}
-              onChange={(e: any) => setAcMod(e.target.value)}
+              value={form.acMod}
+              onChange={(e: any) => setForm((f) => ({ ...f, acMod: e.target.value }))}
               type="number"
               required
+              data-testid="ac-mod"
             />
             <Input
-              variants={['small']}
+              variants={['x-small', 'no-arrows']}
               label="AC Override"
-              value={acOverride}
-              onChange={(e: any) => setAcOverride(e.target.value)}
+              value={form.acOverride}
+              onChange={(e: any) => setForm((f) => ({ ...f, acOverride: e.target.value }))}
               type="number"
               required
+              data-testid="ac-override"
             />
-            <Button variants={['save', 'bold', 'thin']} type="submit">Save</Button>
           </div>
 
           <div className="edit-armor-dialog__items">
