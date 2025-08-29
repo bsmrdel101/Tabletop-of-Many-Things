@@ -1,0 +1,26 @@
+.ability-score {
+  background-color: var(--blue-dark-2);
+  width: 4rem;
+  border-radius: 0.8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__value {
+    background-color: var(--blue-dark-3);
+    border-radius: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  &__mod {
+    padding: 0 0.1rem 0 0;
+    font-size: var(--font-xsm);
+  }
+}

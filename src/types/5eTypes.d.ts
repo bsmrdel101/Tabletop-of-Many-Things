@@ -261,6 +261,7 @@ type Speed_5e = {
 };
 
 type AbilityScore_5e = {
+  id: number
   name: string
   value: number
   mod: number
