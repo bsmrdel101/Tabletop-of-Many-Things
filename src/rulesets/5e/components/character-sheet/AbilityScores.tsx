@@ -6,11 +6,20 @@ interface Props {
 
 
 export default function AbilityScores({ character }: Props) {
+  const handleRollCheck = (abilityScore: AbilityScore_5e) => {
+    
+  };
+
+
   return (
     <div className="character-sheet-main-ability-scores">
       {character.abilityScores.map((abilityScore: AbilityScore_5e) => {
         return (
-          <AbilityScore key={abilityScore.id} abilityScore={abilityScore} />
+          <AbilityScore
+            key={abilityScore.id}
+            abilityScore={abilityScore}
+            onClick={handleRollCheck}
+          />
         );
       })}
     </div>
