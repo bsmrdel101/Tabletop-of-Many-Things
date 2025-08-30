@@ -1,38 +1,80 @@
-type Character_2024 = {
+type Class_2024 = {
   id: number
-  user: User
-  img: string
+  gameId: number | null
   name: string
-  alignment: string | null
   lvl: number
-  xp: number
-  acOverride: number
-  acMod: number
-  ac: number
-  maxHpOverride: number
-  maxHpMod: number
-  maxHp: number
-  maxHpDmg: number
-  hp: number
-  tempHp: number
-  insp: boolean
-  abilityScores: AbilityScore_5e[]
-  race: PlayerRace_5e | null
-  subrace: PlayerSubrace_5e | null
-  classes: PlayerClass_5e[]
-  subclass: PlayerSubclass_5e | null
-  background: PlayerBackground_5e | null
-  currentHitDice: Dice[]
-  speeds: Speed_5e[]
-  senses: NameValue[]
-  proficiencies: Prof_5e[]
-  resistances: string[]
-  vulnerabilities: string[]
-  condImmunities: string[]
-  dmgImmunities: string[]
+  hitDice: number
+  proficiencies: Prof_Dnd[]
+  profChoices: ProfChoice_Dnd[]
+  saves: Skill_Dnd[]
+  startingItems: Item_Dnd[]
+  startingItemChoices: Item_Dnd[]
+  levels: Level_Dnd[]
+  multiClassing: any[]
+  subclasses: Subclass_Dnd[]
+  features: NameDesc[]
+};
+
+type PlayerClass_2024 = {
+  id: number
+  name: string
+  lvl: number
+  hitDice: number
+  subclass: Subclass_Dnd | null
+};
+
+type Subclass_2024 = {
+  id: number
+  name: string
+  subclassFlavor: string | null
+  desc: string | null
+  levels: Level_Dnd[]
+  spells: Spell_Dnd[]
+  class: { id: number, name: string }
+  features: NameDesc[]
+};
+
+type PlayerSubclass_2024 = {
+  id: number
+  name: string
+};
+
+type Background_2024 = {
+  id: number
+  gameId: number | null
+  name: string
+  desc: string | null
+  proficiencies: string | null
   languages: string[]
-  currency: Cost_5e[]
-  spellcasting: Spellcasting_5e | null
-  ruleset: string
-  targets: Token_5e[]
+  equipment: Item_Dnd[]
+  features: NameDesc[]
+  personalityTraits: string | null
+  ideals: string | null
+  bonds: string | null
+  flaws: string | null
+};
+
+type PlayerBackground_2024 = {
+  id: number
+  name: string
+};
+
+type Feat_Dnd = {
+  id: number
+  name: string
+  desc: string
+  prerequisites: Prerequisites_Dnd | null
+  abilityIncrease: { abilityScore: AbilityScore_Dnd, amount: number } | null
+  features: Feature_Dnd[]
+  actions: Action_Dnd[]
+};
+
+type Spellcasting_2024 = {
+  ability: string
+  dc: number
+  mod: number
+  class: string
+  slots: SpellSlots_Dnd
+  pactSlots: PactSlots_Dnd
+  spells: Spell_Dnd[]
 };
