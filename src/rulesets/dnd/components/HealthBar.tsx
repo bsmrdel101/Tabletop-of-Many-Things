@@ -4,8 +4,8 @@ import { emitServerEvent } from "../../../scripts/config/socket-io";
 import Input from "../../../components/library/Input";
 import { useAtom } from "jotai";
 import { roomAtom } from "@/scripts/atoms/state";
-import { getHealthColor } from "@/scripts/tools/utils";
 import { editCharacter } from "@/rulesets/dnd/services/charactersService";
+import { getHealthColor } from "../scripts/utils";
 
 interface Props {
   character: Character_Dnd

@@ -1,8 +1,8 @@
 import { gameAtom } from "@/scripts/atoms/state";
 import Button from "@/components/library/Button";
 import { xpForNextLevel } from "@/rulesets/dnd/scripts/gameSystemsInfo";
-import { formatCharacterClasses } from "@/scripts/tools/utils";
 import { useAtom } from "jotai";
+import { formatCharacterClasses } from "../../scripts/utils";
 
 interface Props {
   character: Character_Dnd

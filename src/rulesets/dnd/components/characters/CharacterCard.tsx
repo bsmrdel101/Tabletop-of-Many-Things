@@ -1,6 +1,6 @@
-import { formatCharacterCardClasses } from "@/scripts/tools/utils";
 import Button from "@/components/library/Button";
 import Link from "@/components/library/Link";
+import { formatCharacterCardClasses } from "../../scripts/utils";
 
 interface Props {
   character: CharacterCard_Dnd
@@ -14,9 +14,9 @@ export default function CharacterCard({ character, deleteFn }: Props) {
       <img className="character-card__pic" src={character.img} alt="Character image" />
       <div>
         <h3 data-testid="name">{ character.name } <span><em>Lvl { character.lvl }</em></span></h3>
-        <p>{ formatCharacterCardClasses(character.classes) }</p>
-        <p>{ character.race }{ character.subrace ? ` (${character.subrace})` : '' }</p>
-        <p>{ character.background }</p>
+        <p><strong>CLASSES:</strong> { formatCharacterCardClasses(character.classes) }</p>
+        <p><strong>RACE:</strong> { character.race }{ character.subrace ? ` (${character.subrace})` : '' }</p>
+        <p><strong>BACKGROUND:</strong> { character.background }</p>
         <Button
           variants={['dark', 'thin', 'link']}
           className="character-card__open-btn"

@@ -3,6 +3,7 @@ import { profFromLvl } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { numPrefix } from "@/scripts/tools/utils";
 import { useMemo, useState } from "react";
 import EditArmorDialog from "./dialogs/EditArmorDialog";
+import { rollInit } from "../../scripts/gameplayMechanics";
 
 interface Props {
   character: Character_Dnd
@@ -31,7 +32,7 @@ export default function MainStats({ character }: Props) {
           <BoxStat title="Proficiency">
             <p>+{ profFromLvl(character.lvl) }</p>
           </BoxStat>
-          <BoxStat title="Initiative">
+          <BoxStat title="Initiative" onClick={() => rollInit(init)}>
             <p>{ numPrefix(init) }</p>
           </BoxStat>
         </div>

@@ -1,4 +1,5 @@
-import { formatCharacterCardClasses, formatCharacterClasses, removeNullObjProps } from '@/scripts/tools/utils';
+import { formatCharacterCardClasses, formatCharacterClasses } from '@/rulesets/dnd/scripts/utils';
+import { removeNullObjProps } from '@/scripts/tools/utils';
 import { describe, expect, test } from 'vitest';
 
 

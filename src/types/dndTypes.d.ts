@@ -5,11 +5,29 @@ type Dice_Dnd = {
   display: string
 };
 
+type DieResult_Dnd = {
+  type: number
+  rolled: number
+};
+
+type DiceGroupResult_Dnd = {
+  dice: Dice_Dnd
+  rolls: DieResult_Dnd[]
+  mod: number
+  rolled: number
+  total: number
+};
+
 type RollResult_Dnd = {
   total: number
   rolled: number
-  mod: number
-  dice: Dice_Dnd[]
+  diceGroups: DiceGroupResult_Dnd[]
+};
+
+type DCRollResult_Dnd = {
+  roll: number
+  target: number
+  success: boolean
 };
 
 type Prerequisites_Dnd = {

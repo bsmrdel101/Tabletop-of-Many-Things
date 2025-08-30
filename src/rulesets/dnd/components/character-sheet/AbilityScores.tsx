@@ -1,4 +1,5 @@
 import AbilityScore from "@/rulesets/dnd/components/AbilityScore";
+import { rollCheck } from "../../scripts/gameplayMechanics";
 
 interface Props {
   character: Character_Dnd
@@ -7,7 +8,7 @@ interface Props {
 
 export default function AbilityScores({ character }: Props) {
   const handleRollCheck = (abilityScore: AbilityScore_Dnd) => {
-    console.log(abilityScore);
+    rollCheck(abilityScore.mod);
   };
 
 
