@@ -1,7 +1,7 @@
 import WindowDialog from "@/components/library/dialogs/WindowDialog";
 import Input from "@/components/library/Input";
 import useAutoSave from "@/hooks/useAutoSave";
-import { editCharacter } from "@/rulesets/5e/services/charactersService";
+import { editCharacter } from "@/rulesets/dnd/services/charactersService";
 import { roomAtom } from "@/scripts/atoms/state";
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import { useAtom } from "jotai";
@@ -10,7 +10,7 @@ import { useState } from "react";
 interface Props {
   open: boolean
   setOpen: (value: boolean) => void
-  character: Character_5e
+  character: Character_Dnd
 }
 
 

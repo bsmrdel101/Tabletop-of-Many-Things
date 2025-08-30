@@ -39,7 +39,7 @@ export default function NewCharacterCard({ setOpen, onCreateCharacter }: Props) 
       />
       <div className="new-character-card__inputs">
         <Input
-          variants={['label-large']}
+          variants={['label-large', 'medium']}
           label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}

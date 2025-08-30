@@ -5,6 +5,13 @@ type Dice_Dnd = {
   display: string
 };
 
+type RollResult_Dnd = {
+  total: number
+  rolled: number
+  mod: number
+  dice: Dice_Dnd[]
+};
+
 type Prerequisites_Dnd = {
   abilityScore?: AbilityScore_Dnd
   lvl?: number

@@ -1,4 +1,4 @@
-import CharactersList from "@/rulesets/5e/components/characters/CharactersList";
+import CharactersList from "@/rulesets/dnd/components/characters/CharactersList";
 import UserBox from "@/components/UserBox";
 
 

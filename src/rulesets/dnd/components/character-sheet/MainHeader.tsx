@@ -5,7 +5,7 @@ import { formatCharacterClasses } from "@/scripts/tools/utils";
 import { useAtom } from "jotai";
 
 interface Props {
-  character: Character_5e
+  character: Character_Dnd
 }
 
 

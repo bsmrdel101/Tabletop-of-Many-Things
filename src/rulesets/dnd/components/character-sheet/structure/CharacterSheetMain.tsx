@@ -1,10 +1,10 @@
-import MainHeader from "@/rulesets/5e/components/character-sheet/MainHeader";
-import HealthManagement from "../../../../dnd/components/HealthManagement";
+import MainHeader from "@/rulesets/dnd/components/character-sheet/MainHeader";
+import HealthManagement from "../../HealthManagement";
 import MainStats from "../MainStats";
 import AbilityScores from "../AbilityScores";
 
 interface Props {
-  character: Character_5e
+  character: Character_Dnd
 }
 
 

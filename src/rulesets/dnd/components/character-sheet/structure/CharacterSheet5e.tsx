@@ -1,14 +1,14 @@
-import CharacterNavbar from "../../../../dnd/components/CharacterNavbar";
+import CharacterNavbar from "../../CharacterNavbar";
 import { useEffect, useState } from "react";
 import CharacterSheetMain from "./CharacterSheetMain";
-import { getCharacterById } from "@/rulesets/5e/services/charactersService";
+import { getCharacterById } from "@/rulesets/dnd/services/charactersService";
 import { useParams } from "react-router";
 import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
 
 
 export default function CharacterSheet5e() {
   const { id } = useParams();
-  const [character, setCharacter] = useState<Character_5e | null>(null);
+  const [character, setCharacter] = useState<Character_Dnd | null>(null);
   const [tab, setTab] = useState('main');
   
   const tabs = [
@@ -36,7 +36,7 @@ export default function CharacterSheet5e() {
     };
   }, []);
 
-  const handlePlayerUpdate = (character: Character_5e) => {
+  const handlePlayerUpdate = (character: Character_Dnd) => {
     setCharacter(character);
   };
 

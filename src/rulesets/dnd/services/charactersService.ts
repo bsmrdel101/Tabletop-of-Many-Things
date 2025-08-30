@@ -10,7 +10,7 @@ const parseCharacter5eData = (character: any) => {
 
 // === GET routes === //
 
-export const getCharactersByUser = async (): Promise<CharacterCard_5e[]> => {
+export const getCharactersByUser = async (): Promise<CharacterCard_Dnd[]> => {
   try {
     const auth = { withCredentials: true };
     const res = await api.get(`/api/5e/characters`, auth);
@@ -21,7 +21,7 @@ export const getCharactersByUser = async (): Promise<CharacterCard_5e[]> => {
   }
 };
 
-export const getCharacterById = async (id: number): Promise<Character_5e | null> => {
+export const getCharacterById = async (id: number): Promise<Character_Dnd | null> => {
   try {
     const auth = { withCredentials: true };
     const res = await api.get(`/api/5e/characters/${id}`, auth);
@@ -76,7 +76,7 @@ export const editCharacterInspiration = async (id: number, insp: boolean) => {
 
 // === PUT routes === //
 
-export const editCharacter = async (character: Character_5e) => {
+export const editCharacter = async (character: Character_Dnd) => {
   try {
     const auth = { withCredentials: true };
     await api.put(`/api/5e/characters`, character, auth);

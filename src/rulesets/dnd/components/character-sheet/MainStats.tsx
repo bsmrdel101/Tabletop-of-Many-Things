@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import EditArmorDialog from "./dialogs/EditArmorDialog";
 
 interface Props {
-  character: Character_5e
+  character: Character_Dnd
 }
 
 

@@ -1,13 +1,13 @@
 import HealthBar from "./HealthBar";
 import Button from "@/components/library/Button";
 import Input from "@/components/library/Input";
-import { addPlayerTempHp, dmgPlayer, dmgPlayerMaxHp, healPlayer } from "@/rulesets/5e/scripts/playerManager";
+import { addPlayerTempHp, dmgPlayer, dmgPlayerMaxHp, healPlayer } from "@/rulesets/dnd/scripts/playerManager";
 import { roomAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import { useState } from "react";
 
 interface Props {
-  character: Character_5e | Character_2024
+  character: Character_Dnd
 }
 
 

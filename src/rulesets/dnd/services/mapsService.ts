@@ -23,7 +23,7 @@ export const getMap = async (mapId: number, gameId: number) => {
     const res = await axios.get(`/api/5e/map/{"mapId":${mapId}, "gameId":${gameId}}`);
     res.data.boardState = res.data.boardState.map((token: any) => {
       return { ...token, creature: JSON.parse(token.creature) };
-    }).filter((token: Token_5e) => token.id);
+    }).filter((token: Token_Dnd) => token.id);
     res.data.offsetX = Number(res.data.offsetX);
     res.data.offsetY = Number(res.data.offsetY);
     return res.data;
@@ -56,7 +56,7 @@ export const addMap = async (payload: NewMap, gameId: number) => {
   }
 };
 
-export const addTokenToMap = async (gameId: number, token: Token_5e, mapId: number, x: number, y: number) => {
+export const addTokenToMap = async (gameId: number, token: Token_Dnd, mapId: number, x: number, y: number) => {
   try {
     await axios.post('/api/5e/map/token', {
       gameId: gameId,
@@ -74,7 +74,7 @@ export const addTokenToMap = async (gameId: number, token: Token_5e, mapId: numb
 
 // === PUT routes === //
 
-export const updateMap = async (payload: Map_5e) => {
+export const updateMap = async (payload: Map_Dnd) => {
   try {
     await axios.put('/api/5e/map', payload);
   } catch (error) {

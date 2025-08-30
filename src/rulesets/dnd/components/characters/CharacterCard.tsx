@@ -3,15 +3,15 @@ import Button from "@/components/library/Button";
 import Link from "@/components/library/Link";
 
 interface Props {
-  character: CharacterCard_5e
-  deleteFn: (character: CharacterCard_5e) => void
+  character: CharacterCard_Dnd
+  deleteFn: (character: CharacterCard_Dnd) => void
 }
 
 
 export default function CharacterCard({ character, deleteFn }: Props) {
   return (
     <div className="character-card">
-      <img src={character.img} alt="Character image" />
+      <img className="character-card__pic" src={character.img} alt="Character image" />
       <div>
         <h3 data-testid="name">{ character.name } <span><em>Lvl { character.lvl }</em></span></h3>
         <p>{ formatCharacterCardClasses(character.classes) }</p>

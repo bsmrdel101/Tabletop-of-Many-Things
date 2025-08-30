@@ -2,7 +2,7 @@ import { userAtom } from "@/scripts/atoms/state";
 import CharacterCard from "./CharacterCard";
 import NewCharacterCard from "./NewCharacterCard";
 import Button from "@/components/library/Button";
-import { addCharacter, deleteCharacter, getCharactersByUser } from "@/rulesets/5e/services/charactersService";
+import { addCharacter, deleteCharacter, getCharactersByUser } from "@/rulesets/dnd/services/charactersService";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -12,12 +12,12 @@ export default function CharactersList() {
   const [user] = useAtom(userAtom);
   const [showNewCharacterForm, setShowNewCharacterForm] = useState(false);
 
-  const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_5e[]>({
+  const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_Dnd[]>({
     queryKey: ['characters'],
     queryFn: getCharactersByUser
   });
 
-  const handleDelete = async (character: CharacterCard_5e) => {
+  const handleDelete = async (character: CharacterCard_Dnd) => {
     if (!confirm(`Do you want to delete ${character.name}?`)) return;
     await deleteCharacter(character.id);
     await refetch();

@@ -44,8 +44,11 @@
     }
   }
 
-  img {
-    width: 5.5rem;
+  &__pic, .file-input img {
+    object-fit: cover;
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
   }
 
   &__ruleset {

@@ -1,8 +1,8 @@
 import { numPrefix } from "@/scripts/tools/utils";
 
 interface Props {
-  abilityScore: AbilityScore_5e
-  onClick: (abilityScore: AbilityScore_5e) => void
+  abilityScore: AbilityScore_Dnd
+  onClick: (abilityScore: AbilityScore_Dnd) => void
 }
 
 
