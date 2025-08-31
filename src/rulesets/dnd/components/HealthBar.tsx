@@ -14,82 +14,104 @@ interface Props {
 
 export default function HealthBar({ character }: Props) {
   const [room] = useAtom<string>(roomAtom);
-  const ref = useRef<HTMLDivElement>(null);
-  const barValueRef = useRef<HTMLParagraphElement>(null);
-  const [hp, setHp] = useState<number>(character.hp);
-  const [tempHp, setTempHp] = useState<number>(character.tempHp);
-  const [maxHp, setMaxHp] = useState<number>(character.maxHp);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const barValueRef = useRef<HTMLParagraphElement | null>(null);
   const [editHp, setEditHp] = useState(false);
   const [maxHpMod, setMaxHpMod] = useState<number>(character.maxHpMod);
   const [maxHpOverride, setMaxHpOverride] = useState<number>(character.maxHpOverride);
+
   const animationFrame = useRef<number | null>(null);
-  const isBelowMaxHp = (character.maxHp - character.maxHpDmg <= 0) && character.maxHpOverride === 0;
   const tempHpColor = 'var(--temp-hp)';
   const easing = 0.1;
-
-  let targetHp = hp;
-  let targetTempHp = tempHp;
-  let targetMaxHp = maxHp;
-  let currentHp = hp;
-  let currentTempHp = tempHp;
-  let currentMaxHp = maxHp;
+  const currentHp = useRef(character.hp);
+  const currentTempHp = useRef(character.tempHp);
+  const currentMaxHp = useRef(character.maxHp - character.maxHpDmg);
+  const targetHp = useRef(character.hp);
+  const targetTempHp = useRef(character.tempHp);
+  const targetMaxHp = useRef(character.maxHp - character.maxHpDmg);
+  const isBelowMaxHp = character.maxHp - character.maxHpDmg <= 0 && character.maxHpOverride === 0;
 
   useEffect(() => {
-    targetHp = character.hp;
-    targetTempHp = character.tempHp;
-    targetMaxHp = character.maxHp;
-    animateHpBar();
+    targetHp.current = character.hp;
+    targetTempHp.current = character.tempHp;
+    targetMaxHp.current = character.maxHp - character.maxHpDmg;
 
-    return () => cancelAnimationFrame(animationFrame.current!);
-  }, [character]);
+    const animate = () => {
+      // ease towards targets
+      currentHp.current += (targetHp.current - currentHp.current) * easing;
+      currentTempHp.current += (targetTempHp.current - currentTempHp.current) * easing;
+      currentMaxHp.current += (targetMaxHp.current - currentMaxHp.current) * easing;
 
-  const animateHpBar = () => {
-    currentHp += (targetHp - currentHp) * easing;
-    currentTempHp += (targetTempHp - currentTempHp) * easing;
-    currentMaxHp += (targetMaxHp - currentMaxHp) * easing;
+      // snap if close enough
+      if (
+        Math.abs(targetHp.current - currentHp.current) < 0.1 &&
+        Math.abs(targetTempHp.current - currentTempHp.current) < 0.1 &&
+        Math.abs(targetMaxHp.current - currentMaxHp.current) < 0.1
+      ) {
+        currentHp.current = targetHp.current;
+        currentTempHp.current = targetTempHp.current;
+        currentMaxHp.current = targetMaxHp.current;
+      }
 
-    if (Math.abs(targetHp - currentHp) < 0.1 && Math.abs(targetTempHp - currentTempHp) < 0.1 && Math.abs(targetMaxHp - currentMaxHp) < 0.1) {
-      currentHp = targetHp;
-      currentTempHp = targetTempHp;
-      currentMaxHp = targetMaxHp;
-    }
+      const total = currentTempHp.current > 0 ? currentMaxHp.current + currentTempHp.current : currentMaxHp.current;
+      const hpAngle = (currentHp.current / total) * 360;
+      const tempHpAngle = currentTempHp.current > 0 ? (currentTempHp.current / total) * 360 : 0;
 
-    const total = currentTempHp > 0 ? currentMaxHp + currentTempHp : currentMaxHp;
-    const hpAngle = (currentHp / total) * 360;
-    const tempHpAngle = currentTempHp > 0 ? (currentTempHp / total) * 360 : 0;
-
-    setHp(Math.round(currentHp));
-    setTempHp(Math.round(currentTempHp));
-    setMaxHp(Math.round(currentMaxHp));
-
-    if (ref.current) {
-      ref.current.style.background = currentTempHp > 0
-        ? `conic-gradient(
-            ${getHealthColor(currentHp, currentMaxHp)} 0deg,
-            ${getHealthColor(currentHp, currentMaxHp)} ${hpAngle}deg,
+      if (ref.current) {
+        ref.current.style.background = currentTempHp.current > 0 ?
+          `conic-gradient(
+            ${getHealthColor(currentHp.current, currentMaxHp.current)} 0deg,
+            ${getHealthColor(currentHp.current, currentMaxHp.current)} ${hpAngle}deg,
             ${tempHpColor} ${hpAngle}deg,
             ${tempHpColor} ${hpAngle + tempHpAngle}deg,
             black ${hpAngle + tempHpAngle}deg
           )`
-        : `conic-gradient(
-            ${getHealthColor(currentHp, currentMaxHp)} 0deg,
-            ${getHealthColor(currentHp, currentMaxHp)} ${hpAngle}deg,
-            black ${hpAngle}deg
+          : `conic-gradient(
+            ${getHealthColor(currentHp.current, currentMaxHp.current)} 0deg,
+            ${getHealthColor(currentHp.current, currentMaxHp.current)}
+            ${hpAngle}deg, black ${hpAngle}deg
           )`;
-    }
+      }
 
-    if (targetHp !== currentHp || targetTempHp !== currentTempHp || targetMaxHp !== currentMaxHp) {
-      animationFrame.current = requestAnimationFrame(animateHpBar);
-    }
-  };
+      if (barValueRef.current) {
+        barValueRef.current.innerHTML = (`
+          <span>${Math.round(currentHp.current)}</span>
+          /
+          <span style="${isBelowMaxHp ? "color: var(--red-4);" : ""}">
+            ${Math.round(currentMaxHp.current)}
+          </span>
+        `);
+      }
+
+      if (
+        currentHp.current !== targetHp.current ||
+        currentTempHp.current !== targetTempHp.current ||
+        currentMaxHp.current !== targetMaxHp.current
+      ) {
+        animationFrame.current = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame.current = requestAnimationFrame(animate);
+    return () => {
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+    };
+  }, [character.hp, character.tempHp, character.maxHp, character.maxHpDmg, editHp]);
 
   const handleEditHpValues = async (e: FormEvent) => {
     e.preventDefault();
     setEditHp(false);
     const newMaxHp = Number(maxHpOverride) > 0 ? Number(maxHpOverride) : character.maxHp + Number(maxHpMod);
-    const newHp = hp > newMaxHp ? newMaxHp : hp;
-    emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHpMod: Number(maxHpMod), maxHpOverride: Number(maxHpOverride), maxHp: newMaxHp, hp: newHp }, room]);
-    await editCharacter({ ...character, maxHpMod: Number(maxHpMod), maxHpOverride: Number(maxHpOverride), maxHp: newMaxHp, hp: newHp });
+    const newHp = currentHp.current > newMaxHp ? newMaxHp : currentHp.current;
+    const newCharacter = {
+      ...character,
+      maxHpMod: Number(maxHpMod),
+      maxHpOverride: Number(maxHpOverride),
+      maxHp: newMaxHp,
+      hp: newHp
+    };
+    emitServerEvent("UPDATE_PLAYER", [newCharacter, room]);
+    await editCharacter(newCharacter);
   };
 
 
@@ -118,12 +140,10 @@ export default function HealthBar({ character }: Props) {
           </form>
           :
           <div className="circular-hp-bar__inner-circle--middle">
-            { tempHp > 0 && <p className="circular-hp-bar__temp-hp" data-testid="temp-hp">{ tempHp && `+${tempHp}` }</p> }
-            <p className="circular-hp-bar__hp" ref={barValueRef} data-testid="hp">
-              <span>{ hp } </span>
-              /
-              <span style={isBelowMaxHp ? { color: 'var(--red-4)' } : {}}> { maxHp }</span>
-            </p>
+            {character.tempHp > 0 && (
+              <p className="circular-hp-bar__temp-hp" data-testid="temp-hp">{ `+${character.tempHp}` }</p>
+            )}
+            <p className="circular-hp-bar__hp" ref={barValueRef} data-testid="hp" />
           </div>
         }
       </div>

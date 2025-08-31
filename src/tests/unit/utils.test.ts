@@ -35,7 +35,7 @@ describe('formatCharacterCardClasses', () => {
     const classes = [
       { name: 'Rouge', lvl: 3, subclass: 'Thief' }
     ] as any;
-    expect(formatCharacterCardClasses(classes)).toEqual('Thief Rouge 3');
+    expect(formatCharacterCardClasses(classes)).toEqual('Thief Rouge lvl 3');
   });
 
   test('Multiple classes', () => {
@@ -43,7 +43,7 @@ describe('formatCharacterCardClasses', () => {
       { name: 'Rouge', lvl: 3, subclass: 'Thief' },
       { name: 'Barbarian', lvl: 1, subclass: null },
     ] as any;
-    expect(formatCharacterCardClasses(classes)).toEqual('Thief Rouge 3 / Barbarian 1');
+    expect(formatCharacterCardClasses(classes)).toEqual('Thief Rouge lvl 3 / Barbarian lvl 1');
   });
 
   test('No classes', () => {

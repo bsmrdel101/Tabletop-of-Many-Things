@@ -38,8 +38,6 @@ export default function EditArmorDialog({ open, setOpen, character }: Props) {
       setOpen={setOpen}
       title="Edit Armor Class"
       className="edit-armor-dialog"
-      x={200}
-      y={100}
     >
       <form>
         <div className="edit-armor-dialog__content">

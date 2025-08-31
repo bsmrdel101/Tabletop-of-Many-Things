@@ -1,4 +1,4 @@
-import CharacterSheet5e from "@/rulesets/dnd/components/character-sheet/structure/CharacterSheet5e";
+import CharacterSheetDnd from "@/rulesets/dnd/components/character-sheet/structure/CharacterSheetDnd";
 import { roomAtom } from "@/scripts/atoms/state";
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import { generateCode } from "@/scripts/tools/utils";
@@ -23,7 +23,7 @@ export default function CharacterPage() {
 
   return (
     <>
-      { ruleset === '5e' && <CharacterSheet5e /> }
+      { ruleset === '5e' && <CharacterSheetDnd /> }
     </>
   );
 }

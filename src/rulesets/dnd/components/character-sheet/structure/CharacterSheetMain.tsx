@@ -11,12 +11,21 @@ interface Props {
 export default function CharacterSheetMain({ character }: Props) {
   return (
     <section className="character-sheet-main">
-      <MainHeader character={character} />
+      <MainHeader
+        characterImg={character.img}
+        characterName={character.name}
+        characterClasses={character.classes}
+        characterRace={character.race}
+        characterSubrace={character.subrace}
+        characterBackground={character.background}
+        characterXp={character.xp}
+        characterLvl={character.lvl}
+      />
       <div className="character-sheet-main__row">
         <HealthManagement character={character} />
         <MainStats character={character} />
       </div>
-      <AbilityScores character={character} />
+      <AbilityScores abilityScores={character.abilityScores} />
     </section>
   );
 };
