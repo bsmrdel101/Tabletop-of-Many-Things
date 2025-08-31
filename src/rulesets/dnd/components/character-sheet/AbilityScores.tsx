@@ -1,12 +1,13 @@
 import AbilityScore from "@/rulesets/dnd/components/AbilityScore";
 import { rollCheck } from "../../scripts/gameplayMechanics";
+import { memo } from "react";
 
 interface Props {
-  character: Character_Dnd
+  abilityScores: AbilityScore_Dnd[]
 }
 
 
-export default function AbilityScores({ character }: Props) {
+function AbilityScores({ abilityScores }: Props) {
   const handleRollCheck = (abilityScore: AbilityScore_Dnd) => {
     rollCheck(abilityScore.mod);
   };
@@ -14,7 +15,7 @@ export default function AbilityScores({ character }: Props) {
 
   return (
     <div className="character-sheet-main-ability-scores">
-      {character.abilityScores.map((abilityScore: AbilityScore_Dnd) => {
+      {abilityScores.map((abilityScore: AbilityScore_Dnd) => {
         return (
           <AbilityScore
             key={abilityScore.id}
@@ -26,3 +27,5 @@ export default function AbilityScores({ character }: Props) {
     </div>
   );
 }
+
+export default memo(AbilityScores);

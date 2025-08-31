@@ -13,15 +13,15 @@ const isContainerRunning = (): boolean => {
 };
 
 export default async function globalSetup() {
-  console.log('🛠️  Ensuring test DB container is running...');
+  console.log('> Ensuring test DB container is running...');
 
   if (!isContainerRunning()) {
     execSync('docker-compose -p tabletop-of-many-things-tests -f docker-compose.test.yml up -d', { stdio: 'inherit' });
   } else {
-    console.log('✅ Container already running');
+    console.log('> Container already running');
   }
 
-  console.log('⏳ Waiting for test DB to be ready...');
+  console.log('> Waiting for test DB to be ready...');
   await new Promise(resolve => setTimeout(resolve, 5000));
   const client = new pg.Client({
     host: '127.0.0.1',
@@ -41,15 +41,15 @@ export default async function globalSetup() {
   `, [knownTable]);
 
   if (!rows[0]?.has_table) {
-    console.log('📦 Schema not found, loading...');
+    console.log('> Schema not found, loading...');
     const schemaSql = fs.readFileSync('../Tabletop-of-Many-Things-Server/db/schema.sql', 'utf-8');
     await client.query(schemaSql);
-    console.log('✅ Schema loaded');
+    console.log('> Schema loaded');
   } else {
-    console.log('🗂️  Schema already exists, skipping schema.sql');
+    console.log('> Schema already exists, skipping schema.sql');
   }
 
-  console.log('🧼 Truncating all user-defined tables...');
+  console.log('> Truncating all user-defined tables...');
   await client.query(`
     DO $$
     DECLARE
@@ -69,14 +69,14 @@ export default async function globalSetup() {
     END $$;
   `);
 
-  console.log('🌱 Seeding test data...');
+  console.log('> Seeding test data...');
   const seedDir = '../Tabletop-of-Many-Things-Server/db/seed';
   const files = fs.readdirSync(seedDir).filter((file) => file.endsWith('.sql')).sort();
   for (const file of files) {
     const sql = fs.readFileSync(`${seedDir}/${file}`, 'utf-8');
-    console.log(`- Running ${file}...`);
+    console.log(`- Running ${file}`);
     await client.query(sql);
   }
   await client.end();
-  console.log('✅ Test DB ready');
+  console.log('> Test DB ready');
 }

@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
 
 
-export default function CharacterSheet5e() {
+export default function CharacterSheetDnd() {
   const { id } = useParams();
   const [character, setCharacter] = useState<Character_Dnd | null>(null);
   const [tab, setTab] = useState('main');
