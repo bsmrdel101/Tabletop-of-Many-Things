@@ -1,10 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
-import Button from "../../../components/library/Button";
-import { emitServerEvent } from "../../../scripts/config/socket-io";
-import Input from "../../../components/library/Input";
-import { useAtom } from "jotai";
-import { roomAtom } from "@/scripts/atoms/state";
-import { editCharacter } from "@/rulesets/dnd/services/charactersService";
+import { useEffect, useRef } from "react";
 import { getHealthColor } from "../scripts/utils";
 
 interface Props {
@@ -13,12 +7,8 @@ interface Props {
 
 
 export default function HealthBar({ character }: Props) {
-  const [room] = useAtom<string>(roomAtom);
   const ref = useRef<HTMLDivElement | null>(null);
   const barValueRef = useRef<HTMLParagraphElement | null>(null);
-  const [editHp, setEditHp] = useState(false);
-  const [maxHpMod, setMaxHpMod] = useState<number>(character.maxHpMod);
-  const [maxHpOverride, setMaxHpOverride] = useState<number>(character.maxHpOverride);
 
   const animationFrame = useRef<number | null>(null);
   const tempHpColor = 'var(--temp-hp)';
@@ -96,56 +86,19 @@ export default function HealthBar({ character }: Props) {
     return () => {
       if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
     };
-  }, [character.hp, character.tempHp, character.maxHp, character.maxHpDmg, editHp]);
-
-  const handleEditHpValues = async (e: FormEvent) => {
-    e.preventDefault();
-    setEditHp(false);
-    const newMaxHp = Number(maxHpOverride) > 0 ? Number(maxHpOverride) : character.maxHp + Number(maxHpMod);
-    const newHp = currentHp.current > newMaxHp ? newMaxHp : currentHp.current;
-    const newCharacter = {
-      ...character,
-      maxHpMod: Number(maxHpMod),
-      maxHpOverride: Number(maxHpOverride),
-      maxHp: newMaxHp,
-      hp: newHp
-    };
-    emitServerEvent("UPDATE_PLAYER", [newCharacter, room]);
-    await editCharacter(newCharacter);
-  };
+  }, [character.hp, character.tempHp, character.maxHp, character.maxHpDmg]);
 
 
   return (
     <div className="circular-hp-bar" ref={ref}>
       <div className="circular-hp-bar__inner-circle"></div>
-      <div className="circular-hp-bar__center" onClick={() => !editHp && setEditHp(true)}>
-        {editHp ?
-          <form className="circular-hp-bar__hp" onSubmit={handleEditHpValues}>
-            <Input
-              label="Max HP Mod"
-              value={maxHpMod}
-              onChange={(e: any) => setMaxHpMod(e.target.value)}
-              type="number"
-            />
-            <Input
-              label="Override Max HP"
-              value={maxHpOverride}
-              onChange={(e: any) => setMaxHpOverride(e.target.value)}
-              type="number"
-            />
-            <div className="form__footer">
-              <Button variants={['danger', 'bold']} type="button" onClick={() => setEditHp(false)}>Cancel</Button>
-              <Button variants={['save', 'bold']} type="submit">Save</Button>
-            </div>
-          </form>
-          :
-          <div className="circular-hp-bar__inner-circle--middle">
-            {character.tempHp > 0 && (
-              <p className="circular-hp-bar__temp-hp" data-testid="temp-hp">{ `+${character.tempHp}` }</p>
-            )}
-            <p className="circular-hp-bar__hp" ref={barValueRef} data-testid="hp" />
-          </div>
-        }
+      <div className="circular-hp-bar__center">
+        <div className="circular-hp-bar__inner-circle--middle">
+          {character.tempHp > 0 && (
+            <p className="circular-hp-bar__temp-hp" data-testid="temp-hp">{ `+${character.tempHp}` }</p>
+          )}
+          <p className="circular-hp-bar__hp" ref={barValueRef} data-testid="hp" />
+        </div>
       </div>
     </div>
   );
