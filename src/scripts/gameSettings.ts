@@ -1,7 +1,8 @@
 const defaultSettingsDnd: GameSettings = {
   dnd: {
     ignoreCoinWeight: true,
-    usingXp: false
+    usingXp: false,
+    trackNormalArrows: true
   }
 };
 

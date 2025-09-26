@@ -46,6 +46,7 @@ type GameSettings = {
   dnd?: {
     ignoreCoinWeight: boolean
     usingXp: boolean
+    trackNormalArrows: boolean
   }
 };
 
