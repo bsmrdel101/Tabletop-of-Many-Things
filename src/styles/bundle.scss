@@ -14,6 +14,7 @@
 @use 'components/home/user-box';
 @use 'components/login';
 @use 'components/dnd/character-sheet/character-sheet';
-@use 'components/dnd/character-sheet/health';
 @use 'components/dnd/character-sheet/main-stats';
 @use 'components/dnd/ability-score';
+@use 'components/dnd/saving-throws';
+@use 'components/dnd/health';

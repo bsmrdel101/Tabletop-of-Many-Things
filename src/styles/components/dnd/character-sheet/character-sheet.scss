@@ -86,4 +86,15 @@
     display: flex;
     gap: 0.4rem;
   }
+
+  .character-sheet-main-saving-throws {
+    &__title {
+      margin: 0.6rem 0 0.5rem;
+    }
+
+    &__list {
+      display: flex;
+      gap: 0.4rem;
+    }
+  }
 }

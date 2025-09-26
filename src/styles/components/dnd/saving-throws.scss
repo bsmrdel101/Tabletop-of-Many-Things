@@ -1,0 +1,35 @@
+.saving-throw {
+  position: relative;
+  background-color: var(--blue-dark-2);
+  width: 4.6rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  &__name {
+    font-weight: bold;
+    font-size: var(--font-sm);
+  }
+
+  &__mod {
+    padding: 0 0.1rem 0 0;
+    font-size: var(--font-xsm);
+  }
+
+  img {
+    position: absolute;
+    width: 0.9rem;
+    left: -0.4rem;
+    top: -0.4rem;
+  }
+
+  &:hover {
+    border-color: var(--pink-1);
+  }
+}
