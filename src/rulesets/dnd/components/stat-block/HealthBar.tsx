@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { getHealthColor } from "../scripts/utils";
+import { getHealthColor } from "../../scripts/utils";
 
 interface Props {
   character: Character_Dnd

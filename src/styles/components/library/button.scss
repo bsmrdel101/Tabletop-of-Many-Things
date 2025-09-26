@@ -18,7 +18,12 @@
   &--secondary {
     background-color: var(--purple-dark-4);
     box-shadow: none;
-  }  
+  }
+
+  &--secondary-blue {
+    background-color: var(--blue-dark-2);
+    box-shadow: none;
+  }
 
   &--border {
     background-color: transparent;

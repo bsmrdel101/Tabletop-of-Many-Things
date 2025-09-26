@@ -1,20 +1,13 @@
 import { numPrefix } from "@/scripts/tools/utils";
-import { profFromLvl } from "../scripts/gameSystemsInfo";
-import { useMemo } from "react";
 
 interface Props {
   abilityScore: AbilityScore_Dnd
-  lvl: number
+  prof: number
   onClick: (abilityScore: AbilityScore_Dnd) => void
 }
 
 
-export default function SavingThrow({ abilityScore, lvl, onClick }: Props) {
-  const prof = useMemo(() => {
-    return abilityScore.prof ? profFromLvl(lvl) : 0;
-  }, [abilityScore, lvl]);
-
-
+export default function SavingThrow({ abilityScore, prof, onClick }: Props) {
   return (
     <div className="saving-throw" onClick={() => onClick(abilityScore)}>
       { abilityScore.prof && <img src="/images/game/star.svg" alt="Star" /> }

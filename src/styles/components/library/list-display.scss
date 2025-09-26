@@ -1,0 +1,26 @@
+.list-display {
+  &__title {
+    font-weight: bold;
+    margin-bottom: 0.15rem;
+  }
+
+  &__row {
+    padding: 0.2rem 0.25rem;
+    background-color: var(--blue-dark-3);
+    font-size: var(--font-sm);
+
+    &:first-child {
+      border-top-left-radius: 0.1rem;
+      border-top-right-radius: 0.1rem;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.1rem;
+      border-bottom-right-radius: 0.1rem;
+    }
+
+    &:nth-child(even) {
+      background-color: var(--blue-dark-2);
+    }
+  }
+}

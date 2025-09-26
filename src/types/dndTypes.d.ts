@@ -96,7 +96,7 @@ type Character_Dnd = {
   currentHitDice: Dice_Dnd[]
   speeds: Speed_Dnd[]
   senses: NameValue[]
-  proficiencies: Prof_Dnd[]
+  proficiencies: Prof_Dnd
   resistances: string[]
   vulnerabilities: string[]
   condImmunities: string[]
@@ -217,11 +217,12 @@ type Skill_Dnd = {
   proficient: boolean
 };
 
-type ProfType_Dnd = 'skill' | 'save' | 'weapon' | 'armor' | 'tool' | 'vehicle';
 type Prof_Dnd = {
-  type: ProfType_Dnd
-  name: string
-  value: number
+  weapons: { id: number, name: string }[]
+  armor: { id: number, name: string }[]
+  tools: { id: number, name: string }[]
+  instruments: { id: number, name: string }[]
+  vehicles: { id: number, name: string }[]
 };
 
 type ProfChoice_Dnd = {

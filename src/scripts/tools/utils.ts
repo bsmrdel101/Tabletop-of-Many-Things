@@ -1,4 +1,14 @@
 // GENERAL
+declare global {
+  interface String {
+    capitalize(): string;
+  }
+}
+
+String.prototype.capitalize = function (): string {
+  if (this.length === 0) return '';
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 export const numPrefix = (num: number): string => num >= 0 ? `+${num}` : num.toString();

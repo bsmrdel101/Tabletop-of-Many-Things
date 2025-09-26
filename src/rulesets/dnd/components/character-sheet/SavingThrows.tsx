@@ -1,6 +1,7 @@
 import { rollCheck } from "../../scripts/gameplayMechanics";
 import { memo } from "react";
-import SavingThrow from "../SavingThrow";
+import SavingThrow from "../stat-block/SavingThrow";
+import { profFromLvl } from "../../scripts/gameSystemsInfo";
 
 interface Props {
   abilityScores: AbilityScore_Dnd[]
@@ -15,15 +16,15 @@ function SavingThrows({ abilityScores, lvl }: Props) {
 
 
   return (
-    <div className="character-sheet-main-saving-throws">
-      <h3 className="character-sheet-main-saving-throws__title">Saving Throws</h3>
-      <div className="character-sheet-main-saving-throws__list">
+    <div className="character-sheet-saving-throws">
+      <h3 className="character-sheet-saving-throws__title">Saving Throws</h3>
+      <div className="character-sheet-saving-throws__list">
         {abilityScores.map((abilityScore: AbilityScore_Dnd) => {
           return (
             <SavingThrow
               key={abilityScore.id}
               abilityScore={abilityScore}
-              lvl={lvl}
+              prof={abilityScore.prof ? profFromLvl(lvl) : 0}
               onClick={handleRollCheck}
             />
           );

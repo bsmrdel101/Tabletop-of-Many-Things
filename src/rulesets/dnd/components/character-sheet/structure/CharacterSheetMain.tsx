@@ -1,8 +1,9 @@
 import MainHeader from "@/rulesets/dnd/components/character-sheet/MainHeader";
-import HealthManagement from "../../HealthManagement";
+import HealthManagement from "../../stat-block/HealthManagement";
 import MainStats from "../MainStats";
 import AbilityScores from "../AbilityScores";
 import SavingThrows from "../SavingThrows";
+import Attributes from "../Attributes";
 
 interface Props {
   character: Character_Dnd
@@ -28,6 +29,7 @@ export default function CharacterSheetMain({ character }: Props) {
       </div>
       <AbilityScores abilityScores={character.abilityScores} />
       <SavingThrows abilityScores={character.abilityScores} lvl={character.lvl} />
+      <Attributes character={character} />
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import AbilityScore from "@/rulesets/dnd/components/AbilityScore";
+import AbilityScore from "@/rulesets/dnd/components/stat-block/AbilityScore";
 import { rollCheck } from "../../scripts/gameplayMechanics";
 import { memo } from "react";
 
@@ -14,7 +14,7 @@ function AbilityScores({ abilityScores }: Props) {
 
 
   return (
-    <div className="character-sheet-main-ability-scores">
+    <div className="character-sheet-ability-scores">
       {abilityScores.map((abilityScore: AbilityScore_Dnd) => {
         return (
           <AbilityScore

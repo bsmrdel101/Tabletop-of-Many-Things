@@ -1,4 +1,4 @@
-import CharacterNavbar from "../../CharacterNavbar";
+import CharacterNavbar from "../CharacterNavbar";
 import { useEffect, useState } from "react";
 import CharacterSheetMain from "./CharacterSheetMain";
 import { getCharacterById } from "@/rulesets/dnd/services/charactersService";

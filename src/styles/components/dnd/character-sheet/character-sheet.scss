@@ -82,12 +82,12 @@
     }
   }
 
-  .character-sheet-main-ability-scores {
+  .character-sheet-ability-scores {
     display: flex;
     gap: 0.4rem;
   }
 
-  .character-sheet-main-saving-throws {
+  .character-sheet-saving-throws {
     &__title {
       margin: 0.6rem 0 0.5rem;
     }
@@ -95,6 +95,20 @@
     &__list {
       display: flex;
       gap: 0.4rem;
+    }
+  }
+
+  .character-sheet-attributes {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: fit-content;
+
+    &__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
     }
   }
 }

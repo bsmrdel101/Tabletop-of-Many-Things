@@ -18,7 +18,7 @@ interface Props {
 
 
 function MainHeader({ characterImg, characterName, characterClasses, characterRace, characterSubrace, characterBackground, characterXp, characterLvl }: Props) {
-  const [game] = useAtom<Game | null>(gameAtom); // TODO: game is currently not being set anywhere
+  const [game] = useAtom<Game | null>(gameAtom);
 
 
   return (
@@ -35,10 +35,10 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
 
       <div className="character-sheet-main-header__right">
         <div className="character-sheet-main-header__rest-buttons">
-          <Button variants={['thin', 'secondary', 'left-icon']}>
+          <Button variants={['thin', 'secondary-blue', 'left-icon']}>
             <img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest
           </Button>
-          <Button variants={['thin', 'secondary', 'left-icon']}>
+          <Button variants={['thin', 'secondary-blue', 'left-icon']}>
             <img src="/images/game/tent.svg" alt="Tent" /> Long Rest
           </Button>
         </div>
