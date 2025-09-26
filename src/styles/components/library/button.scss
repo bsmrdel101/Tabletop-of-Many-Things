@@ -150,4 +150,11 @@
       text-shadow: none;
     }
   }
+
+  &--left-icon {
+    img {
+      width: 1rem;
+      margin-right: 0.2rem;
+    }
+  }
 }

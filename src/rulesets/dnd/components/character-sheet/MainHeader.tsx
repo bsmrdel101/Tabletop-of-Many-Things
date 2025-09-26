@@ -35,8 +35,12 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
 
       <div className="character-sheet-main-header__right">
         <div className="character-sheet-main-header__rest-buttons">
-          <Button variants={['thin', 'secondary']}>Short Rest</Button>
-          <Button variants={['thin', 'secondary']}>Long Rest</Button>
+          <Button variants={['thin', 'secondary', 'left-icon']}>
+            <img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest
+          </Button>
+          <Button variants={['thin', 'secondary', 'left-icon']}>
+            <img src="/images/game/tent.svg" alt="Tent" /> Long Rest
+          </Button>
         </div>
 
         <div className="character-sheet-main-header__lvl-manager">
