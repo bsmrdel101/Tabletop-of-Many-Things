@@ -11,8 +11,7 @@ interface NewUser {
 export const getUser = async (): Promise<User | null> => {
   try {
     const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
+      headers: { 'Content-Type': 'application/json' }
     };
     const res = await api.get('/api/user', config);
     return res.data.user;
@@ -27,8 +26,7 @@ export const getUser = async (): Promise<User | null> => {
 export const registerUser = async (payload: NewUser): Promise<void | string> => {
   try {
     const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
+      headers: { 'Content-Type': 'application/json' }
     };
     await api.post('/api/user/register', payload, config);
   } catch(error: any) {
@@ -40,8 +38,7 @@ export const registerUser = async (payload: NewUser): Promise<void | string> => 
 export const loginUser = async (payload: NewUser): Promise<void | string> => {
   try {
     const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
+      headers: { 'Content-Type': 'application/json' }
     };
     await api.post('/api/user/login', payload, config);
   } catch(error: any) {
@@ -52,8 +49,7 @@ export const loginUser = async (payload: NewUser): Promise<void | string> => {
 
 export const logout = async () => {
   try {
-    const auth = { withCredentials: true };
-    await api.delete('/api/user/logout', auth);
+    await api.delete('/api/user/logout');
   } catch(error) {
     console.error(error);
   }
@@ -63,8 +59,7 @@ export const logout = async () => {
 
 export const changeNewUser = async (payload: boolean) => {
   try {
-    const auth = { withCredentials: true };
-    await api.put('/api/user', { newStatus: payload }, auth);
+    await api.put('/api/user', { newStatus: payload });
   } catch(error) {
     console.error(error);
   }

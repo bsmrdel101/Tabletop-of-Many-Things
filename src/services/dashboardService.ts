@@ -19,8 +19,7 @@ interface EditGamePayload {
 
 export const getGamesByUser = async (): Promise<GameMin[]> => {
   try {
-    const auth = { withCredentials: true };
-    const res = await api.get('/api/dashboard', auth);
+    const res = await api.get('/api/dashboard');
     return res.data;
   } catch (error) {
     console.error(error);
@@ -30,8 +29,7 @@ export const getGamesByUser = async (): Promise<GameMin[]> => {
 
 export const getGameById = async (id: number): Promise<Game | null> => {
   try {
-    const auth = { withCredentials: true };
-    const res = await api.get(`/api/dashboard/id/${id}`, auth);
+    const res = await api.get(`/api/dashboard/id/${id}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -41,8 +39,7 @@ export const getGameById = async (id: number): Promise<Game | null> => {
 
 export const getGamesHistory = async (): Promise<GameMin[]> => {
   try {
-    const auth = { withCredentials: true };
-    const res = await api.get('/api/dashboard/history', auth);
+    const res = await api.get('/api/dashboard/history');
     return res.data;
   } catch (error) {
     console.error(error);
@@ -54,8 +51,7 @@ export const getGamesHistory = async (): Promise<GameMin[]> => {
 
 export const addGame = async (payload: NewGamePayload): Promise<number | null> => {
   try {
-    const auth = { withCredentials: true };
-    const res = await api.post('/api/dashboard', payload, auth);
+    const res = await api.post('/api/dashboard', payload);
     return res.data.id;
   } catch (error) {
     console.error(error);
@@ -65,8 +61,7 @@ export const addGame = async (payload: NewGamePayload): Promise<number | null> =
 
 export const addGameToHistory = async (gameId: number) => {
   try {
-    const auth = { withCredentials: true };
-    await api.post('/api/dashboard/history', { gameId }, auth);
+    await api.post('/api/dashboard/history', { gameId });
   } catch (error) {
     console.error(error);
   }
@@ -76,8 +71,7 @@ export const addGameToHistory = async (gameId: number) => {
 
 export const editGame = async (payload: EditGamePayload) => {
   try {
-    const auth = { withCredentials: true };
-    await api.patch(`/api/dashboard`, payload, auth);
+    await api.patch(`/api/dashboard`, payload);
   } catch (error) {
     console.error(error);
   }
@@ -87,8 +81,7 @@ export const editGame = async (payload: EditGamePayload) => {
 
 export const deleteGame = async (id: number) => {
   try {
-    const auth = { withCredentials: true };
-    await api.patch(`/api/dashboard/${id}`, auth);
+    await api.patch(`/api/dashboard/${id}`);
   } catch (error) {
     console.error(error);
   }

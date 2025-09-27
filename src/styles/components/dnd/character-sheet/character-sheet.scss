@@ -62,6 +62,10 @@
       gap: 1rem;
     }
 
+    &__inspiration {
+      color: var(--pink-0);
+    }
+
     &__rest-buttons {
       display: flex;
       flex-direction: column;

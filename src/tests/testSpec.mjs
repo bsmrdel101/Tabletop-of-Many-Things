@@ -7,5 +7,5 @@ if (args.length === 0) {
 }
 
 const files = args.map(name => `src/tests/e2e/${name}.spec.ts`).join(" ");
-execSync(`npx playwright test ${files} --workers=1`, { stdio: "inherit" });
+execSync(`npx playwright test ${files} --workers 1`, { stdio: "inherit" });
 execSync("rm -rf playwright-report ./test-results");

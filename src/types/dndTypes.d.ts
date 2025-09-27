@@ -82,7 +82,7 @@ type Character_Dnd = {
   maxHpDmg: number
   hp: number
   tempHp: number
-  insp?: boolean
+  insp: boolean
   bardicInsp: BardicInsp_Dnd | null
   abilityScores: AbilityScore_Dnd[]
   race: PlayerRace_Dnd | null
@@ -110,7 +110,6 @@ type Character_Dnd = {
 
 type BardicInsp_Dnd = {
   type: number
-  amount: number
   keepOnFail: boolean
 };
 

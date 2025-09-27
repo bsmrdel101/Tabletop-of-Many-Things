@@ -22,6 +22,7 @@ export default function CharacterSheetMain({ character }: Props) {
         characterBackground={character.background}
         characterXp={character.xp}
         characterLvl={character.lvl}
+        characterBardicInsp={character.bardicInsp}
       />
       <div className="character-sheet-main__row">
         <HealthManagement character={character} />

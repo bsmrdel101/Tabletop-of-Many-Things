@@ -17,6 +17,7 @@
     "color-hex-length": null,
     "selector-id-pattern": null,
     "import-notation": null,
-    "color-function-alias-notation": null
+    "color-function-alias-notation": null,
+    "function-calc-no-unspaced-operator": true
   }
 }

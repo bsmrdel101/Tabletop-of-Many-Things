@@ -4,6 +4,7 @@ import { xpForNextLevel } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { useAtom } from "jotai";
 import { formatCharacterClasses } from "../../scripts/utils";
 import { memo } from "react";
+import Inspiration from "./Inspiration";
 
 interface Props {
   characterImg: string
@@ -14,10 +15,11 @@ interface Props {
   characterBackground: PlayerBackground_5e | PlayerBackground_2024 | null
   characterXp: number
   characterLvl: number
+  characterBardicInsp: BardicInsp_Dnd | null
 }
 
 
-function MainHeader({ characterImg, characterName, characterClasses, characterRace, characterSubrace, characterBackground, characterXp, characterLvl }: Props) {
+function MainHeader({ characterImg, characterName, characterClasses, characterRace, characterSubrace, characterBackground, characterXp, characterLvl, characterBardicInsp }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
 
 
@@ -34,6 +36,8 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
       </div>
 
       <div className="character-sheet-main-header__right">
+        { characterBardicInsp && <Inspiration bardicInsp={characterBardicInsp} /> }
+
         <div className="character-sheet-main-header__rest-buttons">
           <Button variants={['thin', 'secondary-blue', 'left-icon']}>
             <img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest

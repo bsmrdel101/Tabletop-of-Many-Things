@@ -5,8 +5,7 @@ import api from "@/scripts/config/axios";
 
 export const getAssetsByGame = async (gameId: number): Promise<Game[]> => {
   try {
-    const auth = { withCredentials: true };
-    const res = await api.get(`/api/assets/game/${gameId}`, auth);
+    const res = await api.get(`/api/assets/game/${gameId}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -18,8 +17,7 @@ export const getAssetsByGame = async (gameId: number): Promise<Game[]> => {
 
 export const addAsset = async (gameId: number | null, name: string, filepath: string, img: string): Promise<number | null> => {
   try {
-    const auth = { withCredentials: true };
-    const res = await api.post('/api/assets', { gameId, name, filepath, img }, auth);
+    const res = await api.post('/api/assets', { gameId, name, filepath, img });
     return res.data.id;
   } catch (error) {
     console.error(error);
@@ -31,8 +29,7 @@ export const addAsset = async (gameId: number | null, name: string, filepath: st
 
 export const editAssetFilepath = async (id: number, filepath: string) => {
   try {
-    const auth = { withCredentials: true };
-    await api.patch('/api/assets/filepath', { id, filepath }, auth);
+    await api.patch('/api/assets/filepath', { id, filepath });
   } catch (error) {
     console.error(error);
   }
@@ -40,8 +37,7 @@ export const editAssetFilepath = async (id: number, filepath: string) => {
 
 export const editAssetName = async (id: number, name: string) => {
   try {
-    const auth = { withCredentials: true };
-    await api.patch('/api/assets/name', { id, name }, auth);
+    await api.patch('/api/assets/name', { id, name });
   } catch (error) {
     console.error(error);
   }
@@ -51,8 +47,7 @@ export const editAssetName = async (id: number, name: string) => {
 
 export const deleteAsset = async (id: number) => {
   try {
-    const auth = { withCredentials: true };
-    await api.patch(`/api/assets/${id}`, auth);
+    await api.patch(`/api/assets/${id}`);
   } catch (error) {
     console.error(error);
   }
