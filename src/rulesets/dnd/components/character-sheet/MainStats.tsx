@@ -4,6 +4,7 @@ import { numPrefix } from "@/scripts/tools/utils";
 import { useMemo, useState } from "react";
 import EditArmorDialog from "./dialogs/EditArmorDialog";
 import { rollInit } from "../../scripts/gameplayMechanics";
+import Img from "@/components/library/Img";
 
 interface Props {
   character: Character_Dnd
@@ -24,7 +25,7 @@ export default function MainStats({ character }: Props) {
 
       <div className="main-stats__row">
         <div className="main-stats__ac" onClick={() => setEditAcOpen(true)}>
-          <img src="/images/game/shield.svg" alt="" draggable={false} />
+          <Img src="/images/game/shield.svg" alt="" draggable={false} />
           <p>{ character.ac }</p>
         </div>
 

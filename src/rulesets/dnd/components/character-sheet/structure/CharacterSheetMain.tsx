@@ -4,13 +4,16 @@ import MainStats from "../MainStats";
 import AbilityScores from "../AbilityScores";
 import SavingThrows from "../SavingThrows";
 import Attributes from "../Attributes";
+import EditButton from "../EditButton";
 
 interface Props {
   character: Character_Dnd
+  editing: boolean
+  setEditing: (value: boolean) => void
 }
 
 
-export default function CharacterSheetMain({ character }: Props) {
+export default function CharacterSheetMain({ character, editing, setEditing }: Props) {
   return (
     <section className="character-sheet-main">
       <MainHeader
@@ -31,6 +34,8 @@ export default function CharacterSheetMain({ character }: Props) {
       <AbilityScores abilityScores={character.abilityScores} />
       <SavingThrows abilityScores={character.abilityScores} lvl={character.lvl} />
       <Attributes character={character} />
+
+      <EditButton editing={editing} setEditing={setEditing} />
     </section>
   );
 };

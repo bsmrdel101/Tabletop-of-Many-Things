@@ -1,4 +1,5 @@
 import Button from "../library/Button";
+import Img from "../library/Img";
 
 interface Props {
   game: GameMin
@@ -19,10 +20,10 @@ export default function GameCard({ game, selected, setSelected }: Props) {
         <div className="game-card">
           <Button variants={['small', 'dark']}>Launch</Button>
           <Button variants={['small', 'image', 'empty']}>
-            <img src="/images/icons/pen.svg" alt="Edit button" />
+            <Img src="/images/icons/pen.svg" alt="Edit button" />
           </Button>
           <Button variants={['small', 'image', 'empty']}>
-            <img src="/images/icons/trash.svg" alt="Delete button" />
+            <Img src="/images/icons/trash.svg" alt="Delete button" />
           </Button>
         </div>
       }

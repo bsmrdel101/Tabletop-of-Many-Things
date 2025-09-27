@@ -1,6 +1,7 @@
 import Button from "@/components/library/Button";
 import Link from "@/components/library/Link";
 import { formatCharacterCardClasses } from "../../scripts/utils";
+import Img from "@/components/library/Img";
 
 interface Props {
   character: CharacterCard_Dnd
@@ -11,7 +12,7 @@ interface Props {
 export default function CharacterCard({ character, deleteFn }: Props) {
   return (
     <div className="character-card">
-      <img className="character-card__pic" src={character.img} alt="Character image" />
+      <Img className="character-card__pic" src={character.img} alt="Character image" />
       <div>
         <h3 data-testid="name">{ character.name } <span><em>Lvl { character.lvl }</em></span></h3>
         <p><strong>CLASSES:</strong> { formatCharacterCardClasses(character.classes) }</p>
@@ -32,7 +33,7 @@ export default function CharacterCard({ character, deleteFn }: Props) {
         onClick={() => deleteFn(character)}
         data-testid="delete-btn"
       >
-        <img src="/images/icons/trash.svg" alt="Delete btn" draggable={false} />
+        <Img src="/images/icons/trash.svg" alt="Delete btn" draggable={false} />
       </Button>
     </div>
   );

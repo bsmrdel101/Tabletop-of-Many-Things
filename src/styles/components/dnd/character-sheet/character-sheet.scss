@@ -2,6 +2,18 @@
   background-color: var(--blue-dark-0);
   height: 100%;
   overflow-y: auto;
+  position: relative;
+
+  &__edit-btn {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0;
+    padding: 0;
+
+    img {
+      width: 2rem;
+    }
+  }
 }
 
 .character-navbar {

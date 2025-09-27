@@ -9,6 +9,7 @@ import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
 export default function CharacterSheetDnd() {
   const { id } = useParams();
   const [character, setCharacter] = useState<Character_Dnd | null>(null);
+  const [editing, setEditing] = useState(false);
   const [tab, setTab] = useState('main');
   
   const tabs = [
@@ -45,14 +46,27 @@ export default function CharacterSheetDnd() {
   };
 
 
-  return (
-    <div className="character-sheet">
-      {character &&
-        <>
-          <CharacterNavbar selectedTab={tab} tabs={tabs} onChangeTab={onChangeTab} />
-          { tab === 'main' && <CharacterSheetMain character={character} /> }
-        </>
-      }
-    </div>
-  );
+  if (editing) {
+    return (
+      <div className="character-sheet">
+        {character &&
+          <>
+            <CharacterNavbar selectedTab={tab} tabs={tabs} onChangeTab={onChangeTab} />
+            { tab === 'main' && <CharacterSheetMain character={character} editing={editing} setEditing={setEditing} /> }
+          </>
+        }
+      </div>
+    );
+  } else {
+    return (
+      <div className="character-sheet">
+        {character &&
+          <>
+            <CharacterNavbar selectedTab={tab} tabs={tabs} onChangeTab={onChangeTab} />
+            { tab === 'main' && <CharacterSheetMain character={character} editing={editing} setEditing={setEditing} /> }
+          </>
+        }
+      </div>
+    );
+  }
 }

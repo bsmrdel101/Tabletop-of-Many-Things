@@ -1,3 +1,4 @@
+import Img from "@/components/library/Img";
 import { memo } from "react";
 
 interface Props {
@@ -13,9 +14,9 @@ function Inspiration({ insp }: Props) {
     >
       <p>Heroic Inspiration</p>
       {insp ?
-        <img src="/images/game/star.svg" alt="Star" />
+        <Img src="/images/game/star.svg" alt="Star" />
         :
-        <img src="/images/game/star-empty.svg" alt="Star" />
+        <Img src="/images/game/star-empty.svg" alt="Star" />
       }
     </div>
   );

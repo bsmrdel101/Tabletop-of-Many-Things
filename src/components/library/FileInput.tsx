@@ -1,5 +1,6 @@
 import { generateClasses, parseClasses } from "@/scripts/tools/utils";
 import { useMemo, useState } from "react";
+import Img from "./Img";
 
 interface Props {
   className?: string
@@ -25,7 +26,7 @@ export default function FileInput({ className = '', labelClass = '', variants = 
       { label }
       <div className="file-input__add-container">
         <p className="file-input__add">+</p>
-        <img src={previewImg} alt="" onError={(e) => e.currentTarget.style.display='none'} />
+        <Img src={previewImg} alt="" onError={(e) => e.currentTarget.style.display='none'} />
       </div>
 
       <input

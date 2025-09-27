@@ -3,6 +3,7 @@ type InputHTML = React.InputHTMLAttributes<HTMLInputElement>
 type TextAreaHTML = React.InputHTMLAttributes<HTMLTextAreaElement>
 type LinkHTML = React.AnchorHTMLAttributes<HTMLAnchorElement>
 type SelectHTML = React.SelectHTMLAttributes<HTMLSelectElement>
+type ImgHTML = React.ImgHTMLAttributes<HTMLImageElement>
 
 interface NameValue {
   name: string
