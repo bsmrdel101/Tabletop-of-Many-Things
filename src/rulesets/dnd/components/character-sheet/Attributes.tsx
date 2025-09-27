@@ -1,10 +1,10 @@
-import Immunities from "../stat-block/Immunities"
-import Languages from "../stat-block/Languages"
-import Movement from "../stat-block/Movement"
-import Proficiencies from "../stat-block/Proficiencies"
-import Resistances from "../stat-block/Resistances"
-import Senses from "../stat-block/Senses"
-import Vulnerabilities from "../stat-block/Vulnerabilities"
+import Immunities from "../stat-block/Immunities";
+import Languages from "../stat-block/Languages";
+import Movement from "../stat-block/Movement";
+import Proficiencies from "../stat-block/Proficiencies";
+import Resistances from "../stat-block/Resistances";
+import Senses from "../stat-block/Senses";
+import Vulnerabilities from "../stat-block/Vulnerabilities";
 
 interface Props {
   character: Character_Dnd
@@ -40,5 +40,5 @@ export default function Attributes({ character }: Props) {
         }
       </div>
     </div>
-  )
+  );
 };
