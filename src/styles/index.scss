@@ -73,6 +73,10 @@ p {
   font-size: var(--font-md);
 }
 
+img {
+  min-width: 0.8rem;
+}
+
 .form__footer {
   display: flex;
   justify-content: center;

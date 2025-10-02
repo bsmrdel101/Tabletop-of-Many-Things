@@ -4,6 +4,7 @@ import CharacterSheetMain from "./CharacterSheetMain";
 import { getCharacterById } from "@/rulesets/dnd/services/charactersService";
 import { useParams } from "react-router";
 import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
+import EditCharacterSheetMain from "./EditCharacterSheetMain";
 
 
 export default function CharacterSheetDnd() {
@@ -52,7 +53,7 @@ export default function CharacterSheetDnd() {
         {character &&
           <>
             <CharacterNavbar selectedTab={tab} tabs={tabs} onChangeTab={onChangeTab} />
-            { tab === 'main' && <CharacterSheetMain character={character} editing={editing} setEditing={setEditing} /> }
+            { tab === 'main' && <EditCharacterSheetMain character={character} editing={editing} setEditing={setEditing} /> }
           </>
         }
       </div>

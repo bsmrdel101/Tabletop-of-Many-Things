@@ -19,6 +19,12 @@ label {
     font-size: var(--font-xsm);
   }
 
+  &__error {
+    color: var(--red-4);
+    font-weight: 400;
+    margin-top: 0.2rem;
+  }
+
   &--label-inline {
     display: block;
 
@@ -27,13 +33,31 @@ label {
     }
   }
 
-  &--label-large {
+  &--label-md {
     margin-top: 0.6rem;
     font-size: var(--font-md);
 
     input {
       height: 100%;
       font-size: var(--font-md);
+    }
+  }
+
+  &--label-lg {
+    font-size: var(--font-lg);
+
+    input {
+      height: 100%;
+      font-size: var(--font-lg);
+    }
+  }
+
+  &--label-xl {
+    font-size: var(--font-xl);
+
+    input {
+      height: 100%;
+      font-size: var(--font-xl);
     }
   }
 
@@ -65,5 +89,12 @@ label {
 
   &--x-small {
     width: 3rem;
+  }
+
+  &--empty {
+    background-color: transparent;
+    color: white;
+    box-shadow: none !important;
+    border: 1px solid white !important;
   }
 }

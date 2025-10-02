@@ -1,0 +1,30 @@
+.edit-character-sheet-main {
+  .edit-character-sheet-main-header {
+    &__column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    &__classes {
+      padding: 0.3rem;
+      background-color: var(--blue-dark-1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    &__class-row {
+      background-color: var(--blue-dark-2);
+      padding: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+
+      &--left {
+        display: flex;
+        gap: 0.3rem;
+        align-items: center;
+      }
+    }
+  }
+}

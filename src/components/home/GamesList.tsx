@@ -36,7 +36,7 @@ export default function GamesList({ setMenu }: Props) {
         <Button variants={['border']} onClick={() => setMenu('')}>Back</Button>
         <form className="games-list__join-game" onSubmit={handleJoinGame}>
           <Input
-            variants={['fit', 'label-large']}
+            variants={['fit', 'label-md']}
             label="Join Game"
             placeholder="Room code"
             required

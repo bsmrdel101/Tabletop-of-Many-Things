@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
  * @param {(values: T) => void | Promise<void>} saveFn - Callback function.
  * @param {number} delay - Time before saveFn is run.
  */
-export default function useAutoSave<T extends Record<string, any>>(values: T, saveFn: (values: T) => void | Promise<void>, delay: number = 300) {
+export default function useAutoSave<T extends Record<string, any>>(values: T, saveFn: (values: T) => void | Promise<void>, delay: number = 500) {
   const lastSaved = useRef<T>(values);
   const saving = useRef(false);
 

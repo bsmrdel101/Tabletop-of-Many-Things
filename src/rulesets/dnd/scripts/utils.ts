@@ -1,4 +1,6 @@
 import { numPrefix } from "@/scripts/tools/utils";
+import { getCharacterById } from "../services/charactersService";
+import { emitServerEvent } from "@/scripts/config/socket-io";
 
 export const formatCharacterCardClasses = (classes: { name: string, lvl: number, subclass: string | null }[]): string => {
   return classes.map((c) => {
@@ -29,4 +31,10 @@ export const getHealthColor = (hp: number, maxHp: number) => {
 
 export const createDice = (amount: number, type: number, mod = 0): Dice_Dnd => {
   return { amount, type, mod, display: `${1}d${type}${mod ? numPrefix(mod) : ''}` };
+};
+
+export const refreshCharacterSheet = async (characterId: number, room: string) => {
+  const res = await getCharacterById(characterId);
+  if (!res) return;
+  emitServerEvent('UPDATE_PLAYER', [res, room]);
 };
