@@ -11,13 +11,13 @@ import { editCharacter, getCharacterById } from "@/rulesets/dnd/services/charact
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import Select from "@/components/library/select/Select";
 import useClasses5e from "@/rulesets/5e/hooks/useClasses5e";
-import { removePlayerClass } from "@/rulesets/5e/services/classesService";
+import { editPlayerClass, removePlayerClass } from "@/rulesets/5e/services/classesService";
 
 interface Props {
   characterId: number
   characterImg: string
   characterName: string
-  characterClasses: PlayerClass_5e[]
+  characterClasses: PlayerClass_5e[] | PlayerClass_2024[]
   characterRace: PlayerRace_Dnd | null
   characterSubrace: PlayerSubrace_Dnd | null
   characterBackground: PlayerBackground_5e | PlayerBackground_2024 | null
@@ -31,7 +31,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   const [room] = useAtom<string>(roomAtom);
   const [game] = useAtom<Game | null>(gameAtom);
   const [name, setName] = useState({ error: '', value: characterName });
-  const [playerClasses, setPlayerClasses] = useState<PlayerClass_5e[]>(characterClasses);
+  const [playerClasses, setPlayerClasses] = useState<PlayerClass_5e[] | PlayerClass_2024[]>(characterClasses);
   const { classes } = useClasses5e(game?.id ?? 0);
 
   const handleSave = async () => {
@@ -41,7 +41,6 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
       setName({ error: 'Name cannot be empty', value: '' });
       return;
     }
-    console.log(playerClasses);
 
     const character = { ...res, name: name.value, classes: playerClasses };
     emitServerEvent('UPDATE_PLAYER', [character, room]);
@@ -52,19 +51,26 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   useAutoSave(playerClasses, handleSave);
 
   const handleDeleteClass = async (id: number) => {
-    await removePlayerClass(id);
-    const newClasses = playerClasses.filter((c) => c.id !== id);
+    const newClasses = playerClasses.filter((c) => c.playerClassId !== id);
     setPlayerClasses(newClasses);
+    await removePlayerClass(id);
   };
 
   const handleEditClassLevel = async (e: ChangeEvent<HTMLSelectElement>, playerClassId: number) => {
+    const classesToEdit: PlayerClass_5e[] | PlayerClass_2024[] = [];
     const newClasses = playerClasses.map((c) => {
       if (c.id === playerClassId) {
-        return { ...c, lvl: Number(e.target.value) };
+        const newClass = { ...c, lvl: Number(e.target.value) };
+        classesToEdit.push(newClass);
+        return newClass;
       }
       return c;
     });
     setPlayerClasses(newClasses);
+
+    for (const c of classesToEdit) {
+      await editPlayerClass({ id: c.playerClassId, lvl: c.lvl, subclassId: null });
+    }
   };
 
 
@@ -97,15 +103,15 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
                       onChange={(e) => handleEditClassLevel(e, c.id)}
                     >
                       {levels.map((lvl: number) => {
-                        return <option key={lvl} disabled={lvl < c.lvl}>{ lvl }</option>;
+                        return <option key={lvl}>{ lvl }</option>;
                       })}
                     </Select>
                   </div>
 
                   <Button
-                    variants={['danger']}
+                    variants={['danger', 'image']}
                     style={{ padding: '0.2rem' }}
-                    onClick={() => handleDeleteClass(c.id)}
+                    onClick={() => handleDeleteClass(c.playerClassId)}
                   >
                     <Img src="/images/icons/trash.svg" alt="Delete button" />
                   </Button>

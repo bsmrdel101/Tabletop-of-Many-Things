@@ -1,5 +1,11 @@
 import api from "@/scripts/config/axios";
 
+interface PlayerClass {
+  id: number,
+  lvl: number,
+  subclassId: number | null
+}
+
 
 // === GET routes === //
 
@@ -25,13 +31,21 @@ export const getClassById = async (id: number): Promise<Class_5e | null> => {
   }
 };
 
+// === PUT routes === //
+
+export const editPlayerClass = async (playerClass: PlayerClass) => {
+  try {
+    await api.put(`/api/5e/classes/player-classes`, playerClass);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // === DELETE routes === //
 
 export const removePlayerClass = async (classId: number) => {
   try {
-    const params = new URLSearchParams();
-    params.append('classId', classId.toString());
-    await api.delete(`/api/5e/player-classes?${params}`);
+    await api.delete(`/api/5e/classes/player-classes/${classId}`);
   } catch (error) {
     console.error(error);
   }

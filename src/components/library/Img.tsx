@@ -1,7 +1,4 @@
-interface Props extends ImgHTML {}
-
-
-export default function Img(props: Props) {
+export default function Img(props: ImgHTML) {
   return (
     <img draggable={false} {...props} />
   );

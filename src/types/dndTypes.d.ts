@@ -88,7 +88,6 @@ type Character_Dnd = {
   race: PlayerRace_Dnd | null
   subrace: PlayerSubrace_Dnd | null
   classes: PlayerClass_5e[] | PlayerClass_2024[]
-  subclass: PlayerSubclass_5e | PlayerSubclass_2024 | null
   background: PlayerBackground_5e | PlayerBackground_2024 | null
   feats: Feat_5e[] | Feat_2024[]
   traits: Trait_Dnd[]

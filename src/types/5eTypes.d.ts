@@ -1,5 +1,6 @@
 type Class_5e = {
   id: number
+  playerClassId: number
   gameId: number | null
   name: string
   lvl: number
@@ -17,6 +18,7 @@ type Class_5e = {
 
 type PlayerClass_5e = {
   id: number
+  playerClassId: number
   name: string
   lvl: number
   hitDice: number
