@@ -162,4 +162,15 @@
       margin-right: 0.2rem;
     }
   }
+
+  &--add {
+    max-height: 1.2rem;
+    width: 3.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.56rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 }

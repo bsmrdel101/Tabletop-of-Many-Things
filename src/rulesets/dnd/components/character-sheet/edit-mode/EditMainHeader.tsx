@@ -11,7 +11,7 @@ import { editCharacter, getCharacterById } from "@/rulesets/dnd/services/charact
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import Select from "@/components/library/select/Select";
 import useClasses5e from "@/rulesets/5e/hooks/useClasses5e";
-import { editPlayerClass, removePlayerClass } from "@/rulesets/5e/services/classesService";
+import { addPlayerClass, editPlayerClass, removePlayerClass } from "@/rulesets/5e/services/classesService";
 
 interface Props {
   characterId: number
@@ -49,6 +49,20 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
 
   useAutoSave(name, handleSave);
   useAutoSave(playerClasses, handleSave);
+
+  const handleAddClass = async (c: Class_5e) => {
+    const res = await addPlayerClass({ characterId, classId: c.id });
+    if (!res) return;
+    const newClass = {
+      id: c.id,
+      playerClassId: res.id,
+      name: c.name,
+      lvl: 1,
+      hitDice: c.hitDice,
+      subclass: null
+    } as PlayerClass_5e;
+    setPlayerClasses([...playerClasses, newClass]);
+  };
 
   const handleDeleteClass = async (id: number) => {
     const newClasses = playerClasses.filter((c) => c.playerClassId !== id);
@@ -118,6 +132,13 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
                 </div>
               );
             })}
+            
+            <Button
+              variants={['secondary-blue', 'add']}
+              onClick={() => handleAddClass(classes[0])}
+            >
+              +
+            </Button>
           </div>
           <p><strong>RACE</strong>: { characterRace?.name }{ characterSubrace && ` (${characterSubrace.name})` }</p>
           <p><strong>BACKGROUND</strong>: { characterBackground?.name }</p>

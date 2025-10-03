@@ -1,8 +1,17 @@
 import api from "@/scripts/config/axios";
 
-interface PlayerClass {
-  id: number,
-  lvl: number,
+interface NewPlayerClassRes {
+  id: number
+}
+
+interface NewPlayerClass {
+  characterId: number
+  classId: number
+}
+
+interface EditPlayerClass {
+  id: number
+  lvl: number
   subclassId: number | null
 }
 
@@ -31,9 +40,21 @@ export const getClassById = async (id: number): Promise<Class_5e | null> => {
   }
 };
 
+// === POST routes === //
+
+export const addPlayerClass = async (playerClass: NewPlayerClass): Promise<NewPlayerClassRes | null> => {
+  try {
+    const res = await api.post(`/api/5e/classes/player-classes`, playerClass);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 // === PUT routes === //
 
-export const editPlayerClass = async (playerClass: PlayerClass) => {
+export const editPlayerClass = async (playerClass: EditPlayerClass) => {
   try {
     await api.put(`/api/5e/classes/player-classes`, playerClass);
   } catch (error) {
