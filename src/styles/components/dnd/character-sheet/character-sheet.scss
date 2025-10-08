@@ -7,7 +7,7 @@
   &__edit-btn {
     position: absolute;
     right: 0.5rem;
-    bottom: 0;
+    bottom: 0.5rem;
     padding: 0;
 
     img {
@@ -36,6 +36,7 @@
 
 .character-sheet-main {
   padding: 0.8rem;
+  position: relative;
 
   &__row {
     display: flex;
