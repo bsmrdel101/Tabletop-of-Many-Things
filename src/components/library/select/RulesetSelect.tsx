@@ -7,7 +7,7 @@ interface Props extends SelectHTML {
 }
 
 
-export default function RulesetSelect5e({ className = '', labelClass = '', variants = [], ...props }: Props) {
+export default function RulesetSelect({ className = '', labelClass = '', variants = [], ...props }: Props) {
   return (
     <Select
       label="Ruleset"

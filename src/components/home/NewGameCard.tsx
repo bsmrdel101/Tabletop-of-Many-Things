@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import Input from "../library/Input";
 import Button from "../library/Button";
 import { addGame } from "@/services/dashboardService";
-import RulesetSelect5e from "../library/select/RulesetSelect5e";
+import RulesetSelect5e from "../library/select/RulesetSelect";
 import { getDefaultGameSettings } from "@/scripts/gameSettings";
 
 interface Props {

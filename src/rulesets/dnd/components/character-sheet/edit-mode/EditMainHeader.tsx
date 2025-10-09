@@ -12,6 +12,7 @@ import { emitServerEvent } from "@/scripts/config/socket-io";
 import Select from "@/components/library/select/Select";
 import useClasses5e from "@/rulesets/5e/hooks/useClasses5e";
 import { addPlayerClass, editPlayerClass, removePlayerClass } from "@/rulesets/5e/services/classesService";
+import SelectClassModal from "../modals/SelectClassModal";
 
 interface Props {
   characterId: number
@@ -89,80 +90,89 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
 
 
   return (
-    <header className="character-sheet-main-header edit-character-sheet-main-header">
-      <div className="character-sheet-main-header__character-info">
-        <Img
-          className="character-sheet-main-header__character-pic"
-          src={characterImg}
-          alt="Character image"
-          draggable
-        />
-        <div className="edit-character-sheet-main-header__column">
-          <Input
-            variants={['empty', 'label-xl']}
-            value={name.value}
-            onChange={(e) => setName({ error: '', value: e.target.value })}
-            error={name.error}
-          />
-          <p><strong>CLASSES:</strong></p>
-          <div className="edit-character-sheet-main-header__classes">
-            {playerClasses.map((c) => {
-              const levels = Array.from({ length: 20 }, (_, index) => index + 1);
-              return (
-                <div key={c.id} className="edit-character-sheet-main-header__class-row">
-                  <div className="edit-character-sheet-main-header__class-row--left">
-                    <p>{ c.name }</p>
-                    <Select
-                      value={c.lvl}
-                      onChange={(e) => handleEditClassLevel(e, c.id)}
-                    >
-                      {levels.map((lvl: number) => {
-                        return <option key={lvl}>{ lvl }</option>;
-                      })}
-                    </Select>
-                  </div>
+    <>
+      <SelectClassModal
+        open={true}
+        setOpen={() => {}}
+        onSelect={(c) => console.log(c)}
+        classes={classes}
+      />
 
-                  <Button
-                    variants={['danger', 'image']}
-                    style={{ padding: '0.2rem' }}
-                    onClick={() => handleDeleteClass(c.playerClassId)}
-                  >
-                    <Img src="/images/icons/trash.svg" alt="Delete button" />
-                  </Button>
-                </div>
-              );
-            })}
-            
-            <Button
-              variants={['secondary-blue', 'add']}
-              onClick={() => handleAddClass(classes[0])}
-            >
-              +
+      <header className="character-sheet-main-header edit-character-sheet-main-header">
+        <div className="character-sheet-main-header__character-info">
+          <Img
+            className="character-sheet-main-header__character-pic"
+            src={characterImg}
+            alt="Character image"
+            draggable
+          />
+          <div className="edit-character-sheet-main-header__column">
+            <Input
+              variants={['empty', 'label-xl']}
+              value={name.value}
+              onChange={(e) => setName({ error: '', value: e.target.value })}
+              error={name.error}
+            />
+            <p><strong>CLASSES:</strong></p>
+            <div className="edit-character-sheet-main-header__classes">
+              {playerClasses.map((c) => {
+                const levels = Array.from({ length: 20 }, (_, index) => index + 1);
+                return (
+                  <div key={c.id} className="edit-character-sheet-main-header__class-row">
+                    <div className="edit-character-sheet-main-header__class-row--left">
+                      <p>{ c.name }</p>
+                      <Select
+                        value={c.lvl}
+                        onChange={(e) => handleEditClassLevel(e, c.id)}
+                      >
+                        {levels.map((lvl: number) => {
+                          return <option key={lvl}>{ lvl }</option>;
+                        })}
+                      </Select>
+                    </div>
+
+                    <Button
+                      variants={['danger', 'image']}
+                      style={{ padding: '0.2rem' }}
+                      onClick={() => handleDeleteClass(c.playerClassId)}
+                    >
+                      <Img src="/images/icons/trash.svg" alt="Delete button" />
+                    </Button>
+                  </div>
+                );
+              })}
+              
+              <Button
+                variants={['secondary-blue', 'add']}
+                onClick={() => handleAddClass(classes[0])}
+              >
+                +
+              </Button>
+            </div>
+            <p><strong>RACE</strong>: { characterRace?.name }{ characterSubrace && ` (${characterSubrace.name})` }</p>
+            <p><strong>BACKGROUND</strong>: { characterBackground?.name }</p>
+          </div>
+        </div>
+
+        <div className="character-sheet-main-header__right">
+          { characterBardicInsp && <Inspiration bardicInsp={characterBardicInsp} /> }
+
+          <div className="character-sheet-main-header__rest-buttons">
+            <Button variants={['thin', 'secondary-blue', 'left-icon']}>
+              <Img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest
+            </Button>
+            <Button variants={['thin', 'secondary-blue', 'left-icon']}>
+              <Img src="/images/game/tent.svg" alt="Tent" /> Long Rest
             </Button>
           </div>
-          <p><strong>RACE</strong>: { characterRace?.name }{ characterSubrace && ` (${characterSubrace.name})` }</p>
-          <p><strong>BACKGROUND</strong>: { characterBackground?.name }</p>
-        </div>
-      </div>
 
-      <div className="character-sheet-main-header__right">
-        { characterBardicInsp && <Inspiration bardicInsp={characterBardicInsp} /> }
-
-        <div className="character-sheet-main-header__rest-buttons">
-          <Button variants={['thin', 'secondary-blue', 'left-icon']}>
-            <Img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest
-          </Button>
-          <Button variants={['thin', 'secondary-blue', 'left-icon']}>
-            <Img src="/images/game/tent.svg" alt="Tent" /> Long Rest
-          </Button>
+          <div className="character-sheet-main-header__lvl-manager">
+            { game?.settings.dnd?.usingXp && <p>XP: { characterXp } / { xpForNextLevel(characterLvl) }</p> }
+            <Button variants={['thin']}>Level Up</Button>
+          </div>
         </div>
-
-        <div className="character-sheet-main-header__lvl-manager">
-          { game?.settings.dnd?.usingXp && <p>XP: { characterXp } / { xpForNextLevel(characterLvl) }</p> }
-          <Button variants={['thin']}>Level Up</Button>
-        </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
 

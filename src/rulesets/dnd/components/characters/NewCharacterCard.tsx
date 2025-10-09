@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import Button from "@/components/library/Button";
 import Input from "@/components/library/Input";
-import RulesetSelect5e from "@/components/library/select/RulesetSelect5e";
+import RulesetSelect5e from "@/components/library/select/RulesetSelect";
 import FileInput from "@/components/library/FileInput";
 
 interface Props {
