@@ -1,0 +1,13 @@
+.save-indicator {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  p {
+    padding: 0.3rem 0.5rem;
+    background-color: rgba(0, 0, 0, 0.157);
+    border-bottom-left-radius: 0.5rem;
+    color: var(--green-light-3);
+    font-size: var(--font-xsm);
+  }
+}

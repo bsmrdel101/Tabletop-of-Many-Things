@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 import { userAtom } from './scripts/atoms/state';
 import { getUser } from './services/userService';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import SaveIndicator from './components/SaveIndicator';
 import './styles/index.scss';
 
 
@@ -29,6 +30,7 @@ export function App() {
   return (
     <Suspense fallback={<p>Loading...</p>}>
       { useRoutes(routes) }
+      <SaveIndicator />
     </Suspense>
   );
 }
