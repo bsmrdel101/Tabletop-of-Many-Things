@@ -11,9 +11,10 @@ import { editCharacter, getCharacterById } from "@/rulesets/dnd/services/charact
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import Select from "@/components/library/select/Select";
 import useClasses5e from "@/rulesets/5e/hooks/useClasses5e";
-import { addPlayerClass, editPlayerClass, removePlayerClass } from "@/rulesets/5e/services/classesService";
+import { addPlayerClass } from "@/rulesets/5e/services/classesService";
 import SelectClassModal from "../modals/SelectClassModal";
 import { confirm } from "@/scripts/tools/popups";
+import { playerManager } from "@/rulesets/dnd/scripts/playerManager";
 
 interface Props {
   characterId: number
@@ -56,40 +57,20 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   const handleAddClass = async (c: Class_5e) => {
     const res = await addPlayerClass({ characterId, classId: c.id });
     if (!res) return;
-    const newClass = {
-      id: c.id,
-      playerClassId: res.id,
-      name: c.name,
-      lvl: 1,
-      hitDice: c.hitDice,
-      subclass: null
-    } as PlayerClass_5e;
-    setPlayerClasses([...playerClasses, newClass]);
+    const newClass = await playerManager.addClass(characterId, c);
+    if (newClass) setPlayerClasses([...playerClasses, newClass]);
     setSelectClassModalOpen(false);
   };
 
   const handleDeleteClass = async (id: number, className: string) => {
     if (!confirm(`Remove the ${className} class from this character?`)) return;
-    const newClasses = playerClasses.filter((c) => c.playerClassId !== id);
+    const newClasses = await playerManager.removeClass(id, playerClasses);
     setPlayerClasses(newClasses);
-    await removePlayerClass(id);
   };
 
   const handleEditClassLevel = async (e: ChangeEvent<HTMLSelectElement>, playerClassId: number) => {
-    const classesToEdit: PlayerClass_5e[] | PlayerClass_2024[] = [];
-    const newClasses = playerClasses.map((c) => {
-      if (c.id === playerClassId) {
-        const newClass = { ...c, lvl: Number(e.target.value) };
-        classesToEdit.push(newClass);
-        return newClass;
-      }
-      return c;
-    });
+    const newClasses = await playerManager.editClassLevel(playerClassId, Number(e.target.value), playerClasses);
     setPlayerClasses(newClasses);
-
-    for (const c of classesToEdit) {
-      await editPlayerClass({ id: c.playerClassId, lvl: c.lvl, subclassId: null });
-    }
   };
 
 
