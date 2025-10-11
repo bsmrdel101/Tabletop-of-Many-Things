@@ -55,9 +55,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   useAutoSave(playerClasses, handleSave);
 
   const handleAddClass = async (c: Class_5e) => {
-    const res = await addPlayerClass({ characterId, classId: c.id });
-    if (!res) return;
-    const newClass = await playerManager.addClass(characterId, c);
+    const newClass = await playerManager.addClass(characterId, c, playerClasses);
     if (newClass) setPlayerClasses([...playerClasses, newClass]);
     setSelectClassModalOpen(false);
   };
@@ -80,7 +78,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
         open={selectClassModalOpen}
         setOpen={setSelectClassModalOpen}
         onSelect={(c) => handleAddClass(c)}
-        classes={classes}
+        classes={classes.filter((c) => !playerClasses.some((p) => p.id === c.id))}
       />
 
       <header className="character-sheet-main-header edit-character-sheet-main-header">

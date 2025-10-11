@@ -25,7 +25,7 @@ export default function Modal({ children, className = '', variant = [], title, c
   const classes = generateClasses(className, variant, 'modal');
 
   useEffect(() => {
-    document.querySelector('dialog')?.focus();
+    (document.querySelector('.modal') as HTMLElement)?.focus();
     if (ref.current) document.getElementById('root')?.appendChild(ref.current);
     return bindEventListeners();
   }, []);

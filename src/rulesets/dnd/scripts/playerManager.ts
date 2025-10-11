@@ -41,7 +41,12 @@ export const playerManager = {
 
   // CLASSES
 
-  addClass: async (characterId: number, c: Class_5e): Promise<PlayerClass_5e | null> => {
+  addClass: async (characterId: number, c: Class_5e, playerClasses: PlayerClass_5e[]): Promise<PlayerClass_5e | null> => {
+    if (playerClasses.some((playerClass) => playerClass.id === c.id)) {
+      alert('ERROR: Duplicate class');
+      return null;
+    }
+
     const res = await addPlayerClass({ characterId, classId: c.id });
     if (!res) {
       alert('Failed to add class');
@@ -62,11 +67,7 @@ export const playerManager = {
   },
   editClassLevel: async (playerClassId: number, lvl: number, playerClasses: PlayerClass_5e[]): Promise<PlayerClass_5e[]> => {
     const classesToEdit: PlayerClass_5e[] | PlayerClass_2024[] = [];
-    for (const c of classesToEdit) {
-      await editPlayerClass({ id: c.playerClassId, lvl: c.lvl, subclassId: null });
-    }
-
-    return playerClasses.map((c) => {
+    const newClasses = playerClasses.map((c) => {
       if (c.id === playerClassId) {
         const newClass = { ...c, lvl };
         classesToEdit.push(newClass);
@@ -74,5 +75,10 @@ export const playerManager = {
       }
       return c;
     });
+
+    for (const c of classesToEdit) {
+      await editPlayerClass({ id: c.playerClassId, lvl: c.lvl, subclassId: null });
+    }
+    return newClasses;
   }
 };
