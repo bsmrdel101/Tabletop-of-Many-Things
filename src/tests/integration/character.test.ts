@@ -38,4 +38,20 @@ describe('Character Integration', () => {
     if (!newCharacter) return;
     expect(newCharacter).toEqual(expect.objectContaining({ ac: 12, acMod: 2, acOverride: 0 }));
   });
+
+  it('Edit character', async () => {
+    const character = {
+      id: 1,
+      maxHpMod: 0,
+      maxHpOverride: 0,
+      hp: 20,
+      acMod: 0,
+      acOverride: 0,
+      tempHp: 0,
+      name: 'Ziggy'
+    } as any;
+    await editCharacter(character);
+    const res = await getCharacterById(character.id);
+    expect(res).toEqual(expect.objectContaining(character));
+  });
 });

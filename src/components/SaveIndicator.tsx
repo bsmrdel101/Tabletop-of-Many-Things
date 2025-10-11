@@ -7,7 +7,7 @@ interface Props {
 }
 
 
-export default function saveIndicator({ duration = 2000 }: Props) {
+export default function SaveIndicator({ duration = 2000 }: Props) {
   const [open, setOpen] = useAtom<boolean>(saveIndicatorAtom);
   
   useEffect(() => {

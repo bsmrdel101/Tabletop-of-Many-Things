@@ -13,6 +13,7 @@ import Select from "@/components/library/select/Select";
 import useClasses5e from "@/rulesets/5e/hooks/useClasses5e";
 import { addPlayerClass, editPlayerClass, removePlayerClass } from "@/rulesets/5e/services/classesService";
 import SelectClassModal from "../modals/SelectClassModal";
+import { confirm } from "@/scripts/tools/popups";
 
 interface Props {
   characterId: number
@@ -33,6 +34,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   const [game] = useAtom<Game | null>(gameAtom);
   const [name, setName] = useState({ error: '', value: characterName });
   const [playerClasses, setPlayerClasses] = useState<PlayerClass_5e[] | PlayerClass_2024[]>(characterClasses);
+  const [selectClassModalOpen, setSelectClassModalOpen] = useState(false);
   const { classes } = useClasses5e(game?.id ?? 0);
 
   const handleSave = async () => {
@@ -63,9 +65,11 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
       subclass: null
     } as PlayerClass_5e;
     setPlayerClasses([...playerClasses, newClass]);
+    setSelectClassModalOpen(false);
   };
 
-  const handleDeleteClass = async (id: number) => {
+  const handleDeleteClass = async (id: number, className: string) => {
+    if (!confirm(`Remove the ${className} class from this character?`)) return;
     const newClasses = playerClasses.filter((c) => c.playerClassId !== id);
     setPlayerClasses(newClasses);
     await removePlayerClass(id);
@@ -92,9 +96,9 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   return (
     <>
       <SelectClassModal
-        open={true}
-        setOpen={() => {}}
-        onSelect={(c) => console.log(c)}
+        open={selectClassModalOpen}
+        setOpen={setSelectClassModalOpen}
+        onSelect={(c) => handleAddClass(c)}
         classes={classes}
       />
 
@@ -113,6 +117,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
               onChange={(e) => setName({ error: '', value: e.target.value })}
               error={name.error}
             />
+
             <p><strong>CLASSES:</strong></p>
             <div className="edit-character-sheet-main-header__classes">
               {playerClasses.map((c) => {
@@ -134,7 +139,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
                     <Button
                       variants={['danger', 'image']}
                       style={{ padding: '0.2rem' }}
-                      onClick={() => handleDeleteClass(c.playerClassId)}
+                      onClick={() => handleDeleteClass(c.playerClassId, c.name)}
                     >
                       <Img src="/images/icons/trash.svg" alt="Delete button" />
                     </Button>
@@ -144,12 +149,14 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
               
               <Button
                 variants={['secondary-blue', 'add']}
-                onClick={() => handleAddClass(classes[0])}
+                onClick={() => setSelectClassModalOpen(true)}
               >
                 +
               </Button>
             </div>
+
             <p><strong>RACE</strong>: { characterRace?.name }{ characterSubrace && ` (${characterSubrace.name})` }</p>
+            
             <p><strong>BACKGROUND</strong>: { characterBackground?.name }</p>
           </div>
         </div>

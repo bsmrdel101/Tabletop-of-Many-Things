@@ -25,8 +25,9 @@ export default function Modal({ children, className = '', variant = [], title, c
   const classes = generateClasses(className, variant, 'modal');
 
   useEffect(() => {
-    bindEventListeners();
     document.querySelector('dialog')?.focus();
+    if (ref.current) document.getElementById('root')?.appendChild(ref.current);
+    return bindEventListeners();
   }, []);
 
   const bindEventListeners = () => {
@@ -54,7 +55,7 @@ export default function Modal({ children, className = '', variant = [], title, c
     
 
   return (
-    <div className="modal__bg" ref={ref} style={{ zIndex: '40', position: 'absolute', top: 0, left: 0, height: '100%' }}>
+    <div className="modal__bg" ref={ref} style={{ zIndex: '40', position: 'absolute', top: 0, left: 0, height: '100%', visibility: open ? 'visible' : 'hidden' }}>
       <dialog
         open={open}
         style={{ width: width, height: height }}

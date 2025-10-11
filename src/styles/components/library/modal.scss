@@ -4,10 +4,10 @@
   border-radius: 0.3rem;
   background-color: var(--purple-0);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  text-align: center;
-  position: absolute;
-  margin: auto;
+  position: fixed;
   inset: 0;
+  border-color: black;
+  color: white;
 
   &__bg {
     position: fixed;
@@ -15,14 +15,6 @@
     height: 100%;
     background-color: var(--opac-0);
     z-index: 1;
-  }
-
-  .button--X {
-    color: black;
-
-    &:hover {
-      color: var(--red-1);
-    }
   }
 
   &__title {

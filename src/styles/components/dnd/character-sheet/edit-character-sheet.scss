@@ -1,4 +1,8 @@
 .edit-character-sheet-main {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+
   .edit-character-sheet-main-header {
     &__column {
       display: flex;
