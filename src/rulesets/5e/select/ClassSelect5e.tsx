@@ -29,7 +29,7 @@ export default function ClassSelect5e({ className = '', labelClass = '', variant
       }}
       {...props as SelectHTML}
     >
-      <option>-- CLASS --</option>
+      <option value="">-- CLASS --</option>
       {classes.map((c) => {
         return (
           <option key={c.id} value={c.id}>{ c.name }</option>

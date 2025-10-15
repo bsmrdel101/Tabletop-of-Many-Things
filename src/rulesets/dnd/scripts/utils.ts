@@ -8,7 +8,7 @@ export const formatCharacterCardClasses = (classes: { name: string, lvl: number,
   }).join(' / ');
 };
 
-export const formatCharacterClasses = (classes: PlayerClass_5e[] | PlayerClass_2024[]): string => {
+export const formatCharacterClasses = (classes: PlayerClass_Dnd[]): string => {
   return classes.map((c) => {
     return `${c.subclass?.name ?? ''} ${c.name} lvl ${c.lvl}`.trim();
   }).join(' / ');

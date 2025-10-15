@@ -10,7 +10,7 @@ import Img from "@/components/library/Img";
 interface Props {
   characterImg: string
   characterName: string
-  characterClasses: PlayerClass_5e[] | PlayerClass_2024[]
+  characterClasses: PlayerClass_Dnd[]
   characterRace: PlayerRace_Dnd | null
   characterSubrace: PlayerSubrace_Dnd | null
   characterBackground: PlayerBackground_5e | PlayerBackground_2024 | null

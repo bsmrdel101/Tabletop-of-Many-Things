@@ -41,7 +41,7 @@ export const playerManager = {
 
   // CLASSES
 
-  addClass: async (characterId: number, c: Class_5e, playerClasses: PlayerClass_5e[]): Promise<PlayerClass_5e | null> => {
+  addClass: async (characterId: number, c: Class_Dnd, playerClasses: PlayerClass_Dnd[]): Promise<PlayerClass_Dnd | null> => {
     if (playerClasses.some((playerClass) => playerClass.id === c.id)) {
       alert('ERROR: Duplicate class');
       return null;
@@ -59,14 +59,14 @@ export const playerManager = {
       lvl: 1,
       hitDice: c.hitDice,
       subclass: null
-    } as PlayerClass_5e;
+    } as PlayerClass_Dnd;
   },
-  removeClass: async (id: number, playerClasses: PlayerClass_5e[]): Promise<PlayerClass_5e[]> => {
+  removeClass: async (id: number, playerClasses: PlayerClass_Dnd[]): Promise<PlayerClass_Dnd[]> => {
     await removePlayerClass(id);
     return playerClasses.filter((c) => c.playerClassId !== id);
   },
-  editClassLevel: async (playerClassId: number, lvl: number, playerClasses: PlayerClass_5e[]): Promise<PlayerClass_5e[]> => {
-    const classesToEdit: PlayerClass_5e[] | PlayerClass_2024[] = [];
+  editClassLevel: async (playerClassId: number, lvl: number, playerClasses: PlayerClass_Dnd[]): Promise<PlayerClass_Dnd[]> => {
+    const classesToEdit: PlayerClass_Dnd[] = [];
     const newClasses = playerClasses.map((c) => {
       if (c.id === playerClassId) {
         const newClass = { ...c, lvl };
@@ -80,5 +80,11 @@ export const playerManager = {
       await editPlayerClass({ id: c.playerClassId, lvl: c.lvl, subclassId: null });
     }
     return newClasses;
-  }
+  },
+
+  // RACES
+
+  changeRace: async (id: number) => {
+    // TODO: Change raceId on character
+  },
 };

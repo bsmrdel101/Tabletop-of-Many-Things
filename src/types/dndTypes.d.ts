@@ -65,6 +65,12 @@ type Map_Dnd = {
   boardState: Token_Dnd[]
 };
 
+interface Class_Dnd extends Class_5e, Class_2024 {};
+interface PlayerClass_Dnd extends PlayerClass_5e, PlayerClass_2024 {};
+interface PlayerBackground_Dnd extends PlayerBackground_5e, PlayerBackground_2024 {};
+interface Feat_Dnd extends Feat_5e, Feat_2024 {};
+interface Spellcasting_Dnd extends Spellcasting_5e, Spellcasting_2024 {};
+
 type Character_Dnd = {
   id: number
   user: User
@@ -87,9 +93,9 @@ type Character_Dnd = {
   abilityScores: AbilityScore_Dnd[]
   race: PlayerRace_Dnd | null
   subrace: PlayerSubrace_Dnd | null
-  classes: PlayerClass_5e[] | PlayerClass_2024[]
-  background: PlayerBackground_5e | PlayerBackground_2024 | null
-  feats: Feat_5e[] | Feat_2024[]
+  classes: PlayerClass_Dnd[]
+  background: PlayerBackground_Dnd | null
+  feats: Feat_Dnd[]
   traits: Trait_Dnd[]
   features: Feature_Dnd[]
   currentHitDice: Dice_Dnd[]
@@ -102,7 +108,7 @@ type Character_Dnd = {
   dmgImmunities: string[]
   languages: string[]
   currency: Cost_Dnd[]
-  spellcasting: Spellcasting_5e | Spellcasting_2024 | null
+  spellcasting: Spellcasting_Dnd | null
   ruleset: string
   targets: Token_Dnd[]
 };
@@ -145,7 +151,7 @@ type Race_Dnd = {
 type PlayerRace_Dnd = {
   id: number
   name: string
-  subraces: Subrace_Dnd | null
+  subrace: Subrace_Dnd | null
 };
 
 type Subrace_Dnd = {

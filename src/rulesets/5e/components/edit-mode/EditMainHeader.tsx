@@ -4,26 +4,27 @@ import { xpForNextLevel } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { useAtom } from "jotai";
 import { ChangeEvent, memo, useState } from "react";
 import Img from "@/components/library/Img";
-import Inspiration from "../Inspiration";
+import Inspiration from "../../../dnd/components/character-sheet/Inspiration";
 import Input from "@/components/library/Input";
 import useAutoSave from "@/hooks/useAutoSave";
 import { editCharacter, getCharacterById } from "@/rulesets/dnd/services/charactersService";
 import { emitServerEvent } from "@/scripts/config/socket-io";
 import Select from "@/components/library/select/Select";
 import useClasses5e from "@/rulesets/5e/hooks/useClasses5e";
-import { addPlayerClass } from "@/rulesets/5e/services/classesService";
 import SelectClassModal from "../modals/SelectClassModal";
 import { confirm } from "@/scripts/tools/popups";
 import { playerManager } from "@/rulesets/dnd/scripts/playerManager";
+import RaceSelect from "@/rulesets/dnd/components/select/RaceSelect";
+import useRaces from "@/rulesets/dnd/hooks/useRaces";
 
 interface Props {
   characterId: number
   characterImg: string
   characterName: string
-  characterClasses: PlayerClass_5e[] | PlayerClass_2024[]
+  characterClasses: PlayerClass_5e[]
   characterRace: PlayerRace_Dnd | null
   characterSubrace: PlayerSubrace_Dnd | null
-  characterBackground: PlayerBackground_5e | PlayerBackground_2024 | null
+  characterBackground: PlayerBackground_5e | null
   characterXp: number
   characterLvl: number
   characterBardicInsp: BardicInsp_Dnd | null
@@ -34,9 +35,11 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   const [room] = useAtom<string>(roomAtom);
   const [game] = useAtom<Game | null>(gameAtom);
   const [name, setName] = useState({ error: '', value: characterName });
-  const [playerClasses, setPlayerClasses] = useState<PlayerClass_5e[] | PlayerClass_2024[]>(characterClasses);
+  const [playerClasses, setPlayerClasses] = useState<PlayerClass_5e[]>(characterClasses);
+  const [playerRace, setPlayerRace] = useState<PlayerRace_Dnd | null>(characterRace);
   const [selectClassModalOpen, setSelectClassModalOpen] = useState(false);
   const { classes } = useClasses5e(game?.id ?? 0);
+  const { races } = useRaces(game?.id ?? 0);
 
   const handleSave = async () => {
     const res = await getCharacterById(characterId);
@@ -71,6 +74,18 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
     setPlayerClasses(newClasses);
   };
 
+  const handleEditRace = async (race: Race_Dnd, subrace: Subrace_Dnd | null) => {
+    console.log(race, subrace);
+    
+    await playerManager.changeRace(race.id);
+    const newRace = {
+      id: race.id,
+      name: race.name,
+      subrace
+    } as PlayerRace_Dnd;
+    setPlayerRace(newRace);
+  };
+
 
   return (
     <>
@@ -97,7 +112,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
               error={name.error}
             />
 
-            <p><strong>CLASSES:</strong></p>
+            <p><strong>CLASSES</strong>:</p>
             <div className="edit-character-sheet-main-header__classes">
               {playerClasses.map((c) => {
                 const levels = Array.from({ length: 20 }, (_, index) => index + 1);
@@ -134,7 +149,13 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
               </Button>
             </div>
 
-            <p><strong>RACE</strong>: { characterRace?.name }{ characterSubrace && ` (${characterSubrace.name})` }</p>
+            <p><strong>RACE</strong>:</p>
+            <RaceSelect
+              variants={['fit']}
+              value={characterRace?.id}
+              onChangeRace={handleEditRace}
+              races={races}
+            />
             
             <p><strong>BACKGROUND</strong>: { characterBackground?.name }</p>
           </div>

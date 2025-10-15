@@ -1,4 +1,4 @@
-import EditMainHeader from "../edit-mode/EditMainHeader";
+import EditMainHeader from "../../../../5e/components/edit-mode/EditMainHeader";
 import EditButton from "../EditButton";
 
 interface Props {
