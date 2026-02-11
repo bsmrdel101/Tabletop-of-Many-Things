@@ -21,7 +21,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
     "@tanstack/react-query": "^5.85.5",
-    "axios": "^1.12.0",
+    "axios": "^1.13.5",
     "jotai": "^2.12.3",
     "path": "^0.12.7",
     "pg": "^8.15.6",
