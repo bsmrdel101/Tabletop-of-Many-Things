@@ -28,8 +28,9 @@ type Asset = {
 };
 
 type User = {
-  id: number
-  username: string
+  pubId: string
+  displayName: string
+  email: string
   settings: ClientSettings
 };
 

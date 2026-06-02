@@ -1,10 +1,16 @@
 import api from "@/scripts/config/axios";
 
-
 interface NewUser {
-  username: string
+  email: string
+  password: string
+  displayName: string
+}
+
+interface UserLogin {
+  email: string
   password: string
 }
+
 
 // === GET routes === //
 
@@ -13,7 +19,7 @@ export const getUser = async (): Promise<User | null> => {
     const config = {
       headers: { 'Content-Type': 'application/json' }
     };
-    const res = await api.get('/api/user', config);
+    const res = await api.get('/api/users', config);
     return res.data.user;
   } catch(error) {
     console.error(error);
@@ -28,19 +34,19 @@ export const registerUser = async (payload: NewUser): Promise<void | string> => 
     const config = {
       headers: { 'Content-Type': 'application/json' }
     };
-    await api.post('/api/user/register', payload, config);
+    await api.post('/api/users', payload, config);
   } catch(error: any) {
     console.error(error);
     return `${error.response.data.message}`;
   }
 };
 
-export const loginUser = async (payload: NewUser): Promise<void | string> => {
+export const loginUser = async (payload: UserLogin): Promise<void | string> => {
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' }
     };
-    await api.post('/api/user/login', payload, config);
+    await api.post('/api/users/login', payload, config);
   } catch(error: any) {
     console.error(error);
     return `${error.response.data.message}`;

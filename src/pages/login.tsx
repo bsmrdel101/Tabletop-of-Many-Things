@@ -7,13 +7,13 @@ import { FormEvent, useState } from "react";
 
 
 export default function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    const error = await loginUser({ username, password });
+    const error = await loginUser({ email, password });
     if (error) {
       setError(error);
       return;
@@ -26,11 +26,12 @@ export default function Login() {
     <form className="login" onSubmit={handleLogin}>
       <h2>Login</h2>
       <Input
-        label="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        type="email"
         required
-        data-testid="username"
+        data-testid="email"
       />
       <Input
         label="Password"
