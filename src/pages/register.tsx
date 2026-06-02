@@ -7,13 +7,14 @@ import { FormEvent, useState } from "react";
 
 
 export default function Register() {
-  const [username, setUsername] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
-    const error = await registerUser({ username, password });
+    const error = await registerUser({ email, password, displayName });
     if (error) {
       setError(error);
       return;
@@ -26,9 +27,16 @@ export default function Register() {
     <form className="login" onSubmit={handleRegister}>
       <h2>Register</h2>
       <Input
-        label="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        label="Display Name"
+        value={displayName}
+        onChange={(e) => setDisplayName(e.target.value)}
+        required
+      />
+      <Input
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        type="email"
         required
       />
       <Input
