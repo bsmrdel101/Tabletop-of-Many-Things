@@ -1,7 +1,6 @@
 @use 'settings/colors';
 @use 'settings/fonts';
 @use 'components/library/button';
-@use 'components/library/error';
 @use 'components/library/file-input';
 @use 'components/library/input';
 @use 'components/library/link';
@@ -22,3 +21,4 @@
 @use 'components/dnd/character-sheet/edit-character-sheet';
 @use 'components/save-indicator';
 @use 'components/library/modal';
+@use 'components/library/errors';

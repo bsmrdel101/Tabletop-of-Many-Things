@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import CharacterSheetDnd from "@/rulesets/dnd/components/character-sheet/structure/CharacterSheetDnd";
 import { roomAtom } from "@/scripts/atoms/state";
 import { emitServerEvent } from "@/scripts/config/socket-io";
@@ -22,8 +23,8 @@ export default function CharacterPage() {
 
 
   return (
-    <>
+    <Layout>
       { ruleset === '5e' && <CharacterSheetDnd /> }
-    </>
+    </Layout>
   );
 }

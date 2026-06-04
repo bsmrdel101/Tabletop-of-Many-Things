@@ -2,6 +2,7 @@ import axios from 'axios';
 import { wrapper } from 'axios-cookiejar-support';
 import { CookieJar } from 'tough-cookie';
 
+
 const getUrl = () => {
   if (import.meta.env.PROD) {
     return 'https://tabletop-of-many-things-server.up.railway.app';

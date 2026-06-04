@@ -24,6 +24,7 @@ export default function HomeButtonList() {
           </Button>
         </>
       }
+
       {menu === 'play' &&
         <GamesList setMenu={setMenu} />
       }
