@@ -1,7 +1,6 @@
 @use 'settings/colors';
 @use 'settings/fonts';
 @use 'components/library/button';
-@use 'components/library/error';
 @use 'components/library/file-input';
 @use 'components/library/input';
 @use 'components/library/link';
@@ -19,3 +18,4 @@
 @use 'components/dnd/saving-throws';
 @use 'components/dnd/health';
 @use 'components/library/list-display';
+@use 'components/library/errors';

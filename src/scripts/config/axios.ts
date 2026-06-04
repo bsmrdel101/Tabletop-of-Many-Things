@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { wrapper } from 'axios-cookiejar-support';
+import { CookieJar } from 'tough-cookie';
+
 
 const getUrl = () => {
   if (import.meta.env.PROD) {
@@ -11,9 +14,16 @@ const getUrl = () => {
 };
 
 const baseURL = getUrl();
+const jar = new CookieJar();
 
-const api = axios.create({
+const api = wrapper(axios.create({
   baseURL,
-});
+  jar,
+  withCredentials: true
+}));
+
+export const setApiBaseUrl = (url: string) => {
+  api.defaults.baseURL = url;
+};
 
 export default api;

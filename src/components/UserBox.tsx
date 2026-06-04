@@ -17,7 +17,7 @@ export default function UserBox() {
 
   return (
     <div className="user-box">
-      <h3>{ user.username }</h3>
+      <h3>{ user.displayName }</h3>
       <Button variants={['empty']} onClick={() => setMenuOpen(!menuOpen)}>|||</Button>
       
       {menuOpen &&

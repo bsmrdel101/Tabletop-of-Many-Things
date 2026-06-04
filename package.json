@@ -22,6 +22,7 @@
     "@supabase/supabase-js": "^2.49.4",
     "@tanstack/react-query": "^5.85.5",
     "axios": "^1.15.2",
+    "axios-cookiejar-support": "^7.0.0",
     "jotai": "^2.12.3",
     "path": "^0.12.7",
     "pg": "^8.15.6",
@@ -31,6 +32,7 @@
     "react-router": "^7.12.0",
     "react-router-dom": "^7.12.0",
     "socket.io-client": "^4.8.1",
+    "tough-cookie": "^6.0.1",
     "url": "^0.11.4"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, Root } from 'react-dom/client';
 import { BrowserRouter, useNavigate, useRoutes } from 'react-router-dom';
 import routes from '~react-pages';
 import { useAtom } from 'jotai';
@@ -34,7 +34,10 @@ export function App() {
 }
 
 
-const app = createRoot(document.getElementById('root')!);
+const container = document.getElementById('root')!;
+const root: Root = (globalThis as any).__root || createRoot(container);
+(globalThis as any).__root = root;
+
 const queryClient = new QueryClient();
 const queryOptions = {
   refetchOnWindowFocus: false,
@@ -42,7 +45,7 @@ const queryOptions = {
 };
 queryClient.setDefaultOptions({ queries: queryOptions });
 
-app.render(
+root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <App />

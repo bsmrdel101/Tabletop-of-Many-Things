@@ -1,3 +1,4 @@
+import { showError } from "@/components/library/Errors";
 import api from "@/scripts/config/axios";
 
 interface NewUser {
@@ -16,50 +17,36 @@ interface UserLogin {
 
 export const getUser = async (): Promise<User | null> => {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
-    const res = await api.get('/api/users', config);
-    return res.data.user;
+    const res = await api.get('/api/users');
+    return res.data;
   } catch(error) {
     console.error(error);
+    showError(error);
     return null;
   }
 };
 
 // === POST routes === //
 
-export const registerUser = async (payload: NewUser): Promise<void | string> => {
+export const registerUser = async (payload: NewUser) => {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
-    await api.post('/api/users', payload, config);
-  } catch(error: any) {
+    await api.post('/api/users', payload);
+  } catch(error) {
     console.error(error);
-    return `${error.response.data.message}`;
   }
 };
 
-export const loginUser = async (payload: UserLogin): Promise<void | string> => {
+export const loginUser = async (payload: UserLogin) => {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
-    await api.post('/api/users/login', payload, config);
-  } catch(error: any) {
+    await api.post('/api/users/login', payload);
+  } catch(error) {
     console.error(error);
-    return `${error.response.data.message}`;
   }
 };
 
 export const logout = async () => {
   try {
-    const auth = { withCredentials: true };
-    await api.delete('/api/users/logout', auth);
+    await api.post('/api/users/logout');
   } catch(error) {
     console.error(error);
   }
@@ -67,10 +54,19 @@ export const logout = async () => {
 
 // === PUT routes === //
 
-export const changeNewUser = async (payload: boolean) => {
+export const editUser = async (payload: { displayName: string, email: string }) => {
   try {
-    const auth = { withCredentials: true };
-    await api.put('/api/user', { newStatus: payload }, auth);
+    await api.put('/api/user', { ...payload });
+  } catch(error) {
+    console.error(error);
+  }
+};
+
+// === DELETE routes === //
+
+export const deleteUser = async () => {
+  try {
+    await api.delete('/api/user');
   } catch(error) {
     console.error(error);
   }

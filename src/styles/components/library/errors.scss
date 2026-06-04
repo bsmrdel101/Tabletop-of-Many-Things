@@ -1,0 +1,27 @@
+.errors {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  max-height: 50vh;
+  overflow-y: auto;
+  z-index: 10;
+
+  button {
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: var(--white-0);
+    color: black;
+    padding: 0 0.2rem;
+  }
+}
+
+.error {
+  position: relative;
+  background-color: var(--black-0);
+  padding: 1rem;
+  border-radius: 1rem;
+  color: var(--red-5);
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}

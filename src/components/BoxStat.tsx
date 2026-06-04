@@ -12,7 +12,7 @@ export default function BoxStat({ title, onClick, children }: Props) {
       <div
         style={ onClick ? { cursor: 'pointer' } : {}}
         className="box-stat__content"
-        onClick={() => onClick && onClick()}
+        onClick={() => onClick?.()}
       >
         { children }
       </div>
