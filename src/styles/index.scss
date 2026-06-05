@@ -1,5 +1,11 @@
 @use 'bundle.scss';
 
+/*
+  --tablet: 950px;
+  --tablet-sm: 603px;
+  --phone: 396px;
+*/
+
 * {
   box-sizing: border-box;
   font-family: Petrona, Avenir, Helvetica, Arial, sans-serif;
@@ -52,9 +58,6 @@ h1 {
 
   @media (max-width: 950px) {
     margin-top: 4rem;
-  }
-  
-  @media (max-width: 603px) {
     font-size: calc(var(--font-title) * 0.5);
   }
   

@@ -1,6 +1,6 @@
-import HomeButtonList from "@/components/home/HomeButtonList";
 import Layout from "@/components/Layout";
-import UserBox from "@/components/UserBox";
+import Button from "@/components/library/Button";
+import Link from "@/components/library/Link";
 
 
 export default function Home() {
@@ -9,8 +9,9 @@ export default function Home() {
       <main className="home">
         <h1>Tabletop of<br/>Many Things</h1>
 
-        <UserBox />
-        <HomeButtonList />
+        <Button style={{ margin: 'auto' }} variants={['link', 'dark', 'x-large']}>
+          <Link to="/play">Play Now</Link>
+        </Button>
       </main>
     </Layout>
   );

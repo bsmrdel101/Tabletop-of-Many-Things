@@ -1,0 +1,11 @@
+import GamesList from "@/components/home/GamesList";
+import Layout from "@/components/Layout";
+
+
+export default function PlayPage() {
+  return (
+    <Layout>
+      <GamesList />
+    </Layout>
+  );
+}

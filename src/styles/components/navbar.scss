@@ -1,0 +1,55 @@
+.navbar {
+  display: flex;
+  padding: 0.6rem;
+  background-color: var(--bg-0);
+  border-bottom: 2px solid var(--magenta-2);
+  gap: 2rem;
+  margin-bottom: 1rem;
+
+  &--open {
+    .navbar__link,
+    .navbar__userbox {
+      display: block;
+    }
+  }
+
+  &__hamburger-btn {
+    display: none;
+  }
+
+  @media (max-width: 950px) {
+    flex-direction: column;
+
+    &__hamburger-btn {
+      display: block;
+      width: fit-content;
+
+      img {
+        width: 1.4rem;
+      }
+    }
+
+    &__link {
+      display: none;
+    }
+  }
+
+  &__logo {
+    width: 2.6rem;
+  }
+
+  &__link {
+    color: white;
+    transition: all ease-in-out 0.2s;
+    font-size: var(--font-lg);
+
+    &--active {
+      color: var(--pink-1);
+      border-bottom: 1px solid var(--pink-1);
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

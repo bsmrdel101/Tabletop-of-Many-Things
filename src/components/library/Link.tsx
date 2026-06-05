@@ -7,16 +7,18 @@ interface Props extends LinkHTML {
   children?: any
   className?: string
   variants?: ('')[]
+  draggable?: boolean
 }
 
 
-export default function Link({ to, children, className = '', variants = [], ...props }: Props) {
+export default function Link({ to, children, className = '', variants = [], draggable = false, ...props }: Props) {
   const classes = useMemo(() => generateClasses(className, variants, 'link'), []);
 
   
   return (
     <LinkElement
       to={to}
+      draggable={draggable}
       {...parseClasses(classes)}
       {...props}
     >

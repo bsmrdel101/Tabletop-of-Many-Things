@@ -30,11 +30,6 @@
     border: 2px solid var(--purple-dark-2);
   }
 
-  &--empty {
-    background-color: transparent;
-    box-shadow: none;
-  }
-
   &--dark {
     background-color: var(--purple-dark-0);
   }
@@ -105,6 +100,18 @@
     }
   }
 
+  &--x-large {
+    font-size: var(--font-xl) !important;
+
+    img {
+      width: 1.5rem;
+    }
+    
+    a {
+      font-size: var(--font-xl);
+    }
+  }
+
   &--pink {
     background-color: var(--pink-0);
     color: var(--purple-dark-2);
@@ -164,14 +171,8 @@
     }
   }
 
-  &--add {
-    max-height: 1.2rem;
-    width: 3.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.56rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  &--empty {
+    background-color: transparent;
+    box-shadow: none;
   }
 }
