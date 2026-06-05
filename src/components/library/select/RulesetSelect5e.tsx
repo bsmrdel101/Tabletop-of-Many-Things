@@ -18,7 +18,6 @@ export default function RulesetSelect5e({ className = '', labelClass = '', varia
     >
       <option value="5e">D&D 5E (2014)</option>
       <option value="2024">D&D 5E (2024)</option>
-      <option value="sw" disabled>Star Wars (Fantasy Flight)</option>
     </Select>
   );
 }

@@ -9,10 +9,10 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   return (
-    <div>
+    <>
       <Errors />
       <Navbar />
       { children }
-    </div>
+    </>
   );
 }
