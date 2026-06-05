@@ -19,7 +19,6 @@
     "lint": "run-s lint:ts lint:scss"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.4",
     "@tanstack/react-query": "^5.85.5",
     "axios": "^1.15.2",
     "axios-cookiejar-support": "^7.0.0",

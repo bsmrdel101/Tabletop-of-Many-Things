@@ -1,6 +1,6 @@
 import api from "@/scripts/config/axios";
 import { addAsset } from "@/services/assetsService";
-import { uploadFile } from "@/services/storageService";
+import { uploadToBucket } from "@/services/bucketService";
 
 
 const parseCharacter5eData = (character: any) => {
@@ -34,10 +34,10 @@ export const getCharacterById = async (id: number): Promise<Character_Dnd | null
 
 // === POST routes === //
 
-export const addCharacter = async (user: User, name: string, img: File | null, ruleset: string) => {
+export const addCharacter = async (name: string, img: File | null, ruleset: string) => {
   try {
     const auth = { withCredentials: true };
-    const url = img && await uploadFile('tokens', img, `${user.id}_${user.username}/${img.name}`, { upsert: true });
+    const url = img && await uploadToBucket('tokens', img);
     const assetId = (url && img) ? await addAsset(null, img.name, 'assets', url) : 1;
     await api.post(`/api/5e/characters`, { name, assetId, ruleset }, auth);
   } catch (error) {
