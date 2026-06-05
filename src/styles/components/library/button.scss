@@ -30,11 +30,6 @@
     border: 2px solid var(--purple-dark-2);
   }
 
-  &--empty {
-    background-color: transparent;
-    box-shadow: none;
-  }
-
   &--dark {
     background-color: var(--purple-dark-0);
   }
@@ -105,6 +100,18 @@
     }
   }
 
+  &--x-large {
+    font-size: var(--font-xl) !important;
+
+    img {
+      width: 1.5rem;
+    }
+    
+    a {
+      font-size: var(--font-xl);
+    }
+  }
+
   &--pink {
     background-color: var(--pink-0);
     color: var(--purple-dark-2);
@@ -161,5 +168,10 @@
       width: 1rem;
       margin-right: 0.2rem;
     }
+  }
+
+  &--empty {
+    background-color: transparent;
+    box-shadow: none;
   }
 }

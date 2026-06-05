@@ -1,0 +1,12 @@
+.home {
+  padding: 0 1.4rem;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 6rem;
+
+    @media (max-width: 603px) {
+      margin-bottom: 1rem;
+    }
+  }
+}

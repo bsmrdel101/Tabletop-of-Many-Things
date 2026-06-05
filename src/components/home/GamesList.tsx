@@ -6,12 +6,8 @@ import GameCard from "./GameCard";
 import NewGameCard from "./NewGameCard";
 import { useQuery } from "@tanstack/react-query";
 
-interface Props {
-  setMenu: (menu: string) => void
-}
 
-
-export default function GamesList({ setMenu }: Props) {
+export default function GamesList() {
   const [selectedGame, setSelectedGame] = useState<GameMin | null>(null);
   const [showNewGame, setShowNewGame] = useState(false);
 
@@ -33,7 +29,6 @@ export default function GamesList({ setMenu }: Props) {
   return (
     <div className="games-list">
       <div>
-        <Button variants={['border']} onClick={() => setMenu('')}>Back</Button>
         <form className="games-list__join-game" onSubmit={handleJoinGame}>
           <Input
             variants={['fit', 'label-large']}

@@ -8,9 +8,6 @@
 @use 'components/library/dialog';
 @use 'components/box-stat';
 @use 'components/characters';
-@use 'components/home/games-list';
-@use 'components/home/home';
-@use 'components/home/user-box';
 @use 'components/login';
 @use 'components/dnd/character-sheet/character-sheet';
 @use 'components/dnd/character-sheet/main-stats';
@@ -19,3 +16,7 @@
 @use 'components/dnd/health';
 @use 'components/library/list-display';
 @use 'components/library/errors';
+@use 'components/navbar';
+@use 'components/games-list';
+@use 'components/home';
+@use 'components/user-box';
