@@ -29,6 +29,7 @@ const toErrorMessage = (error: unknown): string => {
 };
 
 export function showError(error: unknown) {
+  console.error(error);
   const container = document.querySelector('.errors');
   if (!container) return;
 
