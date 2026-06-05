@@ -5,7 +5,9 @@ import Layout from "@/components/Layout";
 export default function PlayPage() {
   return (
     <Layout>
-      <GamesList />
+      <div className="play">
+        <GamesList />
+      </div>
     </Layout>
   );
 }
