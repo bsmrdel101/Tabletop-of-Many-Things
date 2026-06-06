@@ -24,9 +24,11 @@ export default function GameCard({ game, setEditGameId, refetchGames }: Props) {
 
       <div className="game-card__bottom-row">
         <div className="game-card__buttons">
-          <Button variants={['small', 'image', 'empty']}>
-            <Img src="/images/icons/play.svg" alt="Play button" />
-          </Button>
+          <a href={`/vtt/${game.pubId}`}>
+            <Button variants={['small', 'image', 'empty']}>
+              <Img src="/images/icons/play.svg" alt="Play button" />
+            </Button>
+          </a>
           <Button variants={['small', 'image', 'empty']} onClick={() => setEditGameId(game.pubId)}>
             <Img src="/images/icons/pen.svg" alt="Edit button" />
           </Button>

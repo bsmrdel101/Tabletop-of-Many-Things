@@ -28,9 +28,9 @@ export const getGamesByUser = async (): Promise<Game[]> => {
   }
 };
 
-export const getGameById = async (id: number): Promise<Game | null> => {
+export const getGameById = async (pubId: string): Promise<Game | null> => {
   try {
-    const res = await api.get(`/api/v1/games/id/${id}`);
+    const res = await api.get(`/api/v1/games/id/${pubId}`);
     return res.data;
   } catch (error) {
     showError(error);
