@@ -104,7 +104,7 @@ type Character_Dnd = {
   languages: string[]
   currency: Cost_Dnd[]
   spellcasting: Spellcasting_5e | Spellcasting_2024 | null
-  ruleset: string
+  ruleset: Ruleset
   targets: Token_Dnd[]
 };
 
@@ -123,7 +123,7 @@ type CharacterCard_Dnd = {
   subrace: string | null
   classes: { name: string, lvl: number, subclass: string | null }[]
   background: string
-  ruleset: string
+  ruleset: Ruleset
 };
 
 type Race_Dnd = {

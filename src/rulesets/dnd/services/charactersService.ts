@@ -34,7 +34,7 @@ export const getCharacterById = async (id: number): Promise<Character_Dnd | null
 
 // === POST routes === //
 
-export const addCharacter = async (name: string, img: File | null, ruleset: string) => {
+export const addCharacter = async (name: string, img: File | null, ruleset: Ruleset) => {
   try {
 
     const url = img && await uploadToBucket('tokens', img);
