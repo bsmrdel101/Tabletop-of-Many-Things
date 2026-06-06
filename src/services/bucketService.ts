@@ -14,7 +14,7 @@ export const uploadToBucket = async (path: string, file: File): Promise<string |
     formData.append('file', file);
     formData.append("path", path);
 
-    const res = await api.post('/api/bucket/upload', formData);
+    const res = await api.post('/api/v1/bucket/upload', formData);
     return res.data.url;
   } catch (error) {
     showError(error);

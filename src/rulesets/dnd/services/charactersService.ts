@@ -12,7 +12,7 @@ const parseCharacter5eData = (character: any) => {
 
 export const getCharactersByUser = async (): Promise<CharacterCard_Dnd[]> => {
   try {
-    const res = await api.get(`/api/5e/characters`);
+    const res = await api.get(`/api/v1/5e/characters`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -22,7 +22,7 @@ export const getCharactersByUser = async (): Promise<CharacterCard_Dnd[]> => {
 
 export const getCharacterById = async (id: number): Promise<Character_Dnd | null> => {
   try {
-    const res = await api.get(`/api/5e/characters/${id}`);
+    const res = await api.get(`/api/v1/5e/characters/${id}`);
     return parseCharacter5eData(res.data);
   } catch (error) {
     console.error(error);
@@ -36,7 +36,7 @@ export const addCharacter = async (name: string, img: File | null, ruleset: stri
   try {
     const url = img && await uploadToBucket('tokens', img);
     const assetId = (url && img) ? await addAsset(null, img.name, 'assets', url) : 1;
-    await api.post(`/api/5e/characters`, { name, assetId, ruleset });
+    await api.post(`/api/v1/5e/characters`, { name, assetId, ruleset });
   } catch (error) {
     console.error(error);
   }
@@ -46,7 +46,7 @@ export const addCharacter = async (name: string, img: File | null, ruleset: stri
 
 export const editCharacterHealth = async (id: number, hp: number, tempHp: number) => {
   try {
-    await api.patch(`/api/5e/characters/health`, { id, hp, tempHp });
+    await api.patch(`/api/v1/5e/characters/health`, { id, hp, tempHp });
   } catch (error) {
     console.error(error);
   }
@@ -54,7 +54,7 @@ export const editCharacterHealth = async (id: number, hp: number, tempHp: number
 
 export const editCharacterMaxHp = async (id: number, maxHpMod: number, maxHpOverride: number, maxHpDmg: number, maxHp: number) => {
   try {
-    await api.patch(`/api/5e/characters/max-hp`, { id, maxHpMod, maxHpOverride, maxHpDmg, maxHp });
+    await api.patch(`/api/v1/5e/characters/max-hp`, { id, maxHpMod, maxHpOverride, maxHpDmg, maxHp });
   } catch (error) {
     console.error(error);
   }
@@ -62,7 +62,7 @@ export const editCharacterMaxHp = async (id: number, maxHpMod: number, maxHpOver
 
 export const editCharacterInspiration = async (id: number, insp: boolean) => {
   try {
-    await api.patch(`/api/5e/characters/insp`, { id, insp });
+    await api.patch(`/api/v1/5e/characters/insp`, { id, insp });
   } catch (error) {
     console.error(error);
   }
@@ -72,7 +72,7 @@ export const editCharacterInspiration = async (id: number, insp: boolean) => {
 
 export const editCharacter = async (character: Character_Dnd) => {
   try {
-    await api.put(`/api/5e/characters`, character);
+    await api.put(`/api/v1/5e/characters`, character);
   } catch (error) {
     console.error(error);
   }
@@ -82,7 +82,7 @@ export const editCharacter = async (character: Character_Dnd) => {
 
 export const deleteCharacter = async (id: number) => {
   try {
-    await api.delete(`/api/5e/characters/${id}`);
+    await api.delete(`/api/v1/5e/characters/${id}`);
   } catch (error) {
     console.error(error);
   }

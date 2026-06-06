@@ -5,7 +5,7 @@ import api from "@/scripts/config/axios";
 
 export const getAllRaces = async (gameId: number): Promise<Race_Dnd[]> => {
   try {
-    const res = await api.get(`/api/5e/races/${gameId}`);
+    const res = await api.get(`/api/v1/5e/races`);
     return res.data;
   } catch (error) {
     console.error(error);

@@ -20,9 +20,7 @@ interface EditPlayerClass {
 
 export const getAllClasses = async (gameId: number): Promise<Class_5e[]> => {
   try {
-    const params = new URLSearchParams();
-    params.append('gameId', gameId.toString());
-    const res = await api.get(`/api/5e/classes?${params}`);
+    const res = await api.get(`/api/v1/5e/classes`);
     return res.data;
   } catch (error) {
     console.error(error);

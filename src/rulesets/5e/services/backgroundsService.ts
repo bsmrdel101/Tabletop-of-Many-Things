@@ -5,7 +5,7 @@ import api from "@/scripts/config/axios";
 
 export const getAllBackgrounds = async () => {
   try {
-    const res = await api.get(`/api/5e/backgrounds`);
+    const res = await api.get(`/api/v1/5e/backgrounds`);
     return res.data;
   } catch (error) {
     console.error(error);

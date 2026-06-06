@@ -1,3 +1,4 @@
+import { showError } from "@/components/library/Errors";
 import api from "@/scripts/config/axios";
 
 interface NewGamePayload {
@@ -8,7 +9,7 @@ interface NewGamePayload {
 }
 
 interface EditGamePayload {
-  id: number
+  pubId: number
   name: string
   ruleset: string
   password?: string
@@ -19,30 +20,30 @@ interface EditGamePayload {
 
 export const getGamesByUser = async (): Promise<GameMin[]> => {
   try {
-    const res = await api.get('/api/dashboard');
+    const res = await api.get('/api/v1/games');
     return res.data;
   } catch (error) {
-    console.error(error);
+    showError(error);
     return [];
   }
 };
 
 export const getGameById = async (id: number): Promise<Game | null> => {
   try {
-    const res = await api.get(`/api/dashboard/id/${id}`);
+    const res = await api.get(`/api/v1/games/id/${id}`);
     return res.data;
   } catch (error) {
-    console.error(error);
+    showError(error);
     return null;
   }
 };
 
 export const getGamesHistory = async (): Promise<GameMin[]> => {
   try {
-    const res = await api.get('/api/dashboard/history');
+    const res = await api.get('/api/v1/games/history');
     return res.data;
   } catch (error) {
-    console.error(error);
+    showError(error);
     return [];
   }
 };
@@ -51,19 +52,19 @@ export const getGamesHistory = async (): Promise<GameMin[]> => {
 
 export const addGame = async (payload: NewGamePayload): Promise<number | null> => {
   try {
-    const res = await api.post('/api/dashboard', payload);
+    const res = await api.post('/api/v1/games', payload);
     return res.data.id;
   } catch (error) {
-    console.error(error);
+    showError(error);
     return null;
   }
 };
 
 export const addGameToHistory = async (gameId: number) => {
   try {
-    await api.post('/api/dashboard/history', { gameId });
+    await api.post('/api/v1/games/history', { gameId });
   } catch (error) {
-    console.error(error);
+    showError(error);
   }
 };
 
@@ -71,9 +72,9 @@ export const addGameToHistory = async (gameId: number) => {
 
 export const editGame = async (payload: EditGamePayload) => {
   try {
-    await api.patch(`/api/dashboard`, payload);
+    await api.patch(`/api/v1/games`, payload);
   } catch (error) {
-    console.error(error);
+    showError(error);
   }
 };
 
@@ -81,8 +82,8 @@ export const editGame = async (payload: EditGamePayload) => {
 
 export const deleteGame = async (id: number) => {
   try {
-    await api.patch(`/api/dashboard/${id}`);
+    await api.patch(`/api/v1/games/${id}`);
   } catch (error) {
-    console.error(error);
+    showError(error);
   }
 };

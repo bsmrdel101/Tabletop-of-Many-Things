@@ -5,7 +5,7 @@ import api from "@/scripts/config/axios";
 
 export const getAssetsByGame = async (gameId: number): Promise<Game[]> => {
   try {
-    const res = await api.get(`/api/assets/game/${gameId}`);
+    const res = await api.get(`/api/v1/assets/game/${gameId}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -17,7 +17,7 @@ export const getAssetsByGame = async (gameId: number): Promise<Game[]> => {
 
 export const addAsset = async (gameId: number | null, name: string, filepath: string, img: string): Promise<number | null> => {
   try {
-    const res = await api.post('/api/assets', { gameId, name, filepath, img });
+    const res = await api.post('/api/v1/assets', { gameId, name, filepath, img });
     return res.data.id;
   } catch (error) {
     console.error(error);
@@ -29,7 +29,7 @@ export const addAsset = async (gameId: number | null, name: string, filepath: st
 
 export const editAssetFilepath = async (id: number, filepath: string) => {
   try {
-    await api.patch('/api/assets/filepath', { id, filepath });
+    await api.patch('/api/v1/assets/filepath', { id, filepath });
   } catch (error) {
     console.error(error);
   }
@@ -37,7 +37,7 @@ export const editAssetFilepath = async (id: number, filepath: string) => {
 
 export const editAssetName = async (id: number, name: string) => {
   try {
-    await api.patch('/api/assets/name', { id, name });
+    await api.patch('/api/v1/assets/name', { id, name });
   } catch (error) {
     console.error(error);
   }
@@ -47,7 +47,7 @@ export const editAssetName = async (id: number, name: string) => {
 
 export const deleteAsset = async (id: number) => {
   try {
-    await api.patch(`/api/assets/${id}`);
+    await api.patch(`/api/v1/assets/${id}`);
   } catch (error) {
     console.error(error);
   }

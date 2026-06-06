@@ -3,22 +3,19 @@ import Img from "../library/Img";
 
 interface Props {
   game: GameMin
-  selected: boolean
-  setSelected: (game: GameMin | null) => void
 }
 
 
-export default function GameCard({ game, selected, setSelected }: Props) {
+export default function GameCard({ game }: Props) {
   return (
-    <>
-      {!selected ?
-        <div className="game-card" onClick={() => setSelected(game)}>
-          <h3 className="game-card__name">{ game.name }</h3>
-          <p className="game-card__ruleset"><em>{ game.ruleset }</em></p>
-        </div>
-        :
-        <div className="game-card">
-          <Button variants={['small', 'dark']}>Launch</Button>
+    <div className="game-card">
+      <h3 className="game-card__name">{ game.name }</h3>
+
+      <div className="game-card__bottom-row">
+        <div className="game-card__buttons">
+          <Button variants={['small', 'image', 'empty']}>
+            <img src="/images/icons/play.svg" alt="Play button" />
+          </Button>
           <Button variants={['small', 'image', 'empty']}>
             <Img src="/images/icons/pen.svg" alt="Edit button" />
           </Button>
@@ -26,7 +23,9 @@ export default function GameCard({ game, selected, setSelected }: Props) {
             <Img src="/images/icons/trash.svg" alt="Delete button" />
           </Button>
         </div>
-      }
-    </>
+
+        <p className="game-card__ruleset"><em>{ game.ruleset }</em></p>
+      </div>
+    </div>
   );
 }

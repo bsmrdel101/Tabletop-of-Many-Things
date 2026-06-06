@@ -17,7 +17,7 @@ interface UserLogin {
 
 export const getUser = async (): Promise<User | null> => {
   try {
-    const res = await api.get('/api/users');
+    const res = await api.get('/api/v1/users');
     return res.data;
   } catch(error) {
     showError(error);
@@ -29,7 +29,7 @@ export const getUser = async (): Promise<User | null> => {
 
 export const registerUser = async (payload: NewUser) => {
   try {
-    await api.post('/api/users', payload);
+    await api.post('/api/v1/users', payload);
   } catch(error) {
     showError(error);
   }
@@ -37,7 +37,7 @@ export const registerUser = async (payload: NewUser) => {
 
 export const loginUser = async (payload: UserLogin) => {
   try {
-    await api.post('/api/users/login', payload);
+    await api.post('/api/v1/users/login', payload);
   } catch(error) {
     showError(error);
   }
@@ -45,7 +45,7 @@ export const loginUser = async (payload: UserLogin) => {
 
 export const logout = async () => {
   try {
-    await api.post('/api/users/logout');
+    await api.post('/api/v1/users/logout');
   } catch(error) {
     showError(error);
   }
@@ -55,7 +55,7 @@ export const logout = async () => {
 
 export const editUser = async (payload: { displayName: string, email: string }) => {
   try {
-    await api.put('/api/user', { ...payload });
+    await api.put('/api/v1/user', { ...payload });
   } catch(error) {
     showError(error);
   }
@@ -65,7 +65,7 @@ export const editUser = async (payload: { displayName: string, email: string }) 
 
 export const deleteUser = async () => {
   try {
-    await api.delete('/api/user');
+    await api.delete('/api/v1/user');
   } catch(error) {
     showError(error);
   }

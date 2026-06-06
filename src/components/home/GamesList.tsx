@@ -48,12 +48,7 @@ export default function GamesList() {
         { showNewGame && <NewGameCard setOpen={setShowNewGame} refetch={refetch} /> }
         {!showNewGame && games.map((game: GameMin) => {
           return (
-            <GameCard
-              key={game.id}
-              game={game}
-              selected={selectedGame?.id === game.id && !selectedGame?.gameId}
-              setSelected={setSelectedGame}
-            />
+            <GameCard key={game.id} game={game} />
           );
         })}
       </div>
@@ -63,12 +58,7 @@ export default function GamesList() {
           <h3>Game History</h3>
           {gameHistory.map((game: GameMin) => {
             return (
-              <GameCard
-                key={game.id}
-                game={game}
-                selected={Boolean(selectedGame?.id === game.id && selectedGame?.gameId)}
-                setSelected={setSelectedGame}
-              />
+              <GameCard key={game.id} game={game} />
             );
           })}
         </div>

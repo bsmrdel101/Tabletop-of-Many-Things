@@ -11,7 +11,7 @@ interface NewMap {
 
 export const getMaps = async (id: number) => {
   try {    
-    const res = await axios.get(`/api/5e/map/all/${id}`);
+    const res = await axios.get(`/api/v1/5e/map/all/${id}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -20,7 +20,7 @@ export const getMaps = async (id: number) => {
 
 export const getMap = async (mapId: number, gameId: number) => {
   try {
-    const res = await axios.get(`/api/5e/map/{"mapId":${mapId}, "gameId":${gameId}}`);
+    const res = await axios.get(`/api/v1/5e/map/{"mapId":${mapId}, "gameId":${gameId}}`);
     res.data.boardState = res.data.boardState.map((token: any) => {
       return { ...token, creature: JSON.parse(token.creature) };
     }).filter((token: Token_Dnd) => token.id);
@@ -50,7 +50,7 @@ export const addMap = async (payload: NewMap, gameId: number) => {
       image: payload.isBlank ? payload.image : imageUrl
     };
 
-    await axios.post('/api/5e/map', mapData);
+    await axios.post('/api/v1/5e/map', mapData);
   } catch (error) {
     console.error(error);
   }
@@ -58,7 +58,7 @@ export const addMap = async (payload: NewMap, gameId: number) => {
 
 export const addTokenToMap = async (gameId: number, token: Token_Dnd, mapId: number, x: number, y: number) => {
   try {
-    await axios.post('/api/5e/map/token', {
+    await axios.post('/api/v1/5e/map/token', {
       gameId: gameId,
       mapId: mapId,
       assetId: token.assetId,
@@ -76,7 +76,7 @@ export const addTokenToMap = async (gameId: number, token: Token_Dnd, mapId: num
 
 export const updateMap = async (payload: Map_Dnd) => {
   try {
-    await axios.put('/api/5e/map', payload);
+    await axios.put('/api/v1/5e/map', payload);
   } catch (error) {
     console.error(error);
   }
@@ -85,7 +85,7 @@ export const updateMap = async (payload: Map_Dnd) => {
 // Update token board state
 export const updateToken = async (id: number, size: number, x: number, y: number) => {
   try {
-    await axios.put('/api/5e/map/token', {
+    await axios.put('/api/v1/5e/map/token', {
       id: id,
       x: x,
       y: y,
@@ -100,7 +100,7 @@ export const updateToken = async (id: number, size: number, x: number, y: number
 
 export const deleteTokenFromMap = async (id: number) => {
   try {
-    await axios.delete(`/api/5e/map/token/${id}`);
+    await axios.delete(`/api/v1/5e/map/token/${id}`);
   } catch (error) {
     console.error(error);
   }
