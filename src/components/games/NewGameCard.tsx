@@ -14,10 +14,12 @@ interface Props {
 export default function NewGameCard({ setOpen, refetch }: Props) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [ruleset, setRuleset] = useState('');
+  const [ruleset, setRuleset] = useState<Ruleset | ''>('');
 
   const handleNewGame = async (e: FormEvent) => {
     e.preventDefault();
+    if (ruleset === '') return;
+
     await addGame({ name, password, ruleset, gameSettings: getDefaultGameSettings(ruleset) });
     refetch();
     setOpen(false);
@@ -40,7 +42,7 @@ export default function NewGameCard({ setOpen, refetch }: Props) {
       />
       <RulesetSelect5e
         value={ruleset}
-        onChange={(e) => setRuleset(e.target.value)}
+        onChange={(value) => setRuleset(value)}
       />
 
       <Button variants={['small', 'dark']} type="submit">Create</Button>

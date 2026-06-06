@@ -3,22 +3,22 @@ import api from "@/scripts/config/axios";
 
 interface NewGamePayload {
   name: string
-  ruleset: string
-  password?: string
+  ruleset: Ruleset
+  password: string | null
   gameSettings: GameSettings
 }
 
 interface EditGamePayload {
-  pubId: number
+  pubId: string
   name: string
-  ruleset: string
-  password?: string
+  ruleset: Ruleset
+  password: string | null
 }
 
 
 // === GET routes === //
 
-export const getGamesByUser = async (): Promise<GameMin[]> => {
+export const getGamesByUser = async (): Promise<Game[]> => {
   try {
     const res = await api.get('/api/v1/games');
     return res.data;
@@ -38,7 +38,7 @@ export const getGameById = async (id: number): Promise<Game | null> => {
   }
 };
 
-export const getGamesHistory = async (): Promise<GameMin[]> => {
+export const getGamesHistory = async (): Promise<Game[]> => {
   try {
     const res = await api.get('/api/v1/games/history');
     return res.data;
@@ -72,7 +72,7 @@ export const addGameToHistory = async (gameId: number) => {
 
 export const editGame = async (payload: EditGamePayload) => {
   try {
-    await api.patch(`/api/v1/games`, payload);
+    await api.put(`/api/v1/games`, payload);
   } catch (error) {
     showError(error);
   }
@@ -80,9 +80,9 @@ export const editGame = async (payload: EditGamePayload) => {
 
 // === DELETE routes === //
 
-export const deleteGame = async (id: number) => {
+export const deleteGame = async (pubId: string) => {
   try {
-    await api.patch(`/api/v1/games/${id}`);
+    await api.delete(`/api/v1/games/${pubId}`);
   } catch (error) {
     showError(error);
   }

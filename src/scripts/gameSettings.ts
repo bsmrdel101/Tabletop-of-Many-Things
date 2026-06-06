@@ -14,7 +14,7 @@ const defaultSettings2024: GameSettings = {
   ...defaultSettingsDnd
 };
 
-export const getDefaultGameSettings = (ruleset: string): GameSettings => {
+export const getDefaultGameSettings = (ruleset: Ruleset): GameSettings => {
   switch (ruleset) {
     case '5e':
       return defaultSettings5e;

@@ -1,15 +1,12 @@
-import { userAtom } from "@/scripts/atoms/state";
 import CharacterCard from "./CharacterCard";
 import NewCharacterCard from "./NewCharacterCard";
 import Button from "@/components/library/Button";
 import { addCharacter, deleteCharacter, getCharactersByUser } from "@/rulesets/dnd/services/charactersService";
-import { useAtom } from "jotai";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 
 export default function CharactersList() {
-  const [user] = useAtom(userAtom);
   const [showNewCharacterForm, setShowNewCharacterForm] = useState(false);
 
   const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_Dnd[]>({
@@ -23,9 +20,9 @@ export default function CharactersList() {
     await refetch();
   };
 
-  const handleCreateCharacter = async (name: string, img: File | null, ruleset: string) => {
+  const handleCreateCharacter = async (name: string, img: File | null, ruleset: Ruleset) => {
     setShowNewCharacterForm(false);
-    await addCharacter(user, name, img, ruleset);
+    await addCharacter(name, img, ruleset);
     await refetch();
   };
   

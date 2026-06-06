@@ -35,12 +35,12 @@ type User = {
 };
 
 type Game = {
-  id: number
+  pubId: string
   name: string
   dm: User
   playerList: User[]
-  ruleset: string
-  password?: string
+  ruleset: Ruleset
+  password: string | null
   settings: GameSettings
 };
 
@@ -56,9 +56,4 @@ type ClientSettings = {
   dnd?: any
 };
 
-type GameMin = {
-  id: number
-  gameId?: number
-  name: string
-  ruleset: string
-};
+type Ruleset = '5e' | '2024';

@@ -108,8 +108,8 @@ type Character_Dnd = {
   dmgImmunities: string[]
   languages: string[]
   currency: Cost_Dnd[]
-  spellcasting: Spellcasting_Dnd | null
-  ruleset: string
+  spellcasting: Spellcasting_5e | Spellcasting_2024 | null
+  ruleset: Ruleset
   targets: Token_Dnd[]
 };
 
@@ -127,7 +127,7 @@ type CharacterCard_Dnd = {
   subrace: string | null
   classes: { name: string, lvl: number, subclass: string | null }[]
   background: string
-  ruleset: string
+  ruleset: Ruleset
 };
 
 type Race_Dnd = {
