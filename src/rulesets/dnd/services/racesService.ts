@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const getAllRaces = async () => {
   try {
-    const res = await axios.get(`/api/5e/races`);
+    const res = await axios.get(`/api/v1/5e/races`);
     return res.data;
   } catch (error) {
     console.error(error);

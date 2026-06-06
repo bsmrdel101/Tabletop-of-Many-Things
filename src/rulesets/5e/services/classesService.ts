@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const getAllClasses = async () => {
   try {
-    const res = await axios.get(`/api/5e/classes`);
+    const res = await axios.get(`/api/v1/5e/classes`);
     return res.data;
   } catch (error) {
     console.error(error);

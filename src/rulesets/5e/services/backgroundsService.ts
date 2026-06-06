@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const getAllBackgrounds = async () => {
   try {
-    const res = await axios.get(`/api/5e/backgrounds`);
+    const res = await axios.get(`/api/v1/5e/backgrounds`);
     return res.data;
   } catch (error) {
     console.error(error);
