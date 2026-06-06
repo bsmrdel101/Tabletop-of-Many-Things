@@ -26,7 +26,7 @@ export default function FileInput({ className = '', labelClass = '', variants = 
       { label }
       <div className="file-input__add-container">
         <p className="file-input__add">+</p>
-        <Img src={previewImg} alt="" onError={(e) => e.currentTarget.style.display='none'} />
+        <Img src={previewImg} onError={(e) => e.currentTarget.style.display='none'} />
       </div>
 
       <input

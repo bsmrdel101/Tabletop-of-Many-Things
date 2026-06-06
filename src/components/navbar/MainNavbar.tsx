@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../library/Button";
 import Link from "../library/Link";
 import UserBox from "../UserBox";
+import Img from "../library/Img";
 
 export default function MainNavbar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -15,11 +16,11 @@ export default function MainNavbar() {
         className="navbar__hamburger-btn"
         onClick={() => setMobileNavOpen((v) => !v)}
       >
-        <img alt="" src="/images/icons/bars.svg" />
+        <Img src="/images/icons/bars.svg" />
       </Button>
 
       <Link to="/" className="navbar__link">
-        <img className="navbar__logo" alt="Logo" src="/images/logo.svg" />
+        <Img className="navbar__logo" alt="Logo" src="/images/logo.svg" />
       </Link>
 
       <Link to="/play" className={`navbar__link${url === '/play' ? ' navbar__link--active' : ''}`}>

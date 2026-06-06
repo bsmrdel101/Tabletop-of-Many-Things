@@ -1,5 +1,11 @@
-export default function Img(props: ImgHTML) {
+interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
+  draggable?: boolean
+  alt?: string
+}
+
+
+export default function Img({ alt = '', draggable = false, ...props }: Props) {
   return (
-    <img draggable={false} {...props} />
+    <img alt={alt} draggable={draggable} {...props} />
   );
 }

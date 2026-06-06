@@ -33,7 +33,7 @@ export default function CharacterCard({ character, deleteFn }: Props) {
         onClick={() => deleteFn(character)}
         data-testid="delete-btn"
       >
-        <Img src="/images/icons/trash.svg" alt="Delete btn" draggable={false} />
+        <Img src="/images/icons/trash.svg" alt="Delete btn" />
       </Button>
     </div>
   );

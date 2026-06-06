@@ -4,7 +4,6 @@ import { xpForNextLevel } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { useAtom } from "jotai";
 import { formatCharacterClasses } from "../../scripts/utils";
 import { memo } from "react";
-import Inspiration from "./Inspiration";
 import Img from "@/components/library/Img";
 
 interface Props {
@@ -27,12 +26,7 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
   return (
     <header className="character-sheet-main-header">
       <div className="character-sheet-main-header__character-info">
-        <Img
-          className="character-sheet-main-header__character-pic"
-          src={characterImg}
-          alt="Character image"
-          draggable
-        />
+        <Img className="character-sheet-main-header__character-pic" src={characterImg} alt="Character image" />
         <div>
           <h2 className="character-sheet-main-header__name">{ characterName }</h2>
           <p><strong>CLASSES</strong>: { formatCharacterClasses(characterClasses) }</p>
@@ -42,8 +36,6 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
       </div>
 
       <div className="character-sheet-main-header__right">
-        { characterBardicInsp && <Inspiration bardicInsp={characterBardicInsp} /> }
-
         <div className="character-sheet-main-header__rest-buttons">
           <Button variants={['thin', 'secondary-blue', 'left-icon']}>
             <Img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest

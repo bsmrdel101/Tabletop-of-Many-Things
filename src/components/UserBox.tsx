@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import Button from "./library/Button";
 import { useState } from "react";
 import { logout } from "@/services/userService";
+import Img from "./library/Img";
 
 
 export default function UserBox() {
@@ -16,12 +17,14 @@ export default function UserBox() {
 
 
   return (
-    <div className="user-box">
-      <h3>{ user.displayName }</h3>
-      <Button variants={['empty']} onClick={() => setMenuOpen(!menuOpen)}>|||</Button>
+    <div className="user-box">  
+      <Button variants={['empty']} onClick={() => setMenuOpen(!menuOpen)}>
+        <Img alt="Profile pic" src={user.img ? user.img : '/images/defaults/profile_pic.png'} />
+      </Button>
       
       {menuOpen &&
         <div className="user-box__menu">
+          <h3>{ user.displayName }</h3>
           <Button onClick={handleLogout}>Logout</Button>
         </div>
       }

@@ -25,7 +25,7 @@ export default function MainStats({ character }: Props) {
 
       <div className="main-stats__row">
         <div className="main-stats__ac" onClick={() => setEditAcOpen(true)}>
-          <Img src="/images/game/shield.svg" alt="" draggable={false} />
+          <Img src="/images/game/shield.svg" />
           <p>{ character.ac }</p>
         </div>
 

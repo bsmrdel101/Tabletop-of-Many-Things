@@ -53,3 +53,29 @@
     }
   }
 }
+
+.user-box {
+  display: flex;
+  border-bottom-left-radius: 1rem;
+  gap: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-items: baseline;
+
+  &__menu {
+    position: absolute;
+    top: 3.1rem;
+    right: 0;
+    background-color: var(--bg-1);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  img {
+    width: 2.5rem;
+  }
+}

@@ -31,6 +31,7 @@ type User = {
   pubId: string
   displayName: string
   email: string
+  img: string | null
   settings: ClientSettings
 };
 
