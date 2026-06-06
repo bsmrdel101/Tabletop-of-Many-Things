@@ -1,6 +1,7 @@
 import { ask } from "@/scripts/tools/interactions";
 import Button from "../library/Button";
 import { deleteGame } from "@/services/dashboardService";
+import Img from "../library/Img";
 
 interface Props {
   game: Game
@@ -24,13 +25,13 @@ export default function GameCard({ game, setEditGameId, refetchGames }: Props) {
       <div className="game-card__bottom-row">
         <div className="game-card__buttons">
           <Button variants={['small', 'image', 'empty']}>
-            <img src="/images/icons/play.svg" alt="Play button" />
+            <Img src="/images/icons/play.svg" alt="Play button" />
           </Button>
           <Button variants={['small', 'image', 'empty']} onClick={() => setEditGameId(game.pubId)}>
-            <img src="/images/icons/pen.svg" alt="Edit button" />
+            <Img src="/images/icons/pen.svg" alt="Edit button" />
           </Button>
           <Button variants={['small', 'image', 'empty']} onClick={onClickDelete}>
-            <img src="/images/icons/trash.svg" alt="Delete button" />
+            <Img src="/images/icons/trash.svg" alt="Delete button" />
           </Button>
         </div>
 

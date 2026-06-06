@@ -4,6 +4,7 @@ import { xpForNextLevel } from "@/rulesets/dnd/scripts/gameSystemsInfo";
 import { useAtom } from "jotai";
 import { formatCharacterClasses } from "../../scripts/utils";
 import { memo } from "react";
+import Img from "@/components/library/Img";
 
 interface Props {
   characterImg: string
@@ -24,7 +25,7 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
   return (
     <header className="character-sheet-main-header">
       <div className="character-sheet-main-header__character-info">
-        <img className="character-sheet-main-header__character-pic" src={characterImg} alt="Character image" />
+        <Img className="character-sheet-main-header__character-pic" src={characterImg} alt="Character image" />
         <div>
           <h2 className="character-sheet-main-header__name">{ characterName }</h2>
           <p><strong>CLASSES</strong>: { formatCharacterClasses(characterClasses) }</p>
@@ -36,10 +37,10 @@ function MainHeader({ characterImg, characterName, characterClasses, characterRa
       <div className="character-sheet-main-header__right">
         <div className="character-sheet-main-header__rest-buttons">
           <Button variants={['thin', 'secondary-blue', 'left-icon']}>
-            <img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest
+            <Img src="/images/game/campfire.svg" alt="Campfire" /> Short Rest
           </Button>
           <Button variants={['thin', 'secondary-blue', 'left-icon']}>
-            <img src="/images/game/tent.svg" alt="Tent" /> Long Rest
+            <Img src="/images/game/tent.svg" alt="Tent" /> Long Rest
           </Button>
         </div>
 
