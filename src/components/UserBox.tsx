@@ -1,14 +1,18 @@
 import { userAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import Button from "./library/Button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { logout } from "@/services/userService";
 import Img from "./library/Img";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 
 export default function UserBox() {
   const [user] = useAtom<User>(userAtom);
   const [menuOpen, setMenuOpen] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+  
+  useClickOutside(ref, () => setMenuOpen(false));
 
   const handleLogout = async () => {
     await logout();
@@ -17,7 +21,7 @@ export default function UserBox() {
 
 
   return (
-    <div className="user-box">  
+    <div className="user-box" ref={ref}>
       <Button variants={['empty']} onClick={() => setMenuOpen(!menuOpen)}>
         <Img alt="Profile pic" src={user.img ? user.img : '/images/defaults/profile_pic.png'} />
       </Button>

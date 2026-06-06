@@ -26,11 +26,7 @@ export function App() {
   }, []);
 
 
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      { useRoutes(routes) }
-    </Suspense>
-  );
+  return useRoutes(routes);
 }
 
 
