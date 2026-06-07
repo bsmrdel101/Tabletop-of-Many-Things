@@ -20,3 +20,6 @@
 @use 'components/games-list';
 @use 'components/home';
 @use 'components/play-page';
+@use 'components/modification-process';
+@use 'components/dnd/modification-processes/character-modification-process';
+@use 'components/library/checkbox';

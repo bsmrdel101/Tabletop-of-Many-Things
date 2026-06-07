@@ -43,6 +43,7 @@ export default function NewGameCard({ setOpen, refetch }: Props) {
       <RulesetSelect5e
         value={ruleset}
         onChange={(value) => setRuleset(value)}
+        required
       />
 
       <Button variants={['small', 'dark']} type="submit">Create</Button>

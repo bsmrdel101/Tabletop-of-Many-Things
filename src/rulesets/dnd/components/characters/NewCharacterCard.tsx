@@ -6,21 +6,20 @@ import FileInput from "@/components/library/FileInput";
 
 interface Props {
   setOpen: (value: boolean) => void
-  onCreateCharacter: (name: string, img: File | null, ruleset: Ruleset) => void
+  onCreateCharacter: (img: File | null, ruleset: Ruleset) => void
 }
 
 
 export default function NewCharacterCard({ setOpen, onCreateCharacter }: Props) {
   const [img, setImg] = useState<File | null>(null);
-  const [name, setName] = useState('Unnamed Character');
-  const [ruleset, setRuleset] = useState<Ruleset | ''>('5e');
+  const [ruleset, setRuleset] = useState<Ruleset | ''>('');
   const DEFAULT_IMG = '/images/defaults/character.png';
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (ruleset === '') return;
     
-    onCreateCharacter(name, img, ruleset);
+    onCreateCharacter(img, ruleset);
   };
 
 
@@ -39,19 +38,13 @@ export default function NewCharacterCard({ setOpen, onCreateCharacter }: Props) 
         onChange={(files) => setImg(files[0])}
         accept="image/*"
       />
+
       <div className="new-character-card__inputs">
-        <Input
-          variants={['label-large', 'medium']}
-          label="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          data-testid="name"
-        />
         <RulesetSelect5e
           variants={['fit']}
           value={ruleset}
           onChange={(value) => setRuleset(value)}
+          required
         />
       </div>
 
