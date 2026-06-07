@@ -10,7 +10,7 @@ interface Props extends ButtonHTML {
 
 
 export default function Button({ children, className = '', variants = [], type = 'button', ...props }: Props) {
-  const classes = useMemo(() => generateClasses(className, variants, 'button'), []);
+  const classes = useMemo(() => generateClasses(className, variants, 'button'), [className, variants]);
 
   
   return (
