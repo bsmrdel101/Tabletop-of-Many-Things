@@ -118,6 +118,7 @@ type Character_Dnd = {
 type CharacterDraft_Dnd = {
   img: string
   name: string
+  ruleset: Ruleset | null
   lvl: number
   xp: number
   maxHp: number

@@ -4,6 +4,7 @@ import { useState } from "react";
 const createEmptyCharacter = (): CharacterDraft_Dnd => ({
   img: '/images/defaults/character.png',
   name: 'Unnamed Character',
+  ruleset: null,
   lvl: 1,
   xp: 0,
   maxHp: 0,

@@ -1,5 +1,10 @@
 .dnd-character-modification-process {
+  display: flex;
+  justify-content: flex-start;
+
   .setup-step {
+    margin: 0 auto;
+
     &__join-game {
       display: flex;
       gap: 0.5rem;
@@ -19,6 +24,14 @@
       button {
         align-self: flex-end;
       }
+    }
+  }
+
+  .classes-step {
+    &__class-option {
+      display: flex;
+      gap: 0.3rem;
+      margin-bottom: 0.3rem;
     }
   }
 }

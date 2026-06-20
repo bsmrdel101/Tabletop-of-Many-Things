@@ -5,6 +5,8 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 0.2rem;
   display: flex;
+  height: 80vh;
+  overflow-y: auto;
 
   &__overlay {
     inset: 0;
