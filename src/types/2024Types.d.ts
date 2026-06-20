@@ -17,6 +17,7 @@ type Class_2024 = {
 
 type PlayerClass_2024 = {
   id: number
+  classId: number
   name: string
   lvl: number
   hitDice: number

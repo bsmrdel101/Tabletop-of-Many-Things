@@ -6,25 +6,26 @@ import { useQuery } from "@tanstack/react-query";
 import ModificationProcess, { ModificationStep } from "@/components/ModificationProcess";
 import SetupStep, { isSetupComplete } from "../modification-processes/character/SetupStep";
 import { useCharacterDraft } from "../hooks/useCharacterDraft";
-import ClassesStep from "../modification-processes/character/ClassesStep";
-import SubclassesStep from "../modification-processes/character/SubclassesStep";
-import RaceStep from "../modification-processes/character/RaceStep";
-import BackgroundStep from "../modification-processes/character/BackgroundStep";
-import AbilityScoresStep from "../modification-processes/character/AbilityScoresStep";
-import StartingItemsStep from "../modification-processes/character/StartingItemsStep";
-import FeaturesStep from "../modification-processes/character/FeaturesStep";
+import ClassesStep from "../../../5e/components/modification-processes/character/ClassesStep";
+import SubclassesStep from "../../../5e/components/modification-processes/character/SubclassesStep";
+import RaceStep from "../../../5e/components/modification-processes/character/RaceStep";
+import BackgroundStep from "../../../5e/components/modification-processes/character/BackgroundStep";
+import AbilityScoresStep from "../../../5e/components/modification-processes/character/AbilityScoresStep";
+import StartingItemsStep from "../../../5e/components/modification-processes/character/StartingItemsStep";
+import FeaturesStep from "../../../5e/components/modification-processes/character/FeaturesStep";
 
 
 export default function CharactersList() {
   const [showCharacterCreation, setShowCharacterCreation] = useState(false);
   const { character, updateCharacter, resetCharacter } = useCharacterDraft();
+  const [ruleset, setRuleset] = useState<Ruleset>('5e');
 
   const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_Dnd[]>({
     queryKey: ['characters'],
     queryFn: getCharactersByUser
   });
 
-  const steps: ModificationStep[] = [
+  const steps5e: ModificationStep[] = [
     {
       name: 'Setup',
       content: (
@@ -124,12 +125,14 @@ export default function CharactersList() {
 
   return (
     <>
-      <ModificationProcess
-        open={showCharacterCreation}
-        onClose={onCloseCharacterCreation}
-        steps={steps}
-        className="dnd-character-modification-process"
-      />
+      {ruleset === '5e' &&
+        <ModificationProcess
+          open={showCharacterCreation}
+          onClose={onCloseCharacterCreation}
+          steps={steps5e}
+          className="dnd-character-modification-process"
+        />
+      }
 
       <div className="characters-list__title">
         <h2>Characters</h2>

@@ -66,6 +66,18 @@
     }
   }
 
+    &--danger {
+    background-color: var(--green-0);
+
+    &:hover {
+      color: var(--green-1);
+      background-color: transparent;
+      box-shadow: none;
+      border-color: transparent;
+      text-shadow: none;
+    }
+  }
+
   &--image {
     display: flex;
 
