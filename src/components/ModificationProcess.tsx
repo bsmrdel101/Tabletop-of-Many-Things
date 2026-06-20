@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import Button from "./library/Button";
+import { ask } from "@/scripts/tools/interactions";
 
 export interface ModificationStep {
   name: string;
@@ -17,6 +18,18 @@ interface Props {
 
 export default function ModificationProcess({ open, onClose, steps, className }: Props) {
   const [selectedStep, setSelectedStep] = useState<number>(0);
+
+  const onClickFinish = async () => {
+    const step = steps.find((s) => s.changesRequired);
+    if (step) {
+      alert(`Changes required in ${step.name}.`);
+      return;
+    }
+
+    if (!await ask('Are you sure you want to finish?')) return;
+    setSelectedStep(0);
+    onClose();
+  };
 
 
   if (!open) return null;
@@ -40,7 +53,7 @@ export default function ModificationProcess({ open, onClose, steps, className }:
 
           <Button
             className="modification-process__sidebar-btn"
-            onClick={onClose}
+            onClick={onClickFinish}
           >
             Finish
           </Button>

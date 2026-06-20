@@ -34,8 +34,16 @@ type User = {
   settings: ClientSettings
 };
 
-type Game = {
+type World = {
+  id: number
   pubId: string
+  name: string
+};
+
+type Game = {
+  id: number
+  pubId: string
+  worldId: string
   name: string
   dm: User
   playerList: User[]

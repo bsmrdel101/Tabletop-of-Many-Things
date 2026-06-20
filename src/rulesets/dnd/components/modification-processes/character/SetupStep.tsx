@@ -12,10 +12,8 @@ interface Props {
 }
 
 
-export default function SetupStep({ character }: Props) {
+export default function SetupStep({ character, updateCharacter }: Props) {
   const [game, setGame] = useAtom<Game | null>(gameAtom);
-  const [name, setName] = useState<string>(character.name);
-  const [lvl, setLvl] = useState<number>(character.lvl);
   const [room, setRoom] = useState('');
 
   const onSubmitJoinGame = async (e: FormEvent) => {
@@ -32,14 +30,14 @@ export default function SetupStep({ character }: Props) {
       <div style={{ display: 'flex', gap: '0.3rem', marginBottom: '1rem', justifyContent: 'center' }}>
         <Input
           label="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={character.name}
+          onChange={(e) => updateCharacter({ ...character, name: e.target.value}) }
         />
         <Input
           variants={['small']}
           label="Starting Lvl"
-          value={lvl}
-          onChange={(e) => setLvl(Math.max(Number(e.target.value || 1), 0))}
+          value={character.lvl || ''}
+          onChange={(e) => updateCharacter({ ...character, lvl: Math.max(Number(e.target.value), 0)}) }
           type="number"
         />
       </div>
@@ -47,7 +45,7 @@ export default function SetupStep({ character }: Props) {
       <hr />
       {!game &&
         <p style={{ marginBottom: '0.9rem' }}>
-          <em style={{ fontSize: 'var(--font-sm)' }}>These steps can be done later</em>
+          <em style={{ fontSize: 'var(--font-sm)' }}>These steps can be done later.<br />Joining a game will give you access to the content in that game.</em>
         </p>
       }
 

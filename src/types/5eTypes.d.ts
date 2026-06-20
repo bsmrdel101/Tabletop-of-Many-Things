@@ -1,8 +1,7 @@
 type Class_5e = {
   id: number
-  gameId: number | null
   name: string
-  lvl: number
+  source: Source_Dnd
   hitDice: number
   proficiencies: Prof_Dnd[]
   profChoices: ProfChoice_Dnd[]
@@ -12,7 +11,7 @@ type Class_5e = {
   levels: Level_Dnd[]
   multiClassing: any[]
   subclasses: Subclass_Dnd[]
-  features: NameDesc[]
+  features: Feature_Dnd[]
 };
 
 type PlayerClass_5e = {
@@ -26,6 +25,7 @@ type PlayerClass_5e = {
 type Subclass_5e = {
   id: number
   name: string
+  source: Source_Dnd
   subclassFlavor: string | null
   desc: string | null
   levels: Level_Dnd[]
@@ -41,8 +41,8 @@ type PlayerSubclass_5e = {
 
 type Background_5e = {
   id: number
-  gameId: number | null
   name: string
+  source: Source_Dnd
   desc: string | null
   proficiencies: string | null
   languages: string[]
@@ -62,7 +62,8 @@ type PlayerBackground_5e = {
 type Feat_5e = {
   id: number
   name: string
-  desc: string
+  source: Source_Dnd
+  desc: string | null
   prerequisites: Prerequisites_Dnd | null
   abilityIncrease: { abilityScore: AbilityScore_Dnd, amount: number } | null
   features: Feature_Dnd[]
