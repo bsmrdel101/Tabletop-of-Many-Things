@@ -50,6 +50,8 @@ type Token_Dnd = {
   size: number
 };
 
+type Source_Dnd = 'default' | 'user' | 'game' | 'world';
+
 type Map_Dnd = {
   id: number
   game: Game
@@ -120,7 +122,7 @@ type CharacterDraft_Dnd = {
   xp: number
   maxHp: number
   abilityScores: AbilityScore_Dnd[]
-  race: PlayerRace_Dnd | null
+  race: Race_Dnd | null
   subrace: PlayerSubrace_Dnd | null
   classes: PlayerClass_5e[] | PlayerClass_2024[]
   background: PlayerBackground_5e | PlayerBackground_2024 | null
@@ -159,8 +161,8 @@ type CharacterCard_Dnd = {
 
 type Race_Dnd = {
   id: number
-  gameId: number | null
   name: string
+  source: Source_Dnd
   desc: string | null
   abilityBonuses: NameValue[]
   age: string | null
@@ -184,6 +186,7 @@ type PlayerRace_Dnd = {
 type Subrace_Dnd = {
   id: number
   name: string
+  source: Source_Dnd
   desc: string | null
   abilityBonuses: NameValue[]
   startingProficiencies: Prof_Dnd[]
@@ -208,6 +211,15 @@ type Trait_Dnd = {
   languageChoices: LangChoice_Dnd[]
 };
 
+type Feature_Dnd = {
+  id: number
+  name: string
+  desc: string | null
+  lvl: number
+  class: string
+  subclass: string
+};
+
 type Level_Dnd = {
   name: string
 };
@@ -216,6 +228,7 @@ type Creature_Dnd = {
   id: number
   asset: Asset
   name: string
+  source: Source_Dnd
   size: string
   type: string
   alignment: string
@@ -285,19 +298,12 @@ type AbilityScore_Dnd = {
   prof: boolean
 };
 
-type Feature_Dnd = {
-  id: number
-  classId: number
-  name: string
-  desc: string
-  lvl: number
-};
-
 type EquipmentCategory_Dnd = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Instrument' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Ring' | 'Rod' | 'Staff' | 'Scroll' | 'Wand' | 'Gaming Set' | 'Potion';
 type Rarity_Dnd = 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact';
 type Item_Dnd = {
   id: number
   name: string
+  source: Source_Dnd
   desc: string | null
   type: EquipmentCategory_Dnd
   rarity: Rarity_Dnd
@@ -333,7 +339,7 @@ type SpellDamage_Dnd = {
 };
 
 type AtSpecificLevel_Dnd = {
-  level: number
+  lvl: number
   dice: Dice_Dnd
 };
 
@@ -356,7 +362,7 @@ type Usage_Dnd = {
 };
 
 type AtSpecificLevel_Dnd = {
-  level: number
+  lvl: number
   dice: Dice_Dnd
 };
 
@@ -374,7 +380,7 @@ type SpellSlots_Dnd = {
 
 type PactSlots_Dnd = {
   amount: number
-  level: number
+  lvl: number
 };
 
 type SpellRange_Dnd = {
@@ -385,8 +391,9 @@ type SpellRange_Dnd = {
 type Spell_Dnd = {
   id: number
   name: string
+  source: Source_Dnd
   desc: string | null
-  level: number
+  lvl: number
   range: string
   target: string
   components: string[]

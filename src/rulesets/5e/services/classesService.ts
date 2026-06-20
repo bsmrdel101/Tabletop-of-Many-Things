@@ -1,26 +1,17 @@
 import api from "@/scripts/config/axios";
 
-interface NewPlayerClassRes {
-  id: number
-}
-
-interface NewPlayerClass {
-  characterId: number
-  classId: number
-}
-
-interface EditPlayerClass {
-  id: number
-  lvl: number
-  subclassId: number | null
+interface GetAllClasses {
+  gameId: string | null
+  worldId: string | null
+  userContent: boolean
 }
 
 
 // === GET routes === //
 
-export const getAllClasses = async (gameId: number): Promise<Class_5e[]> => {
+export const getClasses = async (params: GetAllClasses) => {
   try {
-    const res = await api.get(`/api/v1/5e/classes`);
+    const res = await api.get(`/api/v1/5e/classes`, { params });
     return res.data;
   } catch (error) {
     console.error(error);

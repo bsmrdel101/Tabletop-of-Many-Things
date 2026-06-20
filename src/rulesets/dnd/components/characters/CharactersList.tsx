@@ -6,6 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 import ModificationProcess, { ModificationStep } from "@/components/ModificationProcess";
 import SetupStep, { isSetupComplete } from "../modification-processes/character/SetupStep";
 import { useCharacterDraft } from "../hooks/useCharacterDraft";
+import ClassesStep from "../modification-processes/character/ClassesStep";
+import SubclassesStep from "../modification-processes/character/SubclassesStep";
+import RaceStep from "../modification-processes/character/RaceStep";
+import BackgroundStep from "../modification-processes/character/BackgroundStep";
+import AbilityScoresStep from "../modification-processes/character/AbilityScoresStep";
+import StartingItemsStep from "../modification-processes/character/StartingItemsStep";
+import FeaturesStep from "../modification-processes/character/FeaturesStep";
 
 
 export default function CharactersList() {
@@ -31,7 +38,7 @@ export default function CharactersList() {
     {
       name: 'Classes',
       content: (
-        <SetupStep
+        <ClassesStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -41,7 +48,7 @@ export default function CharactersList() {
     {
       name: 'Subclasses',
       content: (
-        <SetupStep
+        <SubclassesStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -51,7 +58,7 @@ export default function CharactersList() {
     {
       name: 'Race',
       content: (
-        <SetupStep
+        <RaceStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -61,7 +68,7 @@ export default function CharactersList() {
     {
       name: 'Background',
       content: (
-        <SetupStep
+        <BackgroundStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -71,7 +78,7 @@ export default function CharactersList() {
     {
       name: 'Ability Scores',
       content: (
-        <SetupStep
+        <AbilityScoresStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -81,7 +88,7 @@ export default function CharactersList() {
     {
       name: 'Starting Items',
       content: (
-        <SetupStep
+        <StartingItemsStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -91,7 +98,7 @@ export default function CharactersList() {
     {
       name: 'Features',
       content: (
-        <SetupStep
+        <FeaturesStep
           character={character}
           updateCharacter={updateCharacter}
         />
@@ -121,7 +128,7 @@ export default function CharactersList() {
         open={showCharacterCreation}
         onClose={onCloseCharacterCreation}
         steps={steps}
-        className="character-modification-process"
+        className="dnd-character-modification-process"
       />
 
       <div className="characters-list__title">
