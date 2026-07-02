@@ -15,6 +15,10 @@
     text-shadow: var(--pink-1) 1px 0 10px;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &--secondary {
     background-color: var(--purple-dark-4);
     box-shadow: none;
@@ -66,8 +70,8 @@
     }
   }
 
-    &--danger {
-    background-color: var(--green-0);
+  &--success {
+    background-color: var(--green-1);
 
     &:hover {
       color: var(--green-1);

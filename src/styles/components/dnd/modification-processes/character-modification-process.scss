@@ -1,6 +1,7 @@
 .dnd-character-modification-process {
   display: flex;
   justify-content: flex-start;
+  width: 40rem;
 
   .setup-step {
     margin: 0 auto;
@@ -28,6 +29,37 @@
   }
 
   .classes-step {
+    &__class-options {
+      margin-right: 5rem;
+
+      button {
+        width: 100%;
+      }
+    }
+
+    &__class-select-btn {
+      position: absolute;
+      bottom: 0.5rem;
+      width: 3rem !important;
+    }
+
+    &__lvl-container {
+      position: absolute;
+      top: -0.05rem;
+      
+      p {
+        font-size: var(--font-sm);
+        white-space: nowrap;
+      }
+
+      button {
+        padding: 0;
+        width: 1rem;
+        font-size: var(--font-md);
+        font-weight: bold;
+      }
+    }
+    
     &__class-option {
       display: flex;
       gap: 0.3rem;

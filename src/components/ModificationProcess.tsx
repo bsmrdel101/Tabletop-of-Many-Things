@@ -46,7 +46,7 @@ export default function ModificationProcess({ open, onClose, steps, className }:
                 onClick={() => setSelectedStep(i)}
               >
                 { item.name }
-                { item.changesRequired ? '(!)' : null }
+                { item.changesRequired ? <span> (!)</span> : null }
               </Button>
             );
           })}

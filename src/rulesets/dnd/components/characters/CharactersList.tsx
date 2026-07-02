@@ -1,24 +1,48 @@
 import CharacterCard from "./CharacterCard";
 import Button from "@/components/library/Button";
 import { deleteCharacter, getCharactersByUser } from "@/rulesets/dnd/services/charactersService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ModificationProcess, { ModificationStep } from "@/components/ModificationProcess";
-import SetupStep, { isSetupComplete } from "../modification-processes/character/SetupStep";
+import SetupStep, { isSetupComplete } from "../modification-processes/character-creation/SetupStep";
 import { useCharacterDraft } from "../hooks/useCharacterDraft";
-import ClassesStep from "../../../5e/components/modification-processes/character/ClassesStep";
-import SubclassesStep from "../../../5e/components/modification-processes/character/SubclassesStep";
-import RaceStep from "../../../5e/components/modification-processes/character/RaceStep";
-import BackgroundStep from "../../../5e/components/modification-processes/character/BackgroundStep";
-import AbilityScoresStep from "../../../5e/components/modification-processes/character/AbilityScoresStep";
-import StartingItemsStep from "../../../5e/components/modification-processes/character/StartingItemsStep";
-import FeaturesStep from "../../../5e/components/modification-processes/character/FeaturesStep";
+import ClassesStep, { isClassesComplete } from "../../../5e/components/modification-processes/character-creation/ClassesStep";
+import SubclassesStep, { isSubclassesComplete } from "../../../5e/components/modification-processes/character-creation/SubclassesStep";
+import RaceStep, { isRaceComplete } from "../../../5e/components/modification-processes/character-creation/RaceStep";
+import BackgroundStep, { isBackgroundComplete } from "../../../5e/components/modification-processes/character-creation/BackgroundStep";
+import AbilityScoresStep, { isAbilityScoresComplete } from "../../../5e/components/modification-processes/character-creation/AbilityScoresStep";
+import StartingItemsStep, { isStartingItemsComplete } from "../../../5e/components/modification-processes/character-creation/StartingItemsStep";
+import FeaturesStep, { isFeaturesComplete } from "../../../5e/components/modification-processes/character-creation/FeaturesStep";
 
 
 export default function CharactersList() {
   const [showCharacterCreation, setShowCharacterCreation] = useState(false);
   const { character, updateCharacter, resetCharacter } = useCharacterDraft();
-  const [ruleset, setRuleset] = useState<Ruleset>('5e');
+  const [changesRequired, setChangesRequired] = useState({
+    setup: true,
+    classes: true,
+    subclasses: true,
+    race: true,
+    subrace: true,
+    background: true,
+    abilityScore: true,
+    startingItems: true,
+    features: true
+  });
+
+  useEffect(() => {
+    setChangesRequired({
+      setup: !isSetupComplete(character),
+      classes: !isClassesComplete(character),
+      subclasses: !isSubclassesComplete(character),
+      race: !isRaceComplete(character),
+      subrace: !isRaceComplete(character),
+      background: !isBackgroundComplete(character),
+      abilityScore: !isAbilityScoresComplete(character),
+      startingItems: !isStartingItemsComplete(character),
+      features: !isFeaturesComplete(character),
+    });
+  }, [character]);
 
   const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_Dnd[]>({
     queryKey: ['characters'],
@@ -34,7 +58,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.setup
     },
     {
       name: 'Classes',
@@ -44,7 +68,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.classes
     },
     {
       name: 'Subclasses',
@@ -54,7 +78,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.subclasses
     },
     {
       name: 'Race',
@@ -64,7 +88,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.race
     },
     {
       name: 'Background',
@@ -74,7 +98,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.background
     },
     {
       name: 'Ability Scores',
@@ -84,7 +108,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.abilityScore
     },
     {
       name: 'Starting Items',
@@ -94,7 +118,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.startingItems
     },
     {
       name: 'Features',
@@ -104,7 +128,7 @@ export default function CharactersList() {
           updateCharacter={updateCharacter}
         />
       ),
-      changesRequired: !isSetupComplete(character)
+      changesRequired: changesRequired.features
     }
   ];
 
@@ -125,14 +149,12 @@ export default function CharactersList() {
 
   return (
     <>
-      {ruleset === '5e' &&
-        <ModificationProcess
-          open={showCharacterCreation}
-          onClose={onCloseCharacterCreation}
-          steps={steps5e}
-          className="dnd-character-modification-process"
-        />
-      }
+      <ModificationProcess
+        open={showCharacterCreation}
+        onClose={onCloseCharacterCreation}
+        steps={steps5e}
+        className="dnd-character-modification-process"
+      />
 
       <div className="characters-list__title">
         <h2>Characters</h2>

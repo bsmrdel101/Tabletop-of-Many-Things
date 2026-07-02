@@ -1,6 +1,7 @@
 type Class_5e = {
   id: number
   name: string
+  description: string | null
   source: Source_Dnd
   hitDice: number
   proficiencies: Prof_Dnd[]
