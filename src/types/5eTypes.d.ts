@@ -6,11 +6,11 @@ type Class_5e = {
   hitDice: number
   proficiencies: Prof_Dnd[]
   profChoices: ProfChoice_Dnd[]
-  saves: Skill_Dnd[]
+  saves: string[]
   startingItems: Item_Dnd[]
   startingItemChoices: Item_Dnd[]
   levels: Level_Dnd[]
-  multiClassing: any[]
+  multiClassing: MultiClassing_Dnd[]
   subclasses: Subclass_Dnd[]
   features: Feature_Dnd[]
 };
@@ -29,7 +29,7 @@ type Subclass_5e = {
   name: string
   source: Source_Dnd
   subclassFlavor: string | null
-  desc: string | null
+  description: string | null
   levels: Level_Dnd[]
   spells: Spell_Dnd[]
   class: { id: number, name: string }
@@ -45,7 +45,7 @@ type Background_5e = {
   id: number
   name: string
   source: Source_Dnd
-  desc: string | null
+  description: string | null
   proficiencies: string | null
   languages: string[]
   equipment: Item_Dnd[]
@@ -65,7 +65,7 @@ type Feat_5e = {
   id: number
   name: string
   source: Source_Dnd
-  desc: string | null
+  description: string | null
   prerequisites: Prerequisites_Dnd | null
   abilityIncrease: { abilityScore: AbilityScore_Dnd, amount: number } | null
   features: Feature_Dnd[]

@@ -159,7 +159,7 @@ type Race_Dnd = {
   id: number
   name: string
   source: Source_Dnd
-  desc: string | null
+  description: string | null
   abilityBonuses: NameValue[]
   age: string | null
   size: string | null
@@ -183,7 +183,7 @@ type Subrace_Dnd = {
   id: number
   name: string
   source: Source_Dnd
-  desc: string | null
+  description: string | null
   abilityBonuses: NameValue[]
   startingProficiencies: Prof_Dnd[]
   languages: string[]
@@ -200,7 +200,7 @@ type PlayerSubrace_Dnd = {
 type Trait_Dnd = {
   id: number
   name: string
-  desc: string | null
+  description: string | null
   races: string | null
   subraces: string | null
   profChoices: ProfChoice_Dnd[]
@@ -210,7 +210,7 @@ type Trait_Dnd = {
 type Feature_Dnd = {
   id: number
   name: string
-  desc: string | null
+  description: string | null
   lvl: number
   class: string
   subclass: string
@@ -258,23 +258,22 @@ type Skill_Dnd = {
 };
 
 type Prof_Dnd = {
-  weapons: { id: number, name: string }[]
-  armor: { id: number, name: string }[]
-  tools: { id: number, name: string }[]
-  instruments: { id: number, name: string }[]
-  vehicles: { id: number, name: string }[]
+  weapons: string[]
+  armor: string[]
+  tools: string[]
+  instruments: string[]
+  vehicles: string[]
 };
 
 type ProfChoice_Dnd = {
-  desc: string | null
-  choose: number
-  type: ProfType_Dnd
-  proficiencies: Prof_Dnd[]
+  amount: number
+  description: string
+  options: string[] | ProfChoice_Dnd[]
 };
 
 type LangChoice_Dnd = {
-  desc: string | null
-  choose: number
+  amount: number
+  description: string
   languages: string[]
 };
 
@@ -300,7 +299,7 @@ type Item_Dnd = {
   id: number
   name: string
   source: Source_Dnd
-  desc: string | null
+  description: string | null
   type: EquipmentCategory_Dnd
   rarity: Rarity_Dnd
   cost: Cost_Dnd | null
@@ -388,7 +387,7 @@ type Spell_Dnd = {
   id: number
   name: string
   source: Source_Dnd
-  desc: string | null
+  description: string | null
   lvl: number
   range: string
   target: string
@@ -406,4 +405,10 @@ type Spell_Dnd = {
   classes: string[]
   subclasses: string[]
   material: string | null
+};
+
+type MultiClassing_Dnd = {
+  prerequisites: NameValue[]
+  proficiencies: Prof_Dnd
+  proficiencyChoices: ProfChoice_Dnd[]
 };

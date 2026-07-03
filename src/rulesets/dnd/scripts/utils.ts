@@ -30,3 +30,22 @@ export const getHealthColor = (hp: number, maxHp: number) => {
 export const createDice = (amount: number, type: number, mod = 0): Dice_Dnd => {
   return { amount, type, mod, display: `${1}d${type}${mod ? numPrefix(mod) : ''}` };
 };
+
+export const fullAbilityScoreName = (name: string): string => {
+  switch (name) {
+    case 'str':
+      return 'Strength';
+    case 'dex':
+      return 'Dexterity';
+    case 'con':
+      return 'Constitution';
+    case 'int':
+      return 'Intelligence';
+    case 'wis':
+      return 'Wisdom';
+    case 'char':
+      return 'Charisma';
+    default:
+      return name;
+  }
+};
