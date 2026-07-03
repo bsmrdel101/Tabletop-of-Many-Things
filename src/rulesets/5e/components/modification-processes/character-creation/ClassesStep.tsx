@@ -1,5 +1,6 @@
 import Button from "@/components/library/Button";
 import useClasses from "@/rulesets/5e/hooks/useClasses";
+import { fullAbilityScoreName } from "@/rulesets/dnd/scripts/utils";
 import { gameAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
@@ -117,7 +118,7 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
           <div>
             <p style={{ whiteSpace: "pre-wrap" }}>{ focusedClass.description }</p>
             <hr />
-            <p><strong>Saving Throws: </strong> { focusedClass.saves.map((s) => s.name).join(', ') }</p>
+            <p><strong>Saving Throws: </strong> { focusedClass.saves.map((s) => fullAbilityScoreName(s)).join(', ') }</p>
             <p><strong>Skills (Pick):</strong></p>
             <p><strong>Starting Items:</strong></p>
             <p><strong>Subclasses (lvl):</strong></p>

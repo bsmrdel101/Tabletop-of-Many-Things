@@ -90,7 +90,7 @@ export default function SetupStep({ character, updateCharacter }: Props) {
           disabled={!!game}
         />
         <Checkbox
-          label="Allow rolling for stats"
+          label="Allow manual entry for abilities"
           disabled={!!game}
         />
       </div>

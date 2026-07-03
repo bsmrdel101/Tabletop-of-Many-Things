@@ -33,8 +33,21 @@ export const createDice = (amount: number, type: number, mod = 0): Dice_Dnd => {
   return { amount, type, mod, display: `${1}d${type}${mod ? numPrefix(mod) : ''}` };
 };
 
-export const refreshCharacterSheet = async (characterId: number, room: string) => {
-  const res = await getCharacterById(characterId);
-  if (!res) return;
-  emitServerEvent('UPDATE_PLAYER', [res, room]);
+export const fullAbilityScoreName = (name: string): string => {
+  switch (name) {
+    case 'str':
+      return 'Strength';
+    case 'dex':
+      return 'Dexterity';
+    case 'con':
+      return 'Constitution';
+    case 'int':
+      return 'Intelligence';
+    case 'wis':
+      return 'Wisdom';
+    case 'char':
+      return 'Charisma';
+    default:
+      return name;
+  }
 };
