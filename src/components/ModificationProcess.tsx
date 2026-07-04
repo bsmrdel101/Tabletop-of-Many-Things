@@ -6,6 +6,7 @@ export interface ModificationStep {
   name: string;
   content: ReactNode;
   changesRequired: boolean;
+  disabled?: boolean
 }
 
 interface Props {
@@ -44,6 +45,7 @@ export default function ModificationProcess({ open, onClose, steps, className }:
                 key={i}
                 className={`modification-process__sidebar-btn${selectedStep === i ? ' modification-process__sidebar-btn--active' : ''}`}
                 onClick={() => setSelectedStep(i)}
+                disabled={item.disabled ?? false}
               >
                 { item.name }
                 { item.changesRequired ? <span> (!)</span> : null }

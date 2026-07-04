@@ -50,8 +50,6 @@ type Token_Dnd = {
   size: number
 };
 
-type Source_Dnd = 'default' | 'user' | 'game' | 'world';
-
 type Map_Dnd = {
   id: number
   game: Game
@@ -104,6 +102,7 @@ type Character_Dnd = {
   speeds: Speed_Dnd[]
   senses: NameValue[]
   proficiencies: Prof_Dnd
+  skills: Skill_Dnd[]
   resistances: string[]
   vulnerabilities: string[]
   condImmunities: string[]
@@ -113,34 +112,6 @@ type Character_Dnd = {
   spellcasting: Spellcasting_5e | Spellcasting_2024 | null
   ruleset: Ruleset
   targets: Token_Dnd[]
-};
-
-type CharacterDraft_Dnd = {
-  img: string
-  name: string
-  ruleset: Ruleset | null
-  lvl: number
-  xp: number
-  maxHp: number
-  abilityScores: AbilityScore_Dnd[]
-  race: Race_Dnd | null
-  subrace: PlayerSubrace_Dnd | null
-  classes: PlayerClass_5e[] | PlayerClass_2024[]
-  background: PlayerBackground_5e | PlayerBackground_2024 | null
-  feats: Feat_5e[] | Feat_2024[]
-  traits: Trait_Dnd[]
-  features: Feature_Dnd[]
-  currentHitDice: Dice_Dnd[]
-  speeds: Speed_Dnd[]
-  senses: NameValue[]
-  proficiencies: Prof_Dnd
-  resistances: string[]
-  vulnerabilities: string[]
-  condImmunities: string[]
-  dmgImmunities: string[]
-  languages: string[]
-  currency: Cost_Dnd[]
-  spellcasting: Spellcasting_5e | Spellcasting_2024 | null
 };
 
 type BardicInsp_Dnd = {
@@ -163,7 +134,7 @@ type CharacterCard_Dnd = {
 type Race_Dnd = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   description: string | null
   abilityBonuses: NameValue[]
   age: string | null
@@ -187,7 +158,7 @@ type PlayerRace_Dnd = {
 type Subrace_Dnd = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   description: string | null
   abilityBonuses: NameValue[]
   startingProficiencies: Prof_Dnd[]
@@ -229,7 +200,7 @@ type Creature_Dnd = {
   id: number
   asset: Asset
   name: string
-  source: Source_Dnd
+  source: Source
   size: string
   type: string
   alignment: string
@@ -303,7 +274,7 @@ type Rarity_Dnd = 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | '
 type Item_Dnd = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   description: string | null
   type: EquipmentCategory_Dnd
   rarity: Rarity_Dnd
@@ -391,7 +362,7 @@ type SpellRange_Dnd = {
 type Spell_Dnd = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   description: string | null
   lvl: number
   range: string
@@ -415,5 +386,5 @@ type Spell_Dnd = {
 type MultiClassing_Dnd = {
   prerequisites: NameValue[]
   proficiencies: Prof_Dnd
-  proficiencyChoices: ProfChoice_Dnd[]
+  profChoices: ProfChoice_Dnd[]
 };

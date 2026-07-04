@@ -1,17 +1,59 @@
+type CharacterDraft_5e = {
+  img: string
+  name: string
+  ruleset: Ruleset | null
+  lvl: number
+  xp: number
+  maxHp: number
+  abilityScores: AbilityScore_Dnd[]
+  race: Race_Dnd | null
+  subrace: PlayerSubrace_Dnd | null
+  classes: PlayerClass_5e[]
+  background: PlayerBackground_5e | null
+  feats: Feat_5e[]
+  traits: Trait_Dnd[]
+  features: Feature_Dnd[]
+  currentHitDice: Dice_Dnd[]
+  speeds: Speed_Dnd[]
+  senses: NameValue[]
+  proficiencies: ProfDraft_Dnd
+  skills: ProfSelectionDraft_Dnd[]
+  resistances: string[]
+  vulnerabilities: string[]
+  condImmunities: string[]
+  dmgImmunities: string[]
+  languages: string[]
+  currency: Cost_Dnd[]
+  spellcasting: Spellcasting_5e | null
+};
+
+type ProfSelectionDraft_Dnd = {
+  name: string
+  source: string
+};
+
+type ProfDraft_Dnd = {
+  weapons: ProfSelectionDraft_Dnd[]
+  armor: ProfSelectionDraft_Dnd[]
+  tools: ProfSelectionDraft_Dnd[]
+  instruments: ProfSelectionDraft_Dnd[]
+  vehicles: ProfSelectionDraft_Dnd[]
+};
+
 type Class_5e = {
   id: number
   name: string
   description: string | null
-  source: Source_Dnd
+  source: Source
   hitDice: number
-  proficiencies: Prof_Dnd[]
+  proficiencies: Prof_Dnd
   profChoices: ProfChoice_Dnd[]
   saves: string[]
   startingItems: Item_Dnd[]
   startingItemChoices: Item_Dnd[]
   levels: Level_Dnd[]
-  multiClassing: MultiClassing_Dnd[]
-  subclasses: Subclass_Dnd[]
+  multiClassing: MultiClassing_Dnd
+  subclasses: Subclass_5e[]
   features: Feature_Dnd[]
 };
 
@@ -21,13 +63,13 @@ type PlayerClass_5e = {
   name: string
   lvl: number
   hitDice: number
-  subclass: Subclass_Dnd | null
+  subclass: Subclass_5e | null
 };
 
 type Subclass_5e = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   subclassFlavor: string | null
   description: string | null
   levels: Level_Dnd[]
@@ -44,7 +86,7 @@ type PlayerSubclass_5e = {
 type Background_5e = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   description: string | null
   proficiencies: string | null
   languages: string[]
@@ -64,7 +106,7 @@ type PlayerBackground_5e = {
 type Feat_5e = {
   id: number
   name: string
-  source: Source_Dnd
+  source: Source
   description: string | null
   prerequisites: Prerequisites_Dnd | null
   abilityIncrease: { abilityScore: AbilityScore_Dnd, amount: number } | null

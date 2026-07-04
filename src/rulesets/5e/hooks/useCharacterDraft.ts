@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const createEmptyCharacter = (): CharacterDraft_Dnd => ({
+const createEmptyCharacter = (): CharacterDraft_5e => ({
   img: '/images/defaults/character.png',
   name: 'Unnamed Character',
   ruleset: null,
@@ -33,6 +33,7 @@ const createEmptyCharacter = (): CharacterDraft_Dnd => ({
     instruments: [],
     vehicles: []
   },
+  skills: [],
   resistances: [],
   vulnerabilities: [],
   condImmunities: [],
@@ -43,9 +44,9 @@ const createEmptyCharacter = (): CharacterDraft_Dnd => ({
 });
 
 export function useCharacterDraft() {
-  const [character, setCharacter] = useState<CharacterDraft_Dnd>(createEmptyCharacter());
+  const [character, setCharacter] = useState<CharacterDraft_5e>(createEmptyCharacter());
 
-  const updateCharacter = (updates: Partial<CharacterDraft_Dnd>) => {
+  const updateCharacter = (updates: Partial<CharacterDraft_5e>) => {
     setCharacter((prev) => ({ ...prev, ...updates }));
   };
 

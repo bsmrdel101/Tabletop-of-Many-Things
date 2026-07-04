@@ -3,18 +3,20 @@ import { memo, useLayoutEffect, useState } from "react";
 
 interface Props {
   proficiencies: Prof_Dnd
+  noStyle?: boolean
+  textAlign?: string
 }
 
 
-function Proficiencies({ proficiencies }: Props) {
+function Proficiencies({ proficiencies, noStyle, textAlign }: Props) {
   const [listData, setListData] = useState<string[]>([]);
 
   useLayoutEffect(() => {
-    const weapons = proficiencies.weapons.map((p) => p.name).join(', ');
-    const armor = proficiencies.armor.map((p) => p.name).join(', ');
-    const tools = proficiencies.tools.map((p) => p.name).join(', ');
-    const instruments = proficiencies.instruments.map((p) => p.name).join(', ');
-    const vehicles = proficiencies.vehicles.map((p) => p.name).join(', ');
+    const weapons = proficiencies.weapons.map((p) => p).join(', ');
+    const armor = proficiencies.armor.map((p) => p).join(', ');
+    const tools = proficiencies.tools.map((p) => p).join(', ');
+    const instruments = proficiencies.instruments.map((p) => p).join(', ');
+    const vehicles = proficiencies.vehicles.map((p) => p).join(', ');
     setListData([
       weapons ? `<strong>WEAPONS:</strong> ${weapons}` : '',
       armor ? `<strong>ARMOR:</strong> ${armor}` : '',
@@ -29,6 +31,8 @@ function Proficiencies({ proficiencies }: Props) {
     <ListDisplay
       title="Proficiencies"
       rows={listData}
+      noStyle={noStyle}
+      textAlign={textAlign}
     />
   );
 }

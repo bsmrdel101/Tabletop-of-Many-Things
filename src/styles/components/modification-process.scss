@@ -41,6 +41,7 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    overflow-y: auto;
 
     h2 {
       font-size: var(--font-md);

@@ -7,8 +7,8 @@ import { useAtom } from "jotai";
 import { FormEvent, useState } from "react";
 
 interface Props {
-  character: CharacterDraft_Dnd
-  updateCharacter: (value: CharacterDraft_Dnd) => void
+  character: CharacterDraft_5e
+  updateCharacter: (value: CharacterDraft_5e) => void
 }
 
 
@@ -98,6 +98,6 @@ export default function SetupStep({ character, updateCharacter }: Props) {
   );
 }
 
-export const isSetupComplete = (character: CharacterDraft_Dnd): boolean => {
+export const isSetupComplete = (character: CharacterDraft_5e): boolean => {
   return !!character.img && !!character.name && !!character.lvl;
 };

@@ -76,8 +76,9 @@ p {
   font-size: var(--font-md);
 }
 
-img {
-  min-width: 0.8rem;
+ul {
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .form__footer {

@@ -12,7 +12,7 @@ type Class_2024 = {
   startingItemChoices: Item_Dnd[]
   levels: Level_Dnd[]
   multiClassing: any[]
-  subclasses: Subclass_Dnd[]
+  subclasses: Subclass_2024[]
   features: NameDesc[]
 };
 
@@ -22,7 +22,7 @@ type PlayerClass_2024 = {
   name: string
   lvl: number
   hitDice: number
-  subclass: Subclass_Dnd | null
+  subclass: Subclass_2024 | null
 };
 
 type Subclass_2024 = {
