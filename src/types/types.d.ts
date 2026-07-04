@@ -65,3 +65,4 @@ type ClientSettings = {
 };
 
 type Ruleset = '5e' | '2024';
+type Source = 'default' | 'user' | 'game' | 'world';

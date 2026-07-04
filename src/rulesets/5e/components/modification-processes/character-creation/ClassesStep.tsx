@@ -1,20 +1,21 @@
 import Button from "@/components/library/Button";
 import useClasses from "@/rulesets/5e/hooks/useClasses";
+import Proficiencies from "@/rulesets/dnd/components/stat-block/Proficiencies";
 import { fullAbilityScoreName } from "@/rulesets/dnd/scripts/utils";
 import { gameAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
 
 interface Props {
-  character: CharacterDraft_Dnd
-  updateCharacter: (value: CharacterDraft_Dnd) => void
+  character: CharacterDraft_5e
+  updateCharacter: (value: CharacterDraft_5e) => void
 }
 
 
 export default function ClassesStep({ character, updateCharacter }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
-  const [focusedClass, setFocusedClass] = useState<Class_5e | null>(null);
   const { classes } = useClasses(game?.pubId ?? null, game?.worldId ?? null, true);
+  const [focusedClass, setFocusedClass] = useState<Class_5e | null>(null);
   const totalLvl = useMemo(() => character.classes.reduce((acc, c) => acc + c.lvl, 0), [character.classes]);
   const notFullyLeveled = totalLvl < character.lvl;
 
@@ -51,7 +52,14 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
       })
       .filter((c) => c.lvl > 0);
 
-    updateCharacter({ ...character, classes: updatedClasses });
+    const proficiencies = {
+      weapons: [],
+      armor: [],
+      tools: [],
+      instruments: [],
+      vehicles: []
+    };
+    updateCharacter({ ...character, classes: updatedClasses, skills: [], proficiencies });
   };
 
 
@@ -70,6 +78,7 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
             return (
               <div key={c.id} className="classes-step__class-option">
                 <Button
+                  style={focusedClass?.id === c.id ? { backgroundColor: 'var(--purple-dark-3)' } : {}}
                   variants={['dark']}
                   onClick={() => setFocusedClass(c)}
                 >
@@ -116,12 +125,19 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
 
         {focusedClass &&
           <div>
-            <p style={{ whiteSpace: "pre-wrap" }}>{ focusedClass.description }</p>
-            <hr />
-            <p><strong>Saving Throws: </strong> { focusedClass.saves.map((s) => fullAbilityScoreName(s)).join(', ') }</p>
-            <p><strong>Skills (Pick):</strong></p>
-            <p><strong>Starting Items:</strong></p>
-            <p><strong>Subclasses (lvl):</strong></p>
+            <p style={{ whiteSpace: 'pre-wrap' }}><em>{ focusedClass.description }</em></p>
+            <hr style={{ margin: '1rem' }} />
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <p><strong>Saving Throws: </strong> { focusedClass.saves.map((s) => fullAbilityScoreName(s)).join(', ') }</p>
+              <Proficiencies proficiencies={focusedClass.proficiencies} noStyle={true} />
+              <div>
+                <p><strong>Subclasses (lvl)</strong></p>
+                <ul>
+                  { focusedClass.subclasses.map((s) => <li key={s.id}>{ s.name }</li>) }
+                </ul>
+              </div>
+            </div>
           </div>
         }
       </div>
@@ -129,7 +145,7 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
   );
 }
 
-export const isClassesComplete = (character: CharacterDraft_Dnd): boolean => {
+export const isClassesComplete = (character: CharacterDraft_5e): boolean => {
   return (
     (character.classes.reduce((acc, c) => acc + c.lvl, 0) === character.lvl)
   );

@@ -66,4 +66,31 @@
       margin-bottom: 0.3rem;
     }
   }
+
+  .class-options-step {
+    margin: 0 auto;
+
+    &__class {
+      margin-bottom: 1rem;
+      background-color: var(--bg-1);
+      padding: 0.5rem;
+      border-radius: 0.3rem;
+
+      h1 {
+        font-size: var(--font-lg);
+        margin: 0 0 0.5rem;
+      }
+    }
+
+    &__skills {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    &__starting-items {
+      margin-top: 2rem;
+    }
+  }
 }
