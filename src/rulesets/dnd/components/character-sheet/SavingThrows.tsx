@@ -4,13 +4,13 @@ import SavingThrow from "../stat-block/SavingThrow";
 import { profFromLvl } from "../../scripts/gameSystemsInfo";
 
 interface Props {
-  abilityScores: AbilityScore_Dnd[]
+  abilityScores: AbilityScore_dnd[]
   lvl: number
 }
 
 
 function SavingThrows({ abilityScores, lvl }: Props) {
-  const handleRollCheck = (abilityScore: AbilityScore_Dnd) => {
+  const handleRollCheck = (abilityScore: AbilityScore_dnd) => {
     rollCheck(abilityScore.mod);
   };
 
@@ -19,7 +19,7 @@ function SavingThrows({ abilityScores, lvl }: Props) {
     <div className="character-sheet-saving-throws">
       <h3 className="character-sheet-saving-throws__title">Saving Throws</h3>
       <div className="character-sheet-saving-throws__list">
-        {abilityScores.map((abilityScore: AbilityScore_Dnd) => {
+        {abilityScores.map((abilityScore: AbilityScore_dnd) => {
           return (
             <SavingThrow
               key={abilityScore.id}

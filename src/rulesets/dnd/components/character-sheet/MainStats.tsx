@@ -7,7 +7,7 @@ import { rollInit } from "../../scripts/gameplayMechanics";
 import Img from "@/components/library/Img";
 
 interface Props {
-  character: Character_Dnd
+  character: Character_dnd
 }
 
 

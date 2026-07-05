@@ -4,14 +4,14 @@ import { editCharacterHealth, editCharacterMaxHp } from "@/rulesets/dnd/services
 
 // HEALTH
 
-export const healPlayer = (character: Character_Dnd, amount: number, room: string) => {
+export const healPlayer = (character: Character_dnd, amount: number, room: string) => {
   if (character.hp === character.maxHp - character.maxHpDmg || amount === 0) return;
   const newHp = Math.min(character.hp + amount, character.maxHp - character.maxHpDmg);
   editCharacterHealth(character.id, newHp, character.tempHp);
   emitServerEvent('UPDATE_PLAYER', [{ ...character, hp: newHp }, room]);
 };
 
-export const dmgPlayer = (character: Character_Dnd, amount: number, room: string) => {
+export const dmgPlayer = (character: Character_dnd, amount: number, room: string) => {
   if (amount === 0) return;
   const actualDmg = Math.max(0, amount - character.tempHp);
   const tempHp = Math.max(0, character.tempHp - amount);
@@ -20,13 +20,13 @@ export const dmgPlayer = (character: Character_Dnd, amount: number, room: string
   emitServerEvent('UPDATE_PLAYER', [{ ...character, hp: newHp, tempHp }, room]);
 };
 
-export const addPlayerTempHp = (character: Character_Dnd, amount: number, room: string) => {
+export const addPlayerTempHp = (character: Character_dnd, amount: number, room: string) => {
   if (amount <= 0) return;
   editCharacterHealth(character.id, character.hp, amount);
   emitServerEvent('UPDATE_PLAYER', [{ ...character, tempHp: amount }, room]);
 };
 
-export const dmgPlayerMaxHp = (character: Character_Dnd, amount: number, room: string) => {
+export const dmgPlayerMaxHp = (character: Character_dnd, amount: number, room: string) => {
   if (amount === 0) return;
   const newMaxHpDmg = character.maxHpDmg + amount;
   const newHp = Math.min(character.hp, character.maxHp - newMaxHpDmg);
@@ -35,7 +35,7 @@ export const dmgPlayerMaxHp = (character: Character_Dnd, amount: number, room: s
   emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHpDmg: newMaxHpDmg, hp: newHp }, room]);
 };
 
-export const restorePlayerMaxHp = (character: Character_Dnd, room: string) => {
+export const restorePlayerMaxHp = (character: Character_dnd, room: string) => {
   editCharacterMaxHp(character.id, character.maxHpMod, character.maxHpOverride, 0, character.maxHp);
   emitServerEvent('UPDATE_PLAYER', [{ ...character, maxHpDmg: 0 }, room]);
 };

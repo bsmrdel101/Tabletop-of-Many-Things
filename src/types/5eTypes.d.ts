@@ -11,51 +11,52 @@ type CharacterDraft_5e = {
   lvl: number
   xp: number
   maxHp: number
-  abilityScores: AbilityScore_Dnd[]
-  race: Race_Dnd | null
-  subrace: PlayerSubrace_Dnd | null
+  abilityScores: AbilityScore_dnd[]
+  race: Race_dnd | null
+  subrace: PlayerSubrace_dnd | null
   classes: PlayerClass_5e[]
   background: PlayerBackground_5e | null
   feats: Feat_5e[]
-  traits: Trait_Dnd[]
-  features: Feature_Dnd[]
-  currentHitDice: Dice_Dnd[]
-  speeds: Speed_Dnd[]
+  traits: Trait_dnd[]
+  features: Feature_dnd[]
+  currentHitDice: Dice_dnd[]
+  speeds: Speed_dnd[]
   senses: NameValue[]
-  proficiencies: ProfDraft_Dnd
-  skills: ProfSelectionDraft_Dnd[]
-  items: ItemSelection_Dnd[]
+  proficiencies: ProfDraft_dnd
+  skills: ProfSelectionDraft_dnd[]
+  items: ItemSelection_dnd[]
   resistances: string[]
   vulnerabilities: string[]
   condImmunities: string[]
   dmgImmunities: string[]
   languages: string[]
-  currency: Cost_Dnd[]
+  currency: Cost_dnd[]
   spellcasting: Spellcasting_5e | null
 };
 
-type ProfSelectionDraft_Dnd = {
+type ProfSelectionDraft_dnd = {
   name: string
   source: string
 };
 
-type ProfDraft_Dnd = {
-  weapons: ProfSelectionDraft_Dnd[]
-  armor: ProfSelectionDraft_Dnd[]
-  tools: ProfSelectionDraft_Dnd[]
-  instruments: ProfSelectionDraft_Dnd[]
-  vehicles: ProfSelectionDraft_Dnd[]
+type ProfDraft_dnd = {
+  weapons: ProfSelectionDraft_dnd[]
+  armor: ProfSelectionDraft_dnd[]
+  tools: ProfSelectionDraft_dnd[]
+  instruments: ProfSelectionDraft_dnd[]
+  vehicles: ProfSelectionDraft_dnd[]
 };
 
-type ItemSelection_Dnd = {
+type ItemSelection_dnd = {
+  itemId: number
   qty: number
   data: { name: string, description: string }
 };
 
-type ItemChoices_Dnd = {
+type ItemChoices_dnd = {
   description: string
   amount: number
-  options: ItemSelection_Dnd[]
+  options: (ItemSelection_dnd | ItemChoices_dnd)[][]
 };
 
 type Class_5e = {
@@ -64,15 +65,15 @@ type Class_5e = {
   description: string | null
   source: Source
   hitDice: number
-  proficiencies: Prof_Dnd
-  profChoices: ProfChoice_Dnd[]
+  proficiencies: Prof_dnd
+  profChoices: ProfChoice_dnd[]
   saves: string[]
-  startingItems: ItemSelection_Dnd[]
-  startingItemChoices: ItemChoices_Dnd[]
-  levels: Level_Dnd[]
-  multiClassing: MultiClassing_Dnd
+  startingItems: ItemSelection_dnd[]
+  startingItemChoices: ItemChoices_dnd[]
+  levels: Level_dnd[]
+  multiClassing: MultiClassing_dnd
   subclasses: Subclass_5e[]
-  features: Feature_Dnd[]
+  features: Feature_dnd[]
 };
 
 type PlayerClass_5e = {
@@ -90,8 +91,8 @@ type Subclass_5e = {
   source: Source
   subclassFlavor: string | null
   description: string | null
-  levels: Level_Dnd[]
-  spells: Spell_Dnd[]
+  levels: Level_dnd[]
+  spells: Spell_dnd[]
   class: { id: number, name: string }
   features: NameDesc[]
 };
@@ -108,7 +109,7 @@ type Background_5e = {
   description: string | null
   proficiencies: string | null
   languages: string[]
-  equipment: Item_Dnd[]
+  equipment: Item_dnd[]
   features: NameDesc[]
   personalityTraits: string | null
   ideals: string | null
@@ -126,10 +127,10 @@ type Feat_5e = {
   name: string
   source: Source
   description: string | null
-  prerequisites: Prerequisites_Dnd | null
-  abilityIncrease: { abilityScore: AbilityScore_Dnd, amount: number } | null
-  features: Feature_Dnd[]
-  actions: Action_Dnd[]
+  prerequisites: Prerequisites_dnd | null
+  abilityIncrease: { abilityScore: AbilityScore_dnd, amount: number } | null
+  features: Feature_dnd[]
+  actions: Action_dnd[]
 };
 
 type Spellcasting_5e = {
@@ -137,7 +138,7 @@ type Spellcasting_5e = {
   dc: number
   mod: number
   class: string
-  slots: SpellSlots_Dnd
-  pactSlots: PactSlots_Dnd
-  spells: Spell_Dnd[]
+  slots: SpellSlots_dnd
+  pactSlots: PactSlots_dnd
+  spells: Spell_dnd[]
 };

@@ -8,7 +8,7 @@ import { offServerEvent, onServerEvent } from "@/scripts/config/socket-io";
 
 export default function CharacterSheetDnd() {
   const { id } = useParams();
-  const [character, setCharacter] = useState<Character_Dnd | null>(null);
+  const [character, setCharacter] = useState<Character_dnd | null>(null);
   const [tab, setTab] = useState('main');
   
   const tabs = [
@@ -36,7 +36,7 @@ export default function CharacterSheetDnd() {
     };
   }, []);
 
-  const handlePlayerUpdate = (character: Character_Dnd) => {
+  const handlePlayerUpdate = (character: Character_dnd) => {
     setCharacter(character);
   };
 

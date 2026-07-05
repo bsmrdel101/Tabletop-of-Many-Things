@@ -27,7 +27,7 @@ export const getHealthColor = (hp: number, maxHp: number) => {
   return color;
 };
 
-export const createDice = (amount: number, type: number, mod = 0): Dice_Dnd => {
+export const createDice = (amount: number, type: number, mod = 0): Dice_dnd => {
   return { amount, type, mod, display: `${1}d${type}${mod ? numPrefix(mod) : ''}` };
 };
 

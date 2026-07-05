@@ -59,7 +59,15 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
       instruments: [],
       vehicles: []
     };
-    updateCharacter({ ...character, classes: updatedClasses, skills: [], proficiencies });
+
+    const isPrimaryClass = character.classes[0].classId === selectedClass.id;
+    const items = isPrimaryClass ? [] : character.items;
+
+    if (isPrimaryClass) {
+      setProcess((prev) => ({ ...prev, selectedChoices: {} }));
+    }
+
+    updateCharacter({ ...character, classes: updatedClasses, skills: [], proficiencies, items });
   };
 
 

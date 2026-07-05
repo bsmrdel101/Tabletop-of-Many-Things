@@ -30,23 +30,28 @@ export const isClassOptionsComplete = (character: CharacterDraft_5e, classesData
   const countStrings = (options: string[], source: string) =>
     options.reduce((acc, o) => acc + (hasSelection(o, source) ? 1 : 0), 0);
 
-  const evaluateChoice = (choice: ProfChoice_Dnd, source: string): boolean => {
+  const evaluateChoice = (choice: ProfChoice_dnd, source: string): boolean => {
     const opts = choice.options;
 
     if (typeof opts[0] === 'string') {
       return countStrings(opts as string[], source) >= choice.amount;
     }
 
-    return (opts as ProfChoice_Dnd[]).some((group) => evaluateChoice(group, source));
+    return (opts as ProfChoice_dnd[]).some((group) => evaluateChoice(group, source));
   };
 
   const hasStartingItemChoices = (classData: Class_5e) => {
     return classData.startingItemChoices.every((choice) =>
-      choice.options.some((option) =>
-        character.items.some(
-          (item) =>
-            item.data.name === option.data.name &&
-            item.qty === option.qty
+      choice.options.some((optionGroup) =>
+        character.items.some((item) =>
+          optionGroup.some((option) => {
+            if (!("data" in option)) return false;
+
+            return (
+              item.data.name === option.data.name &&
+              item.qty === option.qty
+            );
+          })
         )
       )
     );

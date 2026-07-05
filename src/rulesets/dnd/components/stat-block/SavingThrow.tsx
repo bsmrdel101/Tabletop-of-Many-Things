@@ -2,9 +2,9 @@ import Img from "@/components/library/Img";
 import { numPrefix } from "@/scripts/tools/utils";
 
 interface Props {
-  abilityScore: AbilityScore_Dnd
+  abilityScore: AbilityScore_dnd
   prof: number
-  onClick: (abilityScore: AbilityScore_Dnd) => void
+  onClick: (abilityScore: AbilityScore_dnd) => void
 }
 
 

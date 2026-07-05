@@ -93,6 +93,10 @@ export default function SetupStep({ character, updateCharacter }: Props) {
           label="Allow manual entry for abilities"
           disabled={!!game}
         />
+        <Checkbox
+          label="Allow Tasha's rules for races"
+          disabled={!!game}
+        />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import SavingThrows from "../SavingThrows";
 import Attributes from "../Attributes";
 
 interface Props {
-  character: Character_Dnd
+  character: Character_dnd
 }
 
 

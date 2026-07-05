@@ -2,7 +2,7 @@ import Checkbox from "@/components/library/Checkbox";
 
 interface Props {
   character: CharacterDraft_5e
-  profChoices: ProfChoice_Dnd
+  profChoices: ProfChoice_dnd
   onChange: (name: string, checked: boolean, type: string) => void
   type: string
   source: string
@@ -56,7 +56,7 @@ export default function ProfChoices({ character, profChoices, onChange, type, so
           const name = typeof option === 'string' ? option : null;
 
           if (!name) {
-            const nestedChoice = option as ProfChoice_Dnd;
+            const nestedChoice = option as ProfChoice_dnd;
 
             const nestedType =
               nestedChoice.description.toLowerCase().includes('instrument') ? 'instruments' : 'tools';
@@ -64,7 +64,7 @@ export default function ProfChoices({ character, profChoices, onChange, type, so
             return (
               <div key={i} style={{ marginTop: '1rem' }}>
                 <ProfChoices
-                  profChoices={option as ProfChoice_Dnd}
+                  profChoices={option as ProfChoice_dnd}
                   character={character}
                   onChange={onChange}
                   type={nestedType}

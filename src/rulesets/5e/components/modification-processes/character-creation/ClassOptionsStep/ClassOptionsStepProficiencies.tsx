@@ -10,7 +10,7 @@ interface Props {
 
 
 export default function ClassOptionsStepProficiencies({ character, updateCharacter }: Props) {
-  const getProfType = (choice: ProfChoice_Dnd): string => {
+  const getProfType = (choice: ProfChoice_dnd): string => {
     if (typeof choice.options[0] !== 'string') return 'group';
 
     const description = choice.description.toLowerCase();
@@ -19,12 +19,12 @@ export default function ClassOptionsStepProficiencies({ character, updateCharact
     return 'skills';
   };
 
-  const getProfChoiceTitle = (choice: ProfChoice_Dnd): string => {
+  const getProfChoiceTitle = (choice: ProfChoice_dnd): string => {
     if (typeof choice.options[0] !== 'string') {
       const titles = Array.from(
         new Set(
           choice.options.flatMap((option) => {
-            const description = (option as ProfChoice_Dnd).description.toLowerCase();
+            const description = (option as ProfChoice_dnd).description.toLowerCase();
 
             if (description.includes('instrument')) return ['Instruments'];
             if (description.includes('tool')) return ['Tools'];
@@ -43,17 +43,17 @@ export default function ClassOptionsStepProficiencies({ character, updateCharact
     return 'Skills';
   };
 
-  const resolveGroupType = (name: string, choice: ProfChoice_Dnd): 'tools' | 'instruments' => {
+  const resolveGroupType = (name: string, choice: ProfChoice_dnd): 'tools' | 'instruments' => {
     const found = choice.options.find((o) =>
-      typeof o !== 'string' && (o as ProfChoice_Dnd).options?.includes(name as any)
-    ) as ProfChoice_Dnd | undefined;
+      typeof o !== 'string' && (o as ProfChoice_dnd).options?.includes(name as any)
+    ) as ProfChoice_dnd | undefined;
 
     const desc = found?.description.toLowerCase() ?? '';
     if (desc.includes('instrument')) return 'instruments';
     return 'tools';
   };
 
-  const handleProfChoice = (name: string, checked: boolean, type: string, source: string, parentChoice?: ProfChoice_Dnd) => {
+  const handleProfChoice = (name: string, checked: boolean, type: string, source: string, parentChoice?: ProfChoice_dnd) => {
     if (type === 'skills') {
       const skills = checked ?
         [...character.skills, { name, source }]
@@ -64,13 +64,13 @@ export default function ClassOptionsStepProficiencies({ character, updateCharact
       return
     }
 
-    const proficiencies: any = structuredClone(character.proficiencies) as ProfDraft_Dnd;
+    const proficiencies: any = structuredClone(character.proficiencies) as ProfDraft_dnd;
     const resolvedType = type === 'group' ? resolveGroupType(name, parentChoice!) : type;
 
     if (checked) {
       proficiencies[resolvedType].push({ name, source });
     } else {
-      proficiencies[resolvedType] = proficiencies[resolvedType].filter((p: ProfSelectionDraft_Dnd) =>
+      proficiencies[resolvedType] = proficiencies[resolvedType].filter((p: ProfSelectionDraft_dnd) =>
         !(p.name === name && p.source === source)
       );
     }
