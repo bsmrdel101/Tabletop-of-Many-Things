@@ -4,8 +4,8 @@ import { formatCharacterCardClasses } from "../../scripts/utils";
 import Img from "@/components/library/Img";
 
 interface Props {
-  character: CharacterCard_Dnd
-  deleteFn: (character: CharacterCard_Dnd) => void
+  character: CharacterCard_dnd
+  deleteFn: (character: CharacterCard_dnd) => void
 }
 
 

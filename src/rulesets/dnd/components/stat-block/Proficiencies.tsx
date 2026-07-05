@@ -2,7 +2,7 @@ import ListDisplay from "@/components/ListDisplay";
 import { memo, useLayoutEffect, useState } from "react";
 
 interface Props {
-  proficiencies: Prof_Dnd
+  proficiencies: Prof_dnd
   noStyle?: boolean
   textAlign?: string
   title?: string

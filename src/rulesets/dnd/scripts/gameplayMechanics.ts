@@ -2,11 +2,11 @@ import { randomInt } from "@/scripts/tools/utils";
 import { createDice } from "./utils";
 
 
-export const rollDice = (diceList: Dice_Dnd[], globalMod = 0): RollResult_Dnd => {
-  const diceGroups: DiceGroupResult_Dnd[] = [];
-  diceList.forEach((dice: Dice_Dnd) => {
+export const rollDice = (diceList: Dice_dnd[], globalMod = 0): RollResult_dnd => {
+  const diceGroups: DiceGroupResult_dnd[] = [];
+  diceList.forEach((dice: Dice_dnd) => {
     const { amount, type, mod } = dice;
-    const rolls: DieResult_Dnd[] = [];
+    const rolls: DieResult_dnd[] = [];
     for (let i = 0; i < amount; i++) {
       const rolled = randomInt(1, type);
       rolls.push({ type, rolled });
@@ -20,12 +20,12 @@ export const rollDice = (diceList: Dice_Dnd[], globalMod = 0): RollResult_Dnd =>
   return { total, rolled, diceGroups };
 };
 
-export const rollDC = (target: number, mod: number): DCRollResult_Dnd => {
+export const rollDC = (target: number, mod: number): DCRollResult_dnd => {
   const roll = rollDice([createDice(1, 20, mod)]).total;
   return { target, roll, success: roll >= target };
 };
 
-export const rollCheck = (mod: number, target?: number): DCRollResult_Dnd | null => {
+export const rollCheck = (mod: number, target?: number): DCRollResult_dnd | null => {
   if (target) {
     return rollDC(target, mod);
   } else {

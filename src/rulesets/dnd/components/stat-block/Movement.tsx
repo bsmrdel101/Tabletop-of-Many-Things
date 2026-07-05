@@ -2,7 +2,7 @@ import ListDisplay from "@/components/ListDisplay";
 import { memo } from "react";
 
 interface Props {
-  speeds: Speed_Dnd[]
+  speeds: Speed_dnd[]
 }
 
 

@@ -9,12 +9,12 @@ const createEmptyCharacter = (): CharacterDraft_5e => ({
   xp: 0,
   maxHp: 0,
   abilityScores: [
-    { name: 'Strength', value: 10, mod: 0, prof: false } as AbilityScore_Dnd,
-    { name: 'Dexterity', value: 10, mod: 0, prof: false } as AbilityScore_Dnd,
-    { name: 'Constitution', value: 10, mod: 0, prof: false } as AbilityScore_Dnd,
-    { name: 'Intelligence', value: 10, mod: 0, prof: false } as AbilityScore_Dnd,
-    { name: 'Wisdom', value: 10, mod: 0, prof: false } as AbilityScore_Dnd,
-    { name: 'Charisma', value: 10, mod: 0, prof: false } as AbilityScore_Dnd
+    { name: 'Strength', value: 10, mod: 0, prof: false } as AbilityScore_dnd,
+    { name: 'Dexterity', value: 10, mod: 0, prof: false } as AbilityScore_dnd,
+    { name: 'Constitution', value: 10, mod: 0, prof: false } as AbilityScore_dnd,
+    { name: 'Intelligence', value: 10, mod: 0, prof: false } as AbilityScore_dnd,
+    { name: 'Wisdom', value: 10, mod: 0, prof: false } as AbilityScore_dnd,
+    { name: 'Charisma', value: 10, mod: 0, prof: false } as AbilityScore_dnd
   ],
   race: null,
   subrace: null,

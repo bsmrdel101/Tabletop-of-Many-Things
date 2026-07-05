@@ -5,12 +5,12 @@ type Class_2024 = {
   name: string
   lvl: number
   hitDice: number
-  proficiencies: Prof_Dnd[]
-  profChoices: ProfChoice_Dnd[]
-  saves: Skill_Dnd[]
-  startingItems: Item_Dnd[]
-  startingItemChoices: Item_Dnd[]
-  levels: Level_Dnd[]
+  proficiencies: Prof_dnd[]
+  profChoices: ProfChoice_dnd[]
+  saves: Skill_dnd[]
+  startingItems: Item_dnd[]
+  startingItemChoices: Item_dnd[]
+  levels: Level_dnd[]
   multiClassing: any[]
   subclasses: Subclass_2024[]
   features: NameDesc[]
@@ -30,8 +30,8 @@ type Subclass_2024 = {
   name: string
   subclassFlavor: string | null
   desc: string | null
-  levels: Level_Dnd[]
-  spells: Spell_Dnd[]
+  levels: Level_dnd[]
+  spells: Spell_dnd[]
   class: { id: number, name: string }
   features: NameDesc[]
 };
@@ -48,7 +48,7 @@ type Background_2024 = {
   desc: string | null
   proficiencies: string | null
   languages: string[]
-  equipment: Item_Dnd[]
+  equipment: Item_dnd[]
   features: NameDesc[]
   personalityTraits: string | null
   ideals: string | null
@@ -61,14 +61,14 @@ type PlayerBackground_2024 = {
   name: string
 };
 
-type Feat_Dnd = {
+type Feat_dnd = {
   id: number
   name: string
   desc: string
-  prerequisites: Prerequisites_Dnd | null
-  abilityIncrease: { abilityScore: AbilityScore_Dnd, amount: number } | null
-  features: Feature_Dnd[]
-  actions: Action_Dnd[]
+  prerequisites: Prerequisites_dnd | null
+  abilityIncrease: { abilityScore: AbilityScore_dnd, amount: number } | null
+  features: Feature_dnd[]
+  actions: Action_dnd[]
 };
 
 type Spellcasting_2024 = {
@@ -76,7 +76,7 @@ type Spellcasting_2024 = {
   dc: number
   mod: number
   class: string
-  slots: SpellSlots_Dnd
-  pactSlots: PactSlots_Dnd
-  spells: Spell_Dnd[]
+  slots: SpellSlots_dnd
+  pactSlots: PactSlots_dnd
+  spells: Spell_dnd[]
 };

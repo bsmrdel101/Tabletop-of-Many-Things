@@ -7,7 +7,7 @@ import Senses from "../stat-block/Senses";
 import Vulnerabilities from "../stat-block/Vulnerabilities";
 
 interface Props {
-  character: Character_Dnd
+  character: Character_dnd
 }
 
 

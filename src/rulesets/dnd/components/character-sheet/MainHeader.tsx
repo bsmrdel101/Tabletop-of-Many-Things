@@ -9,17 +9,16 @@ import Img from "@/components/library/Img";
 interface Props {
   characterImg: string
   characterName: string
-  characterClasses: PlayerClass_Dnd[]
-  characterRace: PlayerRace_Dnd | null
-  characterSubrace: PlayerSubrace_Dnd | null
+  characterClasses: PlayerClass_5e[] | PlayerClass_2024[]
+  characterRace: PlayerRace_dnd | null
+  characterSubrace: PlayerSubrace_dnd | null
   characterBackground: PlayerBackground_5e | PlayerBackground_2024 | null
   characterXp: number
   characterLvl: number
-  characterBardicInsp: BardicInsp_Dnd | null
 }
 
 
-function MainHeader({ characterImg, characterName, characterClasses, characterRace, characterSubrace, characterBackground, characterXp, characterLvl, characterBardicInsp }: Props) {
+function MainHeader({ characterImg, characterName, characterClasses, characterRace, characterSubrace, characterBackground, characterXp, characterLvl }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
 
 

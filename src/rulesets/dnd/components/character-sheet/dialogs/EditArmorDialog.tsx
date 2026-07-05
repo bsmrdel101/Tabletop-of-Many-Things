@@ -10,7 +10,7 @@ import { useState } from "react";
 interface Props {
   open: boolean
   setOpen: (value: boolean) => void
-  character: Character_Dnd
+  character: Character_dnd
 }
 
 

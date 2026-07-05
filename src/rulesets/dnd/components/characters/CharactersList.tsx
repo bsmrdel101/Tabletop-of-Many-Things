@@ -10,12 +10,12 @@ export default function CharactersList() {
   const [showCharacterCreation, setShowCharacterCreation] = useState(false);
   const [ruleset, setRuleset] = useState<Ruleset>('5e');
 
-  const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_Dnd[]>({
+  const { data: characters = [], refetch, isFetched } = useQuery<CharacterCard_dnd[]>({
     queryKey: ['characters'],
     queryFn: getCharactersByUser
   });
 
-  const handleDelete = async (character: CharacterCard_Dnd) => {
+  const handleDelete = async (character: CharacterCard_dnd) => {
     if (!confirm(`Do you want to delete ${character.name}?`)) return;
     await deleteCharacter(character.id);
     await refetch();

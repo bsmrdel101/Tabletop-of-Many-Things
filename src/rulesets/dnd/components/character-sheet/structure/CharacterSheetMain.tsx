@@ -8,8 +8,6 @@ import EditButton from "../EditButton";
 
 interface Props {
   character: Character_Dnd
-  editing: boolean
-  setEditing: (value: boolean) => void
 }
 
 

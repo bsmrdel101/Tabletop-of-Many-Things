@@ -8,7 +8,7 @@ import { useAtom } from "jotai";
 import { useState } from "react";
 
 interface Props {
-  character: Character_Dnd
+  character: Character_dnd
 }
 
 

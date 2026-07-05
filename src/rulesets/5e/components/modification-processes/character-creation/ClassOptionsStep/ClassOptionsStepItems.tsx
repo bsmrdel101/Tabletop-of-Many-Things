@@ -3,7 +3,7 @@ import { getClassById } from "@/rulesets/5e/services/classesService";
 import { characterCreationProcess5eAtom } from "@/scripts/atoms/state";
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   character: CharacterDraft_5e
@@ -17,7 +17,8 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
   
   const { data: primaryClass } = useQuery<Class_5e | null>({
     queryKey: ['primaryClass', character.classes],
-    queryFn: () => getClassById(character.classes[0].classId)
+    queryFn: () => getClassById(character.classes[0].classId),
+    enabled: character.classes.length > 0
   });
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
         const selectedOptionIndex = process.selectedChoices[choiceIndex];
         if (selectedOptionIndex === undefined) return;
 
-        items.push(choice.options[selectedOptionIndex]);
+        items.push(...resolveSelections(choice.options[selectedOptionIndex]));
       });
 
       updateCharacter({ ...character, items });
@@ -37,6 +38,33 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
       updateCharacter({ ...character, items: [] });
     }
   }, [process.itemPage, primaryClass, process.selectedChoices]);
+
+  function resolveSelections(
+    selections: (ItemSelection_dnd | ItemChoices_dnd)[]
+  ): ItemSelection_dnd[] {
+    const result: ItemSelection_dnd[] = [];
+
+    if (!Array.isArray(selections)) return result;
+
+    for (const selection of selections) {
+      if (!selection) continue;
+
+      if ("data" in selection) {
+        result.push(selection);
+        continue;
+      }
+
+      if ("options" in selection) {
+        const next = selection.options?.[0];
+
+        if (Array.isArray(next)) {
+          result.push(...resolveSelections(next));
+        }
+      }
+    }
+
+    return result;
+  }
 
   const onClickToggleDesc = (hasDesc: boolean, index: number) => {
     if (!hasDesc) return;
@@ -51,6 +79,23 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
       return next;
     });
   }
+
+  const renderOption = (option: any): ReactNode => {
+    if (Array.isArray(option)) {
+      return option.map(renderOption);
+    }
+
+    if ('data' in option) {
+      return (
+        <Fragment>
+          {option.data.name}
+          {option.qty > 1 ? ` (${option.qty})` : ''}
+        </Fragment>
+      );
+    }
+
+    return null;
+  };
 
 
   if (!primaryClass) return;
@@ -95,18 +140,36 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
                         }));
                       }}
                     >
-                      { option.data.name }
-                      { option.qty > 1 ? ` (${option.qty})` : '' }
+                      {option.map((item, index) => {
+                        if ('data' in item) {
+                          return (
+                            <Fragment key={index}>
+                              {item.data.name}
+                              {item.qty > 1 ? ` (${item.qty})` : ''}
+                              {index < option.length - 1 ? ', ' : ''}
+                            </Fragment>
+                          );
+                        }
+
+                        return (
+                          <Fragment key={index}>
+                            { item.description }
+                            {index < option.length - 1 ? ', ' : ''}
+                          </Fragment>
+                        );
+                      })}
                     </Button>
                   );
                 })}
               </div>
 
               {process.selectedChoices[i] !== undefined &&
-                choice.options[process.selectedChoices[i]].data.description && (
-                  <div className="class-options-step__starting-item-desc">
-                    {choice.options[process.selectedChoices[i]].data.description}
-                  </div>
+                resolveSelections(choice.options[process.selectedChoices[i]]).map((item, index) =>
+                  item.data.description ? (
+                    <div key={index} className="class-options-step__starting-item-desc">
+                      {item.data.description}
+                    </div>
+                  ) : null
                 )}
             </li>
           ))}
