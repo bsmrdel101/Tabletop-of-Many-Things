@@ -9,10 +9,10 @@ import BackgroundStep, { isBackgroundComplete } from "./BackgroundStep";
 import AbilityScoresStep, { isAbilityScoresComplete } from "./AbilityScoresStep";
 import StartingItemsStep, { isStartingItemsComplete } from "./StartingItemsStep";
 import FeaturesStep, { isFeaturesComplete } from "./FeaturesStep";
-import ClassOptionsStep, { isClassOptionsComplete } from "@/rulesets/5e/components/modification-processes/character-creation/ClassOptionsStep";
+import ClassOptionsStep, { isClassOptionsComplete } from "@/rulesets/5e/components/modification-processes/character-creation/ClassOptionsStep/ClassOptionsStep";
 import useClasses from "@/rulesets/5e/hooks/useClasses";
 import { useAtom } from "jotai";
-import { gameAtom } from "@/scripts/atoms/state";
+import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
 
 interface Props {
   showCharacterCreation: boolean
@@ -23,6 +23,7 @@ interface Props {
 
 export default function CharacterCreationProcess5e({ showCharacterCreation, setShowCharacterCreation, refetch }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
+  const [, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
   const { character, updateCharacter, resetCharacter } = useCharacterDraft();
   const { classes } = useClasses(game?.pubId ?? null, game?.worldId ?? null, true);
   const [changesRequired, setChangesRequired] = useState({
@@ -148,8 +149,7 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
   ];
 
   const onCloseCharacterCreation = async () => {
-
-    
+    setProcess({ focusedClass: null, itemPage: 'gear', selectedChoices: {} });
     setShowCharacterCreation(false);
     resetCharacter();
     refetch();

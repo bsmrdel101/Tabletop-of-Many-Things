@@ -90,7 +90,17 @@
     }
 
     &__starting-items {
-      margin-top: 2rem;
+      margin-top: 1rem;
+    }
+
+    &__starting-item-desc {
+      display: block;
+      white-space: pre-wrap;
+      background: var(--bg-1);
+      padding: 0.3rem;
+      border-radius: 0.2rem;
+      margin: 0.25rem 0 0.8rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
   }
 }

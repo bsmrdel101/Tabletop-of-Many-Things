@@ -1,3 +1,9 @@
+interface CharacterCreationProcess_5e {
+  focusedClass: Class_5e | null
+  itemPage: 'gear' | 'gold' | null
+  selectedChoices: Dispatch<SetStateAction<Record<number, number>>>
+}
+
 type CharacterDraft_5e = {
   img: string
   name: string
@@ -18,6 +24,7 @@ type CharacterDraft_5e = {
   senses: NameValue[]
   proficiencies: ProfDraft_Dnd
   skills: ProfSelectionDraft_Dnd[]
+  items: ItemSelection_Dnd[]
   resistances: string[]
   vulnerabilities: string[]
   condImmunities: string[]
@@ -40,6 +47,17 @@ type ProfDraft_Dnd = {
   vehicles: ProfSelectionDraft_Dnd[]
 };
 
+type ItemSelection_Dnd = {
+  qty: number
+  data: { name: string, description: string }
+};
+
+type ItemChoices_Dnd = {
+  description: string
+  amount: number
+  options: ItemSelection_Dnd[]
+};
+
 type Class_5e = {
   id: number
   name: string
@@ -49,8 +67,8 @@ type Class_5e = {
   proficiencies: Prof_Dnd
   profChoices: ProfChoice_Dnd[]
   saves: string[]
-  startingItems: Item_Dnd[]
-  startingItemChoices: Item_Dnd[]
+  startingItems: ItemSelection_Dnd[]
+  startingItemChoices: ItemChoices_Dnd[]
   levels: Level_Dnd[]
   multiClassing: MultiClassing_Dnd
   subclasses: Subclass_5e[]

@@ -2,9 +2,9 @@ import Button from "@/components/library/Button";
 import useClasses from "@/rulesets/5e/hooks/useClasses";
 import Proficiencies from "@/rulesets/dnd/components/stat-block/Proficiencies";
 import { fullAbilityScoreName } from "@/rulesets/dnd/scripts/utils";
-import { gameAtom } from "@/scripts/atoms/state";
+import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 interface Props {
   character: CharacterDraft_5e
@@ -14,8 +14,8 @@ interface Props {
 
 export default function ClassesStep({ character, updateCharacter }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
+  const [process, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
   const { classes } = useClasses(game?.pubId ?? null, game?.worldId ?? null, true);
-  const [focusedClass, setFocusedClass] = useState<Class_5e | null>(null);
   const totalLvl = useMemo(() => character.classes.reduce((acc, c) => acc + c.lvl, 0), [character.classes]);
   const notFullyLeveled = totalLvl < character.lvl;
 
@@ -73,14 +73,14 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
         <div className="classes-step__class-options">
           {classes.map((c) => {
             const characterClass = character.classes.find((cl) => cl.classId === c.id)
-            const isFocusedClass = c.id === focusedClass?.id;
+            const isFocusedClass = c.id === process.focusedClass?.id;
 
             return (
               <div key={c.id} className="classes-step__class-option">
                 <Button
-                  style={focusedClass?.id === c.id ? { backgroundColor: 'var(--purple-dark-3)' } : {}}
+                  style={process.focusedClass?.id === c.id ? { backgroundColor: 'var(--purple-dark-3)' } : {}}
                   variants={['dark']}
-                  onClick={() => setFocusedClass(c)}
+                  onClick={() => setProcess((prev) => ({ ...prev, focusedClass: c }))}
                 >
                   { c.name }
                 </Button>
@@ -123,18 +123,19 @@ export default function ClassesStep({ character, updateCharacter }: Props) {
           })}
         </div>
 
-        {focusedClass &&
+        {process.focusedClass &&
           <div>
-            <p style={{ whiteSpace: 'pre-wrap' }}><em>{ focusedClass.description }</em></p>
+            <h2 style={{ textDecoration: 'underline' }}>{ process.focusedClass.name}</h2>
+            <p style={{ whiteSpace: 'pre-wrap' }}><em>{ process.focusedClass.description }</em></p>
             <hr style={{ margin: '1rem' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <p><strong>Saving Throws: </strong> { focusedClass.saves.map((s) => fullAbilityScoreName(s)).join(', ') }</p>
-              <Proficiencies proficiencies={focusedClass.proficiencies} noStyle={true} />
+              <p><strong>Saving Throws: </strong> { process.focusedClass.saves.map((s) => fullAbilityScoreName(s)).join(', ') }</p>
+              <Proficiencies proficiencies={process.focusedClass.proficiencies} noStyle={true} />
               <div>
                 <p><strong>Subclasses (lvl)</strong></p>
                 <ul>
-                  { focusedClass.subclasses.map((s) => <li key={s.id}>{ s.name }</li>) }
+                  { process.focusedClass.subclasses.map((s) => <li key={s.id}>{ s.name }</li>) }
                 </ul>
               </div>
             </div>

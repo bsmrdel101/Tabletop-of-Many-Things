@@ -34,6 +34,7 @@ const createEmptyCharacter = (): CharacterDraft_5e => ({
     vehicles: []
   },
   skills: [],
+  items: [],
   resistances: [],
   vulnerabilities: [],
   condImmunities: [],
