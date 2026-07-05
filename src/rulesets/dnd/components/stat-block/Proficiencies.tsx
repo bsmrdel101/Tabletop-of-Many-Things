@@ -5,10 +5,11 @@ interface Props {
   proficiencies: Prof_Dnd
   noStyle?: boolean
   textAlign?: string
+  title?: string
 }
 
 
-function Proficiencies({ proficiencies, noStyle, textAlign }: Props) {
+function Proficiencies({ proficiencies, noStyle, textAlign, title = 'Proficiencies' }: Props) {
   const [listData, setListData] = useState<string[]>([]);
 
   useLayoutEffect(() => {
@@ -29,7 +30,7 @@ function Proficiencies({ proficiencies, noStyle, textAlign }: Props) {
 
   return (
     <ListDisplay
-      title="Proficiencies"
+      title={title}
       rows={listData}
       noStyle={noStyle}
       textAlign={textAlign}
