@@ -3,7 +3,6 @@ import ModificationProcess, { ModificationStep } from "@/components/Modification
 import SetupStep, { isSetupComplete } from "./SetupStep";
 import { useCharacterDraft } from "../../../hooks/useCharacterDraft";
 import ClassesStep, { isClassesComplete } from "./ClassesStep";
-import SubclassesStep, { isSubclassesComplete } from "./SubclassesStep";
 import RaceStep, { isRaceComplete } from "./RaceStep";
 import BackgroundStep, { isBackgroundComplete } from "./BackgroundStep";
 import AbilityScoresStep, { isAbilityScoresComplete } from "./AbilityScoresStep";
@@ -30,7 +29,6 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
     setup: true,
     classes: true,
     classOptions: true,
-    subclasses: true,
     race: true,
     subrace: true,
     background: true,
@@ -44,7 +42,6 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
       setup: !isSetupComplete(character),
       classes: !isClassesComplete(character),
       classOptions: !isClassOptionsComplete(character, classes),
-      subclasses: !isSubclassesComplete(character),
       race: !isRaceComplete(character),
       subrace: !isRaceComplete(character),
       background: !isBackgroundComplete(character),
@@ -85,16 +82,6 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
       ),
       changesRequired: changesRequired.classOptions,
       disabled: character.classes.length === 0
-    },
-    {
-      name: 'Subclasses',
-      content: (
-        <SubclassesStep
-          character={character}
-          updateCharacter={updateCharacter}
-        />
-      ),
-      changesRequired: changesRequired.subclasses
     },
     {
       name: 'Race',
