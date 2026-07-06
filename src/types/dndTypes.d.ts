@@ -265,7 +265,8 @@ type AbilityScore_dnd = {
 };
 
 type EquipmentCategory_dnd = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Instrument' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Ring' | 'Rod' | 'Staff' | 'Scroll' | 'Wand' | 'Gaming Set' | 'Potion';
-type Rarity_dnd = 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact';
+type Rarity_dnd = 'None' | 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact';
+type ArmorType_dnd = 'Light' | 'Medium' | 'Heavy' | 'Shield';
 type Item_dnd = {
   id: number
   name: string
@@ -276,10 +277,14 @@ type Item_dnd = {
   cost: Cost_dnd | null
   lbs: number
   properties: string[]
-  armorType?: 'Light' | 'Medium' | 'Heavy' | 'Shield'
-  weaponType?: 'Simple' | 'Martial' | 'Firearm'
-  damage?: Damage_dnd
-  range?: Range_dnd
+  armorType: ArmorType_dnd | null
+  stealthDisadvantage: boolean
+  strMinimum: number | null
+  ac: { base: number, dexBonus: boolean, maxBonus: number } | null
+  weaponType: 'Simple' | 'Martial' | 'Firearm' | null
+  weaponRange: 'Melee' | 'Ranged'
+  dmg: Damage_dnd | null
+  range: Range_dnd | null
 };
 
 type Cost_dnd = {
