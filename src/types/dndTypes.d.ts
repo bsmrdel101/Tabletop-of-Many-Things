@@ -1,3 +1,30 @@
+type ProfSelectionDraft_dnd = {
+  name: string
+  source: string
+};
+
+type ProfDraft_dnd = {
+  weapons: ProfSelectionDraft_dnd[]
+  armor: ProfSelectionDraft_dnd[]
+  tools: ProfSelectionDraft_dnd[]
+  instruments: ProfSelectionDraft_dnd[]
+  vehicles: ProfSelectionDraft_dnd[]
+};
+
+type ItemSelection_dnd = {
+  itemId: number
+  qty: number
+  data: { name: string, description: string }
+};
+
+type ItemChoices_dnd = {
+  description: string
+  amount: number
+  options: (ItemSelection_dnd | ItemChoices_dnd)[][]
+};
+
+type WeaponType_dnd = 'Simple' | 'Martial' | 'Firearm';
+
 type Dice_dnd = {
   amount: number
   type: number
@@ -267,25 +294,6 @@ type AbilityScore_dnd = {
 type EquipmentCategory_dnd = 'Adventuring Gear' | 'Ammunition' | 'Weapon' | 'Armor' | 'Tool' | 'Instrument' | 'Treasure' | 'Holy Symbol' | 'Arcane Focus' | 'Druidic Focus' | 'Consumable' | 'Mount/Vehicle' | 'Ring' | 'Equipment Pack' | 'Wonderous Item' | 'Ring' | 'Rod' | 'Staff' | 'Scroll' | 'Wand' | 'Gaming Set' | 'Potion';
 type Rarity_dnd = 'None' | 'Common' | 'Uncommon' | 'Rare' | 'Very Rare' | 'Legendary' | 'Artifact';
 type ArmorType_dnd = 'Light' | 'Medium' | 'Heavy' | 'Shield';
-type Item_dnd = {
-  id: number
-  name: string
-  source: Source
-  description: string | null
-  type: EquipmentCategory_dnd
-  rarity: Rarity_dnd
-  cost: Cost_dnd | null
-  lbs: number
-  properties: string[]
-  armorType: ArmorType_dnd | null
-  stealthDisadvantage: boolean
-  strMinimum: number | null
-  ac: { base: number, dexBonus: boolean, maxBonus: number } | null
-  weaponType: 'Simple' | 'Martial' | 'Firearm' | null
-  weaponRange: 'Melee' | 'Ranged'
-  dmg: Damage_dnd | null
-  range: Range_dnd | null
-};
 
 type Cost_dnd = {
   amount: number
@@ -295,7 +303,6 @@ type Cost_dnd = {
 type Range_dnd = {
   normal: number
   long: number | null
-  display: string
 };
 
 type Damage_dnd = {

@@ -94,6 +94,10 @@ export default function SetupStep({ character, updateCharacter }: Props) {
           disabled={!!game}
         />
         <Checkbox
+          label="Allow buying starting equipment with gold"
+          disabled={!!game}
+        />
+        <Checkbox
           label="Allow Tasha's rules for races"
           disabled={!!game}
         />

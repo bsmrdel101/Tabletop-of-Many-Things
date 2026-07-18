@@ -12,6 +12,11 @@ export const formatCharacterClasses = (classes: PlayerClass_5e[] | PlayerClass_2
   }).join(' / ');
 };
 
+export const formatCostDnd = (cost: Cost_dnd | null): string => {
+  if (!cost) return '';
+  return `${cost.amount} ${cost.type}`;
+};
+
 export const getHealthColor = (hp: number, maxHp: number) => {
   const healthyColor = 'var(--green-light-2)';
   const woundedColor = 'var(--orange-0)';

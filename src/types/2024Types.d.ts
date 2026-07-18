@@ -7,8 +7,8 @@ type Class_2024 = {
   proficiencies: Prof_dnd[]
   profChoices: ProfChoice_dnd[]
   saves: Skill_dnd[]
-  startingItems: Item_dnd[]
-  startingItemChoices: Item_dnd[]
+  startingItems: Item_2024[]
+  startingItemChoices: Item_2024[]
   levels: Level_dnd[]
   multiClassing: any[]
   subclasses: Subclass_2024[]
@@ -47,7 +47,7 @@ type Background_2024 = {
   desc: string | null
   proficiencies: string | null
   languages: string[]
-  equipment: Item_dnd[]
+  equipment: Item_2024[]
   features: NameDesc[]
   personalityTraits: string | null
   ideals: string | null
