@@ -5,7 +5,7 @@ import { selectItem } from "@/rulesets/dnd/dialogs/ItemSelectionDialog";
 import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
-import { Fragment, ReactNode, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 interface Props {
   character: CharacterDraft_5e
@@ -79,14 +79,42 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
     });
   };
 
+  const getItemCategory = (choice: ItemChoices_dnd, optionIndex: number): EquipmentCategory_dnd | null => {
+    const option = choice.options[optionIndex];
+
+    for (const item of option) {
+      if ('data' in item) {
+        continue;
+      }
+      
+      if ('options' in item) {
+        return getItemCategoryFromDescription(item.description);
+      }
+    }
+
+    return getItemCategoryFromDescription(choice.description);
+  };
+
+  const getItemCategoryFromDescription = (description: string): EquipmentCategory_dnd | null => {
+    const value = description.toLowerCase();
+    if (value.includes('weapon')) return 'Weapon';
+    if (value.includes('armor')) return 'Armor';
+    if (value.includes('tool')) return 'Tool';
+    if (value.includes('instrument')) return 'Instrument';
+    return null;
+  };
+
+  const getWeaponType = (description: string): WeaponType_dnd | null => {
+    const value = description.toLowerCase();
+    if (value.includes('martial')) return 'Martial';
+    if (value.includes('simple')) return 'Simple';
+    if (value.includes('firearm')) return 'Firearm';
+    return null;
+  };
+
   const onClickSelectOption = async (choice: ItemChoices_dnd, optionIndex: number, index: number) => {
     const customChoice = choice.options[optionIndex]
       .find((item): item is ItemChoices_dnd => 'options' in item);
-    
-    let weaponType: WeaponType_dnd | null = null;
-    if (choice.description.includes('martial')) weaponType = 'Martial';
-    if (choice.description.includes('simple')) weaponType = 'Simple';
-    if (choice.description.includes('firearm')) weaponType = 'Firearm';
 
     if (customChoice) {
       const search: SearchItems_5e = {
@@ -94,8 +122,8 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
         worldId: null,
         userContent: false,
         name: null,
-        type: 'Weapon', // TODO: Any category
-        weaponType,
+        type: getItemCategory(choice, optionIndex),
+        weaponType: getWeaponType(choice.description),
         rarity: null
       };
       const items = (await selectItem(search, customChoice.amount))

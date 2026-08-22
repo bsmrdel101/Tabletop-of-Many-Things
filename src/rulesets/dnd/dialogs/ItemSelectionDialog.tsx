@@ -40,7 +40,7 @@ function ItemSelectionDialog({ search, amount, onClose }: Props) {
     <WindowDialog
       open
       setOpen={() => onClose([])}
-      title="Pick an Item"
+      title={amount > 1 ? `Pick ${amount} items` : 'Pick an item'}
       width="60vw"
     >
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem' }}>

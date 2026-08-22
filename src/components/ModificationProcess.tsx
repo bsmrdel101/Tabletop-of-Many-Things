@@ -45,21 +45,22 @@ export default function ModificationProcess({ open, onClose, steps, className }:
     <div className="modification-process__overlay">
       <dialog className="modification-process" open={open}>
         <div className="modification-process__sidebar">
-          {steps.map((item, i) => {
-            return (
-              <Button
-                key={i}
-                className={`modification-process__sidebar-btn${selectedStep === i ? ' modification-process__sidebar-btn--active' : ''}`}
-                onClick={() => setSelectedStep(i)}
-                disabled={item.disabled ?? false}
-              >
-                { item.name }
-                { item.changesRequired ? <span> (!)</span> : null }
-              </Button>
-            );
-          })}
+          <div className="modification-process__sidebar-steps">
+            {steps.map((item, i) => {
+              return (
+                <Button
+                  key={i}
+                  className={`modification-process__sidebar-btn${selectedStep === i ? ' modification-process__sidebar-btn--active' : ''}`}
+                  onClick={() => setSelectedStep(i)}
+                  disabled={item.disabled ?? false}
+                >
+                  { item.name }
+                  { item.changesRequired ? <span> (!)</span> : null }
+                </Button>
+              );
+            })}
+          </div>
 
-          <br />
           <Button
             className="modification-process__sidebar-btn"
             onClick={onClickFinish}
