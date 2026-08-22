@@ -9,7 +9,7 @@ import EditCharacterSheetMain from "./EditCharacterSheetMain";
 
 export default function CharacterSheetDnd() {
   const { id } = useParams();
-  const [character, setCharacter] = useState<Character_Dnd | null>(null);
+  const [character, setCharacter] = useState<Character_dnd | null>(null);
   const [editing, setEditing] = useState(false);
   const [tab, setTab] = useState('main');
   
@@ -38,7 +38,7 @@ export default function CharacterSheetDnd() {
     };
   }, []);
 
-  const handlePlayerUpdate = (character: Character_Dnd) => {
+  const handlePlayerUpdate = (character: Character_dnd) => {
     setCharacter(character);
   };
 

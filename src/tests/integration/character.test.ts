@@ -10,7 +10,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await resetDb();
-  await loginUser({ username: 'dev', password: '123' });
+  await loginUser({ email: 'dev@gmail.com', password: '123' });
 });
 
 afterAll(async () => {

@@ -1,21 +1,19 @@
 import Button from "@/components/library/Button";
-import useClasses from "@/rulesets/5e/hooks/useClasses";
 import Proficiencies from "@/rulesets/dnd/components/stat-block/Proficiencies";
 import { fullAbilityScoreName } from "@/rulesets/dnd/scripts/utils";
-import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
+import { characterCreationProcess5eAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import { useMemo } from "react";
 
 interface Props {
   character: CharacterDraft_5e
   updateCharacter: (value: CharacterDraft_5e) => void
+  classes: Class_5e[]
 }
 
 
-export default function ClassesStep({ character, updateCharacter }: Props) {
-  const [game] = useAtom<Game | null>(gameAtom);
+export default function ClassesStep({ character, updateCharacter, classes }: Props) {
   const [process, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
-  const { classes } = useClasses(game?.pubId ?? null, game?.worldId ?? null, true);
   const totalLvl = useMemo(() => character.classes.reduce((acc, c) => acc + c.lvl, 0), [character.classes]);
   const notFullyLeveled = totalLvl < character.lvl;
 

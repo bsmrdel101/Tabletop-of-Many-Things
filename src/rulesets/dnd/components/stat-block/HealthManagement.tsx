@@ -2,7 +2,6 @@ import HealthBar from "./HealthBar";
 import Button from "@/components/library/Button";
 import Img from "@/components/library/Img";
 import Input from "@/components/library/Input";
-import { playerManager } from "@/rulesets/dnd/scripts/playerManager";
 import { roomAtom } from "@/scripts/atoms/state";
 import { useAtom } from "jotai";
 import { useState } from "react";
@@ -33,7 +32,7 @@ export default function HealthManagement({ character }: Props) {
         <div className="hp-management__buttons">
           <Button
             style={{ background: 'var(--healing)' }}
-            onClick={() => playerManager.heal(character, Number(value), room)}
+            // onClick={() => playerManager.heal(character, Number(value), room)}
             data-testid="heal-btn"
           >
             <Img src="/images/game/heart.svg" alt="Heal" />
@@ -41,7 +40,7 @@ export default function HealthManagement({ character }: Props) {
 
           <Button
             style={{ background: 'var(--dmg)' }}
-            onClick={() => playerManager.dmg(character, Number(value), room)}
+            // onClick={() => playerManager.dmg(character, Number(value), room)}
             data-testid="dmg-btn"
           >
             <Img src="/images/game/dmg.svg" alt="Damage" />
@@ -49,7 +48,7 @@ export default function HealthManagement({ character }: Props) {
 
           <Button
             style={{ background: 'var(--temp-hp)' }}
-            onClick={() => playerManager.setTempHp(character, Number(value), room)}
+            // onClick={() => playerManager.setTempHp(character, Number(value), room)}
             data-testid="temp-hp-btn"
           >
             <Img src="/images/game/temp-hp.svg" alt="Temp hp" />
@@ -57,7 +56,7 @@ export default function HealthManagement({ character }: Props) {
 
           <Button
             style={{ background: 'var(--severe-dmg)' }}
-            onClick={() => playerManager.dmgMaxHp(character, Number(value), room)}
+            // onClick={() => playerManager.dmgMaxHp(character, Number(value), room)}
             data-testid="max-hp-dmg-btn"
           >
             <Img src="/images/game/dmg-max-hp.svg" alt="Damage max hp" />
@@ -73,7 +72,7 @@ export default function HealthManagement({ character }: Props) {
 
           <Button
             style={{ background: 'var(--restore)' }}
-            onClick={() => playerManager.restoreMaxHp(character, room)}
+            // onClick={() => playerManager.restoreMaxHp(character, room)}
             data-testid="restore-max-hp-btn"
           >
             <Img src="/images/game/restore.svg" alt="Restore max hp" />

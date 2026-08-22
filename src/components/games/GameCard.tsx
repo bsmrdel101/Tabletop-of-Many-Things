@@ -5,12 +5,12 @@ import Img from "../library/Img";
 
 interface Props {
   game: Game
-  setEditGameId: (pubId: string) => void
+  onClickEditGame: (game: Game) => void
   refetchGames: () => void
 }
 
 
-export default function GameCard({ game, setEditGameId, refetchGames }: Props) {
+export default function GameCard({ game, onClickEditGame, refetchGames }: Props) {
   const onClickJoin = () => {
     if (game.password) {
 
@@ -35,7 +35,7 @@ export default function GameCard({ game, setEditGameId, refetchGames }: Props) {
           <Button variants={['small', 'image', 'empty']} onClick={onClickJoin}>
             <Img src="/images/icons/play.svg" alt="Play button" />
           </Button>
-          <Button variants={['small', 'image', 'empty']} onClick={() => setEditGameId(game.pubId)}>
+          <Button variants={['small', 'image', 'empty']} onClick={() => onClickEditGame(game)}>
             <Img src="/images/icons/pen.svg" alt="Edit button" />
           </Button>
           <Button variants={['small', 'image', 'empty']} onClick={onClickDelete}>

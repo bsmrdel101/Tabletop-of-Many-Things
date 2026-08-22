@@ -7,11 +7,11 @@ import { getDefaultGameSettings } from "@/scripts/gameSettings";
 
 interface Props {
   setOpen: (value: boolean) => void
-  refetch: () => void
+  refetchGames: () => void
 }
 
 
-export default function NewGameCard({ setOpen, refetch }: Props) {
+export default function NewGameCard({ setOpen, refetchGames }: Props) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [ruleset, setRuleset] = useState<Ruleset | ''>('');
@@ -21,7 +21,7 @@ export default function NewGameCard({ setOpen, refetch }: Props) {
     if (ruleset === '') return;
 
     await addGame({ name, password, ruleset, gameSettings: getDefaultGameSettings(ruleset) });
-    refetch();
+    refetchGames();
     setOpen(false);
   };
 

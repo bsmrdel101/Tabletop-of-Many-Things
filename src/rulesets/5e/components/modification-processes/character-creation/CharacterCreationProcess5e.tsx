@@ -6,12 +6,12 @@ import ClassesStep, { isClassesComplete } from "./ClassesStep";
 import RaceStep, { isRaceComplete } from "./RaceStep";
 import BackgroundStep, { isBackgroundComplete } from "./BackgroundStep";
 import AbilityScoresStep, { isAbilityScoresComplete } from "./AbilityScoresStep";
-import StartingItemsStep, { isStartingItemsComplete } from "./StartingItemsStep";
 import FeaturesStep, { isFeaturesComplete } from "./FeaturesStep";
 import ClassOptionsStep, { isClassOptionsComplete } from "@/rulesets/5e/components/modification-processes/character-creation/ClassOptionsStep/ClassOptionsStep";
-import useClasses from "@/rulesets/5e/hooks/useClasses";
 import { useAtom } from "jotai";
 import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
+import { useQuery } from "@tanstack/react-query";
+import { getClasses } from "@/rulesets/5e/services/classesService";
 
 interface Props {
   showCharacterCreation: boolean
@@ -24,7 +24,6 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
   const [game] = useAtom<Game | null>(gameAtom);
   const [process, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
   const { character, updateCharacter, resetCharacter } = useCharacterDraft();
-  const { classes } = useClasses(game?.pubId ?? null, game?.worldId ?? null, true);
   const [changesRequired, setChangesRequired] = useState({
     setup: true,
     classes: true,
@@ -33,8 +32,12 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
     subrace: true,
     background: true,
     abilityScore: true,
-    startingItems: true,
     features: true
+  });
+
+  const { data: classes = [] } = useQuery<Class_5e[]>({
+    queryKey: ['classes', game],
+    queryFn: () => getClasses({ gameId: game?.pubId ?? null, worldId: game?.worldId ?? null, userContent: true })
   });
 
   useEffect(() => {
@@ -46,7 +49,6 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
       subrace: !isRaceComplete(character),
       background: !isBackgroundComplete(character),
       abilityScore: !isAbilityScoresComplete(character),
-      startingItems: !isStartingItemsComplete(character),
       features: !isFeaturesComplete(character)
     });
   }, [character]);
@@ -68,6 +70,7 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
         <ClassesStep
           character={character}
           updateCharacter={updateCharacter}
+          classes={classes}
         />
       ),
       changesRequired: changesRequired.classes
@@ -112,16 +115,6 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
         />
       ),
       changesRequired: changesRequired.abilityScore
-    },
-    {
-      name: 'Starting Items',
-      content: (
-        <StartingItemsStep
-          character={character}
-          updateCharacter={updateCharacter}
-        />
-      ),
-      changesRequired: changesRequired.startingItems
     },
     {
       name: 'Features',

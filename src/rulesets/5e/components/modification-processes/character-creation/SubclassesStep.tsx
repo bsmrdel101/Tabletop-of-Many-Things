@@ -9,6 +9,7 @@ interface Props {
 
 export default function SubclassesStep({ character, updateCharacter }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
+  console.log(character);
 
 
   return (

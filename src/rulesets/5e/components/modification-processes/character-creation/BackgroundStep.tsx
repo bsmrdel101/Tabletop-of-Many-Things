@@ -9,6 +9,7 @@ interface Props {
 
 export default function BackgroundStep({ character, updateCharacter }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
+  console.log(character);
 
 
   return (

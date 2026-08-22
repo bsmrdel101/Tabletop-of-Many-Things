@@ -7,7 +7,9 @@ import Attributes from "../Attributes";
 import EditButton from "../EditButton";
 
 interface Props {
-  character: Character_Dnd
+  character: Character_dnd
+  editing: boolean
+  setEditing: (value: boolean) => void
 }
 
 
@@ -23,7 +25,6 @@ export default function CharacterSheetMain({ character, editing, setEditing }: P
         characterBackground={character.background}
         characterXp={character.xp}
         characterLvl={character.lvl}
-        characterBardicInsp={character.bardicInsp}
       />
       <div className="character-sheet-main__row">
         <HealthManagement character={character} />

@@ -9,7 +9,7 @@ interface Props {
 
 export default function FeaturesStep({ character, updateCharacter }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
-
+  console.log(character);
 
   return (
     <div className="features-step">

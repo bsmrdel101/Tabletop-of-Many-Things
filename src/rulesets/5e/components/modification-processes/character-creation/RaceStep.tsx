@@ -9,7 +9,8 @@ interface Props {
 
 export default function RaceStep({ character, updateCharacter }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
-
+  console.log(character);
+  
 
   return (
     <div className="race-step">

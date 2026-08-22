@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 interface Props {
-  bardicInsp: BardicInsp_Dnd
+  bardicInsp: BardicInsp_dnd
 }
 
 

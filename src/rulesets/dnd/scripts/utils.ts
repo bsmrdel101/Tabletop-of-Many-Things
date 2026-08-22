@@ -2,13 +2,14 @@ import { numPrefix } from "@/scripts/tools/utils";
 import { getCharacterById } from "../services/charactersService";
 import { emitServerEvent } from "@/scripts/config/socket-io";
 
+
 export const formatCharacterCardClasses = (classes: { name: string, lvl: number, subclass: string | null }[]): string => {
   return classes.map((c) => {
     return `${c.subclass ?? ''} ${c.name} lvl ${c.lvl}`.trim();
   }).join(' / ');
 };
 
-export const formatCharacterClasses = (classes: PlayerClass_Dnd[]): string => {
+export const formatCharacterClasses = (classes: PlayerClass_5e[] | PlayerClass_2024[]): string => {
   return classes.map((c) => {
     return `${c.subclass?.name ?? ''} ${c.name} lvl ${c.lvl}`.trim();
   }).join(' / ');

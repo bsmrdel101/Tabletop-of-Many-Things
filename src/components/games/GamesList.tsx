@@ -29,13 +29,13 @@ export default function GamesList() {
         <Button variants={['small', 'flat']} onClick={onClickShowNewGame}>+</Button>
       </h3>
 
-      { showNewGame && <NewGameCard setOpen={setShowNewGame} refetch={refetch} /> }
+      { showNewGame && <NewGameCard setOpen={setShowNewGame} refetchGames={refetch} /> }
       
       {!showNewGame && games.map((game: Game) => {
         if (game.pubId === editGameId) {
           return <EditGameCard key={game.pubId} setOpen={() => setEditGameId(null)} game={game} refetchGames={refetch} />;
         } else {
-          return <GameCard key={game.pubId} game={game} setEditGameId={setEditGameId} refetchGames={refetch} />;
+          return <GameCard key={game.pubId} game={game} onClickEditGame={(g) => setEditGameId(g.pubId)} refetchGames={refetch} />;
         }
       })}
     </div>

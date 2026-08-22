@@ -2,7 +2,7 @@ import EditMainHeader from "../../../../5e/components/edit-mode/EditMainHeader";
 import EditButton from "../EditButton";
 
 interface Props {
-  character: Character_Dnd
+  character: Character_dnd
   editing: boolean
   setEditing: (value: boolean) => void
 }

@@ -1,6 +1,4 @@
-import { saveIndicatorAtom } from "@/scripts/atoms/state";
-import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   duration?: number
@@ -8,7 +6,7 @@ interface Props {
 
 
 export default function SaveIndicator({ duration = 2000 }: Props) {
-  const [open, setOpen] = useAtom<boolean>(saveIndicatorAtom);
+  const [open, setOpen] = useState(false);
   
   useEffect(() => {
     if (!open) return;

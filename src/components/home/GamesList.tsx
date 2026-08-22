@@ -2,21 +2,21 @@ import { FormEvent, useState } from "react";
 import Button from "../library/Button";
 import Input from "../library/Input";
 import { getGamesByUser, getGamesHistory } from "@/services/dashboardService";
-import GameCard from "./GameCard";
-import NewGameCard from "./NewGameCard";
 import { useQuery } from "@tanstack/react-query";
+import NewGameCard from "../games/NewGameCard";
+import GameCard from "../games/GameCard";
 
 
 export default function GamesList() {
-  const [selectedGame, setSelectedGame] = useState<GameMin | null>(null);
+  const [, setGameEdited] = useState<Game | null>(null);
   const [showNewGame, setShowNewGame] = useState(false);
 
-  const { data: games = [], refetch } = useQuery<GameMin[]>({
+  const { data: games = [], refetch: refetchGames } = useQuery<Game[]>({
     queryKey: ['games'],
     queryFn: getGamesByUser
   });
 
-  const { data: gameHistory = [] } = useQuery<GameMin[]>({
+  const { data: gameHistory = [] } = useQuery<Game[]>({
     queryKey: ['gameHistory'],
     queryFn: getGamesHistory
   });
@@ -31,7 +31,7 @@ export default function GamesList() {
       <div>
         <form className="games-list__join-game" onSubmit={handleJoinGame}>
           <Input
-            variants={['fit', 'label-md']}
+            variants={['fit']}
             label="Join Game"
             placeholder="Room code"
             required
@@ -45,10 +45,15 @@ export default function GamesList() {
           Your Campaigns&nbsp;&nbsp;
           <Button variants={['small', 'flat']} onClick={() => setShowNewGame(true)}>+</Button>
         </h3>
-        { showNewGame && <NewGameCard setOpen={setShowNewGame} refetch={refetch} /> }
-        {!showNewGame && games.map((game: GameMin) => {
+        { showNewGame && <NewGameCard setOpen={setShowNewGame} refetchGames={refetchGames} /> }
+        {!showNewGame && games.map((game: Game) => {
           return (
-            <GameCard key={game.id} game={game} />
+            <GameCard
+              key={game.id}
+              game={game}
+              onClickEditGame={(g) => setGameEdited(g)}
+              refetchGames={refetchGames}
+            />
           );
         })}
       </div>
@@ -56,9 +61,14 @@ export default function GamesList() {
       {gameHistory.length > 0 &&
         <div className="games-list__column">
           <h3>Game History</h3>
-          {gameHistory.map((game: GameMin) => {
+          {gameHistory.map((game: Game) => {
             return (
-              <GameCard key={game.id} game={game} />
+              <GameCard
+                key={game.id}
+                game={game}
+                onClickEditGame={(g) => setGameEdited(g)}
+                refetchGames={refetchGames}
+              />
             );
           })}
         </div>
