@@ -88,7 +88,7 @@ function ItemSelectionDialog({ search, amount, onClose }: Props) {
   );
 }
 
-/* eslint-disable */
+
 export function selectItem(search: SearchItems_5e, amount?: number): Promise<Item_5e[]> {
   return new Promise((resolve) => {
     const container = document.createElement('div');

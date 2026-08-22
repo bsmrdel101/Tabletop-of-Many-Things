@@ -33,7 +33,8 @@ export default tseslint.config(
         'error',
         { 'argsIgnorePattern': '^_' }
       ],
-      'no-prototype-builtins': 'off'
+      'no-prototype-builtins': 'off',
+      'react-refresh/only-export-components': 'off'
     },
   },
 );

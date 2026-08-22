@@ -77,7 +77,7 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
       }
       return next;
     });
-  }
+  };
 
   const onClickSelectOption = async (choice: ItemChoices_dnd, optionIndex: number, index: number) => {
     const customChoice = choice.options[optionIndex]
@@ -123,23 +123,6 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
       ...prev,
       selectedChoices: { ...prev.selectedChoices, [index]: { index: optionIndex, items: choice.options[optionIndex] } }
     }));
-  };
-  
-  const renderOption = (option: any): ReactNode => {
-    if (Array.isArray(option)) {
-      return option.map(renderOption);
-    }
-
-    if ('data' in option) {
-      return (
-        <Fragment>
-          { option.data.name }
-          { option.qty > 1 ? ` (${option.qty})` : '' }
-        </Fragment>
-      );
-    }
-
-    return null;
   };
 
 

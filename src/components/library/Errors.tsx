@@ -27,6 +27,7 @@ const toErrorMessage = (error: unknown): string => {
   return 'Unknown error';
 };
 
+
 export function showError(error: unknown) {
   console.error(error);
 

@@ -2,6 +2,7 @@ import { ask } from "@/scripts/tools/interactions";
 import Button from "../library/Button";
 import { deleteGame } from "@/services/dashboardService";
 import Img from "../library/Img";
+import { prompt } from "@/scripts/tools/popups";
 
 interface Props {
   game: Game
@@ -13,7 +14,7 @@ interface Props {
 export default function GameCard({ game, onClickEditGame, refetchGames }: Props) {
   const onClickJoin = () => {
     if (game.password) {
-
+      if (prompt('Enter password') !== game.password) return;
     }
 
     location.replace(`/vtt/${game.pubId}`);

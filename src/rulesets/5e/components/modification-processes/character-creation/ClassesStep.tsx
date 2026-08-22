@@ -78,7 +78,7 @@ export default function ClassesStep({ character, updateCharacter, classes }: Pro
       <div style={{ display: 'flex' }}>
         <div className="classes-step__class-options">
           {classes.map((c) => {
-            const characterClass = character.classes.find((cl) => cl.classId === c.id)
+            const characterClass = character.classes.find((cl) => cl.classId === c.id);
             const isFocusedClass = c.id === process.focusedClass?.id;
 
             return (

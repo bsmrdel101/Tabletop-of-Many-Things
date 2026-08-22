@@ -32,7 +32,7 @@ export default function ClassOptionsStepProficiencies({ character, updateCharact
             return [];
           })
         )
-      )
+      );
 
       return titles.length ? titles.join(' & ') : 'Proficiencies';
     }
@@ -61,7 +61,7 @@ export default function ClassOptionsStepProficiencies({ character, updateCharact
         character.skills.filter((s) => !(s.name === name && s.source === source));
 
       updateCharacter({ ...character, skills });
-      return
+      return;
     }
 
     const proficiencies: any = structuredClone(character.proficiencies) as ProfDraft_dnd;
