@@ -23,6 +23,12 @@ type ItemChoices_dnd = {
   options: (ItemSelection_dnd | ItemChoices_dnd)[][]
 };
 
+interface SelectedItemChoice_dnd {
+  index: number
+  items: ItemSelection_dnd[]
+  customItems?: Record<number, ItemSelection_dnd[]>
+}
+
 type WeaponType_dnd = 'Simple' | 'Martial' | 'Firearm';
 
 type Dice_dnd = {

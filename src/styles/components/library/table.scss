@@ -12,13 +12,14 @@
     border: 2px solid black;
     border-width: 2.5px;
     padding: 0.2rem;
+    background-color: #11172f;
   }
 
   tr:nth-child(even) {
-    
+    background-color: #182041;
   }
 
   tr:nth-child(odd) {
-    
+    background-color: var(--blue-dark-1);
   }
 }

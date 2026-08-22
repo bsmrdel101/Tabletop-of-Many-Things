@@ -90,7 +90,7 @@ export default function SetupStep({ character, updateCharacter }: Props) {
           disabled={!!game}
         />
         <Checkbox
-          label="Allow manual entry for abilities"
+          label="Allow manual entry for ability scores"
           disabled={!!game}
         />
         <Checkbox

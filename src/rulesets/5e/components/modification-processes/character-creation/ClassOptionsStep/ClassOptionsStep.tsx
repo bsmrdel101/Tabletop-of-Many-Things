@@ -18,7 +18,7 @@ export default function ClassOptionsStep({ character, updateCharacter }: Props) 
   );
 }
 
-export const isClassOptionsComplete = (character: CharacterDraft_5e, classesData: Class_5e[]): boolean => {
+export const isClassOptionsComplete = (character: CharacterDraft_5e, classesData: Class_5e[], process: CharacterCreationProcess_5e): boolean => {
   const hasSelection = (name: string, source: string) => {
     return (
       character.skills.some((s) => s.name === name && s.source === source) ||
@@ -41,20 +41,20 @@ export const isClassOptionsComplete = (character: CharacterDraft_5e, classesData
   };
 
   const hasStartingItemChoices = (classData: Class_5e) => {
-    return classData.startingItemChoices.every((choice) =>
-      choice.options.some((optionGroup) =>
-        character.items.some((item) =>
-          optionGroup.some((option) => {
-            if (!("data" in option)) return false;
+    return classData.startingItemChoices.every((choice, choiceIndex) => {
+      const selectedChoice = process.selectedChoices[choiceIndex];
 
-            return (
-              item.data.name === option.data.name &&
-              item.qty === option.qty
-            );
-          })
-        )
-      )
-    );
+      if (!selectedChoice) {
+        return false;
+      }
+
+      const optionIndex = selectedChoice.index;
+
+      return (
+        optionIndex >= 0 &&
+        optionIndex < choice.options.length
+      );
+    });
   };
 
   return character.classes.every((playerClass, i) => {

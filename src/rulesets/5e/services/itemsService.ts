@@ -4,6 +4,10 @@ export interface SearchItems_5e {
   gameId: string | null
   worldId: string | null
   userContent: boolean
+  name: string | null
+  type: EquipmentCategory_dnd | null
+  weaponType: WeaponType_dnd | null
+  rarity: Rarity_dnd | null
 }
 
 

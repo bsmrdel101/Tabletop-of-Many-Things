@@ -20,7 +20,7 @@ export const getUser = async (): Promise<User | null> => {
     const res = await api.get('/api/v1/users');
     return res.data;
   } catch(error) {
-    showError(error);
+    console.error(error);
     return null;
   }
 };

@@ -22,7 +22,7 @@ interface Props {
 
 export default function CharacterCreationProcess5e({ showCharacterCreation, setShowCharacterCreation, refetch }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
-  const [, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
+  const [process, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
   const { character, updateCharacter, resetCharacter } = useCharacterDraft();
   const { classes } = useClasses(game?.pubId ?? null, game?.worldId ?? null, true);
   const [changesRequired, setChangesRequired] = useState({
@@ -41,7 +41,7 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
     setChangesRequired({
       setup: !isSetupComplete(character),
       classes: !isClassesComplete(character),
-      classOptions: !isClassOptionsComplete(character, classes),
+      classOptions: !isClassOptionsComplete(character, classes, process),
       race: !isRaceComplete(character),
       subrace: !isRaceComplete(character),
       background: !isBackgroundComplete(character),
