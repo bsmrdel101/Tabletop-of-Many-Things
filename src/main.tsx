@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { BrowserRouter, useNavigate, useRoutes } from 'react-router-dom';
 import routes from '~react-pages';

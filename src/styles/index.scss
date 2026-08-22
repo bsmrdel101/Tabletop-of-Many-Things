@@ -13,12 +13,11 @@
 
   &::-webkit-scrollbar {
     width: 0.5rem;
-    border-radius: 1rem;
     padding-top: 0.3rem;
   }
   
   &::-webkit-scrollbar-track {
-    border-radius: 1rem;
+    background-color: var(--purple-dark-0);
   }
   
   &::-webkit-scrollbar-thumb {

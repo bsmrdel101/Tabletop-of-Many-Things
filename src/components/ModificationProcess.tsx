@@ -32,6 +32,12 @@ export default function ModificationProcess({ open, onClose, steps, className }:
     onClose();
   };
 
+  const onClickCancel = async () => {
+    if (!await ask('Changes will not be saved, are you sure you want to leave?')) return;
+    setSelectedStep(0);
+    onClose();
+  };
+
 
   if (!open) return null;
 
@@ -53,11 +59,18 @@ export default function ModificationProcess({ open, onClose, steps, className }:
             );
           })}
 
+          <br />
           <Button
             className="modification-process__sidebar-btn"
             onClick={onClickFinish}
           >
             Finish
+          </Button>
+          <Button
+            className="modification-process__sidebar-btn"
+            onClick={onClickCancel}
+          >
+            Cancel
           </Button>
         </div>
 

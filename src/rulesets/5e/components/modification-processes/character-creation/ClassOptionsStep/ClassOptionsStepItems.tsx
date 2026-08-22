@@ -1,6 +1,8 @@
 import Button from "@/components/library/Button";
 import { getClassById } from "@/rulesets/5e/services/classesService";
-import { characterCreationProcess5eAtom } from "@/scripts/atoms/state";
+import { SearchItems_5e } from "@/rulesets/5e/services/itemsService";
+import { selectItem } from "@/rulesets/dnd/dialogs/ItemSelectionDialog";
+import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { Fragment, ReactNode, useEffect, useState } from "react";
@@ -13,8 +15,9 @@ interface Props {
 
 export default function ClassOptionsStepItems({ character, updateCharacter }: Props) {
   const [process, setProcess] = useAtom<CharacterCreationProcess_5e>(characterCreationProcess5eAtom);
+  const [game] = useAtom<Game | null>(gameAtom);
   const [openDescriptions, setOpenDescriptions] = useState<Set<number>>(new Set());
-  
+
   const { data: primaryClass } = useQuery<Class_5e | null>({
     queryKey: ['primaryClass', character.classes],
     queryFn: () => getClassById(character.classes[0].classId),
@@ -39,22 +42,19 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
     }
   }, [process.itemPage, primaryClass, process.selectedChoices]);
 
-  function resolveSelections(
-    selections: (ItemSelection_dnd | ItemChoices_dnd)[]
-  ): ItemSelection_dnd[] {
+  function resolveSelections(selections: (ItemSelection_dnd | ItemChoices_dnd)[]): ItemSelection_dnd[] {
     const result: ItemSelection_dnd[] = [];
-
     if (!Array.isArray(selections)) return result;
 
     for (const selection of selections) {
       if (!selection) continue;
 
-      if ("data" in selection) {
+      if ('data' in selection) {
         result.push(selection);
         continue;
       }
 
-      if ("options" in selection) {
+      if ('options' in selection) {
         const next = selection.options?.[0];
 
         if (Array.isArray(next)) {
@@ -62,7 +62,6 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
         }
       }
     }
-
     return result;
   }
 
@@ -80,6 +79,52 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
     });
   }
 
+  const onClickSelectOption = async (choice: ItemChoices_dnd, optionIndex: number, index: number) => {
+    const customChoice = choice.options[optionIndex]
+      .find((item): item is ItemChoices_dnd => 'options' in item);
+    
+    let weaponType: WeaponType_dnd | null = null;
+    if (choice.description.includes('martial')) weaponType = 'Martial';
+    if (choice.description.includes('simple')) weaponType = 'Simple';
+    if (choice.description.includes('firearm')) weaponType = 'Firearm';
+
+    if (customChoice) {
+      const search: SearchItems_5e = {
+        gameId: game?.pubId ?? null,
+        worldId: null,
+        userContent: false,
+        name: null,
+        type: 'Weapon', // TODO: Any category
+        weaponType,
+        rarity: null
+      };
+      const items = (await selectItem(search, customChoice.amount))
+        .map((i) => ({ itemId: i.id, qty: 1, data: { name: i.name, desc: '' } }));
+
+      setProcess((prev) => ({
+        ...prev,
+        selectedChoices: {
+          ...prev.selectedChoices,
+          [index]: {
+            ...prev.selectedChoices[index],
+            index: optionIndex,
+            items,
+            customItems: {
+              ...prev.selectedChoices[index]?.customItems,
+              [optionIndex]: items
+            }
+          }
+        }
+      }));
+      return;
+    }
+
+    setProcess((prev) => ({
+      ...prev,
+      selectedChoices: { ...prev.selectedChoices, [index]: { index: optionIndex, items: choice.options[optionIndex] } }
+    }));
+  };
+  
   const renderOption = (option: any): ReactNode => {
     if (Array.isArray(option)) {
       return option.map(renderOption);
@@ -88,8 +133,8 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
     if ('data' in option) {
       return (
         <Fragment>
-          {option.data.name}
-          {option.qty > 1 ? ` (${option.qty})` : ''}
+          { option.data.name }
+          { option.qty > 1 ? ` (${option.qty})` : '' }
         </Fragment>
       );
     }
@@ -122,52 +167,56 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
       
       {process.itemPage === 'gear' &&
         <ul style={{ textAlign: 'start' }}>
-          {primaryClass.startingItemChoices.map((choice, i) => (
+          {primaryClass.startingItemChoices.map((choice, i) => ( // TODO: Set itemId for starting_items in 5e.classes table
             <li key={`choice-${i}`}>
               <div>{ choice.description }</div>
               
               <div style={{ display: 'flex', gap: '0.2rem', margin: '0.3rem 0 0.8rem' }}>
                 {choice.options.map((option, optionIndex) => {
+                  const customItems: ItemSelection_dnd[] = process.selectedChoices[i]?.customItems?.[optionIndex];
+                  const isSelected = process.selectedChoices[i]?.index === optionIndex;
+
                   return (
                     <Button
                       key={optionIndex}
-                      style={process.selectedChoices[i] === optionIndex ? { background: 'var(--bg-2)' } : {}}
+                      style={isSelected ? { background: 'var(--bg-2)' } : {}}
                       variants={['small']}
-                      onClick={() => {
-                        setProcess((prev) => ({
-                          ...prev,
-                          selectedChoices: { ...prev.selectedChoices, [i]: optionIndex, }
-                        }));
-                      }}
+                      onClick={() => onClickSelectOption(choice, optionIndex, i)}
                     >
-                      {option.map((item, index) => {
+                      {option.map((item, itemIndex) => {
                         if ('data' in item) {
                           return (
-                            <Fragment key={index}>
-                              {item.data.name}
-                              {item.qty > 1 ? ` (${item.qty})` : ''}
-                              {index < option.length - 1 ? ', ' : ''}
+                            <Fragment key={itemIndex}>
+                              { item.data.name }
+                              { item.qty > 1 ? ` (${item.qty})` : '' }
+                              { itemIndex < option.length - 1 ? ', ' : '' }
                             </Fragment>
                           );
                         }
 
-                        return (
-                          <Fragment key={index}>
-                            { item.description }
-                            {index < option.length - 1 ? ', ' : ''}
-                          </Fragment>
-                        );
+                        if ('options' in item) {
+                          const name = customItems?.map((customItem) => customItem.data.name).join(', ');
+
+                          return (
+                            <Fragment key={itemIndex}>
+                              { (isSelected && name) ? name : item.description }
+                              { itemIndex < option.length - 1 ? ', ' : '' }
+                            </Fragment>
+                          );
+                        }
+
+                        return null;
                       })}
                     </Button>
                   );
                 })}
               </div>
 
-              {process.selectedChoices[i] !== undefined &&
+              {process.selectedChoices[i]?.index !== undefined &&
                 resolveSelections(choice.options[process.selectedChoices[i]]).map((item, index) =>
                   item.data.description ? (
                     <div key={index} className="class-options-step__starting-item-desc">
-                      {item.data.description}
+                      { item.data.description }
                     </div>
                   ) : null
                 )}

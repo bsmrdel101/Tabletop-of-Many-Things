@@ -1,7 +1,7 @@
 interface CharacterCreationProcess_5e {
   focusedClass: Class_5e | null
   itemPage: 'gear' | 'gold' | null
-  selectedChoices: Dispatch<SetStateAction<Record<number, number>>>
+  selectedChoices: Dispatch<SetStateAction<Record<number, SelectedItemChoice_dnd>>>
 }
 
 type CharacterDraft_5e = {
@@ -32,31 +32,6 @@ type CharacterDraft_5e = {
   languages: string[]
   currency: Cost_dnd[]
   spellcasting: Spellcasting_5e | null
-};
-
-type ProfSelectionDraft_dnd = {
-  name: string
-  source: string
-};
-
-type ProfDraft_dnd = {
-  weapons: ProfSelectionDraft_dnd[]
-  armor: ProfSelectionDraft_dnd[]
-  tools: ProfSelectionDraft_dnd[]
-  instruments: ProfSelectionDraft_dnd[]
-  vehicles: ProfSelectionDraft_dnd[]
-};
-
-type ItemSelection_dnd = {
-  itemId: number
-  qty: number
-  data: { name: string, description: string }
-};
-
-type ItemChoices_dnd = {
-  description: string
-  amount: number
-  options: (ItemSelection_dnd | ItemChoices_dnd)[][]
 };
 
 type Class_5e = {
@@ -109,7 +84,7 @@ type Background_5e = {
   description: string | null
   proficiencies: string | null
   languages: string[]
-  equipment: Item_dnd[]
+  equipment: Item_5e[]
   features: NameDesc[]
   personalityTraits: string | null
   ideals: string | null
@@ -131,6 +106,31 @@ type Feat_5e = {
   abilityIncrease: { abilityScore: AbilityScore_dnd, amount: number } | null
   features: Feature_dnd[]
   actions: Action_dnd[]
+};
+
+type Item_5e = {
+  id: number
+  name: string
+  source: Source
+  description: string | null
+  type: EquipmentCategory_dnd
+  rarity: Rarity_dnd
+  cost: Cost_dnd | null
+  lbs: number
+  properties: string[]
+  armor: {
+    armorType: ArmorType_dnd | null
+    stealthDisadvantage: boolean
+    strMinimum: number | null
+    ac: { base: number, dexBonus: boolean, maxBonus: number } | null
+  } | null
+  weapon: {
+    weaponType: WeaponType_dnd | null
+    weaponRange: 'Melee' | 'Ranged' | null
+    dmg: Damage_dnd | null
+    twoHandedDmg: Damage_dnd | null
+    range: Range_dnd | null
+  } | null
 };
 
 type Spellcasting_5e = {
