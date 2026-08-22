@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.85.5",
-    "axios": "^1.16.0",
+    "axios": "^1.19.0",
     "axios-cookiejar-support": "^7.0.0",
     "jotai": "^2.12.3",
     "path": "^0.12.7",
