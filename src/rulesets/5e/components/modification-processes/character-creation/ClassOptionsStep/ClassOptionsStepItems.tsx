@@ -129,6 +129,15 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
       const items = (await selectItem(search, customChoice.amount))
         .map((i) => ({ itemId: i.id, qty: 1, data: { name: i.name, desc: '' } }));
 
+      if (items.length === 0) {
+        setProcess((prev) => {
+          const selectedChoices = { ...prev.selectedChoices };
+          delete selectedChoices[index];
+          return { ...prev, selectedChoices };
+        });
+        return;
+      }
+
       setProcess((prev) => ({
         ...prev,
         selectedChoices: {
