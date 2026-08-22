@@ -36,6 +36,7 @@ type CharacterDraft_5e = {
 
 type Class_5e = {
   id: number
+  img: string | null
   name: string
   description: string | null
   source: Source

@@ -162,32 +162,16 @@ export default function ClassOptionsStepItems({ character, updateCharacter }: Pr
     }));
   };
 
-
+  
   if (!primaryClass) return;
 
   return (
     <div className="class-options-step__starting-items">
-      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '0.5rem' }}>
-        <Button
-          style={process.itemPage === 'gear' ? { textShadow: 'var(--pink-1) 1px 0 10px' } : {}}
-          variants={['small', 'secondary-blue']}
-          onClick={() => setProcess((prev) => ({ ...prev, itemPage: 'gear' }))}
-        >
-          Starting Items
-        </Button>
-        <h3>OR</h3>
-        <Button
-          style={process.itemPage === 'gold' ? { textShadow: 'var(--pink-1) 1px 0 10px' } : {}}
-          variants={['small', 'secondary-blue']}
-          onClick={() => setProcess((prev) => ({ ...prev, itemPage: 'gold' }))}
-        >
-          Buy Gear With Gold
-        </Button>
-      </div>
+      <h2>Starting Items</h2>
       
       {process.itemPage === 'gear' &&
         <ul style={{ textAlign: 'start' }}>
-          {primaryClass.startingItemChoices.map((choice, i) => ( // TODO: Set itemId for starting_items in 5e.classes table
+          {primaryClass.startingItemChoices.map((choice, i) => (
             <li key={`choice-${i}`}>
               <div>{ choice.description }</div>
               

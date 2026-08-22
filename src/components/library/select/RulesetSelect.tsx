@@ -19,8 +19,8 @@ export default function RulesetSelect5e({ className = '', labelClass = '', varia
       {...props as SelectHTML}
     >
       <option value="">-- SELECT --</option>
-      <option value="5e">D&D 5E (2014)</option>
-      <option value="2024">D&D 5E (2024)</option>
+      <option value="5e">D&D 5E</option>
+      <option value="2024" disabled>D&D 5.5E</option>
     </Select>
   );
 }

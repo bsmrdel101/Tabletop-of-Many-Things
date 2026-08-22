@@ -26,8 +26,16 @@
   }
 }
 
-html {
-  max-width: fit-content;
+html,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -39,10 +47,6 @@ body {
   height: 100vh;
   overflow: hidden;
   background-position-y: 75%;
-}
-
-#root {
-  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -69,6 +69,7 @@
 
   .class-options-step {
     margin: 0 auto;
+    width: 100%;
 
     &__class {
       margin-bottom: 1rem;
@@ -101,6 +102,7 @@
       border-radius: 0.2rem;
       margin: 0.25rem 0 0.8rem;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      max-width: 20rem;
     }
   }
 }

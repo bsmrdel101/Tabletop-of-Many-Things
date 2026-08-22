@@ -1,4 +1,5 @@
 import Button from "@/components/library/Button";
+import Img from "@/components/library/Img";
 import Proficiencies from "@/rulesets/dnd/components/stat-block/Proficiencies";
 import { fullAbilityScoreName } from "@/rulesets/dnd/scripts/utils";
 import { characterCreationProcess5eAtom } from "@/scripts/atoms/state";
@@ -132,6 +133,13 @@ export default function ClassesStep({ character, updateCharacter, classes }: Pro
         {process.focusedClass &&
           <div>
             <h2 style={{ textDecoration: 'underline' }}>{ process.focusedClass.name}</h2>
+            {process.focusedClass.img &&
+              <Img
+                style={{ width: '8rem', marginBottom: '0.3rem' }}
+                src={process.focusedClass.img}
+                alt={process.focusedClass.name}
+              />
+            }
             <p style={{ whiteSpace: 'pre-wrap' }}><em>{ process.focusedClass.description }</em></p>
             <hr style={{ margin: '1rem' }} />
 
