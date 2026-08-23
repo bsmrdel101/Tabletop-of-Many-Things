@@ -117,6 +117,17 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
       changesRequired: changesRequired.abilityScore
     },
     {
+      name: 'Hit Points',
+      content: (
+        <AbilityScoresStep
+          character={character}
+          updateCharacter={updateCharacter}
+        />
+      ),
+      changesRequired: changesRequired.abilityScore,
+      hidden: character.lvl <= 1
+    },
+    {
       name: 'Features',
       content: (
         <FeaturesStep

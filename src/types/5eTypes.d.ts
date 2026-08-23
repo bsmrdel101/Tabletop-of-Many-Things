@@ -78,6 +78,48 @@ type PlayerSubclass_5e = {
   name: string
 };
 
+type Race_5e = {
+  id: number
+  name: string
+  source: Source
+  description: string | null
+  abilityBonuses: NameValue[]
+  age: string | null
+  size: string | null
+  sizeDesc: string | null
+  alignment: string | null
+  startingProficiencies: Prof_dnd[]
+  languages: string[]
+  languageDesc: string | null
+  speeds: Speed_dnd[]
+  traits: Trait_dnd[]
+  subraces: Subrace_dnd[]
+};
+
+type PlayerRace_5e = {
+  id: number
+  name: string
+  subraces: Subrace_5e | null
+};
+
+type Subrace_5e = {
+  id: number
+  name: string
+  source: Source
+  description: string | null
+  abilityBonuses: NameValue[]
+  startingProficiencies: Prof_dnd[]
+  languages: string[]
+  languageDesc: string | null
+  traits: Trait_dnd[]
+  spells: Spell_dnd[]
+};
+
+type PlayerSubrace_5e = {
+  id: number
+  name: string
+};
+
 type Background_5e = {
   id: number
   name: string

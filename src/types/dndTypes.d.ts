@@ -159,48 +159,6 @@ type CharacterCard_dnd = {
   ruleset: Ruleset
 };
 
-type Race_dnd = {
-  id: number
-  name: string
-  source: Source
-  description: string | null
-  abilityBonuses: NameValue[]
-  age: string | null
-  size: string | null
-  sizeDesc: string | null
-  alignment: string | null
-  startingProficiencies: Prof_dnd[]
-  languages: string[]
-  languageDesc: string | null
-  speeds: Speed_dnd[]
-  traits: Trait_dnd[]
-  subraces: Subrace_dnd[]
-};
-
-type PlayerRace_dnd = {
-  id: number
-  name: string
-  subraces: Subrace_dnd | null
-};
-
-type Subrace_dnd = {
-  id: number
-  name: string
-  source: Source
-  description: string | null
-  abilityBonuses: NameValue[]
-  startingProficiencies: Prof_dnd[]
-  languages: string[]
-  languageDesc: string | null
-  traits: Trait_dnd[]
-  spells: Spell_dnd[]
-};
-
-type PlayerSubrace_dnd = {
-  id: number
-  name: string
-};
-
 type Trait_dnd = {
   id: number
   name: string
@@ -292,8 +250,6 @@ type AbilityScore_dnd = {
   name: string
   value: number
   mod: number
-  scoreOverride: number
-  scoreMod: number
   prof: boolean
 };
 

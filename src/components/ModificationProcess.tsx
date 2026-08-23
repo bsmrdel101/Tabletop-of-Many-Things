@@ -3,16 +3,17 @@ import Button from "./library/Button";
 import { ask } from "@/scripts/tools/interactions";
 
 export interface ModificationStep {
-  name: string;
-  content: ReactNode;
-  changesRequired: boolean;
+  name: string
+  content: ReactNode
+  changesRequired: boolean
   disabled?: boolean
+  hidden?: boolean
 }
 
 interface Props {
-  open: boolean;
-  onClose: () => void;
-  steps: ModificationStep[];
+  open: boolean
+  onClose: () => void
+  steps: ModificationStep[]
   className?: string
 }
 
@@ -47,6 +48,8 @@ export default function ModificationProcess({ open, onClose, steps, className }:
         <div className="modification-process__sidebar">
           <div className="modification-process__sidebar-steps">
             {steps.map((item, i) => {
+              if (item.hidden) return null;
+
               return (
                 <Button
                   key={i}

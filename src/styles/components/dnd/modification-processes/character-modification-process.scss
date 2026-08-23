@@ -105,4 +105,14 @@
       max-width: 20rem;
     }
   }
+
+  .races-step {
+    &__race-options {
+      margin-right: 5rem;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
 }

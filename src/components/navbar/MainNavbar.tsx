@@ -3,11 +3,16 @@ import Button from "../library/Button";
 import Link from "../library/Link";
 import UserBox from "../UserBox";
 import Img from "../library/Img";
+import { useAtom } from "jotai";
+import { userAtom } from "@/scripts/atoms/state";
 
 export default function MainNavbar() {
+  const [user] = useAtom<User>(userAtom);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const url = location.pathname;
 
+
+  if (!user.pubId) return null;
 
   return (
     <nav className={`navbar ${mobileNavOpen ? "navbar--open" : ""}`}>
@@ -35,9 +40,6 @@ export default function MainNavbar() {
       <Link to="/homebrew" className={`navbar__link${url === '/homebrew' ? ' navbar__link--active' : ''}`}>
         Homebrew
       </Link>
-      {/* <Link to="/plugins" className={`navbar__link${url === '/plugins' ? ' navbar__link--active' : ''}`}>
-        Plugins
-      </Link> */}
       <Link to="/dice" className={`navbar__link${url === '/dice' ? ' navbar__link--active' : ''}`}>
         Dice
       </Link>
