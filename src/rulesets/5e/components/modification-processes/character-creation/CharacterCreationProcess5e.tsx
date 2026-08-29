@@ -12,6 +12,7 @@ import { useAtom } from "jotai";
 import { characterCreationProcess5eAtom, gameAtom } from "@/scripts/atoms/state";
 import { useQuery } from "@tanstack/react-query";
 import { getClasses } from "@/rulesets/5e/services/classesService";
+import { getRaces } from "@/rulesets/dnd/services/racesService";
 
 interface Props {
   showCharacterCreation: boolean
@@ -38,6 +39,19 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
   const { data: classes = [] } = useQuery<Class_5e[]>({
     queryKey: ['classes', game],
     queryFn: () => getClasses({ gameId: game?.pubId ?? null, worldId: game?.worldId ?? null, userContent: true })
+  });
+
+  const { data: races = [] } = useQuery<Race_5e[]>({
+    queryKey: ['races', game],
+    queryFn: async () => {
+      const search = {
+        gameId: game?.pubId ?? null,
+        worldId: game?.worldId ?? null,
+        userContent: false,
+        name: null
+      };
+      return await getRaces(search);
+    }
   });
 
   useEffect(() => {
@@ -92,6 +106,7 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
         <RaceStep
           character={character}
           updateCharacter={updateCharacter}
+          races={races}
         />
       ),
       changesRequired: changesRequired.race
@@ -140,7 +155,11 @@ export default function CharacterCreationProcess5e({ showCharacterCreation, setS
   ];
 
   const onCloseCharacterCreation = async () => {
-    setProcess({ focusedClass: null, itemPage: 'gear', selectedChoices: {} });
+    setProcess({
+      focusedClass: null,
+      itemPage: 'gear',
+      selectedChoices: {}
+    });
     setShowCharacterCreation(false);
     resetCharacter();
     refetch();

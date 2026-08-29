@@ -15,15 +15,15 @@ import RaceSelect from "@/rulesets/dnd/components/select/RaceSelect";
 import { alert } from "@/scripts/tools/popups";
 import { useQuery } from "@tanstack/react-query";
 import { getClasses } from "../../services/classesService";
-import { getAllRaces } from "@/rulesets/dnd/services/racesService";
+import { getRaces } from "@/rulesets/dnd/services/racesService";
 
 interface Props {
   characterId: number
   characterImg: string
   characterName: string
   characterClasses: PlayerClass_5e[] | PlayerClass_2024[]
-  characterRace: PlayerRace_dnd | null
-  characterSubrace: PlayerSubrace_dnd | null
+  characterRace: PlayerRace_5e | null
+  characterSubrace: PlayerSubrace_5e | null
   characterBackground: PlayerBackground_5e | null
   characterXp: number
   characterLvl: number
@@ -36,7 +36,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
   const [game] = useAtom<Game | null>(gameAtom);
   const [name, setName] = useState(characterName);
   const [playerClasses, setPlayerClasses] = useState<PlayerClass_5e[]>(characterClasses as PlayerClass_5e[]);
-  const [playerRace, setPlayerRace] = useState<PlayerRace_dnd | null>(characterRace);
+  const [playerRace, setPlayerRace] = useState<PlayerRace_5e | null>(characterRace);
   const [selectClassModalOpen, setSelectClassModalOpen] = useState(false);
 
   const { data: classes = [] } = useQuery<Class_5e[]>({
@@ -44,9 +44,17 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
     queryFn: () => getClasses({ gameId: game?.pubId ?? null, worldId: game?.worldId ?? null, userContent: true })
   });
 
-  const { data: races = [] } = useQuery<Race_dnd[]>({
+  const { data: races = [] } = useQuery<Race_5e[]>({
     queryKey: ['races', game],
-    queryFn: () => getAllRaces(game?.id ?? null)
+    queryFn: async () => {
+      const search = {
+        gameId: game!.pubId,
+        worldId: game!.worldId,
+        userContent: false,
+        name: null
+      };
+      return await getRaces(search);
+    }
   })
 
   const handleSave = async () => {
@@ -81,7 +89,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
     // setPlayerClasses(newClasses);
   };
 
-  const handleEditRace = async (race: Race_dnd, subrace: Subrace_dnd | null) => {
+  const handleEditRace = async (race: Race_5e, subrace: Subrace_5e | null) => {
     console.log(race, subrace);
     
     // await playerManager.changeRace(race.id);
@@ -89,7 +97,7 @@ function EditMainHeader({ characterId, characterImg, characterName, characterCla
     //   id: race.id,
     //   name: race.name,
     //   subrace
-    // } as PlayerRace_dnd;
+    // } as PlayerRace_5e;
     // setPlayerRace(newRace);
   };
 

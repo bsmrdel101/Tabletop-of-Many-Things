@@ -118,8 +118,8 @@ type Character_dnd = {
   insp?: boolean
   bardicInsp: BardicInsp_dnd | null
   abilityScores: AbilityScore_dnd[]
-  race: PlayerRace_dnd | null
-  subrace: PlayerSubrace_dnd | null
+  race: PlayerRace_5e | null
+  subrace: PlayerSubrace_5e | null
   classes: PlayerClass_5e[] | PlayerClass_2024[]
   background: PlayerBackground_5e | PlayerBackground_2024 | null
   feats: Feat_5e[] | Feat_2024[]

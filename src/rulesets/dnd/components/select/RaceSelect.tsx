@@ -8,17 +8,17 @@ interface Props extends SelectHTML {
   className?: string
   labelClass?: string
   variants?: ('label-thin' | 'fit')[]
-  onChangeRace?: (race: Race_dnd, subrace: Subrace_dnd | null) => void
-  races: Race_dnd[]
+  onChangeRace?: (race: Race_5e, subrace: Subrace_5e | null) => void
+  races: Race_5e[]
 }
 
 
 export default function RaceSelect({ className = '', labelClass = '', variants = [], onChangeRace, races, ...props }: Props) {
   const [game] = useAtom<Game | null>(gameAtom);
-  const [options, setOptions] = useState<{ race: Race_dnd, subrace: Subrace_dnd }[]>([]);
+  const [options, setOptions] = useState<{ race: Race_5e, subrace: Subrace_5e }[]>([]);
 
   useEffect(() => {
-    const data: { race: Race_dnd, subrace: Subrace_dnd }[] = [];
+    const data: { race: Race_5e, subrace: Subrace_5e }[] = [];
     races.forEach((r) => {
       r.subraces.forEach((s) => data.push({ race: r, subrace: s }));
     });

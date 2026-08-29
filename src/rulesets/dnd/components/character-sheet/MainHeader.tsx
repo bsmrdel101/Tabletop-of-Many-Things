@@ -10,8 +10,8 @@ interface Props {
   characterImg: string
   characterName: string
   characterClasses: PlayerClass_5e[] | PlayerClass_2024[]
-  characterRace: PlayerRace_dnd | null
-  characterSubrace: PlayerSubrace_dnd | null
+  characterRace: PlayerRace_5e | null
+  characterSubrace: PlayerSubrace_5e | null
   characterBackground: PlayerBackground_5e | PlayerBackground_2024 | null
   characterXp: number
   characterLvl: number

@@ -12,8 +12,8 @@ type CharacterDraft_5e = {
   xp: number
   maxHp: number
   abilityScores: AbilityScore_dnd[]
-  race: Race_dnd | null
-  subrace: PlayerSubrace_dnd | null
+  race: Race_5e | null
+  subrace: Subrace_5e | null
   classes: PlayerClass_5e[]
   background: PlayerBackground_5e | null
   feats: Feat_5e[]
@@ -88,12 +88,11 @@ type Race_5e = {
   size: string | null
   sizeDesc: string | null
   alignment: string | null
-  startingProficiencies: Prof_dnd[]
   languages: string[]
   languageDesc: string | null
   speeds: Speed_dnd[]
   traits: Trait_dnd[]
-  subraces: Subrace_dnd[]
+  subraces: Subrace_5e[]
 };
 
 type PlayerRace_5e = {

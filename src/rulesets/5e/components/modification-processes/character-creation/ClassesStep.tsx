@@ -131,8 +131,8 @@ export default function ClassesStep({ character, updateCharacter, classes }: Pro
         </div>
 
         {process.focusedClass &&
-          <div>
-            <h2 style={{ textDecoration: 'underline' }}>{ process.focusedClass.name}</h2>
+          <div style={{ width: '100%' }}>
+            <h2 style={{ textDecoration: 'underline' }}>{ process.focusedClass.name }</h2>
             {process.focusedClass.img &&
               <Img
                 style={{ width: '8rem', marginBottom: '0.3rem' }}

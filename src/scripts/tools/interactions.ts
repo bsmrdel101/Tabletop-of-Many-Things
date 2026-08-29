@@ -1,6 +1,6 @@
 export const ask = (msg: string): Promise<boolean> => {
   return new Promise((resolve) => {
-    const overlay = document.createElement("div");
+    const overlay = document.createElement('div');
     overlay.style.cssText = `
       position: fixed;
       inset: 0;
@@ -11,30 +11,34 @@ export const ask = (msg: string): Promise<boolean> => {
       z-index: 9999;
     `;
 
-    const modal = document.createElement("div");
+    const modal = document.createElement('div');
     modal.style.cssText = `
-      background: white;
-      color: black;
+      background: var(--purple-dark-1);
+      color: white;
       padding: 20px;
       border-radius: 8px;
       min-width: 300px;
       text-align: center;
     `;
 
-    const text = document.createElement("p");
+    const text = document.createElement('p');
     text.textContent = msg;
     text.style.cssText = `
       margin-bottom: 1rem;
     `;
 
-    const yesButton = document.createElement("button");
-    yesButton.textContent = "Yes";
+    const yesButton = document.createElement('button');
+    yesButton.textContent = 'Yes';
     yesButton.style.cssText = `
       margin-right: 0.5rem;
+      cursor: pointer;
     `;
 
-    const noButton = document.createElement("button");
-    noButton.textContent = "No";
+    const noButton = document.createElement('button');
+    noButton.textContent = 'No';
+    noButton.style.cssText = `
+      cursor: pointer;
+    `;
 
     yesButton.onclick = () => {
       overlay.remove();

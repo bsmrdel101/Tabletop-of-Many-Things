@@ -29,6 +29,8 @@
   }
 
   .classes-step {
+    width: 100%;
+
     &__class-options {
       margin-right: 5rem;
 
@@ -107,12 +109,32 @@
   }
 
   .races-step {
+    width: 100%;
+
     &__race-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
       margin-right: 5rem;
 
       button {
         width: 100%;
       }
+    }
+
+    &__race-option {
+      display: flex;
+      flex-direction: column;
+      white-space: pre;
+
+      h3 {
+        margin: 0.5rem 0 0;
+        text-align: start;
+      }
+    }
+
+    &__subrace-options {
+      margin: 0 0 0.3rem 1rem;
     }
   }
 }
