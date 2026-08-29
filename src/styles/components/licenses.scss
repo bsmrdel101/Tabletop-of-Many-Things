@@ -1,0 +1,25 @@
+.licenses-page {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.licenses {
+  padding: 1rem;
+  border-radius: 0.3rem;
+  background-color: var(--bg-0);
+  width: fit-content;
+}
+
+.license {
+  text-align: start;
+
+  &__title {
+    margin-bottom: 0.2rem;
+    text-decoration: underline;
+  }
+
+  a {
+    color: var(--pink-0);
+  }
+}

@@ -29,6 +29,10 @@ const toErrorMessage = (error: unknown): string => {
 
 
 export function showError(error: unknown) {
+  if (typeof error === 'object' && error !== null && 'status' in error && error.status === 401) {
+    return;
+  }
+
   console.error(error);
 
   const container = document.querySelector('.errors-list');
