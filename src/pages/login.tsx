@@ -23,7 +23,7 @@ export default function Login() {
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     await loginUser({ email, password });
-    location.replace('/');
+    // location.replace('/');
   };
 
 
