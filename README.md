@@ -4,7 +4,7 @@
 
 ## Description
 
-A virtual tabletop for TTRPG's, that allows users prepare and play their games online with eachother. This app is still in development.
+A virtual tabletop for TTRPG's, that allows users prepare and play their games online with each other. This app is still in development.
 
 ![image](https://user-images.githubusercontent.com/43832671/218588428-3bb0a6bc-8c2e-45ea-b7fb-a7d57e0de7d4.png)
 
